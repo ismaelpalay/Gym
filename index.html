@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ACME Combat Center — Centro MMA Premium en México. Entrena en instalaciones de clase mundial con octágono profesional, clases especializadas y zona de recuperación.">
-    <title>ACME Combat Center · Fight &amp; Fitness · México 2026</title>
+    <meta name="description" content="ACME Fight &amp; Fitness — Centro MMA Premium en México. Entrena en instalaciones de clase mundial con octágono profesional, clases especializadas y zona de recuperación.">
+    <title>ACME Fight &amp; Fitness · México 2026</title>
 
     <!-- Favicon SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
@@ -16,6 +16,9 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"></noscript>
 
     <style>
+        /* ============================================================
+           FONT STACK FALLBACK (por si Google Fonts no carga)
+        ============================================================ */
         @font-face {
             font-family: 'Oswald';
             font-style: normal;
@@ -31,6 +34,9 @@
             src: local('Inter'), local('Inter-Regular');
         }
 
+        /* ============================================================
+           RESET & CUSTOM PROPERTIES
+        ============================================================ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -73,6 +79,9 @@
         ::-webkit-scrollbar-thumb { background: #252525; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
+        /* ============================================================
+           UTILITIES
+        ============================================================ */
         .container {
             max-width: var(--max-w);
             margin: 0 auto;
@@ -113,6 +122,7 @@
         }
         .section-title span { color: var(--red); }
 
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -134,20 +144,12 @@
             background: var(--red);
             color: #000;
             border-color: var(--red);
-            position: relative; overflow: hidden;
         }
-        .btn-red::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
-            opacity: 0; transition: opacity .3s;
-        }
-        .btn-red:hover::after { opacity: 1; }
         .btn-red:hover {
             background: var(--red-l);
             border-color: var(--red-l);
             transform: translateY(-2px);
-            box-shadow: 0 0 24px rgba(229,0,26,0.55), 0 6px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(229,0,26,0.25);
         }
         .btn-outline {
             background: transparent;
@@ -159,6 +161,7 @@
             color: var(--red);
         }
 
+        /* Fade-in scroll animation */
         .fade-in {
             opacity: 0;
             transform: translateY(28px);
@@ -172,7 +175,9 @@
         .fade-in[data-delay="5"] { transition-delay: 0.5s; }
         .fade-in[data-delay="6"] { transition-delay: 0.6s; }
 
-        /* NAVBAR */
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
         #navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -230,17 +235,7 @@
             padding: 8px 11px;
             border-radius: 4px;
             transition: var(--t);
-            position: relative;
         }
-        .nav-links a::after {
-            content: '';
-            position: absolute; bottom: 4px; left: 11px; right: 11px;
-            height: 1px; background: var(--red);
-            transform: scaleX(0); transform-origin: left;
-            transition: transform .3s ease;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
-        .nav-cta::after { display: none !important; }
         .nav-links a:hover,
         .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.05); }
         .nav-cta {
@@ -249,7 +244,9 @@
             font-weight: 600 !important;
             border-radius: 4px !important;
         }
-        .nav-cta:hover { background: var(--red-l) !important; }
+        .nav-cta:hover {
+            background: var(--red-l) !important;
+        }
         .nav-hamburger {
             display: none;
             flex-direction: column;
@@ -286,7 +283,9 @@
             .nav-hamburger { display: flex; }
         }
 
-        /* HERO */
+        /* ============================================================
+           HERO
+        ============================================================ */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -384,6 +383,7 @@
         }
         .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
+        /* Stats bar */
         .hero-stats-bar {
             position: absolute;
             bottom: 0;
@@ -394,7 +394,10 @@
             background: rgba(7,7,7,0.7);
             backdrop-filter: blur(16px);
         }
-        .hero-stats-inner { display: flex; }
+        .hero-stats-inner {
+            display: flex;
+            divide: x;
+        }
         .hero-stat {
             flex: 1;
             padding: 26px 32px;
@@ -425,8 +428,11 @@
             .hero-stat { padding: 18px 24px; }
         }
 
-        /* ESPACIOS */
+        /* ============================================================
+           SECTION 01 — ESPACIOS
+        ============================================================ */
         .espacios { background: var(--bg-alt); }
+
         .espacios-head {
             display: flex;
             align-items: flex-end;
@@ -435,6 +441,7 @@
             margin-bottom: 48px;
             flex-wrap: wrap;
         }
+
         .tab-group {
             display: flex;
             gap: 3px;
@@ -460,8 +467,15 @@
             white-space: nowrap;
         }
         .tab-btn:hover { color: var(--white); }
-        .tab-btn.active { background: var(--red); color: #000; font-weight: 600; }
-        @media (max-width: 700px) { .tab-group { flex-wrap: wrap; } }
+        .tab-btn.active {
+            background: var(--red);
+            color: #000;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .tab-group { flex-wrap: wrap; }
+        }
 
         .spaces-grid {
             display: grid;
@@ -479,7 +493,7 @@
         .space-card:hover {
             border-color: rgba(229,0,26,0.28);
             transform: translateY(-5px);
-            box-shadow: -3px 0 0 var(--red), 0 22px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 22px 50px rgba(0,0,0,0.5);
         }
         .space-card-img {
             height: 180px;
@@ -524,13 +538,18 @@
             line-height: 1.65;
         }
         .space-card-actions { display: flex; gap: 10px; }
+
+        /* Per-category tints */
         .space-card[data-cat="combate"]    .space-card-img { background: linear-gradient(135deg,#150a07,#241210); }
         .space-card[data-cat="fuerza"]     .space-card-img { background: linear-gradient(135deg,#08101a,#101828); }
         .space-card[data-cat="recuperacion"] .space-card-img { background: linear-gradient(135deg,#06101a,#0c1c28); }
         .space-card[data-cat="familia"]    .space-card-img { background: linear-gradient(135deg,#0d1208,#171e0f); }
 
-        /* MAPA */
+        /* ============================================================
+           SECTION 03 — MAPA
+        ============================================================ */
         .mapa { background: var(--bg); }
+
         .mapa-intro {
             font-size: 14px;
             color: var(--muted-l);
@@ -538,6 +557,7 @@
             line-height: 1.85;
             margin: 14px 0 40px;
         }
+
         .floor-tabs {
             display: flex;
             border: 1px solid var(--border);
@@ -563,6 +583,7 @@
         }
         .floor-tab:last-child { border-right: none; }
         .floor-tab.active { background: var(--red); color: #000; }
+
         .floor-plan { display: none; }
         .floor-plan.active {
             display: grid;
@@ -570,7 +591,10 @@
             gap: 28px;
             align-items: start;
         }
-        @media (max-width: 820px) { .floor-plan.active { grid-template-columns: 1fr; } }
+        @media (max-width: 820px) {
+            .floor-plan.active { grid-template-columns: 1fr; }
+        }
+
         .floor-svg-wrap {
             background: var(--card);
             border: 1px solid var(--border);
@@ -582,6 +606,7 @@
             min-height: 400px;
         }
         .floor-svg-wrap svg { width: 100%; max-width: 520px; height: auto; }
+
         .floor-legend { display: flex; flex-direction: column; gap: 10px; }
         .floor-legend-title {
             font-family: var(--font-h);
@@ -603,22 +628,40 @@
             transition: border-color var(--t);
         }
         .legend-item:hover { border-color: rgba(229,0,26,0.30); }
-        .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
         .legend-text { font-size: 13px; font-weight: 500; color: var(--white); }
         .legend-sub { font-size: 11px; color: var(--muted-l); margin-top: 2px; }
 
-        /* MEMBRESIAS */
+        /* ============================================================
+           SECTION 02 — MEMBRESÍAS
+        ============================================================ */
         .membresias { background: var(--bg-alt); }
-        .membresias-hd { text-align: center; margin-bottom: 64px; }
-        .membresias-hd .section-label { justify-content: center; }
+
+        .membresias-hd {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .membresias-hd .section-label {
+            justify-content: center;
+        }
         .membresias-hd .section-label::before { display: none; }
+
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(3,1fr);
             gap: 22px;
             align-items: start;
         }
-        @media (max-width: 880px) { .plans-grid { grid-template-columns: 1fr; max-width: 430px; margin: 0 auto; } }
+        @media (max-width: 880px) {
+            .plans-grid { grid-template-columns: 1fr; max-width: 430px; margin: 0 auto; }
+        }
+
         .plan-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -635,6 +678,7 @@
             box-shadow: 0 0 0 1px rgba(229,0,26,0.13);
         }
         .plan-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+
         .plan-badge {
             position: absolute;
             top: -13px;
@@ -651,107 +695,491 @@
             border-radius: 20px;
             white-space: nowrap;
         }
-        .plan-type { font-family: var(--font-b); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--muted-l); margin-bottom: 5px; }
-        .plan-name { font-family: var(--font-h); font-size: 26px; font-weight: 700; text-transform: uppercase; margin-bottom: 22px; }
+        .plan-type {
+            font-family: var(--font-b);
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted-l);
+            margin-bottom: 5px;
+        }
+        .plan-name {
+            font-family: var(--font-h);
+            font-size: 26px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
         .plan-card.featured .plan-name { color: var(--red); }
-        .plan-price { display: flex; align-items: baseline; gap: 3px; margin-bottom: 6px; }
-        .plan-curr { font-family: var(--font-h); font-size: 20px; font-weight: 400; color: var(--muted-l); }
-        .plan-amount { font-family: var(--font-h); font-size: 54px; font-weight: 700; line-height: 1; color: var(--white); }
-        .plan-period { font-size: 12px; color: var(--muted-l); margin-bottom: 28px; }
-        .plan-divider { height: 1px; background: var(--border); margin-bottom: 22px; }
-        .plan-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 30px; }
-        .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(243,243,243,0.8); line-height: 1.5; }
-        .chk { width: 17px; height: 17px; border-radius: 50%; background: var(--red-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--red); font-size: 9px; margin-top: 1px; }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+            margin-bottom: 6px;
+        }
+        .plan-curr {
+            font-family: var(--font-h);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--muted-l);
+        }
+        .plan-amount {
+            font-family: var(--font-h);
+            font-size: 54px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--white);
+        }
+        .plan-period {
+            font-size: 12px;
+            color: var(--muted-l);
+            margin-bottom: 28px;
+        }
+        .plan-divider {
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 22px;
+        }
+        .plan-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin-bottom: 30px;
+        }
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: rgba(243,243,243,0.8);
+            line-height: 1.5;
+        }
+        .chk {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: var(--red-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--red);
+            font-size: 9px;
+            margin-top: 1px;
+        }
         .plan-features li.dim { color: var(--muted-l); }
         .plan-features li.dim .chk { background: rgba(255,255,255,0.04); color: var(--muted); }
         .plan-btn { width: 100%; padding: 15px; }
         .plan-card.featured .plan-btn { background: var(--red); color: #fff; border-color: var(--red); }
-        .plans-contact { display: flex; gap: 48px; margin-top: 52px; justify-content: center; flex-wrap: wrap; }
-        .plans-contact-item { display: flex; align-items: center; gap: 14px; }
-        .plans-contact-icon { width: 46px; height: 46px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
-        .plans-contact-lbl { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted-l); margin-bottom: 3px; }
-        .plans-contact-val { font-family: var(--font-h); font-size: 15px; font-weight: 600; }
 
-        /* CLASES */
+        /* Contact strip below plans */
+        .plans-contact {
+            display: flex;
+            gap: 48px;
+            margin-top: 52px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .plans-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .plans-contact-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+        .plans-contact-lbl {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted-l);
+            margin-bottom: 3px;
+        }
+        .plans-contact-val {
+            font-family: var(--font-h);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           SECTION 04 — CLASES
+        ============================================================ */
         .clases { background: var(--bg); }
-        .clases-grid { display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: start; margin-top: 52px; }
-        @media (max-width: 900px) { .clases-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+        .clases-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 64px;
+            align-items: start;
+            margin-top: 52px;
+        }
+        @media (max-width: 900px) {
+            .clases-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* Timeline */
         .timeline { display: flex; flex-direction: column; }
-        .tl-item { display: flex; gap: 22px; padding-bottom: 30px; position: relative; }
+        .tl-item {
+            display: flex;
+            gap: 22px;
+            padding-bottom: 30px;
+            position: relative;
+        }
         .tl-item:last-child { padding-bottom: 0; }
-        .tl-item::before { content: ''; position: absolute; left: 18px; top: 40px; bottom: 0; width: 2px; background: var(--border); }
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
         .tl-item:last-child::before { display: none; }
-        .tl-num { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-h); font-size: 14px; font-weight: 700; color: var(--red); flex-shrink: 0; position: relative; z-index: 1; transition: background var(--t), border-color var(--t), color var(--t); }
-        .tl-item:hover .tl-num { background: var(--red); border-color: var(--red); color: #000; }
+        .tl-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-h);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--red);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            transition: background var(--t), border-color var(--t), color var(--t);
+        }
+        .tl-item:hover .tl-num {
+            background: var(--red);
+            border-color: var(--red);
+            color: #000;
+        }
         .tl-body { flex: 1; }
-        .tl-dur { font-family: var(--font-b); font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 3px; }
-        .tl-title { font-family: var(--font-h); font-size: 19px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; }
+        .tl-dur {
+            font-family: var(--font-b);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 3px;
+        }
+        .tl-title {
+            font-family: var(--font-h);
+            font-size: 19px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
         .tl-desc { font-size: 13px; color: var(--muted-l); line-height: 1.7; }
-        .cap-table { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-        .cap-head { padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: var(--font-h); font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .cap-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--border); transition: background var(--t); }
+
+        /* Capacity table */
+        .cap-table {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+        }
+        .cap-head {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--font-h);
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cap-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--border);
+            transition: background var(--t);
+        }
         .cap-row:last-child { border-bottom: none; }
         .cap-row:hover { background: rgba(229,0,26,0.04); }
         .cap-lbl { font-size: 13px; color: rgba(243,243,243,0.65); }
-        .cap-val { font-family: var(--font-h); font-size: 17px; font-weight: 700; color: var(--red); }
+        .cap-val {
+            font-family: var(--font-h);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--red);
+        }
 
-        /* RECUPERACION */
+        /* ============================================================
+           SECTION 05 — RECUPERACIÓN
+        ============================================================ */
         .recuperacion { background: var(--bg-alt); }
-        .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 52px; }
-        @media (max-width: 780px) { .recovery-grid { grid-template-columns: 1fr; } }
-        .rec-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 44px 32px; text-align: center; transition: transform var(--t), border-color var(--t); position: relative; overflow: hidden; }
-        .rec-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-        .rec-card:hover::after { transform: scaleX(1); }
-        .rec-card:hover { transform: translateY(-7px); border-color: rgba(229,0,26,0.18); box-shadow: -3px 0 0 var(--red), 0 20px 40px rgba(0,0,0,0.55); }
-        .rec-icon { font-size: 42px; margin-bottom: 22px; display: block; }
-        .rec-title { font-family: var(--font-h); font-size: 23px; font-weight: 700; text-transform: uppercase; margin-bottom: 16px; }
-        .rec-desc { font-size: 14px; color: var(--muted-l); line-height: 1.8; margin-bottom: 26px; }
-        .rec-badge { display: inline-block; padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(229,0,26,0.40); color: var(--red); font-family: var(--font-h); font-size: 13px; font-weight: 600; letter-spacing: 1px; }
 
-        /* KIDS */
+        .recovery-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 22px;
+            margin-top: 52px;
+        }
+        @media (max-width: 780px) {
+            .recovery-grid { grid-template-columns: 1fr; }
+        }
+
+        .rec-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 44px 32px;
+            text-align: center;
+            transition: transform var(--t), border-color var(--t);
+            position: relative;
+            overflow: hidden;
+        }
+        .rec-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .rec-card:hover::after { transform: scaleX(1); }
+        .rec-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(229,0,26,0.18);
+        }
+        .rec-icon { font-size: 42px; margin-bottom: 22px; display: block; }
+        .rec-title {
+            font-family: var(--font-h);
+            font-size: 23px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .rec-desc {
+            font-size: 14px;
+            color: var(--muted-l);
+            line-height: 1.8;
+            margin-bottom: 26px;
+        }
+        .rec-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(229,0,26,0.40);
+            color: var(--red);
+            font-family: var(--font-h);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================================
+           SECTION 06 — KIDS
+        ============================================================ */
         .kids { background: var(--bg); }
-        .kids-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-        @media (max-width: 880px) { .kids-grid { grid-template-columns: 1fr; gap: 40px; } }
-        .kids-desc { font-size: 15px; color: rgba(243,243,243,0.65); line-height: 1.85; max-width: 460px; margin: 18px 0 34px; }
-        .kids-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .kids-feat { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; transition: border-color var(--t); }
+
+        .kids-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+        }
+        @media (max-width: 880px) {
+            .kids-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .kids-desc {
+            font-size: 15px;
+            color: rgba(243,243,243,0.65);
+            line-height: 1.85;
+            max-width: 460px;
+            margin: 18px 0 34px;
+        }
+
+        .kids-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .kids-feat {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: border-color var(--t);
+        }
         .kids-feat:hover { border-color: rgba(229,0,26,0.30); }
         .kids-feat-icon { font-size: 17px; flex-shrink: 0; }
         .kids-feat-text { font-size: 12px; font-weight: 500; color: rgba(243,243,243,0.8); line-height: 1.4; }
-        .kids-visual { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 48px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 380px; position: relative; overflow: hidden; }
-        .kids-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(229,0,26,0.04) 0%, transparent 70%); }
 
-        /* CONTACT BAR */
-        .contact-bar { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 44px 0; }
-        .contact-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-        .contact-items { display: flex; gap: 44px; flex-wrap: wrap; }
-        .ci { display: flex; align-items: center; gap: 16px; }
-        .ci-icon { width: 46px; height: 46px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 19px; }
-        .ci-lbl { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted-l); margin-bottom: 3px; }
-        .ci-val { font-family: var(--font-h); font-size: 15px; font-weight: 600; }
+        .kids-visual {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+            position: relative;
+            overflow: hidden;
+        }
+        .kids-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(229,0,26,0.04) 0%, transparent 70%);
+        }
 
-        /* FOOTER */
-        footer { background: #040404; padding: 64px 0 32px; border-top: 1px solid var(--border); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
-        @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; gap: 36px; } }
-        .ft-brand .brand { font-family: var(--font-b); font-size: 9px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
-        .ft-brand .name { font-family: var(--font-h); font-size: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
-        .ft-brand p { font-size: 13px; color: var(--muted-l); line-height: 1.8; max-width: 300px; }
-        .ft-col-title { font-family: var(--font-h); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+        /* ============================================================
+           CONTACT BAR
+        ============================================================ */
+        .contact-bar {
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 44px 0;
+        }
+        .contact-bar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .contact-items {
+            display: flex;
+            gap: 44px;
+            flex-wrap: wrap;
+        }
+        .ci {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .ci-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+        .ci-lbl {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted-l);
+            margin-bottom: 3px;
+        }
+        .ci-val {
+            font-family: var(--font-h);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            background: #040404;
+            padding: 64px 0 32px;
+            border-top: 1px solid var(--border);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 56px;
+        }
+        @media (max-width: 720px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+        .ft-brand .brand {
+            font-family: var(--font-b);
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+        .ft-brand .name {
+            font-family: var(--font-h);
+            font-size: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .ft-brand p {
+            font-size: 13px;
+            color: var(--muted-l);
+            line-height: 1.8;
+            max-width: 300px;
+        }
+        .ft-col-title {
+            font-family: var(--font-h);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
         .ft-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .ft-links a { font-size: 13px; color: var(--muted-l); transition: color var(--t); }
         .ft-links a:hover { color: var(--red); }
-        .ft-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .ft-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
         .ft-bottom p { font-size: 12px; color: var(--muted); }
         .ft-ref { font-family: var(--font-h); font-size: 12px; color: var(--red); letter-spacing: 1px; }
 
+        /* ============================================================
+           RESPONSIVE MISC
+        ============================================================ */
         @media (max-width: 560px) {
             .section { padding: 80px 0; }
             .hero-title { font-size: 68px; }
             .plans-contact { gap: 24px; flex-direction: column; }
         }
 
-        /* FILM GRAIN */
+        /* ============================================================
+           FILM GRAIN OVERLAY
+        ============================================================ */
         .grain {
             position: fixed; inset: 0; z-index: 9999;
             pointer-events: none;
@@ -760,7 +1188,9 @@
             background-size: 180px 180px;
         }
 
-        /* LOGO WATERMARK */
+        /* ============================================================
+           LOGO WATERMARK
+        ============================================================ */
         .logo-wm {
             position: fixed; inset: 0; z-index: 0;
             pointer-events: none; overflow: hidden;
@@ -784,7 +1214,9 @@
             50%      { opacity: 1;   filter: drop-shadow(0 0 40px rgba(229,0,26,0.12)); }
         }
 
-        /* SECTION DIVIDERS */
+        /* ============================================================
+           SECTION DIVIDERS
+        ============================================================ */
         .sec-div {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(229,0,26,0.5) 50%, transparent);
@@ -800,17 +1232,19 @@
             box-shadow: 0 0 10px var(--red), 0 0 20px var(--red-glow);
         }
 
-        /* TEXT ANIMATION KEYFRAMES */
-        @keyframes animFadeUp   { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
-        @keyframes animFadeDown { from { opacity:0; transform:translateY(-32px); } to { opacity:1; transform:none; } }
-        @keyframes animSlideL   { from { opacity:0; transform:translateX(-55px); } to { opacity:1; transform:none; } }
-        @keyframes animSlideR   { from { opacity:0; transform:translateX( 55px); } to { opacity:1; transform:none; } }
+        /* ============================================================
+           TEXT ANIMATION KEYFRAMES
+        ============================================================ */
+        @keyframes animFadeUp   { from { opacity:0; transform:translateY(32px);              } to { opacity:1; transform:none; } }
+        @keyframes animFadeDown { from { opacity:0; transform:translateY(-32px);             } to { opacity:1; transform:none; } }
+        @keyframes animSlideL   { from { opacity:0; transform:translateX(-55px);             } to { opacity:1; transform:none; } }
+        @keyframes animSlideR   { from { opacity:0; transform:translateX( 55px);             } to { opacity:1; transform:none; } }
         @keyframes animZoom     { from { opacity:0; transform:scale(2.8); filter:blur(14px); } to { opacity:1; transform:none; filter:blur(0); } }
         @keyframes animBlur     { from { opacity:0.15; filter:blur(22px); letter-spacing:0.35em; } to { opacity:1; filter:blur(0); letter-spacing:inherit; } }
-        @keyframes animRotate   { from { opacity:0; transform:rotateY(90deg) scaleX(0.4); } to { opacity:1; transform:none; } }
+        @keyframes animRotate   { from { opacity:0; transform:rotateY(90deg) scaleX(0.4);   } to { opacity:1; transform:none; } }
         @keyframes animBounce   {
             0%   { opacity:0; transform:translateY(-44px) scale(.8); }
-            55%  { opacity:1; transform:translateY(7px) scale(1.06); }
+            55%  { opacity:1; transform:translateY(7px)   scale(1.06); }
             78%  { transform:translateY(-4px) scale(.98); }
             100% { opacity:1; transform:none; }
         }
@@ -821,64 +1255,123 @@
         }
         @keyframes animGlitch   {
             0%   { opacity:0; clip-path:inset(0 100% 0 0); transform:translateX(-4px) skewX(3deg); }
-            18%  { opacity:1; clip-path:inset(0 0 0 0); transform:translateX(2px) skewX(-1deg); }
+            18%  { opacity:1; clip-path:inset(0 0 0 0);    transform:translateX(2px)  skewX(-1deg);}
             20%  { transform:translateX(0); }
+            44%  { }
             45%  { transform:translateX(-3px); clip-path:inset(25% 0 15% 0); }
-            46%  { transform:translateX(2px); clip-path:inset(0 0 0 0); }
+            46%  { transform:translateX(2px);  clip-path:inset(0 0 0 0); }
             47%  { transform:none; }
             100% { opacity:1; transform:none; clip-path:none; }
         }
         @keyframes animNeon     {
             0%   { opacity:0; color:transparent; text-shadow:none; }
-            35%  { opacity:1; color:var(--red); text-shadow:0 0 8px var(--red),0 0 24px var(--red-glow),0 0 48px var(--red-glow); }
-            65%  { color:var(--red); text-shadow:0 0 4px var(--red); }
-            100% { opacity:1; color:inherit; text-shadow:none; }
+            35%  { opacity:1; color:var(--red);  text-shadow:0 0 8px var(--red),0 0 24px var(--red-glow),0 0 48px var(--red-glow); }
+            65%  { color:var(--red);             text-shadow:0 0 4px var(--red); }
+            100% { opacity:1; color:inherit;     text-shadow:none; }
         }
 
-        /* TEXT ANIMATION APPLICATION */
-        .ch, .wd { display: inline-block; opacity: 0; will-change: transform, opacity; }
-        @media (prefers-reduced-motion: reduce) { .ch, .wd { opacity: 1 !important; animation: none !important; } }
+        /* ============================================================
+           TEXT ANIMATION APPLICATION
+        ============================================================ */
+        .ch, .wd {
+            display: inline-block;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ch, .wd { opacity: 1 !important; animation: none !important; }
+        }
 
+        /* — char animations — */
         [data-anim="glitch"].anim-in  .ch { animation: animGlitch  0.65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 42ms); }
-        [data-anim="neon"].anim-in    .ch { animation: animNeon    0.75s ease forwards; animation-delay: calc(var(--i) * 48ms); }
-        [data-anim="zoom"].anim-in    .ch { animation: animZoom    0.60s ease forwards; animation-delay: calc(var(--i) * 40ms); }
-        [data-anim="blur"].anim-in    .ch { animation: animBlur    0.70s ease forwards; animation-delay: calc(var(--i) * 44ms); }
-        [data-anim="rotate"].anim-in  .ch { animation: animRotate  0.60s cubic-bezier(.4,0,.2,1) forwards; animation-delay: calc(var(--i) * 44ms); }
+        [data-anim="neon"].anim-in    .ch { animation: animNeon    0.75s ease                     forwards; animation-delay: calc(var(--i) * 48ms); }
+        [data-anim="zoom"].anim-in    .ch { animation: animZoom    0.60s ease                     forwards; animation-delay: calc(var(--i) * 40ms); }
+        [data-anim="blur"].anim-in    .ch { animation: animBlur    0.70s ease                     forwards; animation-delay: calc(var(--i) * 44ms); }
+        [data-anim="rotate"].anim-in  .ch { animation: animRotate  0.60s cubic-bezier(.4,0,.2,1)  forwards; animation-delay: calc(var(--i) * 44ms); }
         [data-anim="distort"].anim-in .ch { animation: animDistort 0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 40ms); }
-        [data-anim="fade-up"].anim-in .ch { animation: animFadeUp  0.55s ease forwards; animation-delay: calc(var(--i) * 36ms); }
-        [data-anim="slide-l"].anim-in .ch { animation: animSlideL  0.55s ease forwards; animation-delay: calc(var(--i) * 36ms); }
+        [data-anim="fade-up"].anim-in .ch { animation: animFadeUp  0.55s ease                     forwards; animation-delay: calc(var(--i) * 36ms); }
+        [data-anim="slide-l"].anim-in .ch { animation: animSlideL  0.55s ease                     forwards; animation-delay: calc(var(--i) * 36ms); }
         [data-anim="bounce"].anim-in  .ch { animation: animBounce  0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 44ms); }
 
+        /* — word animations — */
         [data-anim="glitch"].anim-in  .wd { animation: animGlitch  0.65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 80ms); }
-        [data-anim="neon"].anim-in    .wd { animation: animNeon    0.75s ease forwards; animation-delay: calc(var(--i) * 90ms); }
-        [data-anim="zoom"].anim-in    .wd { animation: animZoom    0.60s ease forwards; animation-delay: calc(var(--i) * 80ms); }
-        [data-anim="blur"].anim-in    .wd { animation: animBlur    0.70s ease forwards; animation-delay: calc(var(--i) * 90ms); }
-        [data-anim="slide-l"].anim-in .wd { animation: animSlideL  0.55s ease forwards; animation-delay: calc(var(--i) * 80ms); }
+        [data-anim="neon"].anim-in    .wd { animation: animNeon    0.75s ease                     forwards; animation-delay: calc(var(--i) * 90ms); }
+        [data-anim="zoom"].anim-in    .wd { animation: animZoom    0.60s ease                     forwards; animation-delay: calc(var(--i) * 80ms); }
+        [data-anim="blur"].anim-in    .wd { animation: animBlur    0.70s ease                     forwards; animation-delay: calc(var(--i) * 90ms); }
+        [data-anim="slide-l"].anim-in .wd { animation: animSlideL  0.55s ease                     forwards; animation-delay: calc(var(--i) * 80ms); }
         [data-anim="bounce"].anim-in  .wd { animation: animBounce  0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 90ms); }
-        [data-anim="fade-up"].anim-in .wd { animation: animFadeUp  0.55s ease forwards; animation-delay: calc(var(--i) * 70ms); }
+        [data-anim="fade-up"].anim-in .wd { animation: animFadeUp  0.55s ease                     forwards; animation-delay: calc(var(--i) * 70ms); }
         [data-anim="distort"].anim-in .wd { animation: animDistort 0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 80ms); }
 
-        [data-sd="u"] [data-anim="fade-up"].anim-in .ch,
-        [data-sd="u"] [data-anim="fade-up"].anim-in .wd { animation-name: animFadeDown; }
-        [data-sd="u"] [data-anim="slide-l"].anim-in .ch,
-        [data-sd="u"] [data-anim="slide-l"].anim-in .wd { animation-name: animSlideR; }
+        /* scroll-up variants — elements arrive from opposite direction */
+        [data-sd="u"] [data-anim="fade-up"].anim-in  .ch,
+        [data-sd="u"] [data-anim="fade-up"].anim-in  .wd { animation-name: animFadeDown; }
+        [data-sd="u"] [data-anim="slide-l"].anim-in  .ch,
+        [data-sd="u"] [data-anim="slide-l"].anim-in  .wd { animation-name: animSlideR; }
 
-        /* SECTION LABEL ANIMATED BAR */
+        /* ============================================================
+           ENHANCED BUTTON / CARD HOVER EFFECTS
+        ============================================================ */
+        .btn-red {
+            position: relative; overflow: hidden;
+        }
+        .btn-red::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+            opacity: 0; transition: opacity .3s;
+        }
+        .btn-red:hover::after { opacity: 1; }
+        .btn-red:hover {
+            box-shadow: 0 0 24px rgba(229,0,26,0.55), 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Red left-border glow on cards */
+        .space-card, .rec-card, .plan-card, .legend-item {
+            transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+        }
+        .space-card:hover, .rec-card:hover {
+            box-shadow: -3px 0 0 var(--red), 0 20px 40px rgba(0,0,0,0.55);
+        }
+
+        /* Nav link underline slide */
+        .nav-links a { position: relative; }
+        .nav-links a::after {
+            content: '';
+            position: absolute; bottom: 4px; left: 11px; right: 11px;
+            height: 1px; background: var(--red);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+        .nav-cta::after { display: none !important; }
+
+        /* Section label animated left bar */
         .section-label { overflow: hidden; }
-        .section-label::before { transform-origin: left; transition: transform 0.6s ease; transform: scaleX(0); }
-        .anim-in .section-label::before, .section-label.anim-in::before { transform: scaleX(1); }
+        .section-label::before {
+            transform-origin: left;
+            transition: transform 0.6s ease;
+            transform: scaleX(0);
+        }
+        .anim-in .section-label::before,
+        .section-label.anim-in::before { transform: scaleX(1); }
     </style>
 </head>
 <body>
 
+<!-- Film grain cinematic overlay -->
 <div class="grain" aria-hidden="true"></div>
 
+<!-- Logo watermark background — REPLACE logo.png WITH YOUR ORIGINAL LOGO FILE -->
 <div class="logo-wm" id="logoWm" aria-hidden="true">
     <div class="logo-wm-inner" id="logoWmInner">
         <img src="logo.png" alt="">
     </div>
 </div>
 
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
 <nav id="navbar">
     <div class="container">
         <div class="nav-inner">
@@ -886,6 +1379,7 @@
                 <span class="brand">Marca ACME</span>
                 <span class="name">Fight &amp; Fitness</span>
             </a>
+
             <ul class="nav-links" id="navLinks">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#espacios">Espacios</a></li>
@@ -896,6 +1390,7 @@
                 <li><a href="#kids">Kids</a></li>
                 <li><a href="#planes" class="nav-cta">Unirse Ahora</a></li>
             </ul>
+
             <button class="nav-hamburger" id="hamburger" aria-label="Menú">
                 <span></span><span></span><span></span>
             </button>
@@ -903,13 +1398,19 @@
     </div>
 </nav>
 
+<!-- ================================================================
+     HERO
+================================================================ -->
 <section id="inicio" class="hero">
     <div class="hero-bg"></div>
+
+    <!-- Decorative octagon SVG -->
     <svg class="hero-oct-deco" viewBox="0 0 500 500" aria-hidden="true" fill="none">
-        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186" stroke="#E5001A" stroke-width="1.5"/>
+        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186"   stroke="#E5001A" stroke-width="1.5"/>
         <polygon points="166,28 334,28 472,166 472,334 334,472 166,472 28,334 28,166" stroke="#E5001A" stroke-width="1"/>
         <polygon points="146,48 354,48 452,146 452,354 354,452 146,452 48,354 48,146" stroke="#E5001A" stroke-width="0.5"/>
     </svg>
+
     <div class="container">
         <div class="hero-content">
             <div class="hero-eyebrow fade-in">
@@ -917,34 +1418,53 @@
                 <span class="hero-eyebrow-sep"></span>
                 <span class="hero-eyebrow-tag">Plan MMA Premium</span>
             </div>
+
             <p class="hero-pretitle fade-in" data-delay="1">Marca ACME</p>
+
             <h1 class="hero-title fade-in" data-delay="2">
-                <span class="l1" data-split="char" data-anim="glitch">Combat</span>
-                <span class="l2" data-split="char" data-anim="neon">Center</span>
+                <span class="l1" data-split="char" data-anim="glitch">Fight &amp;</span>
+                <span class="l2" data-split="char" data-anim="neon">Fitness</span>
             </h1>
-            <p class="hero-subtitle" data-split="word" data-anim="blur">Fight &amp; Fitness</p>
+
+            <p class="hero-subtitle" data-split="word" data-anim="blur">Centro MMA Premium</p>
+
             <p class="hero-desc fade-in" data-delay="4">
                 Centro MMA de clase mundial diseñado para atletas comprometidos.
                 Dos octágonos, nueve áreas especializadas y capacidad para 20 atletas simultáneos
                 en 600 m² distribuidos en dos plantas.
             </p>
+
             <div class="hero-actions fade-in" data-delay="5">
                 <a href="#planes" class="btn btn-red">Unirse Ahora</a>
                 <a href="#espacios" class="btn btn-outline">Ver Espacios</a>
             </div>
         </div>
     </div>
+
+    <!-- Stats bar anchored to hero bottom -->
     <div class="hero-stats-bar">
         <div class="container">
             <div class="hero-stats-inner">
-                <div class="hero-stat"><div class="hero-stat-num" data-count="2">2</div><div class="hero-stat-label">Octágonos</div></div>
-                <div class="hero-stat"><div class="hero-stat-num" data-count="9">9</div><div class="hero-stat-label">Áreas Especializadas</div></div>
-                <div class="hero-stat"><div class="hero-stat-num" data-count="20">20</div><div class="hero-stat-label">Atletas Simultáneos</div></div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-count="2">2</div>
+                    <div class="hero-stat-label">Octágonos</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-count="9">9</div>
+                    <div class="hero-stat-label">Áreas Especializadas</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-count="20">20</div>
+                    <div class="hero-stat-label">Atletas Simultáneos</div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- ================================================================
+     SECTION 01 — ESPACIOS
+================================================================ -->
 <section id="espacios" class="section espacios">
     <div class="container">
         <div class="espacios-head">
@@ -960,190 +1480,338 @@
                 <button class="tab-btn" data-tab="familia">Familia</button>
             </div>
         </div>
+
         <div class="spaces-grid" id="spacesGrid">
+
+            <!-- COMBATE -->
             <div class="space-card fade-in" data-cat="combate">
-                <div class="space-card-img"><span class="space-card-num">01</span>🥊</div>
+                <div class="space-card-img">
+                    <span class="space-card-num">01</span>🥊
+                </div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Octágono Principal</h3>
                     <p class="space-card-desc">Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.</p>
                     <div class="space-card-actions">
                         <a href="#planes" class="btn btn-red" style="font-size:11px;padding:9px 16px;">Reservar</a>
-                        <a href="#mapa" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
+                        <a href="#mapa"   class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
                     </div>
                 </div>
             </div>
+
             <div class="space-card fade-in" data-delay="1" data-cat="combate">
                 <div class="space-card-img">🤼</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Zona de Tatami</h3>
                     <p class="space-card-desc">150 m² de tatami de alta densidad para grappling, wrestling y calentamiento. Superficie amortiguadora certificada.</p>
-                    <div class="space-card-actions"><a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a></div>
+                    <div class="space-card-actions">
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                    </div>
                 </div>
             </div>
+
             <div class="space-card fade-in" data-delay="2" data-cat="combate">
                 <div class="space-card-img">🧱</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Área de Costales</h3>
                     <p class="space-card-desc">10–12 costales profesionales de distintos pesos. Desarrollo de potencia, cadencia y resistencia específica.</p>
-                    <div class="space-card-actions"><a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a></div>
+                    <div class="space-card-actions">
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- FUERZA -->
             <div class="space-card fade-in" data-delay="3" data-cat="fuerza">
                 <div class="space-card-img">🏋️</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Sala de Pesas</h3>
                     <p class="space-card-desc">Equipamiento completo de fuerza. Rutinas prescritas según perfil atlético. Disponible post-clase incluido en Básico.</p>
-                    <div class="space-card-actions"><a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a></div>
+                    <div class="space-card-actions">
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- RECUPERACIÓN -->
             <div class="space-card fade-in" data-cat="recuperacion">
                 <div class="space-card-img">❄️</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Crioterapia</h3>
                     <p class="space-card-desc">3–4 tinas de inmersión en frío a 8–12 °C para reducción de inflamación y recuperación acelerada.</p>
-                    <div class="space-card-actions"><a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a></div>
+                    <div class="space-card-actions">
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                    </div>
                 </div>
             </div>
+
             <div class="space-card fade-in" data-delay="1" data-cat="recuperacion">
                 <div class="space-card-img">🌡️</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Sauna Seco</h3>
                     <p class="space-card-desc">Sauna de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda post-entrenamiento.</p>
-                    <div class="space-card-actions"><a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a></div>
+                    <div class="space-card-actions">
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                    </div>
                 </div>
             </div>
+
             <div class="space-card fade-in" data-delay="2" data-cat="recuperacion">
                 <div class="space-card-img">🛌</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Masajes &amp; Fisioterapia</h3>
                     <p class="space-card-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones con fisioterapeuta certificado.</p>
-                    <div class="space-card-actions"><a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a></div>
+                    <div class="space-card-actions">
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- FAMILIA -->
             <div class="space-card fade-in" data-cat="familia">
                 <div class="space-card-img">🧒</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Zona Kids MMA</h3>
                     <p class="space-card-desc">Octágono kids Ø 5 m, tatami acolchado extra y equipo de protección completo. Grupos de 10 niños, entrenador certificado.</p>
-                    <div class="space-card-actions"><a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a></div>
+                    <div class="space-card-actions">
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                    </div>
                 </div>
             </div>
+
             <div class="space-card fade-in" data-delay="1" data-cat="familia">
                 <div class="space-card-img">👨‍👩‍👧</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Zona de Padres</h3>
                     <p class="space-card-desc">Área de descanso con visibilidad directa al entrenamiento infantil. Ambiente familiar, seguro y motivador.</p>
-                    <div class="space-card-actions"><a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a></div>
+                    <div class="space-card-actions">
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div class="sec-div" aria-hidden="true"></div>
+<!-- ================================================================
+     SECTION 03 — MAPA
+================================================================ -->
+<section id="mapa" class="section mapa">
+    <div class="container">
+        <p class="section-label" data-split="word" data-anim="slide-l">03 — Distribución</p>
+        <h2 class="section-title" data-split="char" data-anim="rotate">Mapa Conceptual</h2>
+        <p class="mapa-intro fade-in" data-delay="2">
+            2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja,
+            rodeado por las zonas de impacto y fuerza. La planta alta concentra el área kids con su mini
+            octágono y todas las zonas de recuperación.
+        </p>
+
+        <div class="floor-tabs fade-in" data-delay="3">
+            <button class="floor-tab active" data-floor="baja">Planta Baja</button>
+            <button class="floor-tab"        data-floor="alta">Planta Alta</button>
+        </div>
+
+        <!-- ── PLANTA BAJA ── -->
+        <div class="floor-plan active" id="floor-baja">
+            <div class="floor-svg-wrap">
+                <svg viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" aria-label="Plano Planta Baja">
+                    <defs>
+                        <pattern id="grid" width="52" height="44" patternUnits="userSpaceOnUse">
+                            <path d="M 52 0 L 0 0 0 44" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <!-- bg -->
+                    <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
+                    <rect width="520" height="440" fill="url(#grid)" rx="8"/>
+
+                    <!-- Recepción / Vestidores -->
+                    <rect x="18" y="18" width="150" height="76" rx="4"
+                          fill="rgba(229,0,26,0.07)" stroke="rgba(229,0,26,0.28)" stroke-width="1"/>
+                    <text x="93" y="50"  text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
+                    <text x="93" y="67"  text-anchor="middle" fill="rgba(229,0,26,0.50)" font-family="sans-serif" font-size="9">VESTIDORES</text>
+
+                    <!-- Área Costales -->
+                    <rect x="186" y="18" width="140" height="76" rx="4"
+                          fill="rgba(201,53,32,0.07)" stroke="rgba(201,53,32,0.28)" stroke-width="1"/>
+                    <text x="256" y="50"  text-anchor="middle" fill="#C93520" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">COSTALES</text>
+                    <text x="256" y="67"  text-anchor="middle" fill="rgba(201,53,32,0.5)" font-family="sans-serif" font-size="9">10–12 UNIDADES</text>
+
+                    <!-- Sala Pesas -->
+                    <rect x="348" y="18" width="154" height="136" rx="4"
+                          fill="rgba(90,130,210,0.07)" stroke="rgba(90,130,210,0.22)" stroke-width="1"/>
+                    <text x="425" y="78"  text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">SALA DE</text>
+                    <text x="425" y="95"  text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">PESAS</text>
+
+                    <!-- Tatami Grappling -->
+                    <rect x="18" y="112" width="150" height="120" rx="4"
+                          fill="rgba(50,180,100,0.06)" stroke="rgba(50,180,100,0.22)" stroke-width="1"/>
+                    <text x="93" y="166" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
+                    <text x="93" y="183" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">GRAPPLING</text>
+                    <text x="93" y="200" text-anchor="middle" fill="rgba(72,200,114,0.45)" font-family="sans-serif" font-size="9">150 m²</text>
+
+                    <!-- Octágono Principal (centered at 256,240) -->
+                    <!-- Regular octagon: 8 points at r=105 -->
+                    <polygon
+                        points="256,135 325,158 348,225 325,292 256,315 187,292 164,225 187,158"
+                        fill="rgba(229,0,26,0.06)" stroke="#E5001A" stroke-width="2"/>
+                    <!-- inner ring -->
+                    <polygon
+                        points="256,152 314,172 334,226 314,280 256,300 198,280 178,226 198,172"
+                        fill="none" stroke="rgba(229,0,26,0.18)" stroke-width="1" stroke-dasharray="5,4"/>
+                    <text x="256" y="215" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
+                    <text x="256" y="234" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
+                    <text x="256" y="251" text-anchor="middle" fill="rgba(229,0,26,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
+
+                    <!-- Tatami Calentamiento -->
+                    <rect x="18" y="250" width="140" height="172" rx="4"
+                          fill="rgba(50,180,100,0.04)" stroke="rgba(50,180,100,0.14)" stroke-width="1"/>
+                    <text x="88" y="328" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
+                    <text x="88" y="345" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">CALENTAMIENTO</text>
+
+                    <!-- Outer border -->
+                    <rect x="18" y="18" width="484" height="404" rx="6"
+                          fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
+
+                    <!-- Floor label -->
+                    <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)"
+                          font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA BAJA · 300 m²</text>
+                </svg>
+            </div>
+
+            <div class="floor-legend">
+                <p class="floor-legend-title">Planta Baja · 300 m²</p>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#E5001A"></div>
+                    <div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#C93520"></div>
+                    <div><p class="legend-text">Área de Costales</p><p class="legend-sub">10–12 unidades</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#48C872"></div>
+                    <div><p class="legend-text">Zona de Tatami</p><p class="legend-sub">150 m² · Grappling + Calentamiento</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#7090C8"></div>
+                    <div><p class="legend-text">Sala de Pesas</p><p class="legend-sub">Fuerza y acondicionamiento</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.45"></div>
+                    <div><p class="legend-text">Recepción / Vestidores</p><p class="legend-sub">Acceso principal</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PLANTA ALTA ── -->
+        <div class="floor-plan" id="floor-alta">
+            <div class="floor-svg-wrap">
+                <svg viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" aria-label="Plano Planta Alta">
+                    <defs>
+                        <pattern id="grid2" width="52" height="44" patternUnits="userSpaceOnUse">
+                            <path d="M 52 0 L 0 0 0 44" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
+                    <rect width="520" height="440" fill="url(#grid2)" rx="8"/>
+
+                    <!-- Zona Kids -->
+                    <rect x="18" y="18" width="210" height="210" rx="4"
+                          fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.22)" stroke-width="1"/>
+                    <text x="123" y="44" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="12" font-weight="700" letter-spacing="2">ZONA KIDS MMA</text>
+
+                    <!-- Kids Octagon centered at 123, 130 -->
+                    <polygon
+                        points="123,62 158,74 172,108 172,152 158,186 123,198 88,186 74,152 74,108 88,74"
+                        fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="1.8"/>
+                    <text x="123" y="124" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="11" font-weight="700">OCTÁGONO</text>
+                    <text x="123" y="140" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="10">KIDS</text>
+                    <text x="123" y="156" text-anchor="middle" fill="rgba(255,180,50,0.5)" font-family="sans-serif" font-size="9">Ø ~5 m</text>
+
+                    <!-- Zona Padres -->
+                    <rect x="246" y="18" width="256" height="90" rx="4"
+                          fill="rgba(229,0,26,0.05)" stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
+                    <text x="374" y="52" text-anchor="middle" fill="rgba(229,0,26,0.85)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">ZONA DE PADRES</text>
+                    <text x="374" y="68" text-anchor="middle" fill="rgba(229,0,26,0.38)" font-family="sans-serif" font-size="9">VISTA DIRECTA · ÁREA DESCANSO</text>
+
+                    <!-- Crioterapia -->
+                    <rect x="246" y="126" width="118" height="100" rx="4"
+                          fill="rgba(50,120,210,0.07)" stroke="rgba(50,120,210,0.26)" stroke-width="1"/>
+                    <text x="305" y="166" text-anchor="middle" fill="#5090CC" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">CRIOTERAPIA</text>
+                    <text x="305" y="183" text-anchor="middle" fill="rgba(80,144,204,0.48)" font-family="sans-serif" font-size="9">3–4 TINAS · 8–12°C</text>
+
+                    <!-- Sauna -->
+                    <rect x="384" y="126" width="118" height="100" rx="4"
+                          fill="rgba(200,100,28,0.07)" stroke="rgba(200,100,28,0.26)" stroke-width="1"/>
+                    <text x="443" y="166" text-anchor="middle" fill="#C86420" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">SAUNA SECO</text>
+                    <text x="443" y="183" text-anchor="middle" fill="rgba(200,100,32,0.48)" font-family="sans-serif" font-size="9">70–95°C · 8–10 PAX</text>
+
+                    <!-- Masajes & Fisio -->
+                    <rect x="18" y="246" width="484" height="152" rx="4"
+                          fill="rgba(160,100,200,0.05)" stroke="rgba(160,100,200,0.2)" stroke-width="1"/>
+                    <text x="260" y="312" text-anchor="middle" fill="#A068C8" font-family="Oswald,sans-serif" font-size="13" font-weight="600" letter-spacing="2">MASAJES &amp; FISIOTERAPIA</text>
+                    <text x="260" y="330" text-anchor="middle" fill="rgba(160,100,200,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1">2–3 CAMILLAS · LIBERACIÓN MIOFASCIAL · FISIOTERAPEUTA CERTIFICADO</text>
+
+                    <!-- Outer border -->
+                    <rect x="18" y="18" width="484" height="404" rx="6"
+                          fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
+
+                    <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)"
+                          font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA ALTA · 300 m²</text>
+                </svg>
+            </div>
+
+            <div class="floor-legend">
+                <p class="floor-legend-title">Planta Alta · 300 m²</p>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#FFB432"></div>
+                    <div><p class="legend-text">Octágono Kids</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.55"></div>
+                    <div><p class="legend-text">Zona de Padres</p><p class="legend-sub">Vista directa · Área descanso</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#5090CC"></div>
+                    <div><p class="legend-text">Crioterapia</p><p class="legend-sub">3–4 tinas · 8–12 °C</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#C86420"></div>
+                    <div><p class="legend-text">Sauna Seco</p><p class="legend-sub">70–95 °C · 8–10 pax</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#A068C8"></div>
+                    <div><p class="legend-text">Masajes &amp; Fisioterapia</p><p class="legend-sub">2–3 camillas · Fisioterapeuta certificado</p></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="sec-div" aria-hidden="true"></div>
-
-<section id="mapa" class="section mapa">
-    <div class="container">
-        <p class="section-label" data-split="word" data-anim="slide-l">03 — Distribución</p>
-        <h2 class="section-title" data-split="char" data-anim="rotate">Mapa Conceptual</h2>
-        <p class="mapa-intro fade-in" data-delay="2">2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja, rodeado por las zonas de impacto y fuerza. La planta alta concentra el área kids con su mini octágono y todas las zonas de recuperación.</p>
-        <div class="floor-tabs fade-in" data-delay="3">
-            <button class="floor-tab active" data-floor="baja">Planta Baja</button>
-            <button class="floor-tab" data-floor="alta">Planta Alta</button>
-        </div>
-        <div class="floor-plan active" id="floor-baja">
-            <div class="floor-svg-wrap">
-                <svg viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" aria-label="Plano Planta Baja">
-                    <defs><pattern id="grid" width="52" height="44" patternUnits="userSpaceOnUse"><path d="M 52 0 L 0 0 0 44" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/></pattern></defs>
-                    <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
-                    <rect width="520" height="440" fill="url(#grid)" rx="8"/>
-                    <rect x="18" y="18" width="150" height="76" rx="4" fill="rgba(229,0,26,0.07)" stroke="rgba(229,0,26,0.28)" stroke-width="1"/>
-                    <text x="93" y="50" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
-                    <text x="93" y="67" text-anchor="middle" fill="rgba(229,0,26,0.50)" font-family="sans-serif" font-size="9">VESTIDORES</text>
-                    <rect x="186" y="18" width="140" height="76" rx="4" fill="rgba(201,53,32,0.07)" stroke="rgba(201,53,32,0.28)" stroke-width="1"/>
-                    <text x="256" y="50" text-anchor="middle" fill="#C93520" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">COSTALES</text>
-                    <text x="256" y="67" text-anchor="middle" fill="rgba(201,53,32,0.5)" font-family="sans-serif" font-size="9">10–12 UNIDADES</text>
-                    <rect x="348" y="18" width="154" height="136" rx="4" fill="rgba(90,130,210,0.07)" stroke="rgba(90,130,210,0.22)" stroke-width="1"/>
-                    <text x="425" y="78" text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">SALA DE</text>
-                    <text x="425" y="95" text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">PESAS</text>
-                    <rect x="18" y="112" width="150" height="120" rx="4" fill="rgba(50,180,100,0.06)" stroke="rgba(50,180,100,0.22)" stroke-width="1"/>
-                    <text x="93" y="166" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
-                    <text x="93" y="183" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">GRAPPLING</text>
-                    <text x="93" y="200" text-anchor="middle" fill="rgba(72,200,114,0.45)" font-family="sans-serif" font-size="9">150 m²</text>
-                    <polygon points="256,135 325,158 348,225 325,292 256,315 187,292 164,225 187,158" fill="rgba(229,0,26,0.06)" stroke="#E5001A" stroke-width="2"/>
-                    <polygon points="256,152 314,172 334,226 314,280 256,300 198,280 178,226 198,172" fill="none" stroke="rgba(229,0,26,0.18)" stroke-width="1" stroke-dasharray="5,4"/>
-                    <text x="256" y="215" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
-                    <text x="256" y="234" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
-                    <text x="256" y="251" text-anchor="middle" fill="rgba(229,0,26,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
-                    <rect x="18" y="250" width="140" height="172" rx="4" fill="rgba(50,180,100,0.04)" stroke="rgba(50,180,100,0.14)" stroke-width="1"/>
-                    <text x="88" y="328" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
-                    <text x="88" y="345" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">CALENTAMIENTO</text>
-                    <rect x="18" y="18" width="484" height="404" rx="6" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
-                    <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)" font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA BAJA · 300 m²</text>
-                </svg>
-            </div>
-            <div class="floor-legend">
-                <p class="floor-legend-title">Planta Baja · 300 m²</p>
-                <div class="legend-item"><div class="legend-dot" style="background:#E5001A"></div><div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#C93520"></div><div><p class="legend-text">Área de Costales</p><p class="legend-sub">10–12 unidades</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#48C872"></div><div><p class="legend-text">Zona de Tatami</p><p class="legend-sub">150 m² · Grappling + Calentamiento</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#7090C8"></div><div><p class="legend-text">Sala de Pesas</p><p class="legend-sub">Fuerza y acondicionamiento</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#E5001A;opacity:0.45"></div><div><p class="legend-text">Recepción / Vestidores</p><p class="legend-sub">Acceso principal</p></div></div>
-            </div>
-        </div>
-        <div class="floor-plan" id="floor-alta">
-            <div class="floor-svg-wrap">
-                <svg viewBox="0 0 520 440" xmlns="http://www.w3.org/2000/svg" aria-label="Plano Planta Alta">
-                    <defs><pattern id="grid2" width="52" height="44" patternUnits="userSpaceOnUse"><path d="M 52 0 L 0 0 0 44" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/></pattern></defs>
-                    <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
-                    <rect width="520" height="440" fill="url(#grid2)" rx="8"/>
-                    <rect x="18" y="18" width="210" height="210" rx="4" fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.22)" stroke-width="1"/>
-                    <text x="123" y="44" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="12" font-weight="700" letter-spacing="2">ZONA KIDS MMA</text>
-                    <polygon points="123,62 158,74 172,108 172,152 158,186 123,198 88,186 74,152 74,108 88,74" fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="1.8"/>
-                    <text x="123" y="124" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="11" font-weight="700">OCTÁGONO</text>
-                    <text x="123" y="140" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="10">KIDS</text>
-                    <text x="123" y="156" text-anchor="middle" fill="rgba(255,180,50,0.5)" font-family="sans-serif" font-size="9">Ø ~5 m</text>
-                    <rect x="246" y="18" width="256" height="90" rx="4" fill="rgba(229,0,26,0.05)" stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
-                    <text x="374" y="52" text-anchor="middle" fill="rgba(229,0,26,0.85)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">ZONA DE PADRES</text>
-                    <text x="374" y="68" text-anchor="middle" fill="rgba(229,0,26,0.38)" font-family="sans-serif" font-size="9">VISTA DIRECTA · ÁREA DESCANSO</text>
-                    <rect x="246" y="126" width="118" height="100" rx="4" fill="rgba(50,120,210,0.07)" stroke="rgba(50,120,210,0.26)" stroke-width="1"/>
-                    <text x="305" y="166" text-anchor="middle" fill="#5090CC" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">CRIOTERAPIA</text>
-                    <text x="305" y="183" text-anchor="middle" fill="rgba(80,144,204,0.48)" font-family="sans-serif" font-size="9">3–4 TINAS · 8–12°C</text>
-                    <rect x="384" y="126" width="118" height="100" rx="4" fill="rgba(200,100,28,0.07)" stroke="rgba(200,100,28,0.26)" stroke-width="1"/>
-                    <text x="443" y="166" text-anchor="middle" fill="#C86420" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">SAUNA SECO</text>
-                    <text x="443" y="183" text-anchor="middle" fill="rgba(200,100,32,0.48)" font-family="sans-serif" font-size="9">70–95°C · 8–10 PAX</text>
-                    <rect x="18" y="246" width="484" height="152" rx="4" fill="rgba(160,100,200,0.05)" stroke="rgba(160,100,200,0.2)" stroke-width="1"/>
-                    <text x="260" y="312" text-anchor="middle" fill="#A068C8" font-family="Oswald,sans-serif" font-size="13" font-weight="600" letter-spacing="2">MASAJES &amp; FISIOTERAPIA</text>
-                    <text x="260" y="330" text-anchor="middle" fill="rgba(160,100,200,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1">2–3 CAMILLAS · LIBERACIÓN MIOFASCIAL · FISIOTERAPEUTA CERTIFICADO</text>
-                    <rect x="18" y="18" width="484" height="404" rx="6" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
-                    <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)" font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA ALTA · 300 m²</text>
-                </svg>
-            </div>
-            <div class="floor-legend">
-                <p class="floor-legend-title">Planta Alta · 300 m²</p>
-                <div class="legend-item"><div class="legend-dot" style="background:#FFB432"></div><div><p class="legend-text">Octágono Kids</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#E5001A;opacity:0.55"></div><div><p class="legend-text">Zona de Padres</p><p class="legend-sub">Vista directa · Área descanso</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#5090CC"></div><div><p class="legend-text">Crioterapia</p><p class="legend-sub">3–4 tinas · 8–12 °C</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#C86420"></div><div><p class="legend-text">Sauna Seco</p><p class="legend-sub">70–95 °C · 8–10 pax</p></div></div>
-                <div class="legend-item"><div class="legend-dot" style="background:#A068C8"></div><div><p class="legend-text">Masajes &amp; Fisioterapia</p><p class="legend-sub">2–3 camillas · Fisioterapeuta certificado</p></div></div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <div class="sec-div" aria-hidden="true"></div>
-
+<!-- ================================================================
+     SECTION 02 — MEMBRESÍAS
+================================================================ -->
 <section id="planes" class="section membresias">
     <div class="container">
         <div class="membresias-hd fade-in">
             <p class="section-label">02 — Membresías</p>
             <h2 class="section-title" data-split="word" data-anim="slide-l">Planes de Suscripción</h2>
         </div>
+
         <div class="plans-grid">
+
+            <!-- Clase Única -->
             <div class="plan-card fade-in">
                 <p class="plan-type">Entrada Abierta</p>
                 <h3 class="plan-name" data-split="char" data-anim="glitch">Clase Única</h3>
-                <div class="plan-price"><span class="plan-curr">$</span><span class="plan-amount">299</span></div>
+                <div class="plan-price">
+                    <span class="plan-curr">$</span>
+                    <span class="plan-amount">299</span>
+                </div>
                 <p class="plan-period">Por sesión · Sin compromiso</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
@@ -1155,11 +1823,16 @@
                 </ul>
                 <a href="#" class="btn btn-outline plan-btn">Contratar Ahora</a>
             </div>
+
+            <!-- Mensual BÁSICO (featured) -->
             <div class="plan-card featured fade-in" data-delay="2">
                 <div class="plan-badge">⭐ Recomendado</div>
                 <p class="plan-type">Mensual</p>
                 <h3 class="plan-name" data-split="char" data-anim="neon">Básico</h3>
-                <div class="plan-price"><span class="plan-curr">$</span><span class="plan-amount">1,299</span></div>
+                <div class="plan-price">
+                    <span class="plan-curr">$</span>
+                    <span class="plan-amount">1,299</span>
+                </div>
                 <p class="plan-period">Clases ilimitadas · Cancelable</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
@@ -1172,10 +1845,15 @@
                 </ul>
                 <a href="#" class="btn btn-red plan-btn">Contratar Ahora</a>
             </div>
+
+            <!-- Élite -->
             <div class="plan-card fade-in" data-delay="4">
                 <p class="plan-type">Anual + Beneficios</p>
                 <h3 class="plan-name" data-split="char" data-anim="bounce">Élite</h3>
-                <div class="plan-price"><span class="plan-curr">$</span><span class="plan-amount">12,999</span></div>
+                <div class="plan-price">
+                    <span class="plan-curr">$</span>
+                    <span class="plan-amount">12,999</span>
+                </div>
                 <p class="plan-period">12 meses · 3 meses gratis</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
@@ -1190,28 +1868,91 @@
                 <a href="#" class="btn btn-outline plan-btn">Contratar Ahora</a>
             </div>
         </div>
+
+        <!-- Contact under plans -->
         <div class="plans-contact fade-in">
-            <div class="plans-contact-item"><div class="plans-contact-icon">📧</div><div><p class="plans-contact-lbl">Correo · Disponible 24/7</p><p class="plans-contact-val">soporte@acmecombat.mx</p></div></div>
-            <div class="plans-contact-item"><div class="plans-contact-icon">🔖</div><div><p class="plans-contact-lbl">Referencia única</p><p class="plans-contact-val" style="color:var(--red);">ACC-2026-7849X</p></div></div>
+            <div class="plans-contact-item">
+                <div class="plans-contact-icon">📧</div>
+                <div>
+                    <p class="plans-contact-lbl">Correo · Disponible 24/7</p>
+                    <p class="plans-contact-val">soporte@acmecombat.mx</p>
+                </div>
+            </div>
+            <div class="plans-contact-item">
+                <div class="plans-contact-icon">🔖</div>
+                <div>
+                    <p class="plans-contact-lbl">Referencia única</p>
+                    <p class="plans-contact-val" style="color:var(--red);">ACC-2026-7849X</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<div class="sec-div" aria-hidden="true"></div>
 
+<div class="sec-div" aria-hidden="true"></div>
+<!-- ================================================================
+     SECTION 04 — CLASES
+================================================================ -->
 <section id="clases" class="section clases">
     <div class="container">
         <p class="section-label" data-split="word" data-anim="slide-l">04 — Operación</p>
         <h2 class="section-title" data-split="char" data-anim="distort">Modelo de Clases</h2>
+
         <div class="clases-grid">
+            <!-- Timeline -->
             <div class="timeline">
-                <div class="tl-item fade-in"><div class="tl-num">01</div><div class="tl-body"><p class="tl-dur">15 min.</p><h3 class="tl-title">Calentamiento General</h3><p class="tl-desc">Activación cardiovascular y movilidad articular con todo el grupo de 10 atletas.</p></div></div>
-                <div class="tl-item fade-in" data-delay="1"><div class="tl-num">02</div><div class="tl-body"><p class="tl-dur">25 min.</p><h3 class="tl-title">Técnica Específica</h3><p class="tl-desc">Instrucción técnica dirigida: golpes, defensa, control de distancia o derribo. Striking / Grappling.</p></div></div>
-                <div class="tl-item fade-in" data-delay="2"><div class="tl-num">03</div><div class="tl-body"><p class="tl-dur">15 min.</p><h3 class="tl-title">Circuito de Costales</h3><p class="tl-desc">Rotación por costales desarrollando potencia, cadencia y resistencia específica.</p></div></div>
-                <div class="tl-item fade-in" data-delay="3"><div class="tl-num">04</div><div class="tl-body"><p class="tl-dur">20 min.</p><h3 class="tl-title">Sparring / Drilling en Octágono</h3><p class="tl-desc">Aplicación táctica dentro del octágono, en parejas rotativas supervisadas.</p></div></div>
-                <div class="tl-item fade-in" data-delay="4"><div class="tl-num">05</div><div class="tl-body"><p class="tl-dur">15 min.</p><h3 class="tl-title">Fuerza Complementaria</h3><p class="tl-desc">Opcionales en sala de pesas con rutina prescrita según perfil del atleta.</p></div></div>
-                <div class="tl-item fade-in" data-delay="5"><div class="tl-num">06</div><div class="tl-body"><p class="tl-dur">Post-clase</p><h3 class="tl-title">Recuperación — Fisioterapia</h3><p class="tl-desc">Acceso a tinas de crioterapia y sauna. Protocolo: 3 min. frío / 10 min. sauna.</p></div></div>
+                <div class="tl-item fade-in">
+                    <div class="tl-num">01</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">15 min.</p>
+                        <h3 class="tl-title">Calentamiento General</h3>
+                        <p class="tl-desc">Activación cardiovascular y movilidad articular con todo el grupo de 10 atletas.</p>
+                    </div>
+                </div>
+                <div class="tl-item fade-in" data-delay="1">
+                    <div class="tl-num">02</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">25 min.</p>
+                        <h3 class="tl-title">Técnica Específica</h3>
+                        <p class="tl-desc">Instrucción técnica dirigida: golpes, defensa, control de distancia o derribo. Striking / Grappling.</p>
+                    </div>
+                </div>
+                <div class="tl-item fade-in" data-delay="2">
+                    <div class="tl-num">03</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">15 min.</p>
+                        <h3 class="tl-title">Circuito de Costales</h3>
+                        <p class="tl-desc">Rotación por costales desarrollando potencia, cadencia y resistencia específica.</p>
+                    </div>
+                </div>
+                <div class="tl-item fade-in" data-delay="3">
+                    <div class="tl-num">04</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">20 min.</p>
+                        <h3 class="tl-title">Sparring / Drilling en Octágono</h3>
+                        <p class="tl-desc">Aplicación táctica dentro del octágono, en parejas rotativas supervisadas.</p>
+                    </div>
+                </div>
+                <div class="tl-item fade-in" data-delay="4">
+                    <div class="tl-num">05</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">15 min.</p>
+                        <h3 class="tl-title">Fuerza Complementaria</h3>
+                        <p class="tl-desc">Opcionales en sala de pesas con rutina prescrita según perfil del atleta.</p>
+                    </div>
+                </div>
+                <div class="tl-item fade-in" data-delay="5">
+                    <div class="tl-num">06</div>
+                    <div class="tl-body">
+                        <p class="tl-dur">Post-clase</p>
+                        <h3 class="tl-title">Recuperación — Fisioterapia</h3>
+                        <p class="tl-desc">Acceso a tinas de crioterapia y sauna. Protocolo: 3 min. frío / 10 min. sauna.</p>
+                    </div>
+                </div>
             </div>
+
+            <!-- Capacity table -->
             <div class="cap-table fade-in" data-delay="2">
                 <div class="cap-head">Resumen de Capacidad</div>
                 <div class="cap-row"><span class="cap-lbl">Alumnos por clase (adultos)</span><span class="cap-val">10</span></div>
@@ -1226,29 +1967,56 @@
     </div>
 </section>
 
-<div class="sec-div" aria-hidden="true"></div>
 
+<div class="sec-div" aria-hidden="true"></div>
+<!-- ================================================================
+     SECTION 05 — RECUPERACIÓN
+================================================================ -->
 <section id="recuperacion" class="section recuperacion">
     <div class="container">
         <p class="section-label" data-split="word" data-anim="slide-l">05 — Recuperación</p>
         <h2 class="section-title" data-split="char" data-anim="neon">Área de Fisioterapia</h2>
+
         <div class="recovery-grid">
-            <div class="rec-card fade-in"><span class="rec-icon">❄️</span><h3 class="rec-title" data-split="word" data-anim="blur">Crioterapia</h3><p class="rec-desc">Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.</p><span class="rec-badge">8 – 12 °C</span></div>
-            <div class="rec-card fade-in" data-delay="2"><span class="rec-icon">🌡️</span><h3 class="rec-title" data-split="word" data-anim="blur">Sauna Seco</h3><p class="rec-desc">Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.</p><span class="rec-badge">70 – 95 °C</span></div>
-            <div class="rec-card fade-in" data-delay="4"><span class="rec-icon">🛌</span><h3 class="rec-title" data-split="word" data-anim="blur">Camillas de Masaje</h3><p class="rec-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.</p><span class="rec-badge">2 – 3 camillas</span></div>
+            <div class="rec-card fade-in">
+                <span class="rec-icon">❄️</span>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Crioterapia</h3>
+                <p class="rec-desc">Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.</p>
+                <span class="rec-badge">8 – 12 °C</span>
+            </div>
+            <div class="rec-card fade-in" data-delay="2">
+                <span class="rec-icon">🌡️</span>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Sauna Seco</h3>
+                <p class="rec-desc">Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.</p>
+                <span class="rec-badge">70 – 95 °C</span>
+            </div>
+            <div class="rec-card fade-in" data-delay="4">
+                <span class="rec-icon">🛌</span>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Camillas de Masaje</h3>
+                <p class="rec-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.</p>
+                <span class="rec-badge">2 – 3 camillas</span>
+            </div>
         </div>
     </div>
 </section>
 
-<div class="sec-div" aria-hidden="true"></div>
 
+<div class="sec-div" aria-hidden="true"></div>
+<!-- ================================================================
+     SECTION 06 — KIDS
+================================================================ -->
 <section id="kids" class="section kids">
     <div class="container">
         <div class="kids-grid">
             <div>
                 <p class="section-label" data-split="word" data-anim="slide-l">06 — Programa Infantil</p>
                 <h2 class="section-title" data-split="word" data-anim="bounce">Zona Kids &amp; Familia</h2>
-                <p class="kids-desc fade-in" data-delay="2">🧒 El área kids está diseñada para que los niños entrenen con seguridad y confianza mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad directa al área de entrenamiento infantil, creando un ambiente familiar, seguro y motivador.</p>
+                <p class="kids-desc fade-in" data-delay="2">
+                    🧒 El área kids está diseñada para que los niños entrenen con seguridad y confianza
+                    mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad
+                    directa al área de entrenamiento infantil, creando un ambiente familiar, seguro y motivador.
+                    Los grupos pequeños de 10 niños garantizan atención personalizada de calidad.
+                </p>
                 <div class="kids-features fade-in" data-delay="3">
                     <div class="kids-feat"><span class="kids-feat-icon">👥</span><span class="kids-feat-text">Grupos de 10 niños</span></div>
                     <div class="kids-feat"><span class="kids-feat-icon">🏅</span><span class="kids-feat-text">Entrenador certificado</span></div>
@@ -1260,44 +2028,89 @@
                     <div class="kids-feat"><span class="kids-feat-icon">✅</span><span class="kids-feat-text">Ambiente 100% seguro</span></div>
                 </div>
             </div>
+
+            <!-- Visual: octagon SVG -->
             <div class="kids-visual fade-in" data-delay="2">
                 <svg viewBox="0 0 300 300" width="260" height="260" style="position:relative;z-index:1" aria-label="Octágono Kids">
-                    <polygon points="150,8 220,35 278,93 278,207 220,265 150,292 80,265 22,207 22,93 80,35" fill="none" stroke="rgba(229,0,26,0.10)" stroke-width="1.5" stroke-dasharray="6,5"/>
-                    <text x="150" y="308" text-anchor="middle" fill="rgba(229,0,26,0.28)" font-family="sans-serif" font-size="8" letter-spacing="1">Referencia octágono principal</text>
-                    <polygon points="150,54 197,72 222,118 222,182 197,228 150,246 103,228 78,182 78,118 103,72" fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="2"/>
-                    <circle cx="150" cy="150" r="38" fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.18)" stroke-width="1" stroke-dasharray="4,4"/>
-                    <text x="150" y="143" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="14" font-weight="700">OCTÁGONO</text>
-                    <text x="150" y="159" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="12">KIDS</text>
-                    <text x="150" y="174" text-anchor="middle" fill="rgba(255,180,50,0.45)" font-family="sans-serif" font-size="10">Ø ~5 m</text>
+                    <!-- Reference (adult) octagon -->
+                    <polygon
+                        points="150,8 220,35 278,93 278,207 220,265 150,292 80,265 22,207 22,93 80,35"
+                        fill="none" stroke="rgba(229,0,26,0.10)" stroke-width="1.5" stroke-dasharray="6,5"/>
+                    <text x="150" y="308" text-anchor="middle" fill="rgba(229,0,26,0.28)"
+                          font-family="sans-serif" font-size="8" letter-spacing="1">Referencia octágono principal</text>
+
+                    <!-- Kids octagon -->
+                    <polygon
+                        points="150,54 197,72 222,118 222,182 197,228 150,246 103,228 78,182 78,118 103,72"
+                        fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="2"/>
+
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="38"
+                            fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.18)"
+                            stroke-width="1" stroke-dasharray="4,4"/>
+                    <text x="150" y="143" text-anchor="middle" fill="#FFB432"
+                          font-family="Oswald,sans-serif" font-size="14" font-weight="700">OCTÁGONO</text>
+                    <text x="150" y="159" text-anchor="middle" fill="#FFB432"
+                          font-family="Oswald,sans-serif" font-size="12">KIDS</text>
+                    <text x="150" y="174" text-anchor="middle" fill="rgba(255,180,50,0.45)"
+                          font-family="sans-serif" font-size="10">Ø ~5 m</text>
                 </svg>
-                <div style="margin-top:18px;text-align:center;position:relative;z-index:1;"><p style="font-family:var(--font-h);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,243,243,0.3);">Planta Alta · 300 m²</p></div>
+                <div style="margin-top:18px;text-align:center;position:relative;z-index:1;">
+                    <p style="font-family:var(--font-h);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,243,243,0.3);">Planta Alta · 300 m²</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="sec-div" aria-hidden="true"></div>
 
+<div class="sec-div" aria-hidden="true"></div>
+<!-- ================================================================
+     CONTACT BAR
+================================================================ -->
 <div class="contact-bar">
     <div class="container">
         <div class="contact-bar-inner">
             <div class="contact-items">
-                <div class="ci"><div class="ci-icon">📧</div><div><p class="ci-lbl">Correo · Disponible 24/7</p><p class="ci-val">soporte@acmecombat.mx</p></div></div>
-                <div class="ci"><div class="ci-icon">🔖</div><div><p class="ci-lbl">Referencia única</p><p class="ci-val" style="color:var(--red);">ACC-2026-7849X</p></div></div>
-                <div class="ci"><div class="ci-icon">📍</div><div><p class="ci-lbl">Ubicación</p><p class="ci-val">México · 2026</p></div></div>
+                <div class="ci">
+                    <div class="ci-icon">📧</div>
+                    <div>
+                        <p class="ci-lbl">Correo · Disponible 24/7</p>
+                        <p class="ci-val">soporte@acmecombat.mx</p>
+                    </div>
+                </div>
+                <div class="ci">
+                    <div class="ci-icon">🔖</div>
+                    <div>
+                        <p class="ci-lbl">Referencia única</p>
+                        <p class="ci-val" style="color:var(--red);">ACC-2026-7849X</p>
+                    </div>
+                </div>
+                <div class="ci">
+                    <div class="ci-icon">📍</div>
+                    <div>
+                        <p class="ci-lbl">Ubicación</p>
+                        <p class="ci-val">México · 2026</p>
+                    </div>
+                </div>
             </div>
-            <a href="#planes" class="btn btn-red">¡Únete a ACME Combat Center!</a>
+            <a href="#planes" class="btn btn-red">¡Únete a ACME Fight &amp; Fitness!</a>
         </div>
     </div>
 </div>
 
+<!-- ================================================================
+     FOOTER
+================================================================ -->
 <footer>
     <div class="container">
         <div class="footer-grid">
             <div class="ft-brand">
                 <p class="brand">Marca ACME</p>
-                <p class="name">Combat Center 🥊</p>
-                <p>Plan de Instalaciones MMA Premium · Documento Conceptual · 2026.<br>Espacio mínimo recomendado: 900–1,200 m².<br>Grupos reducidos de 10 · Ambiente familiar.</p>
+                <p class="name">Fight &amp; Fitness 🥊</p>
+                <p>Plan de Instalaciones MMA Premium · Documento Conceptual · 2026.<br>
+                   Espacio mínimo recomendado: 900–1,200 m².<br>
+                   Grupos reducidos de 10 · Ambiente familiar.</p>
             </div>
             <div>
                 <p class="ft-col-title">Navegación</p>
@@ -1316,23 +2129,33 @@
                 <ul class="ft-links">
                     <li><a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a></li>
                     <li><a href="#">Disponible 24/7</a></li>
-                    <li style="margin-top:16px;"><span style="font-family:var(--font-h);color:var(--red);letter-spacing:1px;">ACC-2026-7849X</span></li>
+                    <li style="margin-top:16px;">
+                        <span style="font-family:var(--font-h);color:var(--red);letter-spacing:1px;">ACC-2026-7849X</span>
+                    </li>
                 </ul>
             </div>
         </div>
+
         <div class="ft-bottom">
-            <p>© 2026 ACME Combat Center · Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+            <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
             <p class="ft-ref">🥊 ACC-2026-7849X</p>
         </div>
     </div>
 </footer>
 
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
 <script>
 (function () {
     'use strict';
+
+    /* ── Scroll direction tracker ───────────────────────────── */
     let lastY = window.scrollY;
     const root = document.documentElement;
     root.dataset.sd = 'd';
+
+    /* ── Logo parallax ──────────────────────────────────────── */
     const wmInner = document.getElementById('logoWmInner');
     let ticking = false;
     function onScroll () {
@@ -1350,6 +2173,8 @@
         highlightNav();
     }
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── Navbar ─────────────────────────────────────────────── */
     const navbar    = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
@@ -1357,7 +2182,9 @@
         const open = navLinks.classList.toggle('open');
         hamburger.setAttribute('aria-expanded', String(open));
     });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    navLinks.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
     function highlightNav () {
         const y = window.scrollY + 130;
         document.querySelectorAll('section[id]').forEach(sec => {
@@ -1366,6 +2193,8 @@
             link.classList.toggle('active', y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight);
         });
     }
+
+    /* ── TEXT SPLITTER ──────────────────────────────────────── */
     function splitEl (el) {
         const unit  = el.dataset.split || 'char';
         const orig  = el.textContent;
@@ -1382,17 +2211,27 @@
         });
     }
     document.querySelectorAll('[data-split]').forEach(splitEl);
+
+    /* ── BIDIRECTIONAL ANIMATION OBSERVER ──────────────────── */
     const animObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('anim-in'); }
-            else { e.target.classList.remove('anim-in'); }
+            if (e.isIntersecting) {
+                e.target.classList.add('anim-in');
+            } else {
+                /* re-arm so element re-animates when scrolled back */
+                e.target.classList.remove('anim-in');
+            }
         });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('[data-anim]').forEach(el => animObs.observe(el));
+
+    /* ── FADE-IN (generic non-text elements) ────────────────── */
     const fadeObs = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+    /* ── Spaces filter tabs ─────────────────────────────────── */
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1411,6 +2250,8 @@
             });
         });
     });
+
+    /* ── Floor plan tabs ─────────────────────────────────────── */
     document.querySelectorAll('.floor-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.floor-tab').forEach(t => t.classList.remove('active'));
@@ -1419,6 +2260,8 @@
             document.getElementById('floor-' + tab.dataset.floor).classList.add('active');
         });
     });
+
+    /* ── Animated counters ──────────────────────────────────── */
     function countUp (el) {
         const target = parseInt(el.dataset.count, 10);
         const dur    = 1800;
@@ -1436,6 +2279,7 @@
         entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cntObs.unobserve(e.target); } });
     }, { threshold: 0.6 });
     document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
+
 })();
 </script>
 </body>
