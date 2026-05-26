@@ -6,12 +6,34 @@
     <meta name="description" content="ACME Combat Center — Centro MMA Premium en México. Entrena en instalaciones de clase mundial con octágono profesional, clases especializadas y zona de recuperación.">
     <title>ACME Combat Center · Fight &amp; Fitness · México 2026</title>
 
-    <!-- Google Fonts -->
+    <!-- Favicon SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
+
+    <!-- Google Fonts con fallback robusto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"></noscript>
 
     <style>
+        /* ============================================================
+           FONT STACK FALLBACK (por si Google Fonts no carga)
+        ============================================================ */
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+            src: local('Oswald'), local('Oswald-Regular');
+        }
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300 600;
+            font-display: swap;
+            src: local('Inter'), local('Inter-Regular');
+        }
+
         /* ============================================================
            RESET & CUSTOM PROPERTIES
         ============================================================ */
@@ -31,8 +53,8 @@
             --white:     #F3F3F3;
             --muted:     #5f5f5f;
             --muted-l:   #888;
-            --font-h:    'Oswald', sans-serif;
-            --font-b:    'Inter', sans-serif;
+            --font-h:    'Oswald', 'Arial Narrow', 'Impact', sans-serif;
+            --font-b:    'Inter', 'Helvetica Neue', Arial, sans-serif;
             --max-w:     1200px;
             --r:         12px;
             --t:         0.3s ease;
