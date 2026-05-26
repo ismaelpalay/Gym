@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /home/user/Gym && git add -A && git diff --staged --quiet || (git commit -m \"auto: actualización $(date '+%Y-%m-%d %H:%M')\" && git push -u origin HEAD && git push origin HEAD:gh-pages --force)",
+            "command": "cd /home/user/Gym && git add -A && git diff --staged --quiet || (git commit -m \"auto: actualización $(date '+%Y-%m-%d %H:%M')\" && git push -u origin HEAD && git checkout main && git checkout claude/html-professional-webpage-XCwl4 -- index.html && git commit -m \"sync: actualización $(date '+%Y-%m-%d %H:%M')\" && git push -u origin main && git checkout claude/html-professional-webpage-XCwl4)",
             "timeout": 60,
             "statusMessage": "Guardando cambios en GitHub..."
           }
