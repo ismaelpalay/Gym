@@ -121,6 +121,8 @@
             color: var(--white);
         }
         .section-title span { color: var(--red); }
+        /* Área de Fisioterapia — forzar color rojo (animNeon termina en color:inherit) */
+        #recuperacion .section-title { color: var(--red); }
 
         /* Buttons */
         .btn {
@@ -1421,7 +1423,7 @@
 
             <p class="hero-pretitle fade-in" data-delay="1">Marca ACME</p>
 
-            <h1 class="hero-title fade-in" data-delay="2">
+            <h1 class="hero-title">
                 <span class="l1" data-split="char" data-anim="glitch">Fight &amp;</span>
                 <span class="l2" data-split="char" data-anim="neon">Fitness</span>
             </h1>
@@ -2230,6 +2232,22 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+    /* ── DESKTOP SAFETY: forzar anim-in/visible en elementos ya visibles al cargar ── */
+    requestAnimationFrame(() => {
+        document.querySelectorAll('[data-anim]').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight - 40 && r.bottom > 0) {
+                el.classList.add('anim-in');
+            }
+        });
+        document.querySelectorAll('.fade-in').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight - 50 && r.bottom > 0) {
+                el.classList.add('visible');
+            }
+        });
+    });
 
     /* ── Spaces filter tabs ─────────────────────────────────── */
     document.querySelectorAll('.tab-btn').forEach(btn => {
