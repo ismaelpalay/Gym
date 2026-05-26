@@ -40,18 +40,18 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:        #070707;
-            --bg-alt:    #0d0d0d;
-            --card:      #131313;
-            --card-alt:  #191919;
+            --bg:        #060606;
+            --bg-alt:    #0a0a0a;
+            --card:      #111111;
+            --card-alt:  #181818;
             --border:    rgba(255,255,255,0.07);
-            --gold:      #C8A84B;
-            --gold-l:    #E0BC5A;
-            --gold-dim:  rgba(200,168,75,0.12);
-            --red:       #C93520;
-            --red-dim:   rgba(201,53,32,0.10);
+            --red:       #E5001A;
+            --red-l:     #FF2030;
+            --red-d:     #AA0012;
+            --red-dim:   rgba(229,0,26,0.10);
+            --red-glow:  rgba(229,0,26,0.45);
             --white:     #F3F3F3;
-            --muted:     #5f5f5f;
+            --muted:     #505050;
             --muted-l:   #888;
             --font-h:    'Oswald', 'Arial Narrow', 'Impact', sans-serif;
             --font-b:    'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -96,7 +96,7 @@
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--red);
             display: flex;
             align-items: center;
             gap: 14px;
@@ -107,7 +107,7 @@
             display: block;
             width: 28px;
             height: 1px;
-            background: var(--gold);
+            background: var(--red);
             flex-shrink: 0;
         }
 
@@ -120,7 +120,7 @@
             line-height: 1.0;
             color: var(--white);
         }
-        .section-title span { color: var(--gold); }
+        .section-title span { color: var(--red); }
 
         /* Buttons */
         .btn {
@@ -140,16 +140,16 @@
             border: 1px solid transparent;
             white-space: nowrap;
         }
-        .btn-gold {
-            background: var(--gold);
+        .btn-red {
+            background: var(--red);
             color: #000;
-            border-color: var(--gold);
+            border-color: var(--red);
         }
-        .btn-gold:hover {
-            background: var(--gold-l);
-            border-color: var(--gold-l);
+        .btn-red:hover {
+            background: var(--red-l);
+            border-color: var(--red-l);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(200,168,75,0.25);
+            box-shadow: 0 10px 30px rgba(229,0,26,0.25);
         }
         .btn-outline {
             background: transparent;
@@ -157,8 +157,8 @@
             border-color: var(--border);
         }
         .btn-outline:hover {
-            border-color: rgba(200,168,75,0.5);
-            color: var(--gold);
+            border-color: rgba(229,0,26,0.50);
+            color: var(--red);
         }
 
         /* Fade-in scroll animation */
@@ -210,7 +210,7 @@
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--red);
         }
         .nav-logo .name {
             font-family: var(--font-h);
@@ -239,13 +239,13 @@
         .nav-links a:hover,
         .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.05); }
         .nav-cta {
-            background: var(--gold) !important;
+            background: var(--red) !important;
             color: #000 !important;
             font-weight: 600 !important;
             border-radius: 4px !important;
         }
         .nav-cta:hover {
-            background: var(--gold-l) !important;
+            background: var(--red-l) !important;
         }
         .nav-hamburger {
             display: none;
@@ -297,7 +297,7 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse 70% 90% at 75% 45%, rgba(200,168,75,0.055) 0%, transparent 65%),
+                radial-gradient(ellipse 70% 90% at 75% 45%, rgba(229,0,26,0.055) 0%, transparent 65%),
                 radial-gradient(ellipse 45% 55% at 15% 85%, rgba(201,53,32,0.045) 0%, transparent 55%),
                 var(--bg);
         }
@@ -337,12 +337,12 @@
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--red);
         }
         .hero-eyebrow-sep {
             width: 1px;
             height: 14px;
-            background: rgba(200,168,75,0.3);
+            background: rgba(229,0,26,0.30);
         }
         .hero-pretitle {
             font-family: var(--font-h);
@@ -363,7 +363,7 @@
             margin-bottom: 22px;
         }
         .hero-title .l1 { color: var(--white); display: block; }
-        .hero-title .l2 { color: var(--gold); display: block; }
+        .hero-title .l2 { color: var(--red); display: block; }
         .hero-subtitle {
             font-family: var(--font-h);
             font-size: clamp(16px, 2.5vw, 24px);
@@ -409,7 +409,7 @@
             font-family: var(--font-h);
             font-size: 42px;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--red);
             line-height: 1;
             margin-bottom: 5px;
         }
@@ -468,7 +468,7 @@
         }
         .tab-btn:hover { color: var(--white); }
         .tab-btn.active {
-            background: var(--gold);
+            background: var(--red);
             color: #000;
             font-weight: 600;
         }
@@ -491,7 +491,7 @@
             cursor: default;
         }
         .space-card:hover {
-            border-color: rgba(200,168,75,0.28);
+            border-color: rgba(229,0,26,0.28);
             transform: translateY(-5px);
             box-shadow: 0 22px 50px rgba(0,0,0,0.5);
         }
@@ -517,7 +517,7 @@
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 2px;
-            color: var(--gold);
+            color: var(--red);
             background: rgba(0,0,0,0.55);
             padding: 3px 8px;
             border-radius: 3px;
@@ -582,7 +582,7 @@
             border-right: 1px solid var(--border);
         }
         .floor-tab:last-child { border-right: none; }
-        .floor-tab.active { background: var(--gold); color: #000; }
+        .floor-tab.active { background: var(--red); color: #000; }
 
         .floor-plan { display: none; }
         .floor-plan.active {
@@ -627,7 +627,7 @@
             border-radius: 8px;
             transition: border-color var(--t);
         }
-        .legend-item:hover { border-color: rgba(200,168,75,0.3); }
+        .legend-item:hover { border-color: rgba(229,0,26,0.30); }
         .legend-dot {
             width: 10px;
             height: 10px;
@@ -673,9 +673,9 @@
         .plan-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
         .plan-card.featured {
             background: linear-gradient(155deg, #181308 0%, var(--card) 55%);
-            border-color: rgba(200,168,75,0.5);
+            border-color: rgba(229,0,26,0.50);
             transform: scale(1.03);
-            box-shadow: 0 0 0 1px rgba(200,168,75,0.15);
+            box-shadow: 0 0 0 1px rgba(229,0,26,0.13);
         }
         .plan-card.featured:hover { transform: scale(1.03) translateY(-6px); }
 
@@ -684,7 +684,7 @@
             top: -13px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--gold);
+            background: var(--red);
             color: #000;
             font-family: var(--font-h);
             font-size: 10px;
@@ -711,7 +711,7 @@
             text-transform: uppercase;
             margin-bottom: 22px;
         }
-        .plan-card.featured .plan-name { color: var(--gold); }
+        .plan-card.featured .plan-name { color: var(--red); }
 
         .plan-price {
             display: flex;
@@ -761,19 +761,19 @@
             width: 17px;
             height: 17px;
             border-radius: 50%;
-            background: var(--gold-dim);
+            background: var(--red-dim);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            color: var(--gold);
+            color: var(--red);
             font-size: 9px;
             margin-top: 1px;
         }
         .plan-features li.dim { color: var(--muted-l); }
         .plan-features li.dim .chk { background: rgba(255,255,255,0.04); color: var(--muted); }
         .plan-btn { width: 100%; padding: 15px; }
-        .plan-card.featured .plan-btn { background: var(--gold); color: #000; border-color: var(--gold); }
+        .plan-card.featured .plan-btn { background: var(--red); color: #fff; border-color: var(--red); }
 
         /* Contact strip below plans */
         .plans-contact {
@@ -861,15 +861,15 @@
             font-family: var(--font-h);
             font-size: 14px;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--red);
             flex-shrink: 0;
             position: relative;
             z-index: 1;
             transition: background var(--t), border-color var(--t), color var(--t);
         }
         .tl-item:hover .tl-num {
-            background: var(--gold);
-            border-color: var(--gold);
+            background: var(--red);
+            border-color: var(--red);
             color: #000;
         }
         .tl-body { flex: 1; }
@@ -879,7 +879,7 @@
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--red);
             margin-bottom: 3px;
         }
         .tl-title {
@@ -916,13 +916,13 @@
             transition: background var(--t);
         }
         .cap-row:last-child { border-bottom: none; }
-        .cap-row:hover { background: rgba(200,168,75,0.04); }
+        .cap-row:hover { background: rgba(229,0,26,0.04); }
         .cap-lbl { font-size: 13px; color: rgba(243,243,243,0.65); }
         .cap-val {
             font-family: var(--font-h);
             font-size: 17px;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--red);
         }
 
         /* ============================================================
@@ -955,7 +955,7 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: var(--gold);
+            background: var(--red);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
@@ -963,7 +963,7 @@
         .rec-card:hover::after { transform: scaleX(1); }
         .rec-card:hover {
             transform: translateY(-7px);
-            border-color: rgba(200,168,75,0.2);
+            border-color: rgba(229,0,26,0.18);
         }
         .rec-icon { font-size: 42px; margin-bottom: 22px; display: block; }
         .rec-title {
@@ -983,8 +983,8 @@
             display: inline-block;
             padding: 6px 18px;
             border-radius: 20px;
-            border: 1px solid rgba(200,168,75,0.4);
-            color: var(--gold);
+            border: 1px solid rgba(229,0,26,0.40);
+            color: var(--red);
             font-family: var(--font-h);
             font-size: 13px;
             font-weight: 600;
@@ -1029,7 +1029,7 @@
             border-radius: 10px;
             transition: border-color var(--t);
         }
-        .kids-feat:hover { border-color: rgba(200,168,75,0.3); }
+        .kids-feat:hover { border-color: rgba(229,0,26,0.30); }
         .kids-feat-icon { font-size: 17px; flex-shrink: 0; }
         .kids-feat-text { font-size: 12px; font-weight: 500; color: rgba(243,243,243,0.8); line-height: 1.4; }
 
@@ -1050,7 +1050,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, rgba(200,168,75,0.04) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(229,0,26,0.04) 0%, transparent 70%);
         }
 
         /* ============================================================
@@ -1127,7 +1127,7 @@
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--red);
             margin-bottom: 4px;
         }
         .ft-brand .name {
@@ -1155,7 +1155,7 @@
         }
         .ft-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .ft-links a { font-size: 13px; color: var(--muted-l); transition: color var(--t); }
-        .ft-links a:hover { color: var(--gold); }
+        .ft-links a:hover { color: var(--red); }
         .ft-bottom {
             border-top: 1px solid var(--border);
             padding-top: 28px;
@@ -1166,7 +1166,7 @@
             flex-wrap: wrap;
         }
         .ft-bottom p { font-size: 12px; color: var(--muted); }
-        .ft-ref { font-family: var(--font-h); font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+        .ft-ref { font-family: var(--font-h); font-size: 12px; color: var(--red); letter-spacing: 1px; }
 
         /* ============================================================
            RESPONSIVE MISC
@@ -1176,9 +1176,198 @@
             .hero-title { font-size: 68px; }
             .plans-contact { gap: 24px; flex-direction: column; }
         }
+
+        /* ============================================================
+           FILM GRAIN OVERLAY
+        ============================================================ */
+        .grain {
+            position: fixed; inset: 0; z-index: 9999;
+            pointer-events: none;
+            opacity: 0.032;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
+        }
+
+        /* ============================================================
+           LOGO WATERMARK
+        ============================================================ */
+        .logo-wm {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-wm-inner {
+            width: min(70vmin, 600px);
+            height: min(70vmin, 600px);
+            will-change: transform;
+            animation: logoBreath 5s ease-in-out infinite;
+        }
+        .logo-wm-inner img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+            opacity: 0.045;
+            filter: grayscale(1) brightness(0.6) sepia(1) hue-rotate(320deg) saturate(6);
+            mix-blend-mode: screen;
+        }
+        @keyframes logoBreath {
+            0%,100% { opacity: .85; filter: drop-shadow(0 0 0px rgba(229,0,26,0)); }
+            50%      { opacity: 1;   filter: drop-shadow(0 0 40px rgba(229,0,26,0.12)); }
+        }
+
+        /* ============================================================
+           SECTION DIVIDERS
+        ============================================================ */
+        .sec-div {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(229,0,26,0.5) 50%, transparent);
+            position: relative; overflow: visible;
+        }
+        .sec-div::after {
+            content: '';
+            position: absolute; left: 50%; top: -2px;
+            transform: translateX(-50%);
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red), 0 0 20px var(--red-glow);
+        }
+
+        /* ============================================================
+           TEXT ANIMATION KEYFRAMES
+        ============================================================ */
+        @keyframes animFadeUp   { from { opacity:0; transform:translateY(32px);              } to { opacity:1; transform:none; } }
+        @keyframes animFadeDown { from { opacity:0; transform:translateY(-32px);             } to { opacity:1; transform:none; } }
+        @keyframes animSlideL   { from { opacity:0; transform:translateX(-55px);             } to { opacity:1; transform:none; } }
+        @keyframes animSlideR   { from { opacity:0; transform:translateX( 55px);             } to { opacity:1; transform:none; } }
+        @keyframes animZoom     { from { opacity:0; transform:scale(2.8); filter:blur(14px); } to { opacity:1; transform:none; filter:blur(0); } }
+        @keyframes animBlur     { from { opacity:0.15; filter:blur(22px); letter-spacing:0.35em; } to { opacity:1; filter:blur(0); letter-spacing:inherit; } }
+        @keyframes animRotate   { from { opacity:0; transform:rotateY(90deg) scaleX(0.4);   } to { opacity:1; transform:none; } }
+        @keyframes animBounce   {
+            0%   { opacity:0; transform:translateY(-44px) scale(.8); }
+            55%  { opacity:1; transform:translateY(7px)   scale(1.06); }
+            78%  { transform:translateY(-4px) scale(.98); }
+            100% { opacity:1; transform:none; }
+        }
+        @keyframes animDistort  {
+            0%   { opacity:0; transform:scaleY(4) scaleX(.2); filter:blur(10px); }
+            55%  { opacity:.9; transform:scaleY(.95) scaleX(1.04); filter:blur(1px); }
+            100% { opacity:1; transform:none; filter:blur(0); }
+        }
+        @keyframes animGlitch   {
+            0%   { opacity:0; clip-path:inset(0 100% 0 0); transform:translateX(-4px) skewX(3deg); }
+            18%  { opacity:1; clip-path:inset(0 0 0 0);    transform:translateX(2px)  skewX(-1deg);}
+            20%  { transform:translateX(0); }
+            44%  { }
+            45%  { transform:translateX(-3px); clip-path:inset(25% 0 15% 0); }
+            46%  { transform:translateX(2px);  clip-path:inset(0 0 0 0); }
+            47%  { transform:none; }
+            100% { opacity:1; transform:none; clip-path:none; }
+        }
+        @keyframes animNeon     {
+            0%   { opacity:0; color:transparent; text-shadow:none; }
+            35%  { opacity:1; color:var(--red);  text-shadow:0 0 8px var(--red),0 0 24px var(--red-glow),0 0 48px var(--red-glow); }
+            65%  { color:var(--red);             text-shadow:0 0 4px var(--red); }
+            100% { opacity:1; color:inherit;     text-shadow:none; }
+        }
+
+        /* ============================================================
+           TEXT ANIMATION APPLICATION
+        ============================================================ */
+        .ch, .wd {
+            display: inline-block;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ch, .wd { opacity: 1 !important; animation: none !important; }
+        }
+
+        /* — char animations — */
+        [data-anim="glitch"].anim-in  .ch { animation: animGlitch  0.65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 42ms); }
+        [data-anim="neon"].anim-in    .ch { animation: animNeon    0.75s ease                     forwards; animation-delay: calc(var(--i) * 48ms); }
+        [data-anim="zoom"].anim-in    .ch { animation: animZoom    0.60s ease                     forwards; animation-delay: calc(var(--i) * 40ms); }
+        [data-anim="blur"].anim-in    .ch { animation: animBlur    0.70s ease                     forwards; animation-delay: calc(var(--i) * 44ms); }
+        [data-anim="rotate"].anim-in  .ch { animation: animRotate  0.60s cubic-bezier(.4,0,.2,1)  forwards; animation-delay: calc(var(--i) * 44ms); }
+        [data-anim="distort"].anim-in .ch { animation: animDistort 0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 40ms); }
+        [data-anim="fade-up"].anim-in .ch { animation: animFadeUp  0.55s ease                     forwards; animation-delay: calc(var(--i) * 36ms); }
+        [data-anim="slide-l"].anim-in .ch { animation: animSlideL  0.55s ease                     forwards; animation-delay: calc(var(--i) * 36ms); }
+        [data-anim="bounce"].anim-in  .ch { animation: animBounce  0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 44ms); }
+
+        /* — word animations — */
+        [data-anim="glitch"].anim-in  .wd { animation: animGlitch  0.65s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 80ms); }
+        [data-anim="neon"].anim-in    .wd { animation: animNeon    0.75s ease                     forwards; animation-delay: calc(var(--i) * 90ms); }
+        [data-anim="zoom"].anim-in    .wd { animation: animZoom    0.60s ease                     forwards; animation-delay: calc(var(--i) * 80ms); }
+        [data-anim="blur"].anim-in    .wd { animation: animBlur    0.70s ease                     forwards; animation-delay: calc(var(--i) * 90ms); }
+        [data-anim="slide-l"].anim-in .wd { animation: animSlideL  0.55s ease                     forwards; animation-delay: calc(var(--i) * 80ms); }
+        [data-anim="bounce"].anim-in  .wd { animation: animBounce  0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 90ms); }
+        [data-anim="fade-up"].anim-in .wd { animation: animFadeUp  0.55s ease                     forwards; animation-delay: calc(var(--i) * 70ms); }
+        [data-anim="distort"].anim-in .wd { animation: animDistort 0.70s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 80ms); }
+
+        /* scroll-up variants — elements arrive from opposite direction */
+        [data-sd="u"] [data-anim="fade-up"].anim-in  .ch,
+        [data-sd="u"] [data-anim="fade-up"].anim-in  .wd { animation-name: animFadeDown; }
+        [data-sd="u"] [data-anim="slide-l"].anim-in  .ch,
+        [data-sd="u"] [data-anim="slide-l"].anim-in  .wd { animation-name: animSlideR; }
+
+        /* ============================================================
+           ENHANCED BUTTON / CARD HOVER EFFECTS
+        ============================================================ */
+        .btn-red {
+            position: relative; overflow: hidden;
+        }
+        .btn-red::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+            opacity: 0; transition: opacity .3s;
+        }
+        .btn-red:hover::after { opacity: 1; }
+        .btn-red:hover {
+            box-shadow: 0 0 24px rgba(229,0,26,0.55), 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Red left-border glow on cards */
+        .space-card, .rec-card, .plan-card, .legend-item {
+            transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+        }
+        .space-card:hover, .rec-card:hover {
+            box-shadow: -3px 0 0 var(--red), 0 20px 40px rgba(0,0,0,0.55);
+        }
+
+        /* Nav link underline slide */
+        .nav-links a { position: relative; }
+        .nav-links a::after {
+            content: '';
+            position: absolute; bottom: 4px; left: 11px; right: 11px;
+            height: 1px; background: var(--red);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+        .nav-cta::after { display: none !important; }
+
+        /* Section label animated left bar */
+        .section-label { overflow: hidden; }
+        .section-label::before {
+            transform-origin: left;
+            transition: transform 0.6s ease;
+            transform: scaleX(0);
+        }
+        .anim-in .section-label::before,
+        .section-label.anim-in::before { transform: scaleX(1); }
     </style>
 </head>
 <body>
+
+<!-- Film grain cinematic overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Logo watermark background — REPLACE logo.png WITH YOUR ORIGINAL LOGO FILE -->
+<div class="logo-wm" id="logoWm" aria-hidden="true">
+    <div class="logo-wm-inner" id="logoWmInner">
+        <img src="logo.png" alt="">
+    </div>
+</div>
 
 <!-- ================================================================
      NAVBAR
@@ -1217,9 +1406,9 @@
 
     <!-- Decorative octagon SVG -->
     <svg class="hero-oct-deco" viewBox="0 0 500 500" aria-hidden="true" fill="none">
-        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186"   stroke="#C8A84B" stroke-width="1.5"/>
-        <polygon points="166,28 334,28 472,166 472,334 334,472 166,472 28,334 28,166" stroke="#C8A84B" stroke-width="1"/>
-        <polygon points="146,48 354,48 452,146 452,354 354,452 146,452 48,354 48,146" stroke="#C8A84B" stroke-width="0.5"/>
+        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186"   stroke="#E5001A" stroke-width="1.5"/>
+        <polygon points="166,28 334,28 472,166 472,334 334,472 166,472 28,334 28,166" stroke="#E5001A" stroke-width="1"/>
+        <polygon points="146,48 354,48 452,146 452,354 354,452 146,452 48,354 48,146" stroke="#E5001A" stroke-width="0.5"/>
     </svg>
 
     <div class="container">
@@ -1233,11 +1422,11 @@
             <p class="hero-pretitle fade-in" data-delay="1">Marca ACME</p>
 
             <h1 class="hero-title fade-in" data-delay="2">
-                <span class="l1">Combat</span>
-                <span class="l2">Center</span>
+                <span class="l1" data-split="char" data-anim="glitch">Combat</span>
+                <span class="l2" data-split="char" data-anim="neon">Center</span>
             </h1>
 
-            <p class="hero-subtitle fade-in" data-delay="3">Fight &amp; Fitness</p>
+            <p class="hero-subtitle" data-split="word" data-anim="blur">Fight &amp; Fitness</p>
 
             <p class="hero-desc fade-in" data-delay="4">
                 Centro MMA de clase mundial diseñado para atletas comprometidos.
@@ -1246,7 +1435,7 @@
             </p>
 
             <div class="hero-actions fade-in" data-delay="5">
-                <a href="#planes" class="btn btn-gold">Unirse Ahora</a>
+                <a href="#planes" class="btn btn-red">Unirse Ahora</a>
                 <a href="#espacios" class="btn btn-outline">Ver Espacios</a>
             </div>
         </div>
@@ -1280,8 +1469,8 @@
     <div class="container">
         <div class="espacios-head">
             <div>
-                <p class="section-label fade-in">01 — Espacios</p>
-                <h2 class="section-title fade-in" data-delay="1">Áreas <span>Especializadas</span></h2>
+                <p class="section-label" data-split="word" data-anim="slide-l">01 — Espacios</p>
+                <h2 class="section-title" data-split="word" data-anim="zoom">Áreas <span>Especializadas</span></h2>
             </div>
             <div class="tab-group" role="tablist">
                 <button class="tab-btn active" data-tab="all">Todas</button>
@@ -1303,7 +1492,7 @@
                     <h3 class="space-card-title">Octágono Principal</h3>
                     <p class="space-card-desc">Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.</p>
                     <div class="space-card-actions">
-                        <a href="#planes" class="btn btn-gold" style="font-size:11px;padding:9px 16px;">Reservar</a>
+                        <a href="#planes" class="btn btn-red" style="font-size:11px;padding:9px 16px;">Reservar</a>
                         <a href="#mapa"   class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
                     </div>
                 </div>
@@ -1404,13 +1593,15 @@
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      SECTION 03 — MAPA
 ================================================================ -->
 <section id="mapa" class="section mapa">
     <div class="container">
-        <p class="section-label fade-in">03 — Distribución</p>
-        <h2 class="section-title fade-in" data-delay="1">Mapa <span>Conceptual</span></h2>
+        <p class="section-label" data-split="word" data-anim="slide-l">03 — Distribución</p>
+        <h2 class="section-title" data-split="char" data-anim="rotate">Mapa Conceptual</h2>
         <p class="mapa-intro fade-in" data-delay="2">
             2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja,
             rodeado por las zonas de impacto y fuerza. La planta alta concentra el área kids con su mini
@@ -1437,9 +1628,9 @@
 
                     <!-- Recepción / Vestidores -->
                     <rect x="18" y="18" width="150" height="76" rx="4"
-                          fill="rgba(200,168,75,0.07)" stroke="rgba(200,168,75,0.28)" stroke-width="1"/>
-                    <text x="93" y="50"  text-anchor="middle" fill="#C8A84B" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
-                    <text x="93" y="67"  text-anchor="middle" fill="rgba(200,168,75,0.5)" font-family="sans-serif" font-size="9">VESTIDORES</text>
+                          fill="rgba(229,0,26,0.07)" stroke="rgba(229,0,26,0.28)" stroke-width="1"/>
+                    <text x="93" y="50"  text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
+                    <text x="93" y="67"  text-anchor="middle" fill="rgba(229,0,26,0.50)" font-family="sans-serif" font-size="9">VESTIDORES</text>
 
                     <!-- Área Costales -->
                     <rect x="186" y="18" width="140" height="76" rx="4"
@@ -1464,14 +1655,14 @@
                     <!-- Regular octagon: 8 points at r=105 -->
                     <polygon
                         points="256,135 325,158 348,225 325,292 256,315 187,292 164,225 187,158"
-                        fill="rgba(200,168,75,0.06)" stroke="#C8A84B" stroke-width="2"/>
+                        fill="rgba(229,0,26,0.06)" stroke="#E5001A" stroke-width="2"/>
                     <!-- inner ring -->
                     <polygon
                         points="256,152 314,172 334,226 314,280 256,300 198,280 178,226 198,172"
-                        fill="none" stroke="rgba(200,168,75,0.2)" stroke-width="1" stroke-dasharray="5,4"/>
-                    <text x="256" y="215" text-anchor="middle" fill="#C8A84B" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
-                    <text x="256" y="234" text-anchor="middle" fill="#C8A84B" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
-                    <text x="256" y="251" text-anchor="middle" fill="rgba(200,168,75,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
+                        fill="none" stroke="rgba(229,0,26,0.18)" stroke-width="1" stroke-dasharray="5,4"/>
+                    <text x="256" y="215" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
+                    <text x="256" y="234" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
+                    <text x="256" y="251" text-anchor="middle" fill="rgba(229,0,26,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
 
                     <!-- Tatami Calentamiento -->
                     <rect x="18" y="250" width="140" height="172" rx="4"
@@ -1492,7 +1683,7 @@
             <div class="floor-legend">
                 <p class="floor-legend-title">Planta Baja · 300 m²</p>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#C8A84B"></div>
+                    <div class="legend-dot" style="background:#E5001A"></div>
                     <div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m</p></div>
                 </div>
                 <div class="legend-item">
@@ -1508,7 +1699,7 @@
                     <div><p class="legend-text">Sala de Pesas</p><p class="legend-sub">Fuerza y acondicionamiento</p></div>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#C8A84B;opacity:0.45"></div>
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.45"></div>
                     <div><p class="legend-text">Recepción / Vestidores</p><p class="legend-sub">Acceso principal</p></div>
                 </div>
             </div>
@@ -1541,9 +1732,9 @@
 
                     <!-- Zona Padres -->
                     <rect x="246" y="18" width="256" height="90" rx="4"
-                          fill="rgba(200,168,75,0.05)" stroke="rgba(200,168,75,0.2)" stroke-width="1"/>
-                    <text x="374" y="52" text-anchor="middle" fill="rgba(200,168,75,0.85)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">ZONA DE PADRES</text>
-                    <text x="374" y="68" text-anchor="middle" fill="rgba(200,168,75,0.38)" font-family="sans-serif" font-size="9">VISTA DIRECTA · ÁREA DESCANSO</text>
+                          fill="rgba(229,0,26,0.05)" stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
+                    <text x="374" y="52" text-anchor="middle" fill="rgba(229,0,26,0.85)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">ZONA DE PADRES</text>
+                    <text x="374" y="68" text-anchor="middle" fill="rgba(229,0,26,0.38)" font-family="sans-serif" font-size="9">VISTA DIRECTA · ÁREA DESCANSO</text>
 
                     <!-- Crioterapia -->
                     <rect x="246" y="126" width="118" height="100" rx="4"
@@ -1579,7 +1770,7 @@
                     <div><p class="legend-text">Octágono Kids</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#C8A84B;opacity:0.55"></div>
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.55"></div>
                     <div><p class="legend-text">Zona de Padres</p><p class="legend-sub">Vista directa · Área descanso</p></div>
                 </div>
                 <div class="legend-item">
@@ -1599,6 +1790,8 @@
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      SECTION 02 — MEMBRESÍAS
 ================================================================ -->
@@ -1606,7 +1799,7 @@
     <div class="container">
         <div class="membresias-hd fade-in">
             <p class="section-label">02 — Membresías</p>
-            <h2 class="section-title">Planes de <span>Suscripción</span></h2>
+            <h2 class="section-title" data-split="word" data-anim="slide-l">Planes de Suscripción</h2>
         </div>
 
         <div class="plans-grid">
@@ -1614,7 +1807,7 @@
             <!-- Clase Única -->
             <div class="plan-card fade-in">
                 <p class="plan-type">Entrada Abierta</p>
-                <h3 class="plan-name">Clase Única</h3>
+                <h3 class="plan-name" data-split="char" data-anim="glitch">Clase Única</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">299</span>
@@ -1635,7 +1828,7 @@
             <div class="plan-card featured fade-in" data-delay="2">
                 <div class="plan-badge">⭐ Recomendado</div>
                 <p class="plan-type">Mensual</p>
-                <h3 class="plan-name">Básico</h3>
+                <h3 class="plan-name" data-split="char" data-anim="neon">Básico</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">1,299</span>
@@ -1650,13 +1843,13 @@
                     <li><span class="chk">✓</span>Fisioterapia básica</li>
                     <li><span class="chk">✓</span>Comunidad ACME</li>
                 </ul>
-                <a href="#" class="btn btn-gold plan-btn">Contratar Ahora</a>
+                <a href="#" class="btn btn-red plan-btn">Contratar Ahora</a>
             </div>
 
             <!-- Élite -->
             <div class="plan-card fade-in" data-delay="4">
                 <p class="plan-type">Anual + Beneficios</p>
-                <h3 class="plan-name">Élite</h3>
+                <h3 class="plan-name" data-split="char" data-anim="bounce">Élite</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">12,999</span>
@@ -1689,20 +1882,22 @@
                 <div class="plans-contact-icon">🔖</div>
                 <div>
                     <p class="plans-contact-lbl">Referencia única</p>
-                    <p class="plans-contact-val" style="color:var(--gold);">ACC-2026-7849X</p>
+                    <p class="plans-contact-val" style="color:var(--red);">ACC-2026-7849X</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      SECTION 04 — CLASES
 ================================================================ -->
 <section id="clases" class="section clases">
     <div class="container">
-        <p class="section-label fade-in">04 — Operación</p>
-        <h2 class="section-title fade-in" data-delay="1">Modelo de <span>Clases</span></h2>
+        <p class="section-label" data-split="word" data-anim="slide-l">04 — Operación</p>
+        <h2 class="section-title" data-split="char" data-anim="distort">Modelo de Clases</h2>
 
         <div class="clases-grid">
             <!-- Timeline -->
@@ -1772,30 +1967,32 @@
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      SECTION 05 — RECUPERACIÓN
 ================================================================ -->
 <section id="recuperacion" class="section recuperacion">
     <div class="container">
-        <p class="section-label fade-in">05 — Recuperación</p>
-        <h2 class="section-title fade-in" data-delay="1">Área de <span>Fisioterapia</span></h2>
+        <p class="section-label" data-split="word" data-anim="slide-l">05 — Recuperación</p>
+        <h2 class="section-title" data-split="char" data-anim="neon">Área de Fisioterapia</h2>
 
         <div class="recovery-grid">
             <div class="rec-card fade-in">
                 <span class="rec-icon">❄️</span>
-                <h3 class="rec-title">Crioterapia</h3>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Crioterapia</h3>
                 <p class="rec-desc">Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.</p>
                 <span class="rec-badge">8 – 12 °C</span>
             </div>
             <div class="rec-card fade-in" data-delay="2">
                 <span class="rec-icon">🌡️</span>
-                <h3 class="rec-title">Sauna Seco</h3>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Sauna Seco</h3>
                 <p class="rec-desc">Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.</p>
                 <span class="rec-badge">70 – 95 °C</span>
             </div>
             <div class="rec-card fade-in" data-delay="4">
                 <span class="rec-icon">🛌</span>
-                <h3 class="rec-title">Camillas de Masaje</h3>
+                <h3 class="rec-title" data-split="word" data-anim="blur">Camillas de Masaje</h3>
                 <p class="rec-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.</p>
                 <span class="rec-badge">2 – 3 camillas</span>
             </div>
@@ -1803,6 +2000,8 @@
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      SECTION 06 — KIDS
 ================================================================ -->
@@ -1810,8 +2009,8 @@
     <div class="container">
         <div class="kids-grid">
             <div>
-                <p class="section-label fade-in">06 — Programa Infantil</p>
-                <h2 class="section-title fade-in" data-delay="1">Zona Kids <span>&amp;</span> Familia</h2>
+                <p class="section-label" data-split="word" data-anim="slide-l">06 — Programa Infantil</p>
+                <h2 class="section-title" data-split="word" data-anim="bounce">Zona Kids &amp; Familia</h2>
                 <p class="kids-desc fade-in" data-delay="2">
                     🧒 El área kids está diseñada para que los niños entrenen con seguridad y confianza
                     mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad
@@ -1836,8 +2035,8 @@
                     <!-- Reference (adult) octagon -->
                     <polygon
                         points="150,8 220,35 278,93 278,207 220,265 150,292 80,265 22,207 22,93 80,35"
-                        fill="none" stroke="rgba(200,168,75,0.12)" stroke-width="1.5" stroke-dasharray="6,5"/>
-                    <text x="150" y="308" text-anchor="middle" fill="rgba(200,168,75,0.28)"
+                        fill="none" stroke="rgba(229,0,26,0.10)" stroke-width="1.5" stroke-dasharray="6,5"/>
+                    <text x="150" y="308" text-anchor="middle" fill="rgba(229,0,26,0.28)"
                           font-family="sans-serif" font-size="8" letter-spacing="1">Referencia octágono principal</text>
 
                     <!-- Kids octagon -->
@@ -1864,6 +2063,8 @@
     </div>
 </section>
 
+
+<div class="sec-div" aria-hidden="true"></div>
 <!-- ================================================================
      CONTACT BAR
 ================================================================ -->
@@ -1882,7 +2083,7 @@
                     <div class="ci-icon">🔖</div>
                     <div>
                         <p class="ci-lbl">Referencia única</p>
-                        <p class="ci-val" style="color:var(--gold);">ACC-2026-7849X</p>
+                        <p class="ci-val" style="color:var(--red);">ACC-2026-7849X</p>
                     </div>
                 </div>
                 <div class="ci">
@@ -1893,7 +2094,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#planes" class="btn btn-gold">¡Únete a ACME Combat Center!</a>
+            <a href="#planes" class="btn btn-red">¡Únete a ACME Combat Center!</a>
         </div>
     </div>
 </div>
@@ -1929,7 +2130,7 @@
                     <li><a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a></li>
                     <li><a href="#">Disponible 24/7</a></li>
                     <li style="margin-top:16px;">
-                        <span style="font-family:var(--font-h);color:var(--gold);letter-spacing:1px;">ACC-2026-7849X</span>
+                        <span style="font-family:var(--font-h);color:var(--red);letter-spacing:1px;">ACC-2026-7849X</span>
                     </li>
                 </ul>
             </div>
@@ -1949,14 +2150,32 @@
 (function () {
     'use strict';
 
-    /* ── Navbar scroll ──────────────────────────────────────── */
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 55);
-        highlightNav();
-    }, { passive: true });
+    /* ── Scroll direction tracker ───────────────────────────── */
+    let lastY = window.scrollY;
+    const root = document.documentElement;
+    root.dataset.sd = 'd';
 
-    /* ── Mobile hamburger ──────────────────────────────────── */
+    /* ── Logo parallax ──────────────────────────────────────── */
+    const wmInner = document.getElementById('logoWmInner');
+    let ticking = false;
+    function onScroll () {
+        const y = window.scrollY;
+        root.dataset.sd = y > lastY ? 'd' : 'u';
+        lastY = y;
+        if (wmInner && !ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                wmInner.style.transform = `translateY(${y * 0.14}px) rotate(${y * 0.008}deg)`;
+                ticking = false;
+            });
+        }
+        navbar.classList.toggle('scrolled', y > 55);
+        highlightNav();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    const navbar    = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
@@ -1966,19 +2185,53 @@
     navLinks.querySelectorAll('a').forEach(a =>
         a.addEventListener('click', () => navLinks.classList.remove('open'))
     );
-
-    /* ── Active nav link on scroll ─────────────────────────── */
     function highlightNav () {
-        const y = window.scrollY + 120;
+        const y = window.scrollY + 130;
         document.querySelectorAll('section[id]').forEach(sec => {
             const link = navLinks.querySelector(`a[href="#${sec.id}"]`);
             if (!link) return;
-            const inView = y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight;
-            link.classList.toggle('active', inView);
+            link.classList.toggle('active', y >= sec.offsetTop && y < sec.offsetTop + sec.offsetHeight);
         });
     }
 
-    /* ── Spaces filter tabs ────────────────────────────────── */
+    /* ── TEXT SPLITTER ──────────────────────────────────────── */
+    function splitEl (el) {
+        const unit  = el.dataset.split || 'char';
+        const orig  = el.textContent;
+        el.setAttribute('aria-label', orig);
+        el.innerHTML = '';
+        const parts = unit === 'char' ? [...orig] : orig.split(' ');
+        parts.forEach((p, i) => {
+            if (unit === 'word' && i > 0) el.appendChild(document.createTextNode(' '));
+            const s = document.createElement('span');
+            s.className   = unit === 'char' ? 'ch' : 'wd';
+            s.textContent = p === ' ' ? ' ' : p;
+            s.style.setProperty('--i', i);
+            el.appendChild(s);
+        });
+    }
+    document.querySelectorAll('[data-split]').forEach(splitEl);
+
+    /* ── BIDIRECTIONAL ANIMATION OBSERVER ──────────────────── */
+    const animObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('anim-in');
+            } else {
+                /* re-arm so element re-animates when scrolled back */
+                e.target.classList.remove('anim-in');
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-anim]').forEach(el => animObs.observe(el));
+
+    /* ── FADE-IN (generic non-text elements) ────────────────── */
+    const fadeObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+    /* ── Spaces filter tabs ─────────────────────────────────── */
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1986,23 +2239,19 @@
             const filter = btn.dataset.tab;
             document.querySelectorAll('.space-card').forEach(card => {
                 const show = filter === 'all' || card.dataset.cat === filter;
+                card.style.display = show ? '' : 'none';
                 if (show) {
-                    card.style.display = '';
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(18px)';
+                    card.style.opacity = '0'; card.style.transform = 'translateY(18px)';
                     requestAnimationFrame(() => {
-                        card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
+                        card.style.transition = 'opacity .35s ease, transform .35s ease';
+                        card.style.opacity = '1'; card.style.transform = '';
                     });
-                } else {
-                    card.style.display = 'none';
                 }
             });
         });
     });
 
-    /* ── Floor plan tabs ───────────────────────────────────── */
+    /* ── Floor plan tabs ─────────────────────────────────────── */
     document.querySelectorAll('.floor-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.floor-tab').forEach(t => t.classList.remove('active'));
@@ -2012,34 +2261,24 @@
         });
     });
 
-    /* ── Intersection Observer (fade-in) ───────────────────── */
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
-
-    /* ── Animated counters ─────────────────────────────────── */
+    /* ── Animated counters ──────────────────────────────────── */
     function countUp (el) {
-        const target   = parseInt(el.dataset.count, 10);
-        const duration = 1600;
-        const start    = performance.now();
-        const step     = ts => {
-            const p = Math.min((ts - start) / duration, 1);
-            const e = 1 - Math.pow(1 - p, 3);          // cubic ease-out
+        const target = parseInt(el.dataset.count, 10);
+        const dur    = 1800;
+        const t0     = performance.now();
+        const tick   = now => {
+            const p = Math.min((now - t0) / dur, 1);
+            const e = 1 - Math.pow(1 - p, 3);
             el.textContent = Math.round(e * target);
-            if (p < 1) requestAnimationFrame(step);
+            if (p < 1) requestAnimationFrame(tick);
+            else el.style.textShadow = '0 0 18px var(--red-glow)';
         };
-        requestAnimationFrame(step);
+        requestAnimationFrame(tick);
     }
-    const cntObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                countUp(e.target);
-                cntObserver.unobserve(e.target);
-            }
-        });
+    const cntObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cntObs.unobserve(e.target); } });
     }, { threshold: 0.6 });
-    document.querySelectorAll('[data-count]').forEach(el => cntObserver.observe(el));
+    document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
 
 })();
 </script>
