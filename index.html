@@ -50,6 +50,10 @@
             --red-d:     #AA0012;
             --red-dim:   rgba(229,0,26,0.10);
             --red-glow:  rgba(229,0,26,0.45);
+            --gold:      #C9A84C;
+            --gold-l:    #E0C06A;
+            --gold-dim:  rgba(201,168,76,0.18);
+            --gold-glow: rgba(201,168,76,0.45);
             --white:     #F3F3F3;
             --muted:     #505050;
             --muted-l:   #888;
@@ -123,6 +127,8 @@
         .section-title span { color: var(--red); }
         /* Área de Fisioterapia — forzar color rojo (animNeon termina en color:inherit) */
         #recuperacion .section-title { color: var(--red); }
+        /* & dorado en hero y nav */
+        .hero-title .l1 .ch:last-child { color: var(--gold) !important; }
 
         /* Buttons */
         .btn {
@@ -202,10 +208,23 @@
         }
         .nav-logo {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
             line-height: 1.1;
             flex-shrink: 0;
         }
+        .nav-logo-circle {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #0a0a0a;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .nav-logo-circle svg { width: 100%; height: 100%; }
+        .nav-logo-texts { display: flex; flex-direction: column; }
         .nav-logo .brand {
             font-family: var(--font-b);
             font-size: 9px;
@@ -221,6 +240,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+        .nav-logo .name .amp { color: var(--gold); }
         .nav-links {
             display: flex;
             align-items: center;
@@ -486,7 +506,7 @@
         }
         .space-card {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--gold-dim);
             border-radius: var(--r);
             overflow: hidden;
             transition: border-color var(--t), transform var(--t), box-shadow var(--t);
@@ -584,7 +604,7 @@
             border-right: 1px solid var(--border);
         }
         .floor-tab:last-child { border-right: none; }
-        .floor-tab.active { background: var(--red); color: #000; }
+        .floor-tab.active { background: var(--gold); color: #000; }
 
         .floor-plan { display: none; }
         .floor-plan.active {
@@ -666,7 +686,7 @@
 
         .plan-card {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--gold-dim);
             border-radius: 16px;
             padding: 40px 30px;
             position: relative;
@@ -675,9 +695,9 @@
         .plan-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
         .plan-card.featured {
             background: linear-gradient(155deg, #181308 0%, var(--card) 55%);
-            border-color: rgba(229,0,26,0.50);
+            border-color: rgba(201,168,76,0.55);
             transform: scale(1.03);
-            box-shadow: 0 0 0 1px rgba(229,0,26,0.13);
+            box-shadow: 0 0 0 1px rgba(201,168,76,0.18), 0 0 30px rgba(201,168,76,0.08);
         }
         .plan-card.featured:hover { transform: scale(1.03) translateY(-6px); }
 
@@ -686,7 +706,7 @@
             top: -13px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--red);
+            background: var(--gold);
             color: #000;
             font-family: var(--font-h);
             font-size: 10px;
@@ -775,7 +795,8 @@
         .plan-features li.dim { color: var(--muted-l); }
         .plan-features li.dim .chk { background: rgba(255,255,255,0.04); color: var(--muted); }
         .plan-btn { width: 100%; padding: 15px; }
-        .plan-card.featured .plan-btn { background: var(--red); color: #fff; border-color: var(--red); }
+        .plan-card.featured .plan-btn { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+        .plan-card.featured .plan-name { color: var(--gold) !important; }
 
         /* Contact strip below plans */
         .plans-contact {
@@ -1336,6 +1357,147 @@
             box-shadow: -3px 0 0 var(--red), 0 20px 40px rgba(0,0,0,0.55);
         }
 
+        /* ── REDES SOCIALES FLOTANTES ─────────────────────────── */
+        .social-float {
+            position: fixed;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .social-float a {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform .25s, box-shadow .25s;
+            text-decoration: none;
+        }
+        .social-float a:hover { transform: scale(1.15); }
+        .social-float .sf-ig  { background: radial-gradient(circle at 30% 110%, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); box-shadow: 0 4px 15px rgba(220,39,67,0.4); }
+        .social-float .sf-wa  { background: #25D366; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        .social-float .sf-fb  { background: #1877F2; box-shadow: 0 4px 15px rgba(24,119,242,0.4); }
+        .social-float a svg   { width: 22px; height: 22px; fill: #fff; }
+        /* Redes inline footer */
+        .social-links-row { display: flex; gap: 10px; margin-top: 16px; }
+        .social-links-row a {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform .25s;
+        }
+        .social-links-row a:hover { transform: scale(1.12); }
+        .social-links-row .sl-ig { background: radial-gradient(circle at 30% 110%, #f09433,#dc2743,#bc1888); }
+        .social-links-row .sl-wa { background: #25D366; }
+        .social-links-row .sl-fb { background: #1877F2; }
+        .social-links-row a svg  { width: 18px; height: 18px; fill: #fff; }
+
+        /* ── MODALES FORMULARIOS ──────────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 9000;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--card);
+            border: 1px solid var(--gold-dim);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 540px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        .modal-close {
+            position: absolute; top: 16px; right: 20px;
+            background: none; border: none; color: var(--muted-l);
+            font-size: 26px; cursor: pointer; line-height: 1;
+            transition: color .2s;
+        }
+        .modal-close:hover { color: var(--white); }
+        .modal-tag {
+            font-size: 9px; letter-spacing: 4px; color: var(--gold);
+            font-family: var(--font-h); text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .modal-title {
+            font-family: var(--font-h);
+            font-size: clamp(22px,4vw,32px);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+        .modal-title span { color: var(--gold); }
+        .modal-desc {
+            font-size: 13px; color: var(--muted-l);
+            margin-bottom: 24px; line-height: 1.6;
+            border-left: 2px solid var(--gold);
+            padding-left: 12px;
+        }
+        .form-row { margin-bottom: 16px; }
+        .form-row label {
+            display: block;
+            font-size: 10px; letter-spacing: 2px; color: var(--gold);
+            text-transform: uppercase; margin-bottom: 6px;
+            font-family: var(--font-h);
+        }
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            width: 100%;
+            background: #161616;
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 6px;
+            padding: 11px 14px;
+            color: var(--white);
+            font-family: var(--font-b);
+            font-size: 14px;
+            outline: none;
+            transition: border-color .2s;
+            box-sizing: border-box;
+        }
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus { border-color: var(--gold); }
+        .form-row select option { background: #161616; }
+        .form-row textarea { resize: vertical; min-height: 80px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+        .form-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font-h);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s, box-shadow .2s;
+            margin-top: 8px;
+        }
+        .form-submit:hover { background: var(--gold-l); box-shadow: 0 6px 24px rgba(201,168,76,0.35); }
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+        }
+        .form-success .fs-icon { font-size: 48px; margin-bottom: 12px; }
+        .form-success p { color: var(--muted-l); font-size: 14px; }
+        .form-success h4 { font-family: var(--font-h); font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+
         /* Nav link underline slide */
         .nav-links a { position: relative; }
         .nav-links a::after {
@@ -1364,10 +1526,31 @@
 <!-- Film grain cinematic overlay -->
 <div class="grain" aria-hidden="true"></div>
 
-<!-- Logo watermark background — REPLACE logo.png WITH YOUR ORIGINAL LOGO FILE -->
+<!-- Logo watermark background -->
 <div class="logo-wm" id="logoWm" aria-hidden="true">
     <div class="logo-wm-inner" id="logoWmInner">
-        <img src="logo.png" alt="">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.055;filter:drop-shadow(0 0 30px rgba(201,168,76,0.1))">
+            <!-- Outer gold octagon -->
+            <polygon points="200,18 308,58 382,165 382,235 308,342 92,342 18,235 18,165 92,58"
+                     fill="rgba(229,0,26,0.22)" stroke="#C9A84C" stroke-width="4.5"/>
+            <!-- Inner octagon line -->
+            <polygon points="200,38 295,73 362,172 362,228 295,327 105,327 38,228 38,172 105,73"
+                     fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <!-- Fist silhouette simplified -->
+            <ellipse cx="200" cy="195" rx="52" ry="48" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="1"/>
+            <!-- Knuckle lines -->
+            <line x1="162" y1="182" x2="238" y2="182" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+            <line x1="165" y1="192" x2="235" y2="192" stroke="#C9A84C" stroke-width="1" opacity="0.3"/>
+            <!-- MARCA text -->
+            <text x="200" y="118" text-anchor="middle" fill="#F3F3F3" font-family="Oswald,Impact,sans-serif" font-size="28" font-weight="700" letter-spacing="8">MARCA</text>
+            <!-- ACME big -->
+            <text x="200" y="280" text-anchor="middle" fill="#E5001A" font-family="Oswald,Impact,sans-serif" font-size="72" font-weight="900" letter-spacing="3">ACME</text>
+            <!-- FIGHT & FITNESS -->
+            <text x="200" y="315" text-anchor="middle" fill="#C9A84C" font-family="Oswald,Impact,sans-serif" font-size="18" font-weight="600" letter-spacing="5">FIGHT &amp; FITNESS</text>
+            <!-- side fighter silhouettes -->
+            <ellipse cx="72" cy="200" rx="22" ry="40" fill="rgba(229,0,26,0.15)"/>
+            <ellipse cx="328" cy="200" rx="22" ry="40" fill="rgba(229,0,26,0.15)"/>
+        </svg>
     </div>
 </div>
 
@@ -1378,8 +1561,20 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#inicio" class="nav-logo">
-                <span class="brand">Marca ACME</span>
-                <span class="name">Fight &amp; Fitness</span>
+                <div class="nav-logo-circle">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill="#0a0a0a"/>
+                        <polygon points="50,6 76,15 94,38 94,62 76,85 24,85 6,62 6,38 24,15"
+                                 fill="rgba(229,0,26,0.15)" stroke="#C9A84C" stroke-width="2"/>
+                        <text x="50" y="42" text-anchor="middle" fill="#C9A84C" font-family="Oswald,Impact,sans-serif" font-size="11" font-weight="700" letter-spacing="2">MARCA</text>
+                        <text x="50" y="64" text-anchor="middle" fill="#E5001A" font-family="Oswald,Impact,sans-serif" font-size="22" font-weight="900" letter-spacing="1">ACME</text>
+                        <text x="50" y="78" text-anchor="middle" fill="#C9A84C" font-family="Oswald,sans-serif" font-size="7" letter-spacing="1.5">F &amp; F</text>
+                    </svg>
+                </div>
+                <div class="nav-logo-texts">
+                    <span class="brand">Marca ACME</span>
+                    <span class="name">Fight <span class="amp">&amp;</span> Fitness</span>
+                </div>
             </a>
 
             <ul class="nav-links" id="navLinks">
@@ -1406,11 +1601,11 @@
 <section id="inicio" class="hero">
     <div class="hero-bg"></div>
 
-    <!-- Decorative octagon SVG -->
+    <!-- Decorative octagon SVG — gold -->
     <svg class="hero-oct-deco" viewBox="0 0 500 500" aria-hidden="true" fill="none">
-        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186"   stroke="#E5001A" stroke-width="1.5"/>
-        <polygon points="166,28 334,28 472,166 472,334 334,472 166,472 28,334 28,166" stroke="#E5001A" stroke-width="1"/>
-        <polygon points="146,48 354,48 452,146 452,354 354,452 146,452 48,354 48,146" stroke="#E5001A" stroke-width="0.5"/>
+        <polygon points="186,8 314,8 492,186 492,314 314,492 186,492 8,314 8,186"   stroke="#C9A84C" stroke-width="1.5"/>
+        <polygon points="166,28 334,28 472,166 472,334 334,472 166,472 28,334 28,166" stroke="#C9A84C" stroke-width="1"/>
+        <polygon points="146,48 354,48 452,146 452,354 354,452 146,452 48,354 48,146" stroke="#C9A84C" stroke-width="0.5"/>
     </svg>
 
     <div class="container">
@@ -1428,7 +1623,7 @@
                 <span class="l2" data-split="char" data-anim="neon">Fitness</span>
             </h1>
 
-            <p class="hero-subtitle" data-split="word" data-anim="blur">Centro MMA Premium</p>
+            <p class="hero-subtitle" data-split="word" data-anim="blur">La Evolución del Combate Comienza en Familia</p>
 
             <p class="hero-desc fade-in" data-delay="4">
                 Centro MMA de clase mundial diseñado para atletas comprometidos.
@@ -1817,13 +2012,13 @@
                 <p class="plan-period">Por sesión · Sin compromiso</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="chk">✓</span>1 clase de 90 minutos</li>
+                    <li><span class="chk">✓</span>1 clase de 60 minutos</li>
                     <li><span class="chk">✓</span>Acceso a instalaciones</li>
                     <li><span class="chk">✓</span>Entrenador certificado</li>
                     <li class="dim"><span class="chk">—</span>Acceso a fisioterapia</li>
                     <li class="dim"><span class="chk">—</span>Toalla incluida</li>
                 </ul>
-                <a href="#" class="btn btn-outline plan-btn">Contratar Ahora</a>
+                <button onclick="openModal('modal-clase')" class="btn btn-outline plan-btn">Reservar Clase</button>
             </div>
 
             <!-- Mensual BÁSICO (featured) -->
@@ -1845,7 +2040,7 @@
                     <li><span class="chk">✓</span>Fisioterapia básica</li>
                     <li><span class="chk">✓</span>Comunidad ACME</li>
                 </ul>
-                <a href="#" class="btn btn-red plan-btn">Contratar Ahora</a>
+                <button onclick="openModal('modal-membresia','Básico')" class="btn btn-red plan-btn" style="background:var(--gold);border-color:var(--gold);color:#000;font-weight:700;">Inscribirme Ahora</button>
             </div>
 
             <!-- Élite -->
@@ -1867,7 +2062,7 @@
                     <li><span class="chk">✓</span>Prioridad en octágono</li>
                     <li><span class="chk">✓</span>Descuento en eventos</li>
                 </ul>
-                <a href="#" class="btn btn-outline plan-btn">Contratar Ahora</a>
+                <button onclick="openModal('modal-membresia','Élite')" class="btn btn-outline plan-btn">Inscribirme Ahora</button>
             </div>
         </div>
 
@@ -2110,9 +2305,19 @@
             <div class="ft-brand">
                 <p class="brand">Marca ACME</p>
                 <p class="name">Fight &amp; Fitness 🥊</p>
-                <p>Plan de Instalaciones MMA Premium · Documento Conceptual · 2026.<br>
-                   Espacio mínimo recomendado: 900–1,200 m².<br>
-                   Grupos reducidos de 10 · Ambiente familiar.</p>
+                <p>La Evolución del Combate Comienza en Familia.<br>
+                   Grupos reducidos de 10 · Ambiente familiar · México 2026.</p>
+                <div class="social-links-row">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener" class="sl-ig" title="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener" class="sl-wa" title="WhatsApp">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </a>
+                    <a href="https://facebook.com/" target="_blank" rel="noopener" class="sl-fb" title="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
             </div>
             <div>
                 <p class="ft-col-title">Navegación</p>
@@ -2299,6 +2504,199 @@
     document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
 
 })();
+</script>
+
+<!-- ================================================================
+     REDES SOCIALES FLOTANTES (derecha, siempre visible)
+================================================================ -->
+<div class="social-float" aria-label="Redes Sociales">
+    <a href="https://instagram.com/" target="_blank" rel="noopener" class="sf-ig" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener" class="sf-wa" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="https://facebook.com/" target="_blank" rel="noopener" class="sf-fb" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+</div>
+
+<!-- ================================================================
+     MODAL — MEMBRESÍA (Básico / Élite)
+================================================================ -->
+<div class="modal-overlay" id="modal-membresia" role="dialog" aria-modal="true" aria-labelledby="mem-title">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('modal-membresia')" aria-label="Cerrar">&times;</button>
+        <div id="mem-form-wrap">
+            <p class="modal-tag">ACME Fight &amp; Fitness · Inscripción</p>
+            <h2 class="modal-title" id="mem-title">Únete al <span>Team ACME</span></h2>
+            <p class="modal-desc">Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas para confirmar tu inscripción y resolver cualquier duda.</p>
+            <form id="form-membresia" onsubmit="submitForm(event,'modal-membresia')">
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="mem-nombre">Nombre completo *</label>
+                        <input type="text" id="mem-nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-row">
+                        <label for="mem-tel">Teléfono *</label>
+                        <input type="tel" id="mem-tel" name="telefono" required placeholder="+52 55 0000 0000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="mem-email">Correo electrónico *</label>
+                    <input type="email" id="mem-email" name="email" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="mem-plan">Plan seleccionado</label>
+                        <select id="mem-plan" name="plan">
+                            <option value="Básico">Básico — $1,299/mes</option>
+                            <option value="Élite">Élite — $12,999/año</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="mem-inicio">Fecha de inicio deseada</label>
+                        <input type="date" id="mem-inicio" name="fecha_inicio">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="mem-edad">Edad &amp; experiencia en artes marciales</label>
+                    <input type="text" id="mem-edad" name="experiencia" placeholder="Ej: 28 años, principiante">
+                </div>
+                <div class="form-row">
+                    <label for="mem-como">¿Cómo nos conociste?</label>
+                    <select id="mem-como" name="fuente">
+                        <option value="">Selecciona...</option>
+                        <option>Instagram</option>
+                        <option>Facebook</option>
+                        <option>WhatsApp</option>
+                        <option>Recomendación</option>
+                        <option>Búsqueda web</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="mem-notas">Notas adicionales</label>
+                    <textarea id="mem-notas" name="notas" placeholder="Objetivos, lesiones previas, preguntas..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">🥊 Enviar Solicitud</button>
+            </form>
+        </div>
+        <div class="form-success" id="mem-success">
+            <div class="fs-icon">🏆</div>
+            <h4>¡Bienvenido al Team ACME!</h4>
+            <p>Recibimos tu solicitud. Un asesor te contactará en menos de 24 horas para confirmar tu inscripción.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================
+     MODAL — CLASE ÚNICA
+================================================================ -->
+<div class="modal-overlay" id="modal-clase" role="dialog" aria-modal="true" aria-labelledby="clase-title">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('modal-clase')" aria-label="Cerrar">&times;</button>
+        <div id="clase-form-wrap">
+            <p class="modal-tag">Entrada Abierta · Sin compromiso</p>
+            <h2 class="modal-title" id="clase-title">Clase <span>Única</span></h2>
+            <p class="modal-desc">
+                <strong style="color:var(--white)">¿Cómo funciona?</strong><br>
+                60 minutos de intensidad controlada: calentamiento funcional, técnica de golpeo y grappling básico, sparring supervisado y recuperación activa. Sin nivel previo requerido. Máximo 10 atletas por sesión para atención personalizada.<br><br>
+                <strong style="color:var(--gold)">$299 por sesión · Incluye: </strong>instalaciones, entrenador certificado y análisis post-clase.
+            </p>
+            <form id="form-clase" onsubmit="submitForm(event,'modal-clase')">
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="cls-nombre">Nombre completo *</label>
+                        <input type="text" id="cls-nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-row">
+                        <label for="cls-tel">Teléfono *</label>
+                        <input type="tel" id="cls-tel" name="telefono" required placeholder="+52 55 0000 0000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="cls-email">Correo electrónico *</label>
+                    <input type="email" id="cls-email" name="email" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="cls-fecha">Fecha preferida</label>
+                        <input type="date" id="cls-fecha" name="fecha">
+                    </div>
+                    <div class="form-row">
+                        <label for="cls-primera">¿Primera vez en MMA?</label>
+                        <select id="cls-primera" name="primera_vez">
+                            <option value="si">Sí, es mi primera vez</option>
+                            <option value="no">No, tengo experiencia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="cls-edad">Edad &amp; condición física</label>
+                    <input type="text" id="cls-edad" name="condicion" placeholder="Ej: 30 años, buen estado físico">
+                </div>
+                <div class="form-row">
+                    <label for="cls-como">¿Cómo nos conociste?</label>
+                    <select id="cls-como" name="fuente">
+                        <option value="">Selecciona...</option>
+                        <option>Instagram</option>
+                        <option>Facebook</option>
+                        <option>WhatsApp</option>
+                        <option>Recomendación</option>
+                        <option>Búsqueda web</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="cls-notas">¿Alguna lesión o condición que debamos saber?</label>
+                    <textarea id="cls-notas" name="notas" placeholder="Sin lesiones / describe cualquier condición..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">🥊 Reservar Mi Clase</button>
+            </form>
+        </div>
+        <div class="form-success" id="clase-success">
+            <div class="fs-icon">🏆</div>
+            <h4>¡Clase Reservada!</h4>
+            <p>Recibimos tu reserva. Te confirmaremos por WhatsApp o correo electrónico en breve.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ── Modal helpers ─────────────────────────────────── */
+function openModal(id, plan) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    if (plan && id === 'modal-membresia') {
+        const sel = document.getElementById('mem-plan');
+        if (sel) sel.value = plan;
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+    const overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+function submitForm(e, modalId) {
+    e.preventDefault();
+    const wrap   = document.getElementById(modalId === 'modal-membresia' ? 'mem-form-wrap' : 'clase-form-wrap');
+    const success = document.getElementById(modalId === 'modal-membresia' ? 'mem-success' : 'clase-success');
+    if (wrap) wrap.style.display = 'none';
+    if (success) success.style.display = 'block';
+    setTimeout(() => closeModal(modalId), 3500);
+}
+/* Close on backdrop click */
+document.querySelectorAll('.modal-overlay').forEach(ov => {
+    ov.addEventListener('click', e => { if (e.target === ov) closeModal(ov.id); });
+});
+/* Close on Escape */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(ov => closeModal(ov.id));
+});
 </script>
 </body>
 </html>
