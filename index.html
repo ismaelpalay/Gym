@@ -125,6 +125,21 @@
             color: var(--white);
         }
         .section-title span { color: var(--red); }
+        /* Botones outline en tarjetas de espacios → dorados */
+        .space-card .btn-outline {
+            color: var(--gold);
+            border-color: rgba(201,168,76,0.45);
+        }
+        .space-card .btn-outline:hover {
+            background: rgba(201,168,76,0.10);
+            border-color: var(--gold);
+            color: var(--gold-l);
+        }
+        /* Fondos de secciones → transparente (solo fondo base + watermark) */
+        .hero-bg { background: transparent !important; }
+        .hero-bg::before { display: none; }
+        .espacios, .membresias, .recuperacion, .clases { background: transparent; }
+        .section { background: transparent; }
         /* Área de Fisioterapia — forzar color rojo (animNeon termina en color:inherit) */
         #recuperacion .section-title { color: var(--red); }
         /* & dorado en hero y nav */
@@ -488,11 +503,12 @@
             transition: var(--t);
             white-space: nowrap;
         }
-        .tab-btn:hover { color: var(--white); }
+        .tab-btn:hover { color: var(--gold); }
         .tab-btn.active {
-            background: var(--red);
-            color: #000;
+            background: rgba(201,168,76,0.12);
+            color: var(--gold);
             font-weight: 600;
+            border: 1px solid rgba(201,168,76,0.40);
         }
 
         @media (max-width: 700px) {
@@ -1052,9 +1068,24 @@
             border-radius: 10px;
             transition: border-color var(--t);
         }
-        .kids-feat:hover { border-color: rgba(229,0,26,0.30); }
-        .kids-feat-icon { font-size: 17px; flex-shrink: 0; }
-        .kids-feat-text { font-size: 12px; font-weight: 500; color: rgba(243,243,243,0.8); line-height: 1.4; }
+        /* Kids features — lista subrayada sin círculos */
+        .kids-features {
+            list-style: none;
+            padding: 0; margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .kids-feat-item {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(243,243,243,0.85);
+            line-height: 1.4;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201,168,76,0.25);
+            text-decoration: none;
+        }
+        .kids-feat-item:last-child { border-bottom: none; padding-bottom: 0; }
 
         .kids-visual {
             background: var(--card);
@@ -1223,18 +1254,20 @@
             width: min(70vmin, 600px);
             height: min(70vmin, 600px);
             will-change: transform;
-            animation: logoBreath 5s ease-in-out infinite;
+            animation: logoFloat 12s ease-in-out infinite, logoGlow 6s ease-in-out infinite;
         }
         .logo-wm-inner img {
             width: 100%; height: 100%;
             object-fit: contain;
-            opacity: 0.045;
-            filter: grayscale(1) brightness(0.6) sepia(1) hue-rotate(320deg) saturate(6);
-            mix-blend-mode: screen;
         }
-        @keyframes logoBreath {
-            0%,100% { opacity: .85; filter: drop-shadow(0 0 0px rgba(229,0,26,0)); }
-            50%      { opacity: 1;   filter: drop-shadow(0 0 40px rgba(229,0,26,0.12)); }
+        @keyframes logoFloat {
+            0%   { transform: translateY(-18px) rotate(-0.7deg); }
+            50%  { transform: translateY(18px)  rotate(0.7deg);  }
+            100% { transform: translateY(-18px) rotate(-0.7deg); }
+        }
+        @keyframes logoGlow {
+            0%,100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.06)); }
+            50%      { filter: drop-shadow(0 0 50px rgba(201,168,76,0.22)); }
         }
 
         /* ============================================================
@@ -1242,7 +1275,7 @@
         ============================================================ */
         .sec-div {
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(229,0,26,0.5) 50%, transparent);
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.55) 50%, transparent);
             position: relative; overflow: visible;
         }
         .sec-div::after {
@@ -1251,8 +1284,8 @@
             transform: translateX(-50%);
             width: 6px; height: 6px;
             border-radius: 50%;
-            background: var(--red);
-            box-shadow: 0 0 10px var(--red), 0 0 20px var(--red-glow);
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold-glow);
         }
 
         /* ============================================================
@@ -1529,7 +1562,7 @@
 <!-- Logo watermark background -->
 <div class="logo-wm" id="logoWm" aria-hidden="true">
     <div class="logo-wm-inner" id="logoWmInner">
-        <img src="logo.png" alt="" style="width:100%;height:100%;object-fit:contain;opacity:0.055;filter:grayscale(0.2) brightness(0.85) drop-shadow(0 0 30px rgba(201,168,76,0.15));">
+        <img src="logo.png" alt="" style="width:100%;height:100%;object-fit:contain;opacity:0.11;">
     </div>
 </div>
 
@@ -1556,7 +1589,7 @@
                 <li><a href="#planes">Planes</a></li>
                 <li><a href="#clases">Clases</a></li>
                 <li><a href="#recuperacion">Recuperación</a></li>
-                <li><a href="#kids">Kids</a></li>
+                <li><a href="#kids">Niños</a></li>
                 <li><a href="#planes" class="nav-cta">Unirse Ahora</a></li>
             </ul>
 
@@ -1655,14 +1688,13 @@
             <!-- COMBATE -->
             <div class="space-card fade-in" data-cat="combate">
                 <div class="space-card-img">
-                    <span class="space-card-num">01</span>🥊
+                    🥊
                 </div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Octágono Principal</h3>
                     <p class="space-card-desc">Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.</p>
                     <div class="space-card-actions">
-                        <a href="#planes" class="btn btn-red" style="font-size:11px;padding:9px 16px;">Reservar</a>
-                        <a href="#mapa"   class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
+                        <a href="#mapa" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
                     </div>
                 </div>
             </div>
@@ -1708,7 +1740,7 @@
                     <h3 class="space-card-title">Crioterapia</h3>
                     <p class="space-card-desc">3–4 tinas de inmersión en frío a 8–12 °C para reducción de inflamación y recuperación acelerada.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -1719,7 +1751,7 @@
                     <h3 class="space-card-title">Sauna Seco</h3>
                     <p class="space-card-desc">Sauna de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda post-entrenamiento.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -1730,7 +1762,7 @@
                     <h3 class="space-card-title">Masajes &amp; Fisioterapia</h3>
                     <p class="space-card-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones con fisioterapeuta certificado.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -1739,10 +1771,10 @@
             <div class="space-card fade-in" data-cat="familia">
                 <div class="space-card-img">🧒</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Zona Kids MMA</h3>
+                    <h3 class="space-card-title">Zona Niños MMA</h3>
                     <p class="space-card-desc">Octágono kids Ø 5 m, tatami acolchado extra y equipo de protección completo. Grupos de 10 niños, entrenador certificado.</p>
                     <div class="space-card-actions">
-                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -1753,7 +1785,7 @@
                     <h3 class="space-card-title">Zona de Padres</h3>
                     <p class="space-card-desc">Área de descanso con visibilidad directa al entrenamiento infantil. Ambiente familiar, seguro y motivador.</p>
                     <div class="space-card-actions">
-                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Saber Más</a>
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -1773,7 +1805,7 @@
         <h2 class="section-title" data-split="char" data-anim="rotate">Mapa Conceptual</h2>
         <p class="mapa-intro fade-in" data-delay="2">
             2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja,
-            rodeado por las zonas de impacto y fuerza. La planta alta concentra el área kids con su mini
+            rodeado por las zonas de impacto y fuerza. La planta alta concentra el área niños con su mini
             octágono y todas las zonas de recuperación.
         </p>
 
@@ -1936,7 +1968,7 @@
                 <p class="floor-legend-title">Planta Alta · 300 m²</p>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#FFB432"></div>
-                    <div><p class="legend-text">Octágono Kids</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div>
+                    <div><p class="legend-text">Octágono Niños</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#E5001A;opacity:0.55"></div>
@@ -2179,28 +2211,28 @@
         <div class="kids-grid">
             <div>
                 <p class="section-label" data-split="word" data-anim="slide-l">06 — Programa Infantil</p>
-                <h2 class="section-title" data-split="word" data-anim="bounce">Zona Kids &amp; Familia</h2>
+                <h2 class="section-title" data-split="word" data-anim="bounce">Zona Niños &amp; Familia</h2>
                 <p class="kids-desc fade-in" data-delay="2">
-                    🧒 El área kids está diseñada para que los niños entrenen con seguridad y confianza
+                    El área niños está diseñada para que los niños entrenen con seguridad y confianza
                     mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad
                     directa al área de entrenamiento infantil, creando un ambiente familiar, seguro y motivador.
                     Los grupos pequeños de 10 niños garantizan atención personalizada de calidad.
                 </p>
-                <div class="kids-features fade-in" data-delay="3">
-                    <div class="kids-feat"><span class="kids-feat-icon">👥</span><span class="kids-feat-text">Grupos de 10 niños</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">🏅</span><span class="kids-feat-text">Entrenador certificado</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">🥊</span><span class="kids-feat-text">Equipo protección completo</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">🛡️</span><span class="kids-feat-text">Tatami acolchado extra</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">🔶</span><span class="kids-feat-text">Mini octágono Ø 5 m</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">👁️</span><span class="kids-feat-text">Vista directa para padres</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">🛋️</span><span class="kids-feat-text">Zona de descanso padres</span></div>
-                    <div class="kids-feat"><span class="kids-feat-icon">✅</span><span class="kids-feat-text">Ambiente 100% seguro</span></div>
-                </div>
+                <ul class="kids-features fade-in" data-delay="3">
+                    <li class="kids-feat-item">Grupos de 10 niños</li>
+                    <li class="kids-feat-item">Entrenador certificado</li>
+                    <li class="kids-feat-item">Equipo de protección completo</li>
+                    <li class="kids-feat-item">Tatami acolchado extra</li>
+                    <li class="kids-feat-item">Mini octágono Ø 5 m</li>
+                    <li class="kids-feat-item">Vista directa para padres</li>
+                    <li class="kids-feat-item">Zona de descanso para padres</li>
+                    <li class="kids-feat-item">Ambiente 100% seguro</li>
+                </ul>
             </div>
 
             <!-- Visual: octagon SVG -->
             <div class="kids-visual fade-in" data-delay="2">
-                <svg viewBox="0 0 300 300" width="260" height="260" style="position:relative;z-index:1" aria-label="Octágono Kids">
+                <svg viewBox="0 0 300 300" width="260" height="260" style="position:relative;z-index:1" aria-label="Octágono Niños">
                     <!-- Reference (adult) octagon -->
                     <polygon
                         points="150,8 220,35 278,93 278,207 220,265 150,292 80,265 22,207 22,93 80,35"
@@ -2300,7 +2332,7 @@
                     <li><a href="#planes">Planes</a></li>
                     <li><a href="#clases">Clases</a></li>
                     <li><a href="#recuperacion">Recuperación</a></li>
-                    <li><a href="#kids">Kids</a></li>
+                    <li><a href="#kids">Niños</a></li>
                 </ul>
             </div>
             <div>
@@ -2334,20 +2366,11 @@
     const root = document.documentElement;
     root.dataset.sd = 'd';
 
-    /* ── Logo parallax ──────────────────────────────────────── */
-    const wmInner = document.getElementById('logoWmInner');
-    let ticking = false;
+    /* ── Scroll handler (sin parallax — logo usa animación CSS pura) ── */
     function onScroll () {
         const y = window.scrollY;
         root.dataset.sd = y > lastY ? 'd' : 'u';
         lastY = y;
-        if (wmInner && !ticking) {
-            ticking = true;
-            requestAnimationFrame(() => {
-                wmInner.style.transform = `translateY(${y * 0.14}px) rotate(${y * 0.008}deg)`;
-                ticking = false;
-            });
-        }
         navbar.classList.toggle('scrolled', y > 55);
         highlightNav();
     }
