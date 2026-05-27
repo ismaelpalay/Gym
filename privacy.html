@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad · ACME Fight &amp; Fitness</title>
+    <meta name="description" content="Política de Privacidad de ACME Fight & Fitness. Conoce cómo tratamos y protegemos tus datos personales.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap">
+
+    <style>
+        :root {
+            --gold:    #C9A84C;
+            --gold-l:  #E0C06A;
+            --red:     #E5001A;
+            --bg:      #060606;
+            --white:   #F3F3F3;
+            --muted:   rgba(243,243,243,0.45);
+            --card:    rgba(255,255,255,0.035);
+            --border:  rgba(255,255,255,0.08);
+            --font-h:  'Oswald', Impact, sans-serif;
+            --font-b:  'Inter', system-ui, sans-serif;
+            --r:       10px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--font-b);
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── NAV BAR ─────────────────────────── */
+        .priv-nav {
+            background: rgba(6,6,6,0.95);
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .priv-nav .inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .priv-nav .brand {
+            font-family: var(--font-h);
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .priv-nav .brand span { color: var(--gold); }
+        .priv-nav .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: var(--font-h);
+            transition: opacity .2s;
+        }
+        .priv-nav .back-btn:hover { opacity: 0.7; }
+
+        /* ── HERO ────────────────────────────── */
+        .priv-hero {
+            background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+            border-bottom: 1px solid rgba(201,168,76,0.12);
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        .priv-hero .tag {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .priv-hero h1 {
+            font-family: var(--font-h);
+            font-size: clamp(28px, 6vw, 52px);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1.1;
+        }
+        .priv-hero h1 span { color: var(--gold); }
+        .priv-hero .meta {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        /* ── CONTENT ─────────────────────────── */
+        .priv-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+        .priv-section {
+            margin-bottom: 44px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 28px 32px;
+        }
+        .priv-section:hover { border-color: rgba(201,168,76,0.20); }
+        .priv-section h2 {
+            font-family: var(--font-h);
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+        }
+        .priv-section h2 .num {
+            color: rgba(201,168,76,0.4);
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .priv-section p {
+            color: rgba(243,243,243,0.80);
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .priv-section p:last-child { margin-bottom: 0; }
+        .priv-section ul, .priv-section ol {
+            padding-left: 20px;
+            color: rgba(243,243,243,0.75);
+            font-size: 14px;
+        }
+        .priv-section li { margin-bottom: 6px; }
+        .priv-section strong { color: var(--white); }
+        .priv-section a {
+            color: var(--gold);
+            text-underline-offset: 3px;
+        }
+        .priv-section a:hover { color: var(--gold-l); }
+
+        /* Highlight box */
+        .priv-highlight {
+            background: rgba(201,168,76,0.06);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 var(--r) var(--r) 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: rgba(243,243,243,0.85);
+        }
+
+        /* ── FOOTER ──────────────────────────── */
+        .priv-footer {
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(201,168,76,0.12);
+            padding: 28px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .priv-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .priv-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .priv-section { padding: 20px 18px; }
+            .priv-hero { padding: 40px 0 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="priv-nav">
+    <div class="inner">
+        <a href="index.html" class="brand">ACME <span>Fight &amp; Fitness</span></a>
+        <a href="index.html" class="back-btn">← Volver al inicio</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="priv-hero">
+    <p class="tag">Documento Legal · México 2026</p>
+    <h1>Política de <span>Privacidad</span></h1>
+    <p class="meta">Última actualización: 27 de mayo de 2026 &nbsp;·&nbsp; Versión 1.0</p>
+</header>
+
+<!-- Content -->
+<main class="priv-content">
+
+    <div class="priv-section">
+        <h2><span class="num">01</span> Identificación del Responsable</h2>
+        <p>
+            En cumplimiento con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong>
+            de los Estados Unidos Mexicanos y su Reglamento, se informa que el responsable del tratamiento de los datos
+            personales recopilados a través de este sitio web es:
+        </p>
+        <div class="priv-highlight">
+            <strong>Denominación:</strong> ACME Fight &amp; Fitness<br>
+            <strong>Actividad:</strong> Centro de entrenamiento de Artes Marciales Mixtas (MMA) y acondicionamiento físico<br>
+            <strong>Correo de contacto:</strong> <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
+            <strong>País:</strong> México<br>
+            <strong>Referencia:</strong> ACC-2026-7849X
+        </div>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">02</span> Datos Personales Recabados</h2>
+        <p>A través de los formularios de inscripción y reserva de clase presentes en este sitio web, podemos recabar los siguientes datos personales:</p>
+        <ul>
+            <li><strong>Datos de identificación:</strong> nombre completo, edad.</li>
+            <li><strong>Datos de contacto:</strong> correo electrónico, número de teléfono (incluyendo código de país).</li>
+            <li><strong>Datos de preferencias:</strong> plan seleccionado, fecha de inicio deseada, experiencia en artes marciales, condición física.</li>
+            <li><strong>Datos de salud (voluntarios):</strong> lesiones previas o condiciones físicas relevantes para la práctica deportiva.</li>
+            <li><strong>Datos de origen de contacto:</strong> cómo nos conociste (referido por, red social, búsqueda web, etc.).</li>
+        </ul>
+        <p>No recopilamos datos sensibles adicionales (datos patrimoniales, financieros, biométricos o de origen racial/étnico) a través de este sitio web.</p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">03</span> Finalidades del Tratamiento</h2>
+        <p>Los datos personales que nos proporcionas serán utilizados para las siguientes <strong>finalidades primarias</strong> (necesarias para la prestación del servicio):</p>
+        <ul>
+            <li>Procesar tu solicitud de inscripción o reserva de clase única.</li>
+            <li>Contactarte para confirmar tu registro, resolver dudas y coordinar tu inicio.</li>
+            <li>Enviarte comunicaciones de bienvenida y orientación sobre el gimnasio.</li>
+            <li>Gestionar tu historial como miembro o asistente del gimnasio.</li>
+            <li>Cumplir con obligaciones legales y fiscales aplicables en México.</li>
+        </ul>
+        <p>De manera adicional, y <strong>de forma secundaria</strong> (no imprescindibles para el servicio), podríamos utilizar tus datos para:</p>
+        <ul>
+            <li>Enviarte boletines informativos, promociones y novedades de ACME Fight &amp; Fitness.</li>
+            <li>Realizar análisis estadísticos anónimos sobre el perfil de nuestros miembros.</li>
+        </ul>
+        <div class="priv-highlight">
+            Si no deseas que tus datos sean usados para las finalidades secundarias, puedes manifestarlo enviando un correo a <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a> con el asunto "OPOSICIÓN DATOS".
+        </div>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">04</span> Transferencia de Datos</h2>
+        <p>
+            ACME Fight &amp; Fitness <strong>no vende, cede ni transfiere</strong> tus datos personales a terceros con fines comerciales propios,
+            salvo en los casos expresamente previstos por la ley o cuando sea estrictamente necesario para la prestación del servicio.
+        </p>
+        <p>Podemos compartir datos con:</p>
+        <ul>
+            <li><strong>Proveedores de servicios tecnológicos</strong> (plataformas de email, CRM) que actúan en nuestro nombre y bajo estrictas obligaciones de confidencialidad.</li>
+            <li><strong>Autoridades competentes</strong> cuando así lo exija la legislación mexicana aplicable.</li>
+        </ul>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">05</span> Derechos ARCO</h2>
+        <p>
+            En cualquier momento tienes derecho a <strong>Acceder, Rectificar, Cancelar u Oponerte</strong> al tratamiento de tus datos personales
+            (Derechos ARCO), de conformidad con la LFPDPPP.
+        </p>
+        <p>Para ejercer tus derechos ARCO deberás enviar una solicitud escrita a:</p>
+        <div class="priv-highlight">
+            📧 <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
+            Asunto: DERECHOS ARCO — [tu nombre completo]
+        </div>
+        <p>Tu solicitud deberá contener:</p>
+        <ol>
+            <li>Nombre completo y correo electrónico con el que te registraste.</li>
+            <li>Descripción clara y precisa del derecho que deseas ejercer.</li>
+            <li>Cualquier otro elemento o documento que facilite la localización de tus datos.</li>
+        </ol>
+        <p>Responderemos a tu solicitud en un plazo máximo de <strong>20 días hábiles</strong> a partir de su recepción.</p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">06</span> Cookies y Tecnologías de Seguimiento</h2>
+        <p>
+            Este sitio web puede utilizar <strong>cookies técnicas</strong> (estrictamente necesarias para el funcionamiento del sitio)
+            y <strong>cookies de análisis</strong> (para entender cómo los usuarios interactúan con el sitio, de forma anónima).
+        </p>
+        <p>No utilizamos cookies publicitarias propias de terceros para segmentación o retargeting.</p>
+        <p>
+            Puedes configurar tu navegador para rechazar o eliminar cookies en cualquier momento.
+            Ten en cuenta que deshabilitar las cookies técnicas puede afectar la funcionalidad del sitio.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">07</span> Seguridad de los Datos</h2>
+        <p>
+            Adoptamos medidas técnicas, administrativas y físicas razonables para proteger tus datos personales
+            contra pérdida, mal uso, acceso no autorizado, divulgación, alteración y destrucción.
+        </p>
+        <p>
+            Sin embargo, ningún sistema de transmisión por internet o almacenamiento electrónico es 100% seguro.
+            Te recomendamos no compartir información sensible innecesaria a través de nuestros formularios.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">08</span> Datos de Menores de Edad</h2>
+        <p>
+            Nuestro programa infantil (Zona Niños &amp; Familia) está dirigido a menores de edad.
+            Los datos de menores <strong>deben ser proporcionados exclusivamente por su padre, madre o tutor legal</strong>,
+            quien acepta y consiente el tratamiento de dichos datos en su nombre.
+        </p>
+        <p>
+            Si eres padre/madre/tutor y deseas ejercer los derechos ARCO respecto a los datos de tu hijo(a),
+            sigue el procedimiento indicado en la sección 05 indicando la relación de parentesco o tutela.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">09</span> Conservación de los Datos</h2>
+        <p>
+            Conservaremos tus datos personales durante el tiempo que seas miembro activo o tengas una relación activa con ACME Fight &amp; Fitness
+            y, posteriormente, durante el tiempo necesario para cumplir con las obligaciones legales y fiscales vigentes en México
+            (mínimo 5 años según normativa fiscal aplicable).
+        </p>
+        <p>
+            Una vez concluido dicho período, tus datos serán eliminados o anonimizados de forma segura.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">10</span> Cambios en esta Política</h2>
+        <p>
+            Nos reservamos el derecho de actualizar o modificar la presente Política de Privacidad en cualquier momento.
+            Cualquier cambio significativo será notificado a través de nuestro sitio web, indicando la fecha de última actualización.
+        </p>
+        <p>
+            Te recomendamos revisar periódicamente esta página para mantenerte informado sobre cómo protegemos tus datos.
+            El uso continuo del sitio web tras la publicación de cambios implica la aceptación de la política actualizada.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">11</span> Contacto y Autoridad</h2>
+        <p>
+            Para cualquier consulta, duda o solicitud relacionada con el tratamiento de tus datos personales, contáctanos en:
+        </p>
+        <div class="priv-highlight">
+            📧 <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
+            🏷️ Ref. ACC-2026-7849X · ACME Fight &amp; Fitness · México 2026
+        </div>
+        <p>
+            Si no recibes respuesta satisfactoria en los plazos establecidos, tienes derecho a acudir al
+            <strong>Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</strong>
+            en <a href="https://www.inai.org.mx" target="_blank" rel="noopener">www.inai.org.mx</a>.
+        </p>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="priv-footer">
+    <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+    <p style="margin-top:6px;">
+        <a href="index.html">← Volver al sitio principal</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a>
+    </p>
+</footer>
+
+</body>
+</html>
