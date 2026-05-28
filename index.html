@@ -3333,7 +3333,7 @@ document.addEventListener('keydown', e => {
      CHATBOT JS  ·  ACME Fight & Fitness  ·  Powered by Claude
 ================================================================ -->
 <script>
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
 'use strict';
 
 /* ── Knowledge Base ──────────────────────────────────────────── */
@@ -3604,7 +3604,7 @@ function showWelcome() {
 inputEl.addEventListener('keydown', function(e){ if(e.key==='Enter') sendMessage(inputEl.value); });
 sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
 
-})();
+});
 </script>
 
 <!-- ================================================================
