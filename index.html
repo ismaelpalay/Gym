@@ -1744,6 +1744,242 @@
         }
         .anim-in .section-label::before,
         .section-label.anim-in::before { transform: scaleX(1); }
+
+        /* ══════════════════════════════════════════════════════════
+           CHATBOT  ·  ACME Fight & Fitness  ·  Powered by Claude
+        ══════════════════════════════════════════════════════════ */
+        .chatbot-trigger {
+            position: fixed;
+            bottom: 30px; left: 26px;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            border: 2.5px solid var(--red);
+            cursor: pointer;
+            overflow: visible;
+            z-index: 890;
+            transition: transform .25s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+        }
+        .chatbot-trigger img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: 50% 38%;
+            border-radius: 50%; display: block;
+        }
+        /* Red pulse only on hover */
+        .chatbot-trigger:hover {
+            transform: scale(1.08);
+            animation: cbTrigPulse 1.1s ease-in-out infinite;
+        }
+        @keyframes cbTrigPulse {
+            0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 0   rgba(229,0,26,.7); }
+            50%      { box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 14px rgba(229,0,26,0); }
+        }
+        .chatbot-notif {
+            position: absolute; top: -4px; right: -4px;
+            width: 20px; height: 20px;
+            background: var(--red); border-radius: 50%;
+            font-size: 10px; font-weight: 700; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-b);
+            box-shadow: 0 2px 8px rgba(229,0,26,.6);
+            animation: notifBounce 2s ease-in-out infinite;
+        }
+        @keyframes notifBounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+
+        /* ── Chat panel ─────────────────────────────────── */
+        .chatbot-panel {
+            position: fixed;
+            bottom: 102px; left: 26px;
+            width: 370px; max-width: calc(100vw - 36px);
+            height: 560px; max-height: calc(100vh - 130px);
+            background: #0d0d0d;
+            border: 1px solid rgba(201,168,76,0.22);
+            border-radius: 20px;
+            z-index: 891;
+            display: flex; flex-direction: column;
+            box-shadow: 0 28px 70px rgba(0,0,0,0.85);
+            opacity: 0; pointer-events: none;
+            transform: translateY(22px) scale(0.95);
+            transition: opacity .32s ease, transform .32s cubic-bezier(.2,.8,.2,1);
+        }
+        .chatbot-panel.open {
+            opacity: 1; transform: none; pointer-events: all;
+        }
+        /* Header */
+        .cb-header {
+            display: flex; align-items: center; gap: 11px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+            border-radius: 20px 20px 0 0;
+            background: rgba(255,255,255,0.02);
+        }
+        .cb-header-logo {
+            width: 42px; height: 42px; border-radius: 50%;
+            border: 2px solid var(--red);
+            overflow: hidden; flex-shrink: 0;
+        }
+        .cb-header-logo img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: 50% 38%;
+        }
+        .cb-header-info { flex: 1; min-width: 0; }
+        .cb-name {
+            font-family: var(--font-h); font-size: 13px;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--white);
+        }
+        .cb-status {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 10px; color: rgba(243,243,243,.45);
+            margin-top: 2px;
+        }
+        .cb-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 6px rgba(34,197,94,.65);
+            flex-shrink: 0;
+        }
+        .cb-powered-txt { color: rgba(243,243,243,.38); font-size: 10px; }
+        .cb-powered-txt svg { vertical-align: middle; margin: 0 1px; opacity: .7; }
+        .cb-close-btn {
+            background: none; border: none;
+            color: rgba(243,243,243,.4);
+            font-size: 24px; line-height: 1;
+            cursor: pointer; padding: 0 2px;
+            transition: color .2s;
+            flex-shrink: 0;
+        }
+        .cb-close-btn:hover { color: var(--white); }
+        /* Messages */
+        .cb-messages {
+            flex: 1; overflow-y: auto;
+            padding: 14px 14px 8px;
+            display: flex; flex-direction: column; gap: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(201,168,76,.2) transparent;
+        }
+        .cb-messages::-webkit-scrollbar { width: 4px; }
+        .cb-messages::-webkit-scrollbar-thumb {
+            background: rgba(201,168,76,.2); border-radius: 2px;
+        }
+        .cb-msg { display: flex; gap: 8px; max-width: 94%; animation: cbMsgIn .3s ease; }
+        @keyframes cbMsgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+        .cb-msg.bot  { align-self: flex-start; }
+        .cb-msg.user { align-self: flex-end; flex-direction: row-reverse; max-width: 82%; }
+        .cb-msg-av {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 1.5px solid var(--red);
+            overflow: hidden; flex-shrink: 0; margin-top: 2px;
+        }
+        .cb-msg-av img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: 50% 38%;
+        }
+        .cb-msg-inner { display: flex; flex-direction: column; gap: 6px; }
+        .cb-bubble {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 4px 16px 16px 16px;
+            padding: 10px 14px;
+            font-size: 13px; line-height: 1.6;
+            color: rgba(243,243,243,.88);
+        }
+        .cb-msg.user .cb-bubble {
+            background: rgba(201,168,76,.11);
+            border-color: rgba(201,168,76,.22);
+            border-radius: 16px 4px 16px 16px;
+            color: var(--white);
+        }
+        .cb-bubble strong { color: var(--gold-l); }
+        .cb-bubble small  { color: rgba(243,243,243,.45); font-size: 11px; }
+        /* Action buttons */
+        .cb-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+        .cb-act-btn {
+            background: transparent;
+            border: 1px solid rgba(201,168,76,.38);
+            color: var(--gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px; letter-spacing: 1px;
+            font-family: var(--font-h); text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, color .2s;
+        }
+        .cb-act-btn:hover {
+            background: rgba(201,168,76,.12);
+            border-color: var(--gold); color: var(--gold-l);
+        }
+        /* Typing dots */
+        .cb-typing-dots {
+            display: flex; gap: 5px; align-items: center;
+            padding: 8px 6px;
+        }
+        .cb-typing-dots span {
+            width: 7px; height: 7px;
+            background: var(--gold); border-radius: 50%;
+            animation: cbDot 1.2s ease-in-out infinite;
+        }
+        .cb-typing-dots span:nth-child(2) { animation-delay: .22s; }
+        .cb-typing-dots span:nth-child(3) { animation-delay: .44s; }
+        @keyframes cbDot {
+            0%,80%,100% { transform:scale(.65); opacity:.35; }
+            40%          { transform:scale(1.1);  opacity:1;   }
+        }
+        /* FAQ chips */
+        .cb-chips {
+            padding: 6px 12px 8px;
+            border-top: 1px solid rgba(255,255,255,.05);
+            display: flex; flex-wrap: wrap; gap: 5px;
+            flex-shrink: 0;
+        }
+        .cb-chip-btn {
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.09);
+            color: rgba(243,243,243,.58);
+            padding: 4px 10px; border-radius: 14px;
+            font-size: 11px; cursor: pointer;
+            transition: border-color .2s, color .2s, background .2s;
+            white-space: nowrap; font-family: var(--font-b);
+        }
+        .cb-chip-btn:hover {
+            border-color: rgba(201,168,76,.38);
+            color: var(--gold); background: rgba(201,168,76,.06);
+        }
+        /* Input row */
+        .cb-input-row {
+            display: flex; gap: 8px; align-items: center;
+            padding: 10px 12px 12px;
+            border-top: 1px solid rgba(255,255,255,.05);
+            flex-shrink: 0;
+            border-radius: 0 0 20px 20px;
+        }
+        #cbInput {
+            flex: 1;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 24px;
+            color: var(--white); font-size: 13px;
+            padding: 9px 16px; outline: none;
+            font-family: var(--font-b);
+            transition: border-color .2s;
+        }
+        #cbInput:focus { border-color: rgba(201,168,76,.38); }
+        #cbInput::placeholder { color: rgba(243,243,243,.28); }
+        #cbSend {
+            width: 38px; height: 38px;
+            background: var(--gold); border: none;
+            border-radius: 50%; color: #000;
+            cursor: pointer; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s, transform .2s;
+        }
+        #cbSend:hover { background: var(--gold-l); transform: scale(1.06); }
+        #cbSend svg { pointer-events: none; }
+        @media (max-width: 420px) {
+            .chatbot-panel { left: 8px; right: 8px; width: auto; bottom: 94px; }
+            .chatbot-trigger { bottom: 20px; left: 14px; width: 50px; height: 50px; }
+        }
     </style>
 </head>
 <body>
@@ -1863,8 +2099,8 @@
     <div class="container">
         <div class="espacios-head">
             <div>
-                <p class="section-label" data-split="word" data-anim="slide-l">01 — Espacios</p>
-                <h2 class="section-title" data-split="word" data-anim="zoom">Áreas <span>Especializadas</span></h2>
+                <p class="section-label" data-split="word" data-anim="bounce">01 — Espacios</p>
+                <h2 class="section-title" data-split="char" data-anim="glitch">Áreas <span>Especializadas</span></h2>
             </div>
             <div class="tab-group" role="tablist">
                 <button class="tab-btn active" data-tab="all">Todas</button>
@@ -1993,8 +2229,8 @@
 ================================================================ -->
 <section id="mapa" class="section mapa">
     <div class="container">
-        <p class="section-label" data-split="word" data-anim="slide-l">03 — Distribución</p>
-        <h2 class="section-title" data-split="char" data-anim="rotate">Mapa Conceptual</h2>
+        <p class="section-label" data-split="word" data-anim="zoom">03 — Distribución</p>
+        <h2 class="section-title" data-split="char" data-anim="blur">Mapa Conceptual</h2>
         <p class="mapa-intro fade-in" data-delay="2">
             2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja,
             rodeado por las zonas de impacto y fuerza. La planta alta concentra el área niños con su mini
@@ -2191,8 +2427,8 @@
 <section id="planes" class="section membresias">
     <div class="container">
         <div class="membresias-hd fade-in">
-            <p class="section-label">02 — Membresías</p>
-            <h2 class="section-title" data-split="word" data-anim="slide-l">Planes de Suscripción</h2>
+            <p class="section-label" data-split="word" data-anim="fade-up">02 — Membresías</p>
+            <h2 class="section-title" data-split="char" data-anim="neon">Planes de Suscripción</h2>
         </div>
 
         <div class="plans-grid">
@@ -2289,8 +2525,8 @@
 ================================================================ -->
 <section id="clases" class="section clases">
     <div class="container">
-        <p class="section-label" data-split="word" data-anim="slide-l">04 — Operación</p>
-        <h2 class="section-title" data-split="char" data-anim="distort">Modelo de Clases</h2>
+        <p class="section-label" data-split="word" data-anim="bounce">04 — Operación</p>
+        <h2 class="section-title" data-split="char" data-anim="rotate">Modelo de Clases</h2>
 
         <div class="clases-grid">
             <!-- Timeline -->
@@ -2402,8 +2638,8 @@
     <div class="container">
         <div class="kids-grid">
             <div>
-                <p class="section-label" data-split="word" data-anim="slide-l">06 — Programa Infantil</p>
-                <h2 class="section-title" data-split="word" data-anim="bounce">Zona Niños &amp; Familia</h2>
+                <p class="section-label" data-split="word" data-anim="fade-up">06 — Programa Infantil</p>
+                <h2 class="section-title" data-split="char" data-anim="distort">Zona Niños &amp; Familia</h2>
                 <p class="kids-desc fade-in" data-delay="2">
                     El área niños está diseñada para que los niños entrenen con seguridad y confianza
                     mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad
@@ -2548,7 +2784,9 @@
             <p class="ft-ref" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;">
                 <span style="color:rgba(243,243,243,0.45);">🕐 Lun-Vie 5AM–9PM &nbsp;|&nbsp; Sáb-Dom 7AM–6PM</span>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
-                <a href="privacy.html" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Política de Privacidad</a>
+                <a href="privacy.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Política de Privacidad</a>
+                <span style="color:rgba(243,243,243,0.25);">·</span>
+                <a href="faq.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Preguntas Frecuentes</a>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
                 <span>🥊 ACC-2026-7849X</span>
             </p>
@@ -2658,23 +2896,49 @@
         });
     }, 80);
 
-    /* ── Spaces filter tabs ─────────────────────────────────── */
+    /* ── Spaces filter tabs — animación fluida ─────────────── */
+    let tabAnimating = false;
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+            if (tabAnimating) return;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const filter = btn.dataset.tab;
-            document.querySelectorAll('.space-card').forEach(card => {
-                const show = filter === 'all' || card.dataset.cat === filter;
-                card.style.display = show ? '' : 'none';
-                if (show) {
-                    card.style.opacity = '0'; card.style.transform = 'translateY(18px)';
-                    requestAnimationFrame(() => {
-                        card.style.transition = 'opacity .35s ease, transform .35s ease';
-                        card.style.opacity = '1'; card.style.transform = '';
-                    });
+            const cards  = [...document.querySelectorAll('.space-card')];
+
+            /* 1 — fade-out all visible cards */
+            tabAnimating = true;
+            cards.forEach(c => {
+                if (c.style.display !== 'none') {
+                    c.style.transition = 'opacity .18s ease, transform .18s ease';
+                    c.style.opacity    = '0';
+                    c.style.transform  = 'translateY(10px) scale(.97)';
                 }
             });
+
+            /* 2 — after fade-out, re-layout and stagger fade-in */
+            setTimeout(() => {
+                let idx = 0;
+                cards.forEach(c => {
+                    const show = filter === 'all' || c.dataset.cat === filter;
+                    if (show) {
+                        c.style.display   = '';
+                        c.style.opacity   = '0';
+                        c.style.transform = 'translateY(22px) scale(.96)';
+                        const delay = idx * 55;
+                        setTimeout(() => {
+                            c.style.transition = `opacity .42s ease ${delay}ms, transform .42s cubic-bezier(.2,.8,.2,1) ${delay}ms`;
+                            c.style.opacity    = '1';
+                            c.style.transform  = '';
+                        }, 20);
+                        idx++;
+                    } else {
+                        c.style.display = 'none';
+                    }
+                });
+                /* unlock after all cards are in */
+                setTimeout(() => { tabAnimating = false; }, 220 + idx * 55);
+            }, 200);
         });
     });
 
@@ -3026,5 +3290,329 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(ov => closeModal(ov.id));
 });
 </script>
+
+<!-- ================================================================
+     CHATBOT JS  ·  ACME Fight & Fitness  ·  Powered by Claude
+================================================================ -->
+<script>
+(function () {
+'use strict';
+
+/* ── Knowledge Base ──────────────────────────────────────────── */
+var KB = [
+  {
+    keys:['hola','hi','hey','buenos días','buenos dias','buenas tardes','buenas noches','saludos','como estas','qué tal','que tal','buen dia','buenas'],
+    res:'¡Hola! 👊 Soy el asistente virtual de <strong>ACME Fight &amp; Fitness</strong>.<br><br>Puedes preguntarme sobre planes, horarios, clases, instalaciones, inscripción y mucho más. ¿En qué puedo ayudarte?',
+    actions:[]
+  },
+  {
+    keys:['plan','planes','precio','precios','cuánto cuesta','cuanto cuesta','cuanto es','membresía','membresia','mensual','anual','suscripción','suscripcion','básico','basico','élite','elite','costo'],
+    res:'💪 <strong>Nuestros Planes:</strong><br><br>🥊 <strong>Clase Única</strong> — <strong>$299</strong> / sesión<br><small>60 min · sin compromiso · máx. 10 atletas</small><br><br>🏅 <strong>Plan Básico</strong> — <strong>$1,299</strong> / mes<br><small>Acceso ilimitado · entrenador certificado</small><br><br>⭐ <strong>Plan Élite</strong> — <strong>$12,999</strong> / año<br><small>3 meses GRATIS · masajes · nutrición · plan personalizado</small>',
+    actions:[{label:'Ver planes completos',scroll:'#planes'},{label:'Inscribirme ahora',modal:'modal-membresia'}]
+  },
+  {
+    keys:['horario','horarios','cuando abren','cuándo abren','cuando cierran','qué días','que dias','hora de apertura','abierto','lunes','viernes','sábado','sabado','domingo','semana'],
+    res:'🕐 <strong>Horarios de Apertura:</strong><br><br>📅 <strong>Lunes a Viernes:</strong> 5:00 AM – 9:00 PM<br>📅 <strong>Sábado y Domingo:</strong> 7:00 AM – 6:00 PM<br><br>📌 Días festivos: disponibilidad por consulta en <strong>soporte@acmecombat.mx</strong>',
+    actions:[]
+  },
+  {
+    keys:['clase única','clase unica','prueba','primera clase','primera vez','probar','trial','una clase','1 clase','clase de prueba'],
+    res:'🎯 <strong>Clase Única — $299 / sesión</strong><br><br>60 minutos de intensidad controlada:<br>• Calentamiento funcional (15 min)<br>• Técnica de golpeo y grappling básico<br>• Sparring supervisado<br>• Recuperación activa<br>• Análisis post-clase<br><br>Máximo <strong>10 atletas</strong>. ¡Sin experiencia previa necesaria!',
+    actions:[{label:'Reservar clase única',modal:'modal-clase'}]
+  },
+  {
+    keys:['niños','kids','infantil','hijo','hija','pequeños','familia','niño','niña','programa infantil'],
+    res:'👦 <strong>Zona Niños &amp; Familia</strong><br><br>Área 100% dedicada al entrenamiento infantil:<br>• Grupos de máx. <strong>10 niños</strong><br>• Entrenador certificado<br>• Mini octágono Ø 5 m<br>• Tatami acolchado extra<br>• Equipo de protección completo<br>• Vista directa para padres<br>• Zona de descanso para padres<br>• Ambiente 100% seguro',
+    actions:[{label:'Ver programa infantil',scroll:'#kids'}]
+  },
+  {
+    keys:['fisioterapia','recuperación','recuperacion','masaje','masajes','sauna','crioterapia','camilla','terapia','dolor muscular','lesión','lesion'],
+    res:'💆 <strong>Área de Fisioterapia &amp; Recuperación</strong><br><br>• ❄️ <strong>Crioterapia</strong> — reduce inflamación muscular<br>• 🌡️ <strong>Sauna Seco</strong> — relajación profunda<br>• 🛏️ <strong>Camillas de Masaje</strong> — recuperación activa<br><br>Masajes deportivos incluidos en el <strong>Plan Élite</strong> (2x/mes).',
+    actions:[{label:'Ver área de recuperación',scroll:'#recuperacion'}]
+  },
+  {
+    keys:['espacios','áreas','areas','instalaciones','octágono','octagono','box','grappling','sparring','tatami','ring','pesas','cardio','instalación','instalacion','equipos','equipo'],
+    res:'🏟️ <strong>Nuestras Áreas Especializadas:</strong><br><br><strong>Planta Baja:</strong><br>• Octágono Profesional Ø 8 m<br>• Área de Box<br>• Área de Grappling<br>• Área de Sparring<br>• Box Thai<br><br><strong>Planta Alta:</strong><br>• Zona de Pesas<br>• Área Cardio<br>• Zona Niños &amp; Familia<br>• Fisioterapia &amp; Recuperación',
+    actions:[{label:'Explorar espacios',scroll:'#espacios'}]
+  },
+  {
+    keys:['clases','disciplinas','mma','artes marciales','muay thai','jiu jitsu','jiu-jitsu','kickboxing','modelo de clases','sesión','sesion','entrenamiento'],
+    res:'🥋 <strong>Modelo de Clases ACME:</strong><br><br>• <strong>Fase 1</strong> — Calentamiento funcional (15 min)<br>• <strong>Fase 2</strong> — Técnica especializada (25 min)<br>• <strong>Fase 3</strong> — Sparring supervisado (15 min)<br>• <strong>Fase 4</strong> — Recuperación activa (5 min)<br><br>Total: <strong>60 minutos</strong>. Grupos de máx. <strong>10 atletas</strong>.',
+    actions:[{label:'Ver modelo de clases',scroll:'#clases'}]
+  },
+  {
+    keys:['inscribir','inscribirme','cómo me inscribo','como me inscribo','registrar','registro','formulario','apuntar','unirme','joinme'],
+    res:'📝 <strong>¿Cómo inscribirte?</strong><br><br>1. Elige tu plan (Básico o Élite)<br>2. Haz clic en <strong>"Inscribirme Ahora"</strong><br>3. Completa el formulario con tus datos<br>4. Un asesor te contactará en <strong>menos de 24 horas</strong><br><br>También puedes escribir a <strong>soporte@acmecombat.mx</strong>',
+    actions:[{label:'Ir a planes',scroll:'#planes'},{label:'Formulario de inscripción',modal:'modal-membresia'}]
+  },
+  {
+    keys:['contacto','email','correo','teléfono','telefono','whatsapp','instagram','facebook','redes','ubicación','ubicacion','dirección','direccion','donde están','donde estan','donde queda'],
+    res:'📬 <strong>Contáctanos:</strong><br><br>📧 <strong>soporte@acmecombat.mx</strong><br>💬 WhatsApp — botón en la web<br>📸 Instagram / Facebook<br>📍 México · 2026<br><br>Atención 24/7 por correo electrónico.',
+    actions:[{label:'WhatsApp',href:'https://wa.me/521XXXXXXXXXX'},{label:'Instagram',href:'https://instagram.com/'}]
+  },
+  {
+    keys:['grupos','cuántos','cuantos','alumnos','atletas','tamaño','personal','ratio','atención personalizada','atencion personalizada','capacidad','aforo'],
+    res:'👥 <strong>Grupos Reducidos — Máximo 10 Atletas</strong><br><br>Esta es nuestra filosofía: grupos pequeños que garantizan:<br>• Atención <strong>personalizada</strong> del entrenador<br>• Corrección técnica individual<br>• Progreso más rápido y seguro<br>• Ambiente familiar y motivador',
+    actions:[]
+  },
+  {
+    keys:['experiencia','principiante','nunca he','sin experiencia','nuevo','nueva','empezar desde cero','nivel','soy principiante','no sé','no se','nunca entrené','nunca entrenado'],
+    res:'✅ <strong>¡Todos son bienvenidos!</strong><br><br>No necesitas ninguna experiencia previa. Nuestros entrenadores certificados adaptan el entrenamiento a tu nivel actual.<br><br>El programa está diseñado para llevarte <strong>desde cero hasta nivel competitivo</strong> si así lo deseas.',
+    actions:[{label:'Reservar clase de prueba',modal:'modal-clase'}]
+  },
+  {
+    keys:['cancelar','cancelación','cancelacion','baja','darme de baja','reembolso','devolucion','devolución'],
+    res:'📋 <strong>Política de Cancelación:</strong><br><br>Para cancelar o consultar sobre devoluciones, escribe a:<br><strong>soporte@acmecombat.mx</strong><br><br>Indica tu nombre completo y número de referencia <strong>ACC-2026-7849X</strong>. Un asesor te orientará en 24 horas.',
+    actions:[{label:'Enviar correo',href:'mailto:soporte@acmecombat.mx'}]
+  },
+  {
+    keys:['gracias','thank','thanks','perfecto','excelente','genial','buenísimo','buenisimo','chévere','chevere','de maravilla','muy bien'],
+    res:'¡De nada! 🥊 Siempre estoy aquí para ayudarte.<br><br>Si tienes alguna otra pregunta sobre el gimnasio, con gusto la respondo. ¡Mucho éxito en tu entrenamiento! 💪',
+    actions:[]
+  },
+  {
+    keys:['privacidad','política de privacidad','politica de privacidad','datos personales','protección de datos','proteccion de datos'],
+    res:'🔒 <strong>Política de Privacidad:</strong><br><br>ACME Fight &amp; Fitness protege tus datos personales conforme a la <strong>LFPDPPP</strong> (Ley Federal de Protección de Datos Personales). Puedes consultar la política completa en el enlace de abajo.',
+    actions:[{label:'Ver Política de Privacidad',href:'privacy.html'}]
+  },
+  {
+    keys:['faq','preguntas frecuentes','preguntas comunes','dudas frecuentes','dudas comunes'],
+    res:'❓ <strong>Preguntas Frecuentes:</strong><br><br>Tenemos una página completa con más de 12 respuestas a las dudas más comunes sobre el gimnasio.',
+    actions:[{label:'Ir a Preguntas Frecuentes',href:'faq.html'}]
+  },
+  {
+    keys:['élite vs básico','elite vs basico','diferencia','comparar planes','qué incluye élite','que incluye elite','plan recomendado'],
+    res:'⭐ <strong>Élite vs. Básico:</strong><br><br><strong>Plan Básico ($1,299/mes):</strong><br>• Acceso ilimitado a todas las áreas<br>• Entrenador certificado<br>• Grupos de máx. 10 atletas<br><br><strong>Plan Élite ($12,999/año):</strong><br>Todo lo anterior más:<br>• 3 meses GRATIS<br>• 2 masajes deportivos/mes<br>• Asesoría nutricional<br>• Plan de entrenamiento personalizado<br>• Seminarios privados<br>• Prioridad en octágono<br>• Descuento en eventos',
+    actions:[{label:'Ver planes',scroll:'#planes'}]
+  },
+  {
+    keys:['estacionamiento','parking','carro','auto','como llegar','cómo llegar','transporte','dirección','direccion'],
+    res:'📍 <strong>Ubicación y Acceso:</strong><br><br>Nos encontramos en <strong>México · 2026</strong>.<br><br>Para información específica sobre cómo llegar, escríbenos a <strong>soporte@acmecombat.mx</strong> o por WhatsApp y te enviamos la dirección exacta y opciones de estacionamiento.',
+    actions:[{label:'Contactar por WhatsApp',href:'https://wa.me/521XXXXXXXXXX'}]
+  }
+];
+
+/* ── FAQ Chips ───────────────────────────────────────────────── */
+var FAQ_CHIPS = [
+  {label:'💰 Planes y precios',   q:'planes y precios'},
+  {label:'🕐 Horarios',           q:'horarios'},
+  {label:'🎯 Clase de prueba',    q:'clase única'},
+  {label:'👦 Niños',             q:'niños'},
+  {label:'💆 Fisioterapia',       q:'fisioterapia'},
+  {label:'📝 Cómo inscribirme',   q:'cómo me inscribo'},
+  {label:'📍 Contacto',           q:'contacto'},
+  {label:'❓ Más preguntas',      q:'preguntas frecuentes'}
+];
+
+/* ── DOM references ─────────────────────────────────────────── */
+var trigger  = document.getElementById('chatbotTrigger');
+var panel    = document.getElementById('chatbotPanel');
+var closeBtn = document.getElementById('chatbotClose');
+var msgArea  = document.getElementById('cbMessages');
+var chipsEl  = document.getElementById('cbChips');
+var inputEl  = document.getElementById('cbInput');
+var sendBtn  = document.getElementById('cbSend');
+var notifEl  = document.getElementById('chatbotNotif');
+if (!trigger || !panel) return;
+
+/* ── Init chips ─────────────────────────────────────────────── */
+FAQ_CHIPS.forEach(function(c) {
+  var btn = document.createElement('button');
+  btn.className = 'cb-chip-btn';
+  btn.textContent = c.label;
+  btn.addEventListener('click', function() { sendMessage(c.q); });
+  chipsEl.appendChild(btn);
+});
+
+/* ── Open / Close ───────────────────────────────────────────── */
+var isOpen = false;
+var hasOpened = false;
+function openChat() {
+  isOpen = true;
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden','false');
+  if (notifEl) notifEl.style.display = 'none';
+  if (!hasOpened) { hasOpened = true; showWelcome(); }
+  setTimeout(function(){ inputEl.focus(); }, 350);
+}
+function closeChat() {
+  isOpen = false;
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden','true');
+}
+trigger.addEventListener('click', function(){ isOpen ? closeChat() : openChat(); });
+trigger.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); isOpen ? closeChat() : openChat(); } });
+closeBtn.addEventListener('click', closeChat);
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && isOpen) closeChat();
+});
+
+/* ── Render helpers ─────────────────────────────────────────── */
+function addBotMsg(html, actions) {
+  var wrap = document.createElement('div');
+  wrap.className = 'cb-msg bot';
+  var av = document.createElement('div');
+  av.className = 'cb-msg-av';
+  av.innerHTML = '<img src="logo.png" alt="bot" loading="lazy">';
+  var inner = document.createElement('div');
+  inner.className = 'cb-msg-inner';
+  var bubble = document.createElement('div');
+  bubble.className = 'cb-bubble';
+  bubble.innerHTML = html;
+  inner.appendChild(bubble);
+  if (actions && actions.length) {
+    var actDiv = document.createElement('div');
+    actDiv.className = 'cb-actions';
+    actions.forEach(function(a) {
+      var btn = document.createElement('button');
+      btn.className = 'cb-act-btn';
+      btn.textContent = a.label;
+      if (a.scroll) {
+        btn.addEventListener('click', function(){
+          closeChat();
+          var el = document.querySelector(a.scroll);
+          if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      } else if (a.modal) {
+        btn.addEventListener('click', function(){
+          closeChat();
+          if (typeof openModal === 'function') openModal(a.modal);
+        });
+      } else if (a.href) {
+        btn.addEventListener('click', function(){ window.open(a.href,'_blank'); });
+      }
+      actDiv.appendChild(btn);
+    });
+    inner.appendChild(actDiv);
+  }
+  wrap.appendChild(av);
+  wrap.appendChild(inner);
+  msgArea.appendChild(wrap);
+  msgArea.scrollTop = msgArea.scrollHeight;
+}
+
+function addUserMsg(text) {
+  var wrap = document.createElement('div');
+  wrap.className = 'cb-msg user';
+  var bubble = document.createElement('div');
+  bubble.className = 'cb-bubble';
+  bubble.textContent = text;
+  wrap.appendChild(bubble);
+  msgArea.appendChild(wrap);
+  msgArea.scrollTop = msgArea.scrollHeight;
+}
+
+function addTyping() {
+  var wrap = document.createElement('div');
+  wrap.className = 'cb-msg bot';
+  wrap.id = 'cbTyping';
+  var av = document.createElement('div');
+  av.className = 'cb-msg-av';
+  av.innerHTML = '<img src="logo.png" alt="bot" loading="lazy">';
+  var bubble = document.createElement('div');
+  bubble.className = 'cb-bubble';
+  var dots = document.createElement('div');
+  dots.className = 'cb-typing-dots';
+  dots.innerHTML = '<span></span><span></span><span></span>';
+  bubble.appendChild(dots);
+  wrap.appendChild(av);
+  wrap.appendChild(bubble);
+  msgArea.appendChild(wrap);
+  msgArea.scrollTop = msgArea.scrollHeight;
+  return wrap;
+}
+
+/* ── Response engine ─────────────────────────────────────────── */
+function findMatch(query) {
+  var q = query.toLowerCase();
+  for (var i = 0; i < KB.length; i++) {
+    var entry = KB[i];
+    for (var j = 0; j < entry.keys.length; j++) {
+      if (q.indexOf(entry.keys[j]) !== -1) return entry;
+    }
+  }
+  return null;
+}
+
+function sendMessage(text) {
+  text = (text || '').trim();
+  if (!text) return;
+  addUserMsg(text);
+  inputEl.value = '';
+  var typing = addTyping();
+  var delay = 700 + Math.floor(Math.random() * 500);
+  setTimeout(function() {
+    typing.remove();
+    var match = findMatch(text);
+    if (match) {
+      addBotMsg(match.res, match.actions);
+    } else {
+      addBotMsg(
+        'No encontré información específica sobre eso. 🤔<br><br>¿Puedo ayudarte con alguno de estos temas?<br>• Planes y precios<br>• Horarios de apertura<br>• Cómo inscribirme<br>• Espacios e instalaciones<br>• Clases para niños',
+        [{label:'Ver FAQ completo',href:'faq.html'},{label:'Contactar',href:'mailto:soporte@acmecombat.mx'}]
+      );
+    }
+  }, delay);
+}
+
+function showWelcome() {
+  addBotMsg(
+    '¡Hola! 👊 Soy el asistente virtual de <strong>ACME Fight &amp; Fitness</strong>.<br><br>Estoy aquí para resolver todas tus dudas sobre el gimnasio. ¿En qué puedo ayudarte hoy? 💪',
+    []
+  );
+}
+
+inputEl.addEventListener('keydown', function(e){ if(e.key==='Enter') sendMessage(inputEl.value); });
+sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
+
+})();
+</script>
+
+<!-- ================================================================
+     CHATBOT WIDGET  ·  ACME Fight & Fitness  ·  Powered by Claude
+================================================================ -->
+<div class="chatbot-trigger" id="chatbotTrigger" role="button" tabindex="0" aria-label="Abrir asistente virtual">
+    <img src="logo.png" alt="ACME AI" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;display:block;">
+    <div class="chatbot-notif" id="chatbotNotif" aria-hidden="true">1</div>
+</div>
+
+<div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-label="Asistente ACME Fight &amp; Fitness" aria-hidden="true">
+    <!-- Header -->
+    <div class="cb-header">
+        <div class="cb-header-logo">
+            <img src="logo.png" alt="ACME" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;">
+        </div>
+        <div class="cb-header-info">
+            <p class="cb-name">ACME Fight &amp; Fitness</p>
+            <p class="cb-status">
+                <span class="cb-dot"></span>
+                <span>Asistente · En línea</span>
+                <span class="cb-powered-txt">
+                    &nbsp;·&nbsp; Powered by
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle;">
+                        <path d="M13.83 2.57L20.71 21.43H17.34L15.69 16.86H8.31L6.66 21.43H3.29L10.17 2.57H13.83ZM12 6.83L9.34 14.26H14.66L12 6.83Z"/>
+                    </svg>
+                    Claude
+                </span>
+            </p>
+        </div>
+        <button class="cb-close-btn" id="chatbotClose" aria-label="Cerrar chat">&#215;</button>
+    </div>
+    <!-- Messages -->
+    <div class="cb-messages" id="cbMessages" aria-live="polite"></div>
+    <!-- FAQ Chips -->
+    <div class="cb-chips" id="cbChips"></div>
+    <!-- Input -->
+    <div class="cb-input-row">
+        <input type="text" id="cbInput" placeholder="Escribe tu pregunta..." autocomplete="off" aria-label="Mensaje al asistente">
+        <button id="cbSend" aria-label="Enviar mensaje">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+    </div>
+</div>
+
 </body>
 </html>
