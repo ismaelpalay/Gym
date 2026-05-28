@@ -1426,7 +1426,7 @@
             position: fixed;
             right: 18px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-60%);
             z-index: 900;
             display: flex;
             flex-direction: column;
@@ -1748,10 +1748,12 @@
         /* ══════════════════════════════════════════════════════════
            CHATBOT  ·  ACME Fight & Fitness  ·  Powered by Claude
         ══════════════════════════════════════════════════════════ */
+        /* ── Trigger (debajo de redes sociales, lado derecho) ── */
         .chatbot-trigger {
             position: fixed;
-            bottom: 30px; left: 26px;
-            width: 58px; height: 58px;
+            right: 18px;
+            bottom: 30px;
+            width: 54px; height: 54px;
             border-radius: 50%;
             border: 2.5px solid var(--red);
             cursor: pointer;
@@ -1765,39 +1767,69 @@
             object-fit: cover; object-position: 50% 38%;
             border-radius: 50%; display: block;
         }
-        /* Red pulse only on hover */
+        /* Pulso rojo SOLO al pasar el cursor */
         .chatbot-trigger:hover {
-            transform: scale(1.08);
+            transform: scale(1.10);
             animation: cbTrigPulse 1.1s ease-in-out infinite;
         }
         @keyframes cbTrigPulse {
             0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 0   rgba(229,0,26,.7); }
             50%      { box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 0 0 14px rgba(229,0,26,0); }
         }
-        .chatbot-notif {
-            position: absolute; top: -4px; right: -4px;
-            width: 20px; height: 20px;
-            background: var(--red); border-radius: 50%;
-            font-size: 10px; font-weight: 700; color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-b);
-            box-shadow: 0 2px 8px rgba(229,0,26,.6);
-            animation: notifBounce 2s ease-in-out infinite;
+        /* Banner cómic "¿EN QUÉ PODEMOS AYUDARTE?" */
+        .chatbot-comic {
+            position: absolute;
+            bottom: 64px; right: 0;
+            background: #fff;
+            color: #111;
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            padding: 7px 13px;
+            border-radius: 12px 12px 4px 12px;
+            border: 2px solid var(--red);
+            box-shadow: 3px 3px 0 var(--red);
+            pointer-events: none;
+            animation: comicBob 3s ease-in-out infinite;
         }
-        @keyframes notifBounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+        .chatbot-comic::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; right: 14px;
+            width: 0; height: 0;
+            border-left: 8px solid transparent;
+            border-right: 0px solid transparent;
+            border-top: 10px solid var(--red);
+        }
+        .chatbot-comic::before {
+            content: '';
+            position: absolute;
+            bottom: -7px; right: 15px;
+            width: 0; height: 0;
+            border-left: 7px solid transparent;
+            border-right: 0px solid transparent;
+            border-top: 9px solid #fff;
+            z-index: 1;
+        }
+        @keyframes comicBob {
+            0%,100% { transform: translateY(0);   }
+            50%      { transform: translateY(-5px); }
+        }
 
-        /* ── Chat panel ─────────────────────────────────── */
+        /* ── Chat panel (derecha, encima del trigger) ─────── */
         .chatbot-panel {
             position: fixed;
-            bottom: 102px; left: 26px;
-            width: 370px; max-width: calc(100vw - 36px);
+            bottom: 102px; right: 18px;
+            width: 360px; max-width: calc(100vw - 28px);
             height: 560px; max-height: calc(100vh - 130px);
-            background: #0d0d0d;
-            border: 1px solid rgba(201,168,76,0.22);
+            background: #000;
+            border: 1px solid rgba(229,0,26,0.35);
             border-radius: 20px;
             z-index: 891;
             display: flex; flex-direction: column;
-            box-shadow: 0 28px 70px rgba(0,0,0,0.85);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.90);
             opacity: 0; pointer-events: none;
             transform: translateY(22px) scale(0.95);
             transition: opacity .32s ease, transform .32s cubic-bezier(.2,.8,.2,1);
@@ -1809,10 +1841,10 @@
         .cb-header {
             display: flex; align-items: center; gap: 11px;
             padding: 14px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(229,0,26,0.20);
             flex-shrink: 0;
             border-radius: 20px 20px 0 0;
-            background: rgba(255,255,255,0.02);
+            background: rgba(229,0,26,0.08);
         }
         .cb-header-logo {
             width: 42px; height: 42px; border-radius: 50%;
@@ -1851,17 +1883,18 @@
             flex-shrink: 0;
         }
         .cb-close-btn:hover { color: var(--white); }
-        /* Messages */
+        /* Messages — fondo negro */
         .cb-messages {
             flex: 1; overflow-y: auto;
             padding: 14px 14px 8px;
             display: flex; flex-direction: column; gap: 10px;
+            background: #000;
             scrollbar-width: thin;
-            scrollbar-color: rgba(201,168,76,.2) transparent;
+            scrollbar-color: rgba(229,0,26,.25) transparent;
         }
         .cb-messages::-webkit-scrollbar { width: 4px; }
         .cb-messages::-webkit-scrollbar-thumb {
-            background: rgba(201,168,76,.2); border-radius: 2px;
+            background: rgba(229,0,26,.25); border-radius: 2px;
         }
         .cb-msg { display: flex; gap: 8px; max-width: 94%; animation: cbMsgIn .3s ease; }
         @keyframes cbMsgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
@@ -1877,47 +1910,49 @@
             object-fit: cover; object-position: 50% 38%;
         }
         .cb-msg-inner { display: flex; flex-direction: column; gap: 6px; }
+        /* Burbuja BOT — roja */
         .cb-bubble {
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.08);
+            background: var(--red);
+            border: none;
             border-radius: 4px 16px 16px 16px;
             padding: 10px 14px;
             font-size: 13px; line-height: 1.6;
-            color: rgba(243,243,243,.88);
+            color: #fff;
         }
+        /* Burbuja USUARIO — blanca */
         .cb-msg.user .cb-bubble {
-            background: rgba(201,168,76,.11);
-            border-color: rgba(201,168,76,.22);
+            background: #fff;
             border-radius: 16px 4px 16px 16px;
-            color: var(--white);
+            color: #111;
         }
-        .cb-bubble strong { color: var(--gold-l); }
-        .cb-bubble small  { color: rgba(243,243,243,.45); font-size: 11px; }
+        .cb-bubble strong { color: #ffe0e0; }
+        .cb-msg.user .cb-bubble strong { color: #111; }
+        .cb-bubble small  { color: rgba(255,255,255,.65); font-size: 11px; }
         /* Action buttons */
         .cb-actions { display: flex; flex-wrap: wrap; gap: 6px; }
         .cb-act-btn {
-            background: transparent;
-            border: 1px solid rgba(201,168,76,.38);
-            color: var(--gold);
+            background: rgba(229,0,26,.15);
+            border: 1px solid rgba(229,0,26,.55);
+            color: #fff;
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 11px; letter-spacing: 1px;
             font-family: var(--font-h); text-transform: uppercase;
             cursor: pointer;
-            transition: background .2s, border-color .2s, color .2s;
+            transition: background .2s, border-color .2s;
         }
         .cb-act-btn:hover {
-            background: rgba(201,168,76,.12);
-            border-color: var(--gold); color: var(--gold-l);
+            background: var(--red);
+            border-color: var(--red);
         }
-        /* Typing dots */
+        /* Typing dots — blancos sobre negro */
         .cb-typing-dots {
             display: flex; gap: 5px; align-items: center;
             padding: 8px 6px;
         }
         .cb-typing-dots span {
             width: 7px; height: 7px;
-            background: var(--gold); border-radius: 50%;
+            background: #fff; border-radius: 50%;
             animation: cbDot 1.2s ease-in-out infinite;
         }
         .cb-typing-dots span:nth-child(2) { animation-delay: .22s; }
@@ -1929,56 +1964,59 @@
         /* FAQ chips */
         .cb-chips {
             padding: 6px 12px 8px;
-            border-top: 1px solid rgba(255,255,255,.05);
+            border-top: 1px solid rgba(229,0,26,.18);
+            background: #000;
             display: flex; flex-wrap: wrap; gap: 5px;
             flex-shrink: 0;
         }
         .cb-chip-btn {
-            background: rgba(255,255,255,.04);
-            border: 1px solid rgba(255,255,255,.09);
-            color: rgba(243,243,243,.58);
+            background: rgba(229,0,26,.08);
+            border: 1px solid rgba(229,0,26,.30);
+            color: rgba(243,243,243,.75);
             padding: 4px 10px; border-radius: 14px;
             font-size: 11px; cursor: pointer;
             transition: border-color .2s, color .2s, background .2s;
             white-space: nowrap; font-family: var(--font-b);
         }
         .cb-chip-btn:hover {
-            border-color: rgba(201,168,76,.38);
-            color: var(--gold); background: rgba(201,168,76,.06);
+            border-color: var(--red);
+            color: #fff; background: rgba(229,0,26,.20);
         }
         /* Input row */
         .cb-input-row {
             display: flex; gap: 8px; align-items: center;
             padding: 10px 12px 12px;
-            border-top: 1px solid rgba(255,255,255,.05);
+            border-top: 1px solid rgba(229,0,26,.18);
+            background: #000;
             flex-shrink: 0;
             border-radius: 0 0 20px 20px;
         }
         #cbInput {
             flex: 1;
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.10);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(229,0,26,.30);
             border-radius: 24px;
             color: var(--white); font-size: 13px;
             padding: 9px 16px; outline: none;
             font-family: var(--font-b);
             transition: border-color .2s;
         }
-        #cbInput:focus { border-color: rgba(201,168,76,.38); }
+        #cbInput:focus { border-color: var(--red); }
         #cbInput::placeholder { color: rgba(243,243,243,.28); }
         #cbSend {
             width: 38px; height: 38px;
-            background: var(--gold); border: none;
-            border-radius: 50%; color: #000;
+            background: var(--red); border: none;
+            border-radius: 50%; color: #fff;
             cursor: pointer; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
             transition: background .2s, transform .2s;
         }
-        #cbSend:hover { background: var(--gold-l); transform: scale(1.06); }
+        #cbSend:hover { background: #ff1a2e; transform: scale(1.06); }
         #cbSend svg { pointer-events: none; }
         @media (max-width: 420px) {
             .chatbot-panel { left: 8px; right: 8px; width: auto; bottom: 94px; }
-            .chatbot-trigger { bottom: 20px; left: 14px; width: 50px; height: 50px; }
+            .chatbot-trigger { bottom: 20px; right: 12px; width: 48px; height: 48px; }
+            .chatbot-comic { font-size: 10px; }
         }
     </style>
 </head>
@@ -3412,7 +3450,7 @@ var msgArea  = document.getElementById('cbMessages');
 var chipsEl  = document.getElementById('cbChips');
 var inputEl  = document.getElementById('cbInput');
 var sendBtn  = document.getElementById('cbSend');
-var notifEl  = document.getElementById('chatbotNotif');
+var comicEl  = trigger ? trigger.querySelector('.chatbot-comic') : null;
 if (!trigger || !panel) return;
 
 /* ── Init chips ─────────────────────────────────────────────── */
@@ -3431,7 +3469,7 @@ function openChat() {
   isOpen = true;
   panel.classList.add('open');
   panel.setAttribute('aria-hidden','false');
-  if (notifEl) notifEl.style.display = 'none';
+  if (comicEl) comicEl.style.display = 'none';
   if (!hasOpened) { hasOpened = true; showWelcome(); }
   setTimeout(function(){ inputEl.focus(); }, 350);
 }
@@ -3439,6 +3477,7 @@ function closeChat() {
   isOpen = false;
   panel.classList.remove('open');
   panel.setAttribute('aria-hidden','true');
+  if (comicEl) comicEl.style.display = '';
 }
 trigger.addEventListener('click', function(){ isOpen ? closeChat() : openChat(); });
 trigger.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); isOpen ? closeChat() : openChat(); } });
@@ -3557,7 +3596,7 @@ function sendMessage(text) {
 
 function showWelcome() {
   addBotMsg(
-    '¡Hola! 👊 Soy el asistente virtual de <strong>ACME Fight &amp; Fitness</strong>.<br><br>Estoy aquí para resolver todas tus dudas sobre el gimnasio. ¿En qué puedo ayudarte hoy? 💪',
+    '¡BIENVENIDO/A A <strong>MARCA ACME FIGHT &amp; FITNESS</strong>! 🥊<br><br>¿En qué podemos ayudarlo el día de hoy?<br><br>Puedes preguntarme sobre planes, horarios, inscripción, instalaciones, clases para niños y mucho más.',
     []
   );
 }
@@ -3573,7 +3612,7 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
 ================================================================ -->
 <div class="chatbot-trigger" id="chatbotTrigger" role="button" tabindex="0" aria-label="Abrir asistente virtual">
     <img src="logo.png" alt="ACME AI" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;display:block;">
-    <div class="chatbot-notif" id="chatbotNotif" aria-hidden="true">1</div>
+    <span class="chatbot-comic" aria-hidden="true">¿En qué podemos ayudarte?</span>
 </div>
 
 <div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-label="Asistente ACME Fight &amp; Fitness" aria-hidden="true">
