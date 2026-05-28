@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes · ACME Fight &amp; Fitness</title>
+    <meta name="description" content="Resolvemos todas tus dudas sobre ACME Fight & Fitness: planes, horarios, inscripción, clases, programa infantil, fisioterapia y más.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap">
+
+    <style>
+        :root {
+            --gold:    #C9A84C;
+            --gold-l:  #E0C06A;
+            --gold-dim: rgba(201,168,76,0.12);
+            --red:     #E5001A;
+            --bg:      #060606;
+            --white:   #F3F3F3;
+            --muted:   rgba(243,243,243,0.45);
+            --muted-l: #888;
+            --card:    rgba(255,255,255,0.035);
+            --border:  rgba(255,255,255,0.08);
+            --font-h:  'Oswald', Impact, sans-serif;
+            --font-b:  'Inter', system-ui, sans-serif;
+            --r:       10px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--font-b);
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #252525; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        /* ── NAV ──────────────────────────────────────────────── */
+        .faq-nav {
+            background: rgba(6,6,6,0.95);
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .faq-nav .inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .faq-nav .brand {
+            font-family: var(--font-h);
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .faq-nav .brand span { color: var(--gold); }
+        .faq-nav .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: var(--font-h);
+            transition: opacity .2s;
+        }
+        .faq-nav .back-btn:hover { opacity: 0.7; }
+
+        /* ── HERO ─────────────────────────────────────────────── */
+        .faq-hero {
+            background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+            border-bottom: 1px solid rgba(201,168,76,0.12);
+            padding: 64px 0 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 56px 56px;
+            pointer-events: none;
+        }
+        .faq-hero .tag {
+            position: relative;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+        .faq-hero h1 {
+            position: relative;
+            font-family: var(--font-h);
+            font-size: clamp(30px, 7vw, 56px);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .faq-hero h1 span { color: var(--gold); }
+        .faq-hero .meta {
+            position: relative;
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .faq-hero .hero-stats {
+            position: relative;
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 36px;
+        }
+        .faq-hero .hero-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .faq-hero .hero-stat .stat-num {
+            font-family: var(--font-h);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .faq-hero .hero-stat .stat-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .hero-stat-sep {
+            width: 1px;
+            height: 40px;
+            background: rgba(201,168,76,0.25);
+            align-self: center;
+        }
+
+        /* ── FILTER TABS ──────────────────────────────────────── */
+        .faq-filters {
+            max-width: 960px;
+            margin: 40px auto 0;
+            padding: 0 24px;
+        }
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted-l);
+            font-family: var(--font-b);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+        .filter-btn:hover {
+            border-color: rgba(201,168,76,0.4);
+            color: var(--gold);
+        }
+        .filter-btn.active {
+            background: rgba(201,168,76,0.12);
+            border-color: rgba(201,168,76,0.5);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ── CONTENT ──────────────────────────────────────────── */
+        .faq-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .faq-section-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            margin-top: 48px;
+        }
+        .faq-section-label:first-child { margin-top: 0; }
+        .faq-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+        }
+
+        /* ── FAQ CARD ─────────────────────────────────────────── */
+        .faq-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color .25s;
+        }
+        .faq-card:hover {
+            border-color: rgba(201,168,76,0.22);
+        }
+        .faq-card[open] {
+            border-color: rgba(201,168,76,0.35);
+            background: rgba(201,168,76,0.025);
+        }
+
+        .faq-card summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .faq-card summary::-webkit-details-marker { display: none; }
+        .faq-card summary::marker { display: none; }
+
+        .faq-num {
+            font-family: var(--font-h);
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(201,168,76,0.45);
+            letter-spacing: 1px;
+            flex-shrink: 0;
+            min-width: 28px;
+        }
+        .faq-card[open] .faq-num { color: var(--gold); }
+
+        .faq-question {
+            font-family: var(--font-h);
+            font-size: 17px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--white);
+            flex: 1;
+            line-height: 1.3;
+        }
+        .faq-card[open] .faq-question { color: var(--gold-l); }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,168,76,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .25s ease, background .25s, border-color .25s;
+            color: var(--gold);
+        }
+        .faq-chevron svg {
+            width: 12px;
+            height: 12px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform .25s ease;
+        }
+        .faq-card[open] .faq-chevron {
+            background: rgba(201,168,76,0.12);
+            border-color: var(--gold);
+        }
+        .faq-card[open] .faq-chevron svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-body {
+            padding: 0 24px 24px 68px;
+            font-size: 14px;
+            color: rgba(243,243,243,0.78);
+            line-height: 1.85;
+            border-top: 1px solid rgba(201,168,76,0.10);
+        }
+        .faq-body p { margin-bottom: 12px; }
+        .faq-body p:last-child { margin-bottom: 0; }
+        .faq-body ul, .faq-body ol {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        .faq-body li { margin-bottom: 6px; }
+        .faq-body strong { color: var(--white); }
+        .faq-body a { color: var(--gold); text-underline-offset: 3px; }
+        .faq-body a:hover { color: var(--gold-l); }
+        .faq-body .faq-highlight {
+            background: rgba(201,168,76,0.06);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 var(--r) var(--r) 0;
+            padding: 12px 16px;
+            margin: 14px 0;
+            font-size: 13px;
+            color: rgba(243,243,243,0.85);
+        }
+        .faq-body .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 14px 0;
+        }
+        .faq-body .price-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .faq-body .price-card .pc-name {
+            font-family: var(--font-h);
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted-l);
+            margin-bottom: 6px;
+        }
+        .faq-body .price-card .pc-price {
+            font-family: var(--font-h);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+        .faq-body .price-card .pc-price span {
+            font-size: 13px;
+            color: var(--muted-l);
+        }
+        .faq-body .price-card.featured {
+            border-color: rgba(201,168,76,0.5);
+            background: rgba(201,168,76,0.06);
+        }
+        .faq-body .price-card.featured .pc-price { color: var(--gold); }
+        .faq-body .tag-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(201,168,76,0.35);
+            color: var(--gold);
+            font-family: var(--font-h);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 6px;
+        }
+
+        /* ── CTA STRIP ─────────────────────────────────────── */
+        .faq-cta {
+            background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(6,6,6,0) 60%);
+            border: 1px solid rgba(201,168,76,0.18);
+            border-radius: 16px;
+            padding: 44px 36px;
+            text-align: center;
+            margin-top: 52px;
+        }
+        .faq-cta .cta-tag {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .faq-cta h3 {
+            font-family: var(--font-h);
+            font-size: clamp(22px, 4vw, 34px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .faq-cta h3 span { color: var(--gold); }
+        .faq-cta p {
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 480px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+        .faq-cta .cta-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: 4px;
+            font-family: var(--font-h);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            transition: background .2s, box-shadow .2s, transform .2s;
+        }
+        .btn-gold:hover {
+            background: var(--gold-l);
+            border-color: var(--gold-l);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+        }
+        .btn-outline-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: 4px;
+            font-family: var(--font-h);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid rgba(201,168,76,0.4);
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            transition: background .2s, border-color .2s, transform .2s;
+        }
+        .btn-outline-gold:hover {
+            background: rgba(201,168,76,0.08);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ── FOOTER ───────────────────────────────────────────── */
+        .faq-footer {
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(201,168,76,0.12);
+            padding: 28px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .faq-footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .faq-footer a:hover { text-decoration: underline; }
+
+        /* ── SEARCH ───────────────────────────────────────────── */
+        .faq-search-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 24px 0;
+        }
+        .faq-search {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 8px;
+            padding: 13px 18px 13px 44px;
+            color: var(--white);
+            font-family: var(--font-b);
+            font-size: 14px;
+            outline: none;
+            transition: border-color .2s;
+            box-sizing: border-box;
+        }
+        .faq-search:focus { border-color: var(--gold); }
+        .faq-search::placeholder { color: rgba(243,243,243,0.35); }
+        .faq-search-wrap { position: relative; }
+        .faq-search-wrap .search-icon {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(201,168,76,0.5);
+            pointer-events: none;
+            font-size: 16px;
+        }
+        .faq-card[data-hidden="true"] { display: none; }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 600px) {
+            .faq-hero { padding: 44px 0 32px; }
+            .faq-body { padding-left: 24px; }
+            .faq-card summary { padding: 18px 16px; gap: 12px; }
+            .faq-body { padding: 0 16px 20px 16px; }
+            .hero-stat-sep { display: none; }
+            .faq-cta { padding: 32px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="faq-nav">
+    <div class="inner">
+        <a href="index.html" class="brand">ACME <span>Fight &amp; Fitness</span></a>
+        <a href="index.html" class="back-btn">← Volver al inicio</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="faq-hero">
+    <p class="tag">Soporte &amp; Información · México 2026</p>
+    <h1>Preguntas <span>Frecuentes</span></h1>
+    <p class="meta">Resolvemos todas tus dudas sobre nuestros planes, clases, instalaciones, programa infantil, inscripción y más.</p>
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">Preguntas</span>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Planes</span>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+            <span class="stat-num">7</span>
+            <span class="stat-label">Disciplinas</span>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+            <span class="stat-num">600m²</span>
+            <span class="stat-label">Instalaciones</span>
+        </div>
+    </div>
+</header>
+
+<!-- Search -->
+<div class="faq-search-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+        type="search"
+        class="faq-search"
+        id="faqSearch"
+        placeholder="Busca una pregunta: planes, horarios, niños, cancelación..."
+        aria-label="Buscar preguntas frecuentes"
+    >
+</div>
+
+<!-- Filter tabs -->
+<div class="faq-filters">
+    <div class="filter-row" id="filterRow">
+        <button class="filter-btn active" data-cat="all">Todas</button>
+        <button class="filter-btn" data-cat="precios">💰 Precios</button>
+        <button class="filter-btn" data-cat="horarios">📅 Horarios</button>
+        <button class="filter-btn" data-cat="clases">🥊 Clases</button>
+        <button class="filter-btn" data-cat="ninos">🧒 Niños</button>
+        <button class="filter-btn" data-cat="instalaciones">🏟️ Instalaciones</button>
+        <button class="filter-btn" data-cat="salud">❤️‍🩹 Salud</button>
+        <button class="filter-btn" data-cat="admin">📋 Administrativo</button>
+    </div>
+</div>
+
+<!-- Content -->
+<main class="faq-content">
+
+    <!-- ── PLANES & PRECIOS ───────────────────────────────── -->
+    <p class="faq-section-label">💰 Planes &amp; Precios</p>
+
+    <details class="faq-card" data-cat="precios" open>
+        <summary>
+            <span class="faq-num">01</span>
+            <span class="faq-question">¿Cuáles son los planes disponibles y sus precios?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>En ACME Fight &amp; Fitness ofrecemos <strong>3 planes</strong> para adaptarnos a cada atleta, desde el que viene a probar hasta el competidor de alto rendimiento:</p>
+            <div class="price-grid">
+                <div class="price-card">
+                    <p class="pc-name">Clase Única</p>
+                    <p class="pc-price">$299<span> MXN</span></p>
+                    <span class="tag-badge">Sin compromiso</span>
+                </div>
+                <div class="price-card featured">
+                    <p class="pc-name">Básico Mensual</p>
+                    <p class="pc-price">$1,299<span>/mes</span></p>
+                    <span class="tag-badge">Más popular</span>
+                </div>
+                <div class="price-card">
+                    <p class="pc-name">Elite Anual</p>
+                    <p class="pc-price">$12,999<span>/año</span></p>
+                    <span class="tag-badge">Mejor valor</span>
+                </div>
+            </div>
+            <p>El plan <strong>Elite Anual</strong> equivale a solo <strong>$1,083 MXN/mes</strong> — un ahorro de más de $2,500 comparado con el plan mensual, con beneficios adicionales incluidos.</p>
+        </div>
+    </details>
+
+    <details class="faq-card" data-cat="precios">
+        <summary>
+            <span class="faq-num">02</span>
+            <span class="faq-question">¿Qué diferencia al Plan Elite del Plan Básico?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Ambos planes dan acceso <strong>ilimitado a todas las clases y áreas de entrenamiento</strong>, pero el Elite agrega una capa completa de alto rendimiento:</p>
+            <ul>
+                <li><strong>Plan Básico ($1,299/mes):</strong> Acceso ilimitado a clases · Sala de pesas · Vestidores · Tatami y octágono principal</li>
+                <li><strong>Plan Elite ($12,999/año):</strong> Todo lo anterior, más:
+                    <ul>
+                        <li>✅ Nutrición personalizada con seguimiento mensual</li>
+                        <li>✅ Sesiones de fisioterapia incluidas (2/mes)</li>
+                        <li>✅ Acceso prioritario a crioterapia y sauna</li>
+                        <li>✅ Análisis de rendimiento trimestral con coach</li>
+                        <li>✅ Acceso a eventos y competencias exclusivas del gym</li>
+                        <li>✅ Descuento en clases privadas (1-a-1)</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="faq-highlight">
+                El plan Elite está diseñado para atletas comprometidos que quieren <strong>resultados medibles y acompañamiento integral</strong>, no solo acceso al espacio.
+            </div>
+        </div>
+    </details>
+
+    <!-- ── HORARIOS ───────────────────────────────────────── -->
+    <p class="faq-section-label">📅 Horarios</p>
+
+    <details class="faq-card" data-cat="horarios">
+        <summary>
+            <span class="faq-num">03</span>
+            <span class="faq-question">¿Cuáles son los horarios de apertura del gimnasio?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Nuestras instalaciones están abiertas con los siguientes horarios:</p>
+            <ul>
+                <li>🗓️ <strong>Lunes a Viernes:</strong> 5:00 AM – 9:00 PM</li>
+                <li>🗓️ <strong>Sábados y Domingos:</strong> 7:00 AM – 6:00 PM</li>
+            </ul>
+            <p>Las clases se programan en <strong>bloques de 60 a 90 minutos</strong> a lo largo del día. El horario detallado de clases se publica semanalmente en recepción y en nuestras redes sociales.</p>
+            <div class="faq-highlight">
+                Apertura temprana a las <strong>5:00 AM</strong> de lunes a viernes para atletas que prefieren entrenar antes de su jornada laboral. ¡Sin excusas!
+            </div>
+        </div>
+    </details>
+
+    <!-- ── CLASES ─────────────────────────────────────────── -->
+    <p class="faq-section-label">🥊 Clases &amp; Disciplinas</p>
+
+    <details class="faq-card" data-cat="clases">
+        <summary>
+            <span class="faq-num">04</span>
+            <span class="faq-question">¿Necesito experiencia previa para inscribirme?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p><strong>¡No! Absolutamente no necesitas experiencia previa.</strong> ACME Fight &amp; Fitness está diseñado para recibir atletas de <strong>todos los niveles</strong>:</p>
+            <ul>
+                <li>🟢 <strong>Principiantes:</strong> Grupos de iniciación con fundamentos básicos, movimiento seguro y técnica desde cero</li>
+                <li>🟡 <strong>Intermedios:</strong> Grupos de técnica avanzada, sparring controlado y acondicionamiento específico</li>
+                <li>🔴 <strong>Avanzados:</strong> Preparación competitiva, alta intensidad y análisis táctico</li>
+            </ul>
+            <p>Durante tu <strong>primera clase</strong>, el entrenador evalúa tu nivel de forma natural y te orienta hacia el grupo más adecuado. No hay evaluaciones intimidantes ni requisitos físicos previos.</p>
+        </div>
+    </details>
+
+    <details class="faq-card" data-cat="clases">
+        <summary>
+            <span class="faq-num">05</span>
+            <span class="faq-question">¿Qué disciplinas se imparten en el gym?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Impartimos un <strong>espectro completo de artes marciales mixtas</strong> bajo un modelo pedagógico estructurado:</p>
+            <ul>
+                <li>🥊 <strong>Box / Boxeo:</strong> Técnica de golpeo, footwork y defensa</li>
+                <li>🦵 <strong>Kickboxing &amp; Muay Thai:</strong> Golpeo completo + clínch y rodillazos</li>
+                <li>🤼 <strong>Grappling &amp; Wrestling:</strong> Derribo, control y posición</li>
+                <li>🥋 <strong>BJJ (Jiu-Jitsu Brasileño):</strong> Sumisiones y combate en el suelo</li>
+                <li>🏆 <strong>MMA Integrado:</strong> Combinación de todas las disciplinas en contexto real</li>
+                <li>💪 <strong>Acondicionamiento físico para combate:</strong> Fuerza, potencia y resistencia específicas</li>
+            </ul>
+            <p>Las clases siguen un <strong>flujo de 4 fases</strong>: Activación (15 min) → Técnica (30 min) → Sparring/Drill (20 min) → Recuperación (10 min).</p>
+        </div>
+    </details>
+
+    <details class="faq-card" data-cat="clases">
+        <summary>
+            <span class="faq-num">06</span>
+            <span class="faq-question">¿Cuántos atletas hay por clase? ¿Es personalizada?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Nuestras clases tienen un <strong>límite máximo de 15 atletas</strong> para garantizar atención de calidad. Cada sesión la dirige un <strong>entrenador certificado</strong> apoyado por instructores auxiliares en grupos más grandes.</p>
+            <ul>
+                <li>Grupos regulares: hasta <strong>15 atletas</strong></li>
+                <li>Clases privadas (1-a-1): disponibles con costo adicional, descuento para miembros Elite</li>
+                <li>Grupos semiprivados (2–4 personas): disponibles bajo solicitud</li>
+            </ul>
+            <div class="faq-highlight">
+                El tamaño reducido garantiza que el entrenador pueda corregir tu técnica, adaptar la intensidad y conocer tu progreso real. No eres un número en ACME.
+            </div>
+        </div>
+    </details>
+
+    <!-- ── NIÑOS ──────────────────────────────────────────── -->
+    <p class="faq-section-label">🧒 Programa Infantil</p>
+
+    <details class="faq-card" data-cat="ninos">
+        <summary>
+            <span class="faq-num">07</span>
+            <span class="faq-question">¿Qué incluye el programa para niños? ¿Desde qué edad?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Nuestro programa <strong>Zona Niños &amp; Familia</strong> está diseñado para niños desde los <strong>5 hasta los 14 años</strong>, con grupos segmentados por edad y desarrollo:</p>
+            <ul>
+                <li>🧒 <strong>5–8 años:</strong> Coordinación, motricidad y juegos de combate seguros</li>
+                <li>👦 <strong>9–11 años:</strong> Técnica básica de grappling, box y autodefensa</li>
+                <li>🧑 <strong>12–14 años:</strong> MMA juvenil, competencia interna y desarrollo atlético</li>
+            </ul>
+            <p><strong>Infraestructura exclusiva para niños:</strong></p>
+            <ul>
+                <li>Octágono Kids de <strong>Ø 5 m</strong> con tatami acolchado extra</li>
+                <li>Equipo de protección completo <strong>incluido en la clase</strong></li>
+                <li>Grupos de <strong>máximo 10 niños</strong> por entrenador</li>
+                <li>Entrenador con certificación en pedagogía deportiva infantil</li>
+                <li><strong>Zona de padres</strong> con visibilidad directa hacia el área de entrenamiento</li>
+            </ul>
+            <div class="faq-highlight">
+                Los valores que enseñamos van más allá del combate: <strong>disciplina, respeto, perseverancia y autoconfianza</strong>. Un entorno familiar, seguro y divertido.
+            </div>
+        </div>
+    </details>
+
+    <!-- ── INSTALACIONES ──────────────────────────────────── -->
+    <p class="faq-section-label">🏟️ Instalaciones &amp; Estacionamiento</p>
+
+    <details class="faq-card" data-cat="instalaciones">
+        <summary>
+            <span class="faq-num">08</span>
+            <span class="faq-question">¿Cómo están distribuidas las instalaciones del gym?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>ACME Fight &amp; Fitness opera en <strong>600 m² distribuidos en 2 plantas</strong>, con 9 áreas especializadas diseñadas para el entrenamiento integral de MMA:</p>
+            <p><strong>🏢 Planta Baja (300 m²):</strong></p>
+            <ul>
+                <li>🥊 Octágono Principal Ø 9.1 m — medidas reglamentarias con superficie profesional</li>
+                <li>🤼 Zona de Tatami — 150 m² de alta densidad para grappling y wrestling</li>
+                <li>🧱 Área de Costales — 10–12 unidades de distintos pesos</li>
+                <li>🏋️ Sala de Pesas — equipamiento completo de fuerza y acondicionamiento</li>
+                <li>Recepción, vestidores y área administrativa</li>
+            </ul>
+            <p><strong>🏢 Planta Alta (300 m²):</strong></p>
+            <ul>
+                <li>🧒 Zona Niños — Octágono Kids Ø 5 m con tatami acolchado extra</li>
+                <li>👨‍👩‍👧 Zona de Padres — área de espera con visibilidad directa</li>
+                <li>❄️ Crioterapia — 3–4 tinas de inmersión a 8–12 °C</li>
+                <li>🌡️ Sauna Seco — cedro canadiense 70–95 °C, capacidad 8–10 personas</li>
+                <li>🛌 Fisioterapia — 2–3 camillas para masajes deportivos y liberación miofascial</li>
+            </ul>
+        </div>
+    </details>
+
+    <details class="faq-card" data-cat="instalaciones">
+        <summary>
+            <span class="faq-num">09</span>
+            <span class="faq-question">¿Hay estacionamiento disponible? ¿Cómo llego?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Sí, <strong>contamos con estacionamiento propio</strong> en las instalaciones con capacidad suficiente para nuestros miembros. El acceso es <strong>gratuito</strong> durante tu sesión de entrenamiento.</p>
+            <ul>
+                <li>🚗 Estacionamiento propio incluido sin costo adicional</li>
+                <li>🚌 Rutas de transporte público próximas a la ubicación</li>
+                <li>🚴 Área para resguardar bicicletas en la entrada</li>
+            </ul>
+            <p>Para obtener la dirección exacta, indicaciones de llegada y ver el mapa interactivo, visita la sección <strong>Mapa</strong> en nuestra página principal o contáctanos directamente.</p>
+            <div class="faq-highlight">
+                📍 Consulta nuestra ubicación exacta en el sitio web o escríbenos por WhatsApp y te enviamos el pin de Google Maps.
+            </div>
+        </div>
+    </details>
+
+    <!-- ── FISIOTERAPIA ────────────────────────────────────── -->
+    <p class="faq-section-label">❤️‍🩹 Fisioterapia &amp; Recuperación</p>
+
+    <details class="faq-card" data-cat="salud">
+        <summary>
+            <span class="faq-num">10</span>
+            <span class="faq-question">¿Qué servicios ofrece el área de fisioterapia?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Nuestra <strong>Área de Recuperación &amp; Fisioterapia</strong> es uno de los pilares diferenciales de ACME. Contamos con un fisioterapeuta certificado en deportes de contacto y las siguientes instalaciones:</p>
+            <ul>
+                <li>❄️ <strong>Crioterapia (baños de hielo):</strong> 3–4 tinas de inmersión a 8–12 °C. Reduce inflamación, acelera la recuperación muscular y disminuye el DOMS post-entrenamiento</li>
+                <li>🌡️ <strong>Sauna Seco:</strong> Cabina de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda, mejora la circulación y el sueño</li>
+                <li>🛌 <strong>Masajes deportivos:</strong> 2–3 camillas para masaje profundo, descontracturante y de recuperación</li>
+                <li>🔧 <strong>Liberación miofascial:</strong> Técnicas específicas para deportistas de combate con tejido intensamente trabajado</li>
+                <li>🩺 <strong>Valoración y atención de lesiones:</strong> Diagnóstico funcional y protocolo de retorno al entrenamiento</li>
+            </ul>
+            <p><strong>Acceso:</strong> Incluido (2 sesiones/mes) en el plan Elite. Disponible con costo adicional para miembros Básico o Clase Única.</p>
+        </div>
+    </details>
+
+    <!-- ── INSCRIPCIÓN ────────────────────────────────────── -->
+    <p class="faq-section-label">📋 Inscripción &amp; Administrativo</p>
+
+    <details class="faq-card" data-cat="admin">
+        <summary>
+            <span class="faq-num">11</span>
+            <span class="faq-question">¿Cómo es el proceso de inscripción?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Inscribirse en ACME Fight &amp; Fitness es un proceso <strong>sencillo y rápido</strong>. Puedes hacerlo de dos formas:</p>
+            <p><strong>En línea (desde esta página):</strong></p>
+            <ol>
+                <li>Rellena el formulario de inscripción con tus datos básicos y plan elegido</li>
+                <li>Un asesor te contacta en menos de 24 horas para confirmar y coordinar tu primera sesión</li>
+                <li>Llega al gym en tu fecha acordada — ¡todo listo para empezar!</li>
+            </ol>
+            <p><strong>Presencialmente:</strong></p>
+            <ol>
+                <li>Visítanos en cualquier horario de apertura</li>
+                <li>Te damos un tour por las instalaciones</li>
+                <li>Eliges tu plan y completamos el registro en recepción</li>
+                <li>¡Puedes tomar tu primera clase ese mismo día!</li>
+            </ol>
+            <div class="faq-highlight">
+                <strong>¿Qué necesitas traer?</strong> Solo ropa deportiva cómoda, calzado deportivo y una botella de agua. El equipo básico (guantes, vendas) puede rentarse o comprarse en recepción.
+            </div>
+        </div>
+    </details>
+
+    <details class="faq-card" data-cat="admin">
+        <summary>
+            <span class="faq-num">12</span>
+            <span class="faq-question">¿Cuál es la política de cancelación o baja del plan?</span>
+            <span class="faq-chevron">
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </summary>
+        <div class="faq-body">
+            <p>Queremos que te quedes porque los resultados hablan, no por letra chica. Nuestra política de cancelación es <strong>transparente y justa</strong>:</p>
+            <p><strong>📋 Plan Básico (mensual):</strong></p>
+            <ul>
+                <li>Cancela en cualquier momento, <strong>sin penalización ni cargos ocultos</strong></li>
+                <li>La cancelación aplica al cierre del período de facturación en curso</li>
+                <li>Aviso mínimo requerido: <strong>5 días hábiles</strong> antes de la siguiente fecha de cobro</li>
+                <li>No se realizan cargos adicionales tras la confirmación de baja</li>
+            </ul>
+            <p><strong>📋 Plan Elite (anual):</strong></p>
+            <ul>
+                <li>Cancelación con <strong>reembolso proporcional completo</strong> dentro de los primeros 30 días</li>
+                <li>Después de los 30 días: sin reembolso monetario, pero con <strong>derecho a usar el saldo de días restantes</strong></li>
+                <li>Posibilidad de <strong>congelar la membresía</strong> por causas justificadas (enfermedad, lesión) por hasta 60 días por año</li>
+            </ul>
+            <p><strong>Para cancelar:</strong> Envía un correo a <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a> o acércate a recepción con tu identificación.</p>
+        </div>
+    </details>
+
+    <!-- CTA -->
+    <div class="faq-cta">
+        <p class="cta-tag">¿Listo para dar el primer paso?</p>
+        <h3>Únete a <span>ACME Fight &amp; Fitness</span></h3>
+        <p>Tu primera clase prueba está a un clic. Sin compromisos, sin contratos forzosos. Solo ven, entrena y decide.</p>
+        <div class="cta-btns">
+            <a href="index.html#planes" class="btn-gold">💰 Ver Planes y Precios</a>
+            <a href="mailto:soporte@acmecombat.mx" class="btn-outline-gold">📧 Escribirnos</a>
+            <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener" class="btn-outline-gold">💬 WhatsApp</a>
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="faq-footer">
+    <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+    <p style="margin-top:6px;">
+        <a href="index.html">← Volver al sitio principal</a>
+        &nbsp;·&nbsp;
+        <a href="privacy.html">Política de Privacidad</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a>
+    </p>
+</footer>
+
+<script>
+(function () {
+    /* ── Filter tabs ── */
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var faqCards   = document.querySelectorAll('.faq-card');
+
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var cat = btn.getAttribute('data-cat');
+
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            faqCards.forEach(function (card) {
+                if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+                    card.removeAttribute('data-hidden');
+                } else {
+                    card.setAttribute('data-hidden', 'true');
+                }
+            });
+
+            /* Also hide section labels that have no visible cards */
+            var labels = document.querySelectorAll('.faq-section-label');
+            labels.forEach(function (label) {
+                var next = label.nextElementSibling;
+                var hasVisible = false;
+                while (next && next.classList.contains('faq-card')) {
+                    if (!next.hasAttribute('data-hidden')) { hasVisible = true; break; }
+                    next = next.nextElementSibling;
+                }
+                label.style.display = hasVisible ? '' : 'none';
+            });
+        });
+    });
+
+    /* ── Search ── */
+    var searchInput = document.getElementById('faqSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            var query = searchInput.value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+            /* Reset filter tabs */
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
+            document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
+
+            faqCards.forEach(function (card) {
+                if (!query) {
+                    card.removeAttribute('data-hidden');
+                    return;
+                }
+                var text = card.textContent.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+                if (text.indexOf(query) !== -1) {
+                    card.removeAttribute('data-hidden');
+                    card.setAttribute('open', '');
+                } else {
+                    card.setAttribute('data-hidden', 'true');
+                    card.removeAttribute('open');
+                }
+            });
+
+            /* Show / hide section labels */
+            var labels = document.querySelectorAll('.faq-section-label');
+            labels.forEach(function (label) {
+                var next = label.nextElementSibling;
+                var hasVisible = false;
+                while (next && next.classList.contains('faq-card')) {
+                    if (!next.hasAttribute('data-hidden')) { hasVisible = true; break; }
+                    next = next.nextElementSibling;
+                }
+                label.style.display = hasVisible ? '' : 'none';
+            });
+        });
+    }
+})();
+</script>
+
+</body>
+</html>
