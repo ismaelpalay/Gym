@@ -1641,13 +1641,13 @@
         }
         .phone-group .country-select {
             flex: 0 0 auto;
-            width: 130px;
+            width: 88px;
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.12);
             color: var(--white);
             border-radius: var(--r);
-            padding: 0 8px;
-            font-size: 13px;
+            padding: 0 6px;
+            font-size: 12px;
             appearance: none;
             -webkit-appearance: none;
             cursor: pointer;
@@ -2690,11 +2690,10 @@
                     <ul class="plan-features">
                         <li><span class="chk">✓</span><span data-i18n="plans.legado.f1">Padre: Plan CAMPEÓN completo</span></li>
                         <li><span class="chk">✓</span><span data-i18n="plans.legado.f2">Hijo: Plan PROSPECTO completo</span></li>
-                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f3">4 sesiones crioterapia/mes (2+2)</span></li>
-                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f4">4 sesiones fisioterapia/mes (2+2)</span></li>
-                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f5">App IA personalizada (nutrición + entrenamiento)</span></li>
-                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f6">Zona pesas, sauna y gimnasio abierto</span></li>
-                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f7">Entrenador certificado para ambos</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f3">2 sesiones crioterapia/mes padre o madre</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f4">2 sesiones fisioterapia/mes padre o madre</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f5">Zona pesas, sauna y gimnasio abierto</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f6">Entrenador certificado para ambos</span></li>
                     </ul>
                     <button onclick="openModal('modal-membresia','LEGADO ACME')" class="btn plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
                 </div>
@@ -3282,7 +3281,7 @@
         <div id="mem-form-wrap">
             <p class="modal-tag">ACME Fight &amp; Fitness · Inscripción</p>
             <h2 class="modal-title" id="mem-title">Únete al <span>Team ACME</span></h2>
-            <p class="modal-desc">Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas para confirmar tu inscripción y resolver cualquier duda.</p>
+            <p class="modal-desc">Completa el formulario y recibirás inmediatamente un <strong style="color:var(--gold)">correo de bienvenida</strong> con todos los detalles y el enlace de pago.</p>
             <form id="form-membresia" onsubmit="submitForm(event,'modal-membresia')">
                 <div class="form-grid">
                     <div class="form-row">
@@ -3369,6 +3368,19 @@
                         <option>Otro</option>
                     </select>
                 </div>
+                <!-- Campos exclusivos LEGADO ACME — se muestran sólo si ese plan está seleccionado -->
+                <div id="legado-fields" style="display:none;">
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="mem-padre">Nombre del padre / madre responsable *</label>
+                            <input type="text" id="mem-padre" name="nombre_padre" placeholder="Nombre completo del adulto">
+                        </div>
+                        <div class="form-row">
+                            <label for="mem-nino">Nombre del niño / niña *</label>
+                            <input type="text" id="mem-nino" name="nombre_nino" placeholder="Nombre completo del menor">
+                        </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <label for="mem-notas">Notas adicionales</label>
                     <textarea id="mem-notas" name="notas" placeholder="Objetivos, lesiones previas, preguntas..."></textarea>
@@ -3377,9 +3389,9 @@
             </form>
         </div>
         <div class="form-success" id="mem-success">
-            <div class="fs-icon">🏆</div>
+            <div class="fs-icon">✅</div>
             <h4>¡Bienvenido al Team ACME!</h4>
-            <p>Recibimos tu solicitud. Un asesor te contactará en menos de 24 horas para confirmar tu inscripción.</p>
+            <p>Te enviamos un correo de bienvenida con todos los detalles. En un momento se abrirá tu página de pago.</p>
         </div>
     </div>
 </div>
@@ -3499,42 +3511,67 @@
 
 <script>
 /* ================================================================
-   EMAILJS CONFIGURATION
-   Para activar el envío de correos automáticos:
-   1. Crea una cuenta en https://www.emailjs.com (plan gratuito: 200 emails/mes)
-   2. Crea un "Email Service" y copia el Service ID
-   3. Crea un "Email Template" con variables: {{to_name}}, {{to_email}}, {{plan_type}}
-   4. Copia tu Public Key desde Account > API Keys
-   5. Reemplaza los valores de abajo con los tuyos
+   EMAILJS — CONFIGURACIÓN
+   1. Crea cuenta gratuita en https://www.emailjs.com (200 emails/mes)
+   2. Conecta tu servicio Gmail desde Email Services
+   3. Crea una plantilla y pega el HTML de tu template de bienvenida
+      Variables disponibles: {{to_name}}, {{to_email}}, {{plan_type}},
+      {{telefono}}, {{fecha_inicio}}, {{nombre_padre}}, {{nombre_nino}},
+      {{fuente}}, {{notas}}, {{año}}
+   4. Copia Public Key → Account > API Keys y Service/Template IDs
+   5. Sustituye los valores TU_... de abajo
 ================================================================ */
-const EMAILJS_PUBLIC_KEY   = 'TU_PUBLIC_KEY_AQUI';       // e.g. 'abcXYZ123...'
-const EMAILJS_SERVICE_ID   = 'TU_SERVICE_ID_AQUI';       // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID  = 'TU_TEMPLATE_ID_AQUI';      // e.g. 'template_abc123'
-const EMAILJS_CONFIGURED   = EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY_AQUI';
+const EMAILJS_PUBLIC_KEY  = 'TU_PUBLIC_KEY_AQUI';
+const EMAILJS_SERVICE_ID  = 'TU_SERVICE_ID_AQUI';
+const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID_AQUI';
+const EMAILJS_TEST_TO     = 'ismaelemergencia.46@gmail.com'; // correo de pruebas
+const EMAILJS_CONFIGURED  = EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY_AQUI';
 
-if (EMAILJS_CONFIGURED) {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+if (EMAILJS_CONFIGURED) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+/* ── Envío de correo de bienvenida ─────────────────────────────── */
+function sendWelcomeEmail(data) {
+    const payload = {
+        to_name:      data.nombre,
+        to_email:     data.email || EMAILJS_TEST_TO,
+        bcc_to:       EMAILJS_TEST_TO,
+        plan_type:    data.plan,
+        telefono:     (data.codigo || '+52') + ' ' + (data.telefono || ''),
+        fecha_inicio: data.fechaInicio || '—',
+        nombre_padre: data.nombrePadre || '—',
+        nombre_nino:  data.nombreNino  || '—',
+        fuente:       data.fuente || '—',
+        notas:        data.notas  || '—',
+        gym_name:     'ACME Fight & Fitness',
+        gym_email:    'soporte@acmecombat.mx',
+        reply_to:     'soporte@acmecombat.mx',
+        año:          new Date().getFullYear()
+    };
+    if (!EMAILJS_CONFIGURED) {
+        console.info('[ACME] EmailJS sin configurar — datos del correo:', payload);
+        return Promise.resolve();
+    }
+    return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, payload)
+        .catch(err => console.error('[ACME] Email error:', err));
 }
 
-/* ── Envío de correo de bienvenida ─────────────────────────── */
-function sendWelcomeEmail(toName, toEmail, planType) {
-    if (!EMAILJS_CONFIGURED) return; // silenciosamente omite si no está configurado
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        to_name:   toName,
-        to_email:  toEmail,
-        plan_type: planType,
-        gym_name:  'ACME Fight & Fitness',
-        reply_to:  'soporte@acmecombat.mx',
-    }).catch(() => {}); // evita errores visibles si hay problema de red
-}
+/* Mapa de precios para la página de pago */
+const PLAN_PRICES = {
+    'FIGHT':       { precio: '$499', periodo: 'por sesión', tipo: 'Clase única — Adultos' },
+    'CAMPEÓN':     { precio: '$2,999', periodo: 'al mes',  tipo: 'Membresía — Adultos' },
+    'ÉLITE':       { precio: '$3,999', periodo: 'al mes',  tipo: 'Membresía Premium — Adultos' },
+    'VALOR':       { precio: '$329',   periodo: 'por sesión', tipo: 'Clase única — Niños' },
+    'PROSPECTO':   { precio: '$2,799', periodo: 'al mes',  tipo: 'Membresía — Niños' },
+    'LEGADO ACME': { precio: '$4,999', periodo: 'al mes',  tipo: 'Plan Familiar' }
+};
 
-/* ── Modal helpers ─────────────────────────────────── */
+/* ── Modal helpers ──────────────────────────────────────────────── */
 function openModal(id, plan) {
     const overlay = document.getElementById(id);
     if (!overlay) return;
     if (plan && id === 'modal-membresia') {
         const sel = document.getElementById('mem-plan');
-        if (sel) sel.value = plan;
+        if (sel) { sel.value = plan; toggleLegadoFields(plan); }
     }
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -3545,33 +3582,73 @@ function closeModal(id) {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
 }
+
+/* Mostrar/ocultar campos exclusivos LEGADO ACME */
+function toggleLegadoFields(plan) {
+    const wrap = document.getElementById('legado-fields');
+    if (!wrap) return;
+    const show = (plan === 'LEGADO ACME');
+    wrap.style.display = show ? 'block' : 'none';
+    ['mem-padre', 'mem-nino'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.required = show;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const planSel = document.getElementById('mem-plan');
+    if (planSel) planSel.addEventListener('change', () => toggleLegadoFields(planSel.value));
+});
+
 function submitForm(e, modalId) {
     e.preventDefault();
     const form = e.target;
+    const get = name => (form.querySelector('[name="' + name + '"]') || {}).value || '';
 
-    /* Recolectar datos del formulario para el email */
-    const nombre    = form.querySelector('[name="nombre"]');
-    const emailInp  = form.querySelector('[name="email"]');
-    const planInp   = form.querySelector('[name="plan"]');
-    const toName    = nombre   ? nombre.value   : 'Nuevo integrante';
-    const toEmail   = emailInp ? emailInp.value : '';
-    const planType  = planInp  ? planInp.value  : (modalId === 'modal-clase' ? 'Clase Única' : 'Membresía');
+    const data = {
+        nombre:      get('nombre'),
+        email:       get('email'),
+        codigo:      get('pais_codigo'),
+        telefono:    get('telefono'),
+        plan:        get('plan') || (modalId === 'modal-clase' ? 'FIGHT' : 'CAMPEÓN'),
+        fechaInicio: get('fecha_inicio') || get('fecha'),
+        fuente:      get('fuente'),
+        notas:       get('notas'),
+        nombrePadre: get('nombre_padre'),
+        nombreNino:  get('nombre_nino')
+    };
 
-    /* Enviar email de bienvenida */
-    sendWelcomeEmail(toName, toEmail, planType);
+    /* 1 — Enviar correo de bienvenida */
+    sendWelcomeEmail(data);
 
-    /* Mostrar pantalla de éxito */
-    const wrap    = document.getElementById(modalId === 'modal-membresia' ? 'mem-form-wrap' : 'clase-form-wrap');
-    const success = document.getElementById(modalId === 'modal-membresia' ? 'mem-success' : 'clase-success');
-    if (wrap) wrap.style.display = 'none';
+    /* 2 — Mostrar pantalla de éxito en el modal */
+    const wrapId    = modalId === 'modal-membresia' ? 'mem-form-wrap' : 'clase-form-wrap';
+    const successId = modalId === 'modal-membresia' ? 'mem-success'   : 'clase-success';
+    const wrap    = document.getElementById(wrapId);
+    const success = document.getElementById(successId);
+    if (wrap)    wrap.style.display    = 'none';
     if (success) success.style.display = 'block';
-    setTimeout(() => closeModal(modalId), 3500);
+
+    /* 3 — Abrir página de pago en nueva pestaña (sólo membresías) */
+    if (modalId === 'modal-membresia') {
+        const params = new URLSearchParams({
+            nombre:  data.nombre,
+            email:   data.email,
+            plan:    data.plan,
+            fecha:   data.fechaInicio,
+            padre:   data.nombrePadre,
+            nino:    data.nombreNino
+        });
+        setTimeout(() => window.open('payment.html?' + params.toString(), '_blank'), 600);
+    }
+
+    setTimeout(() => closeModal(modalId), 4500);
 }
-/* Close on backdrop click */
+
+/* Cerrar con clic en fondo o Escape */
 document.querySelectorAll('.modal-overlay').forEach(ov => {
     ov.addEventListener('click', e => { if (e.target === ov) closeModal(ov.id); });
 });
-/* Close on Escape */
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(ov => closeModal(ov.id));
 });
@@ -4053,11 +4130,10 @@ var DICT = {
     'plans.legado.period': 'Padre + Hijo · Todo incluido',
     'plans.legado.f1': 'Padre: Plan CAMPEÓN completo',
     'plans.legado.f2': 'Hijo: Plan PROSPECTO completo',
-    'plans.legado.f3': '4 sesiones crioterapia/mes (2+2)',
-    'plans.legado.f4': '4 sesiones fisioterapia/mes (2+2)',
-    'plans.legado.f5': 'App IA personalizada (nutrición + entrenamiento)',
-    'plans.legado.f6': 'Zona pesas, sauna y gimnasio abierto',
-    'plans.legado.f7': 'Entrenador certificado para ambos',
+    'plans.legado.f3': '2 sesiones crioterapia/mes padre o madre',
+    'plans.legado.f4': '2 sesiones fisioterapia/mes padre o madre',
+    'plans.legado.f5': 'Zona pesas, sauna y gimnasio abierto',
+    'plans.legado.f6': 'Entrenador certificado para ambos',
     'plans.join': 'Inscribirme Ahora',
     'contact.email.lbl': 'Correo · Disponible 24/7',
     'contact.ref.lbl': 'Referencia única',
@@ -4222,11 +4298,10 @@ var DICT = {
     'plans.legado.period': 'Parent + Child · All included',
     'plans.legado.f1': 'Parent: Full CHAMPION plan',
     'plans.legado.f2': 'Child: Full PROSPECT plan',
-    'plans.legado.f3': '4 cryotherapy sessions/month (2+2)',
-    'plans.legado.f4': '4 physiotherapy sessions/month (2+2)',
-    'plans.legado.f5': 'AI App (nutrition + personalized training)',
-    'plans.legado.f6': 'Weight room, sauna & open gym',
-    'plans.legado.f7': 'Certified trainer for both',
+    'plans.legado.f3': '2 cryotherapy sessions/month (parent)',
+    'plans.legado.f4': '2 physiotherapy sessions/month (parent)',
+    'plans.legado.f5': 'Weight room, sauna & open gym',
+    'plans.legado.f6': 'Certified trainer for both',
     'plans.join': 'Join Now',
     'contact.email.lbl': 'Email · Available 24/7',
     'contact.ref.lbl': 'Unique reference',
