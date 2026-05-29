@@ -470,6 +470,9 @@
             color: var(--muted-l);
         }
 
+        @media (min-width: 601px) {
+            .hero { padding-bottom: 115px; }
+        }
         @media (max-width: 600px) {
             .hero-stats-inner { flex-direction: column; }
             .hero-stat { border-right: none; border-bottom: 1px solid var(--border); }
@@ -2876,6 +2879,10 @@
 <script>
 (function () {
     'use strict';
+
+    /* ── Siempre mostrar el inicio al hacer refresh ─────────── */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
 
     /* ── Scroll direction tracker ───────────────────────────── */
     let lastY = window.scrollY;
