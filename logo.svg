@@ -1,109 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" role="img" aria-label="MARCA ACME Fight & Fitness">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-label="MARCA ACME Fight & Fitness">
   <defs>
-
-    <!-- Octagon clip — nothing exits the shape -->
     <clipPath id="oct">
       <polygon points="155,18 345,18 482,155 482,345 345,482 155,482 18,345 18,155"/>
     </clipPath>
-
-    <!-- Dark-red radial bg gradient -->
-    <radialGradient id="bgG" cx="50%" cy="42%" r="68%">
-      <stop offset="0%"   stop-color="#3d0008"/>
-      <stop offset="40%"  stop-color="#180003"/>
+    <radialGradient id="bgG" cx="50%" cy="40%" r="72%">
+      <stop offset="0%"   stop-color="#3a0008"/>
+      <stop offset="35%"  stop-color="#1a0004"/>
       <stop offset="100%" stop-color="#060606"/>
     </radialGradient>
-
-    <!-- Red centre glow -->
-    <radialGradient id="glowG" cx="50%" cy="44%" r="55%">
-      <stop offset="0%"   stop-color="#E5001A" stop-opacity="0.28"/>
+    <radialGradient id="glowG" cx="50%" cy="46%" r="52%">
+      <stop offset="0%"   stop-color="#E5001A" stop-opacity="0.32"/>
       <stop offset="100%" stop-color="#E5001A" stop-opacity="0"/>
     </radialGradient>
-
-    <!-- Gold border gradient -->
-    <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#8A6500"/>
-      <stop offset="25%"  stop-color="#E8C840"/>
-      <stop offset="55%"  stop-color="#C8A020"/>
-      <stop offset="80%"  stop-color="#F0D860"/>
-      <stop offset="100%" stop-color="#7A5800"/>
+    <linearGradient id="goldOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#5A3E00"/>
+      <stop offset="18%"  stop-color="#D4A820"/>
+      <stop offset="38%"  stop-color="#F8E060"/>
+      <stop offset="58%"  stop-color="#C8980C"/>
+      <stop offset="78%"  stop-color="#F0D040"/>
+      <stop offset="100%" stop-color="#6A4A00"/>
     </linearGradient>
-
-    <!-- Red metallic gradient (ACME text) -->
-    <linearGradient id="redM" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#FF4850"/>
-      <stop offset="28%"  stop-color="#E5001A"/>
-      <stop offset="65%"  stop-color="#9A000F"/>
-      <stop offset="100%" stop-color="#580008"/>
+    <linearGradient id="goldInner" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#7A5800"/>
+      <stop offset="30%"  stop-color="#E8C830"/>
+      <stop offset="65%"  stop-color="#B88010"/>
+      <stop offset="100%" stop-color="#503800"/>
     </linearGradient>
-
-    <!-- Chrome gradient (MARCA text) -->
     <linearGradient id="chromeG" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%"   stop-color="#FFFFFF"/>
-      <stop offset="40%"  stop-color="#D8D8D8"/>
-      <stop offset="70%"  stop-color="#909090"/>
-      <stop offset="100%" stop-color="#505050"/>
+      <stop offset="35%"  stop-color="#E0E0E0"/>
+      <stop offset="65%"  stop-color="#A0A0A0"/>
+      <stop offset="100%" stop-color="#606060"/>
     </linearGradient>
-
-    <!-- Gold text gradient -->
-    <linearGradient id="goldTextG" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#F0D860"/>
-      <stop offset="45%"  stop-color="#C8A020"/>
-      <stop offset="100%" stop-color="#886000"/>
+    <linearGradient id="redM" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FF5060"/>
+      <stop offset="22%"  stop-color="#E5001A"/>
+      <stop offset="60%"  stop-color="#A2000E"/>
+      <stop offset="100%" stop-color="#600008"/>
     </linearGradient>
-
-    <!-- Drop shadow for text -->
-    <filter id="ds" x="-15%" y="-15%" width="130%" height="130%">
-      <feDropShadow dx="2" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.9"/>
+    <linearGradient id="goldTG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#F5E060"/>
+      <stop offset="40%"  stop-color="#C89A18"/>
+      <stop offset="100%" stop-color="#805A00"/>
+    </linearGradient>
+    <filter id="ds" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.95"/>
     </filter>
-
-    <!-- Red outer glow for ACME -->
-    <filter id="redGF" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="b"/>
-      <feFlood flood-color="#E5001A" flood-opacity="0.55" result="c"/>
+    <filter id="redGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feFlood flood-color="#E5001A" flood-opacity="0.50" result="c"/>
       <feComposite in="c" in2="b" operator="in" result="s"/>
       <feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <!-- Subtle inner border glow -->
-    <filter id="glow2" x="-5%" y="-5%" width="110%" height="110%">
-      <feGaussianBlur stdDeviation="3" result="b"/>
+    <filter id="ringGlow" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
   </defs>
 
-  <!-- ═══════════════════════════════════════
-       OUTER FRAME (outside clip so it draws on top of bg)
-  ═══════════════════════════════════════ -->
-
-  <!-- Gold border thick -->
+  <!-- OUTER FRAME -->
   <polygon points="155,18 345,18 482,155 482,345 345,482 155,482 18,345 18,155"
-           fill="none" stroke="url(#goldG)" stroke-width="14" stroke-linejoin="bevel"/>
+           fill="none" stroke="url(#goldOuter)" stroke-width="16" stroke-linejoin="bevel"/>
+  <polygon points="159,22 341,22 478,159 478,341 341,478 159,478 22,341 22,159"
+           fill="#101010" stroke="none"/>
+  <polygon points="165,28 335,28 472,165 472,335 335,472 165,472 28,335 28,165"
+           fill="none" stroke="url(#goldInner)" stroke-width="6" stroke-linejoin="bevel"
+           filter="url(#ringGlow)"/>
+  <polygon points="170,33 330,33 467,170 467,330 330,467 170,467 33,330 33,170"
+           fill="none" stroke="rgba(229,0,26,0.55)" stroke-width="1.5"/>
 
-  <!-- Dark charcoal separation ring -->
-  <polygon points="158,21 342,21 479,158 479,342 342,479 158,479 21,342 21,158"
-           fill="#111111" stroke="none"/>
-
-  <!-- Red inner glow edge -->
-  <polygon points="163,26 337,26 474,163 474,337 337,474 163,474 26,337 26,163"
-           fill="none" stroke="#E5001A" stroke-width="2.5" filter="url(#glow2)"/>
-
-  <!-- ═══════════════════════════════════════
-       CLIPPED CONTENT
-  ═══════════════════════════════════════ -->
+  <!-- CLIPPED INTERIOR -->
   <g clip-path="url(#oct)">
-
-    <!-- Base black fill -->
-    <rect width="500" height="500" fill="#060606"/>
-
-    <!-- Dark-red atmospheric gradient -->
+    <rect width="500" height="500" fill="#050505"/>
     <rect width="500" height="500" fill="url(#bgG)"/>
-
-    <!-- Central red glow -->
-    <ellipse cx="250" cy="210" rx="190" ry="170" fill="url(#glowG)"/>
-
-    <!-- Subtle grid (tech/cinematic feel) -->
-    <g stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none">
+    <ellipse cx="250" cy="220" rx="200" ry="175" fill="url(#glowG)"/>
+    <g stroke="rgba(255,255,255,0.025)" stroke-width="1" fill="none">
       <line x1="0"   y1="125" x2="500" y2="125"/>
       <line x1="0"   y1="250" x2="500" y2="250"/>
       <line x1="0"   y1="375" x2="500" y2="375"/>
@@ -111,153 +82,80 @@
       <line x1="250" y1="0"   x2="250" y2="500"/>
       <line x1="375" y1="0"   x2="375" y2="500"/>
     </g>
+    <polygon points="155,18 225,18 155,88"  fill="rgba(229,0,26,0.16)"/>
+    <polygon points="345,18 275,18 345,88"  fill="rgba(229,0,26,0.16)"/>
+    <polygon points="155,482 225,482 155,412" fill="rgba(229,0,26,0.12)"/>
+    <polygon points="345,482 275,482 345,412" fill="rgba(229,0,26,0.12)"/>
 
-    <!-- Diagonal accent lines -->
-    <line x1="155" y1="18"  x2="250" y2="80"  stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
-    <line x1="345" y1="18"  x2="250" y2="80"  stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
-    <line x1="155" y1="482" x2="250" y2="420" stroke="rgba(229,0,26,0.12)" stroke-width="1"/>
-    <line x1="345" y1="482" x2="250" y2="420" stroke="rgba(229,0,26,0.12)" stroke-width="1"/>
-
-    <!-- Corner triangle accents (top) -->
-    <polygon points="155,18 222,18 155,85"  fill="rgba(229,0,26,0.14)"/>
-    <polygon points="345,18 278,18 345,85"  fill="rgba(229,0,26,0.14)"/>
-    <!-- Corner triangle accents (bottom) -->
-    <polygon points="155,482 222,482 155,415" fill="rgba(229,0,26,0.10)"/>
-    <polygon points="345,482 278,482 345,415" fill="rgba(229,0,26,0.10)"/>
-
-    <!-- ─── FIGHTER SILHOUETTES ─── -->
-    <!-- Left fighter (boxing/guard stance) -->
-    <g fill="#E5001A" opacity="0.18" transform="translate(82,170)">
-      <ellipse cx="0" cy="0"   rx="17" ry="18"/>           <!-- head -->
-      <ellipse cx="0" cy="55"  rx="15" ry="28"/>           <!-- torso -->
-      <!-- front arm (guard up) -->
-      <rect x="-26" y="15" width="11" height="30" rx="5" transform="rotate(-20,-20,30)"/>
-      <rect x="-35" y="-5" width="11" height="22" rx="5" transform="rotate(-35,-29,6)"/>
-      <!-- back arm -->
-      <rect x="8"  y="20" width="10" height="26" rx="5" transform="rotate(15,13,33)"/>
-      <!-- legs -->
-      <rect x="-12" y="83" width="10" height="36" rx="5" transform="rotate(-5,-7,101)"/>
-      <rect x="4"   y="83" width="10" height="36" rx="5" transform="rotate(10,9,101)"/>
+    <!-- LEFT FIGHTER SILHOUETTE -->
+    <g fill="#8B0010" opacity="0.55" transform="translate(72,130)">
+      <ellipse cx="0" cy="0" rx="20" ry="22"/>
+      <ellipse cx="0" cy="65" rx="18" ry="34"/>
+      <rect x="-30" y="10" width="13" height="38" rx="6" transform="rotate(-30,-24,29)"/>
+      <rect x="-42" y="-18" width="13" height="28" rx="6" transform="rotate(-48,-36,-4)"/>
+      <rect x="10"  y="20" width="12" height="32" rx="6" transform="rotate(18,16,36)"/>
+      <rect x="-14" y="99" width="13" height="46" rx="6" transform="rotate(-8,-8,122)"/>
+      <rect x="4"   y="98" width="13" height="30" rx="6" transform="rotate(22,10,113)"/>
+      <rect x="20"  y="120" width="13" height="24" rx="6" transform="rotate(40,26,132)"/>
     </g>
 
-    <!-- Right fighter (kick stance — mirrored) -->
-    <g fill="#E5001A" opacity="0.18" transform="translate(418,170) scale(-1,1)">
-      <ellipse cx="0" cy="0"   rx="17" ry="18"/>
-      <ellipse cx="0" cy="55"  rx="15" ry="28"/>
-      <rect x="-26" y="15" width="11" height="30" rx="5" transform="rotate(-20,-20,30)"/>
-      <rect x="-35" y="-5" width="11" height="22" rx="5" transform="rotate(-35,-29,6)"/>
-      <rect x="8"  y="20" width="10" height="26" rx="5" transform="rotate(15,13,33)"/>
-      <rect x="-12" y="83" width="10" height="36" rx="5" transform="rotate(-5,-7,101)"/>
-      <rect x="4"   y="83" width="10" height="36" rx="5" transform="rotate(10,9,101)"/>
+    <!-- RIGHT FIGHTER SILHOUETTE (mirrored) -->
+    <g fill="#8B0010" opacity="0.55" transform="translate(428,130) scale(-1,1)">
+      <ellipse cx="0" cy="0" rx="20" ry="22"/>
+      <ellipse cx="0" cy="65" rx="18" ry="34"/>
+      <rect x="-30" y="10" width="13" height="38" rx="6" transform="rotate(-30,-24,29)"/>
+      <rect x="-42" y="-18" width="13" height="28" rx="6" transform="rotate(-48,-36,-4)"/>
+      <rect x="10"  y="20" width="12" height="32" rx="6" transform="rotate(18,16,36)"/>
+      <rect x="-14" y="99" width="13" height="46" rx="6" transform="rotate(-8,-8,122)"/>
+      <rect x="4"   y="98" width="13" height="30" rx="6" transform="rotate(22,10,113)"/>
+      <rect x="20"  y="120" width="13" height="24" rx="6" transform="rotate(40,26,132)"/>
     </g>
 
-    <!-- ─── MMA GLOVE FIST (geometric-modern) ─── -->
-    <g transform="translate(250,148)">
+    <!-- SEPARATOR -->
+    <line x1="85" y1="232" x2="415" y2="232" stroke="rgba(229,0,26,0.45)" stroke-width="1"/>
+    <line x1="105" y1="236" x2="395" y2="236" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
 
-      <!-- Background glow behind glove -->
-      <ellipse cx="0" cy="-5" rx="65" ry="75" fill="rgba(229,0,26,0.12)"/>
-
-      <!-- Main glove body (dark leather) -->
-      <path d="M-46,50 L-48,10 Q-48,-28 -24,-48 Q0,-65 24,-48 Q48,-28 48,10 L46,50 Q40,62 0,65 Q-40,62 -46,50 Z"
-            fill="#1C1C1C" stroke="#2e2e2e" stroke-width="1.5"/>
-
-      <!-- Stitching line across middle -->
-      <path d="M-44,8 Q0,-4 44,8" fill="none" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
-
-      <!-- 4 knuckle ridges -->
-      <ellipse cx="-30" cy="-28" rx="10"  ry="8"  fill="#252525" stroke="#383838" stroke-width="1"/>
-      <ellipse cx="-10" cy="-35" rx="11"  ry="9"  fill="#252525" stroke="#383838" stroke-width="1"/>
-      <ellipse cx=" 10" cy="-35" rx="11"  ry="9"  fill="#252525" stroke="#383838" stroke-width="1"/>
-      <ellipse cx=" 30" cy="-28" rx="10"  ry="8"  fill="#252525" stroke="#383838" stroke-width="1"/>
-
-      <!-- Knuckle highlight sheen -->
-      <path d="M-28,-34 Q0,-44 28,-34" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
-
-      <!-- Red MMA power stripe -->
-      <path d="M-46,14 Q0,4 46,14"  fill="none" stroke="#E5001A" stroke-width="4.5" stroke-linecap="round"/>
-      <path d="M-44,24 Q0,16 44,24" fill="none" stroke="#E5001A" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
-
-      <!-- Wrist / cuff band (red) -->
-      <rect x="-46" y="42" width="92" height="20" rx="7"
-            fill="#E5001A" opacity="0.80"/>
-      <rect x="-46" y="42" width="92" height="20" rx="7"
-            fill="none" stroke="#FF3040" stroke-width="1"/>
-      <!-- Cuff highlight -->
-      <rect x="-40" y="44" width="80" height="4" rx="2" fill="rgba(255,255,255,0.08)"/>
-
-    </g>
-    <!-- End fist -->
-
-    <!-- ─── HORIZONTAL SEPARATOR ─── -->
-    <line x1="90" y1="222" x2="410" y2="222" stroke="#E5001A" stroke-width="1" opacity="0.45"/>
-    <line x1="110" y1="225" x2="390" y2="225" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-
-    <!-- ─── MARCA text ─── -->
-    <!-- subtle backing bar -->
-    <rect x="118" y="228" width="264" height="34" rx="2" fill="rgba(229,0,26,0.07)"/>
-    <text x="250" y="252"
-          text-anchor="middle"
+    <!-- MARCA -->
+    <rect x="110" y="240" width="280" height="38" rx="3" fill="rgba(229,0,26,0.08)"/>
+    <text x="250" y="267" text-anchor="middle"
           font-family="Oswald, 'Arial Narrow', Impact, sans-serif"
-          font-size="26" font-weight="400"
-          fill="url(#chromeG)"
-          letter-spacing="16"
-          filter="url(#ds)">MARCA</text>
+          font-size="28" font-weight="400" fill="url(#chromeG)"
+          letter-spacing="18" filter="url(#ds)">MARCA</text>
 
-    <!-- ─── ACME text (hero element) ─── -->
-    <!-- Outer glow layer -->
-    <text x="250" y="340"
-          text-anchor="middle"
+    <!-- ACME -->
+    <text x="250" y="358" text-anchor="middle"
           font-family="Oswald, 'Arial Narrow', Impact, sans-serif"
-          font-size="122" font-weight="700"
-          fill="rgba(229,0,26,0.35)"
-          letter-spacing="2"
-          filter="url(#redGF)">ACME</text>
-    <!-- Black shadow -->
-    <text x="253" y="343"
-          text-anchor="middle"
+          font-size="128" font-weight="700" fill="rgba(229,0,26,0.40)"
+          letter-spacing="2" filter="url(#redGlow)">ACME</text>
+    <text x="254" y="362" text-anchor="middle"
           font-family="Oswald, 'Arial Narrow', Impact, sans-serif"
-          font-size="122" font-weight="700"
-          fill="rgba(0,0,0,0.7)"
+          font-size="128" font-weight="700" fill="rgba(0,0,0,0.75)"
           letter-spacing="2">ACME</text>
-    <!-- Main metallic text -->
-    <text x="250" y="340"
-          text-anchor="middle"
+    <text x="250" y="358" text-anchor="middle"
           font-family="Oswald, 'Arial Narrow', Impact, sans-serif"
-          font-size="122" font-weight="700"
-          fill="url(#redM)"
-          stroke="white" stroke-width="1.2" paint-order="stroke"
+          font-size="128" font-weight="700" fill="url(#redM)"
+          stroke="rgba(255,255,255,0.14)" stroke-width="1" paint-order="stroke"
           letter-spacing="2">ACME</text>
 
-    <!-- Separator below ACME -->
-    <rect x="102" y="350" width="296" height="2" fill="rgba(229,0,26,0.5)"/>
-
-    <!-- ─── FIGHT & FITNESS bar ─── -->
-    <rect x="102" y="356" width="296" height="46" rx="4" fill="rgba(8,8,8,0.85)"/>
-    <rect x="102" y="356" width="296" height="46" rx="4"
-          fill="none" stroke="url(#goldG)" stroke-width="1.2"/>
-    <!-- inner top highlight -->
-    <rect x="104" y="358" width="292" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
-
-    <text x="250" y="387"
-          text-anchor="middle"
+    <!-- FIGHT & FITNESS BAR -->
+    <rect x="96" y="368" width="308" height="50" rx="5" fill="rgba(5,5,5,0.88)"/>
+    <rect x="96" y="368" width="308" height="50" rx="5"
+          fill="none" stroke="url(#goldOuter)" stroke-width="1.2"/>
+    <rect x="98" y="370" width="304" height="2" rx="1" fill="rgba(255,255,255,0.07)"/>
+    <text x="250" y="402" text-anchor="middle"
           font-family="Oswald, 'Arial Narrow', Impact, sans-serif"
-          font-size="22" font-weight="600"
-          fill="url(#goldTextG)"
-          letter-spacing="7"
-          filter="url(#ds)">FIGHT &amp; FITNESS</text>
+          font-size="23" font-weight="600" fill="url(#goldTG)"
+          letter-spacing="7" filter="url(#ds)">FIGHT &amp; FITNESS</text>
 
-    <!-- Inner-edge red scan ring (cinematic depth) -->
+    <!-- Inner scan ring -->
     <polygon points="155,18 345,18 482,155 482,345 345,482 155,482 18,345 18,155"
-             fill="none" stroke="rgba(229,0,26,0.06)" stroke-width="28"/>
-
+             fill="none" stroke="rgba(229,0,26,0.05)" stroke-width="30"/>
   </g>
-  <!-- End clip -->
 
-  <!-- Outer gold ring re-drawn on top for crispness -->
+  <!-- Re-draw gold ring on top -->
   <polygon points="155,18 345,18 482,155 482,345 345,482 155,482 18,345 18,155"
-           fill="none" stroke="url(#goldG)" stroke-width="8" stroke-linejoin="bevel"/>
-  <!-- Outer red accent line -->
+           fill="none" stroke="url(#goldOuter)" stroke-width="7" stroke-linejoin="bevel"/>
   <polygon points="155,18 345,18 482,155 482,345 345,482 155,482 18,345 18,155"
-           fill="none" stroke="rgba(229,0,26,0.4)" stroke-width="2"/>
+           fill="none" stroke="rgba(229,0,26,0.35)" stroke-width="1.8"/>
 
 </svg>
