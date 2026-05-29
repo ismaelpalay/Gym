@@ -2098,7 +2098,7 @@
 
             <p class="hero-desc fade-in" data-delay="4">
                 Centro MMA de clase mundial diseñado para atletas comprometidos.
-                Dos octágonos, nueve áreas especializadas y capacidad para 20 atletas simultáneos
+                Octágono profesional de alto rendimiento, nueve áreas especializadas y capacidad para 20 atletas simultáneos
                 en 600 m² distribuidos en dos plantas.
             </p>
 
@@ -2114,8 +2114,8 @@
         <div class="container">
             <div class="hero-stats-inner">
                 <div class="hero-stat">
-                    <div class="hero-stat-num" data-count="2">2</div>
-                    <div class="hero-stat-label">Octágonos</div>
+                    <div class="hero-stat-num" data-count="1">1</div>
+                    <div class="hero-stat-label">Octágono</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-num" data-count="9">9</div>
@@ -2238,7 +2238,7 @@
                 <div class="space-card-img">🧒</div>
                 <div class="space-card-body">
                     <h3 class="space-card-title">Zona Niños MMA</h3>
-                    <p class="space-card-desc">Octágono kids Ø 5 m, tatami acolchado extra y equipo de protección completo. Grupos de 10 niños, entrenador certificado.</p>
+                    <p class="space-card-desc">Área de tatami especializada, equipo de protección completo y entrenamiento supervisado.</p>
                     <div class="space-card-actions">
                         <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
                     </div>
@@ -2270,9 +2270,9 @@
         <p class="section-label" data-split="word" data-anim="zoom">03 — Distribución</p>
         <h2 class="section-title" data-split="char" data-anim="blur">Mapa Conceptual</h2>
         <p class="mapa-intro fade-in" data-delay="2">
-            2 Pisos × 300 m² · 600 m² totales. El octágono principal ocupa el corazón de la planta baja,
-            rodeado por las zonas de impacto y fuerza. La planta alta concentra el área niños con su mini
-            octágono y todas las zonas de recuperación.
+            2 Pisos × 300 m² · 600 m² totales. La planta baja concentra el 60% del espacio en zonas de tatami,
+            ideal para grappling y calentamiento. La planta alta alberga el octágono principal rodeado por las áreas
+            infantil, de padres y de recuperación.
         </p>
 
         <div class="floor-tabs fade-in" data-delay="3">
@@ -2384,47 +2384,54 @@
                     <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
                     <rect width="520" height="440" fill="url(#grid2)" rx="8"/>
 
-                    <!-- Zona Kids -->
-                    <rect x="18" y="18" width="210" height="210" rx="4"
-                          fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.22)" stroke-width="1"/>
-                    <text x="123" y="44" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="12" font-weight="700" letter-spacing="2">ZONA KIDS MMA</text>
-
-                    <!-- Kids Octagon centered at 123, 130 -->
+                    <!-- Octágono Principal (centrado en 260,200) -->
                     <polygon
-                        points="123,62 158,74 172,108 172,152 158,186 123,198 88,186 74,152 74,108 88,74"
-                        fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="1.8"/>
-                    <text x="123" y="124" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="11" font-weight="700">OCTÁGONO</text>
-                    <text x="123" y="140" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="10">KIDS</text>
-                    <text x="123" y="156" text-anchor="middle" fill="rgba(255,180,50,0.5)" font-family="sans-serif" font-size="9">Ø ~5 m</text>
+                        points="260,95 330,118 355,190 330,262 260,285 190,262 165,190 190,118"
+                        fill="rgba(229,0,26,0.06)" stroke="#E5001A" stroke-width="2"/>
+                    <polygon
+                        points="260,112 322,133 344,192 322,251 260,272 198,251 176,192 198,133"
+                        fill="none" stroke="rgba(229,0,26,0.18)" stroke-width="1" stroke-dasharray="5,4"/>
+                    <text x="260" y="182" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
+                    <text x="260" y="200" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
+                    <text x="260" y="218" text-anchor="middle" fill="rgba(229,0,26,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
 
-                    <!-- Zona Padres -->
-                    <rect x="246" y="18" width="256" height="90" rx="4"
+                    <!-- Zona Niños (sin octágono, solo área de entrenamiento) -->
+                    <rect x="18" y="18" width="130" height="130" rx="4"
+                          fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.22)" stroke-width="1"/>
+                    <text x="83" y="44" text-anchor="middle" fill="#FFB432" font-family="Oswald,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">ZONA NIÑOS</text>
+                    <text x="83" y="60" text-anchor="middle" fill="rgba(255,180,50,0.55)" font-family="sans-serif" font-size="8">MMA INFANTIL</text>
+                    <!-- Tatami mat lines -->
+                    <line x1="18" y1="80" x2="148" y2="80" stroke="rgba(255,180,50,0.12)" stroke-width="1"/>
+                    <line x1="18" y1="110" x2="148" y2="110" stroke="rgba(255,180,50,0.12)" stroke-width="1"/>
+                    <line x1="83" y1="18" x2="83" y2="148" stroke="rgba(255,180,50,0.08)" stroke-width="1"/>
+
+                    <!-- Zona de Padres -->
+                    <rect x="18" y="156" width="130" height="80" rx="4"
                           fill="rgba(229,0,26,0.05)" stroke="rgba(229,0,26,0.18)" stroke-width="1"/>
-                    <text x="374" y="52" text-anchor="middle" fill="rgba(229,0,26,0.85)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">ZONA DE PADRES</text>
-                    <text x="374" y="68" text-anchor="middle" fill="rgba(229,0,26,0.38)" font-family="sans-serif" font-size="9">VISTA DIRECTA · ÁREA DESCANSO</text>
+                    <text x="83" y="190" text-anchor="middle" fill="rgba(229,0,26,0.85)" font-family="Oswald,sans-serif" font-size="10" font-weight="600" letter-spacing="1">ZONA PADRES</text>
+                    <text x="83" y="207" text-anchor="middle" fill="rgba(229,0,26,0.38)" font-family="sans-serif" font-size="8">VISTA DIRECTA</text>
 
-                    <!-- Crioterapia -->
-                    <rect x="246" y="126" width="118" height="100" rx="4"
+                    <!-- Crioterapia (top right) -->
+                    <rect x="372" y="18" width="130" height="100" rx="4"
                           fill="rgba(50,120,210,0.07)" stroke="rgba(50,120,210,0.26)" stroke-width="1"/>
-                    <text x="305" y="166" text-anchor="middle" fill="#5090CC" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">CRIOTERAPIA</text>
-                    <text x="305" y="183" text-anchor="middle" fill="rgba(80,144,204,0.48)" font-family="sans-serif" font-size="9">3–4 TINAS · 8–12°C</text>
+                    <text x="437" y="62" text-anchor="middle" fill="#5090CC" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">CRIOTERAPIA</text>
+                    <text x="437" y="79" text-anchor="middle" fill="rgba(80,144,204,0.48)" font-family="sans-serif" font-size="9">3–4 TINAS · 8–12°C</text>
 
-                    <!-- Sauna -->
-                    <rect x="384" y="126" width="118" height="100" rx="4"
+                    <!-- Sauna (right middle) -->
+                    <rect x="372" y="126" width="130" height="108" rx="4"
                           fill="rgba(200,100,28,0.07)" stroke="rgba(200,100,28,0.26)" stroke-width="1"/>
-                    <text x="443" y="166" text-anchor="middle" fill="#C86420" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">SAUNA SECO</text>
-                    <text x="443" y="183" text-anchor="middle" fill="rgba(200,100,32,0.48)" font-family="sans-serif" font-size="9">70–95°C · 8–10 PAX</text>
+                    <text x="437" y="174" text-anchor="middle" fill="#C86420" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1">SAUNA SECO</text>
+                    <text x="437" y="191" text-anchor="middle" fill="rgba(200,100,32,0.48)" font-family="sans-serif" font-size="9">70–95°C · 8–10 PAX</text>
 
-                    <!-- Masajes & Fisio -->
-                    <rect x="18" y="246" width="484" height="152" rx="4"
+                    <!-- Masajes & Fisio (bottom full width) -->
+                    <rect x="18" y="302" width="484" height="118" rx="4"
                           fill="rgba(160,100,200,0.05)" stroke="rgba(160,100,200,0.2)" stroke-width="1"/>
-                    <text x="260" y="312" text-anchor="middle" fill="#A068C8" font-family="Oswald,sans-serif" font-size="13" font-weight="600" letter-spacing="2">MASAJES &amp; FISIOTERAPIA</text>
-                    <text x="260" y="330" text-anchor="middle" fill="rgba(160,100,200,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1">2–3 CAMILLAS · LIBERACIÓN MIOFASCIAL · FISIOTERAPEUTA CERTIFICADO</text>
+                    <text x="260" y="355" text-anchor="middle" fill="#A068C8" font-family="Oswald,sans-serif" font-size="13" font-weight="600" letter-spacing="2">MASAJES &amp; FISIOTERAPIA</text>
+                    <text x="260" y="374" text-anchor="middle" fill="rgba(160,100,200,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1">2–3 CAMILLAS · LIBERACIÓN MIOFASCIAL · FISIOTERAPEUTA CERTIFICADO</text>
 
                     <!-- Outer border -->
                     <rect x="18" y="18" width="484" height="404" rx="6"
                           fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
-
                     <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)"
                           font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA ALTA · 300 m²</text>
                 </svg>
@@ -2433,11 +2440,15 @@
             <div class="floor-legend">
                 <p class="floor-legend-title">Planta Alta · 300 m²</p>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#FFB432"></div>
-                    <div><p class="legend-text">Octágono Niños</p><p class="legend-sub">Ø ~5 m · Tatami acolchado</p></div>
+                    <div class="legend-dot" style="background:#E5001A"></div>
+                    <div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m · Centro de combate</p></div>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#E5001A;opacity:0.55"></div>
+                    <div class="legend-dot" style="background:#FFB432"></div>
+                    <div><p class="legend-text">Zona Niños MMA</p><p class="legend-sub">Tatami acolchado · Entrenamiento infantil</p></div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.45"></div>
                     <div><p class="legend-text">Zona de Padres</p><p class="legend-sub">Vista directa · Área descanso</p></div>
                 </div>
                 <div class="legend-item">
@@ -2628,7 +2639,7 @@
                 <div class="cap-row"><span class="cap-lbl">Tinas de crioterapia</span><span class="cap-val">3–4</span></div>
                 <div class="cap-row"><span class="cap-lbl">Capacidad sauna</span><span class="cap-val">8–10 pax</span></div>
                 <div class="cap-row"><span class="cap-lbl">Octágono principal</span><span class="cap-val">Ø 9.1 m</span></div>
-                <div class="cap-row"><span class="cap-lbl">Octágono kids</span><span class="cap-val">Ø ~5 m</span></div>
+                <div class="cap-row"><span class="cap-lbl">Zona entrenamiento niños</span><span class="cap-val">Planta Alta</span></div>
             </div>
         </div>
     </div>
@@ -2696,34 +2707,95 @@
                 </ul>
             </div>
 
-            <!-- Visual: octagon SVG -->
+            <!-- Visual: parent's view toward kids training -->
             <div class="kids-visual fade-in" data-delay="2">
-                <svg viewBox="0 0 300 300" width="260" height="260" style="position:relative;z-index:1" aria-label="Octágono Niños">
-                    <!-- Reference (adult) octagon -->
-                    <polygon
-                        points="150,8 220,35 278,93 278,207 220,265 150,292 80,265 22,207 22,93 80,35"
-                        fill="none" stroke="rgba(229,0,26,0.10)" stroke-width="1.5" stroke-dasharray="6,5"/>
-                    <text x="150" y="308" text-anchor="middle" fill="rgba(229,0,26,0.28)"
-                          font-family="sans-serif" font-size="8" letter-spacing="1">Referencia octágono principal</text>
+                <svg viewBox="0 0 320 280" width="300" height="260" aria-label="Vista conceptual: padres observando entrenamiento infantil" style="position:relative;z-index:1;display:block;margin:0 auto;">
+                    <!-- Sky / background depth -->
+                    <rect width="320" height="280" fill="#080808" rx="8"/>
 
-                    <!-- Kids octagon -->
-                    <polygon
-                        points="150,54 197,72 222,118 222,182 197,228 150,246 103,228 78,182 78,118 103,72"
-                        fill="rgba(255,180,50,0.07)" stroke="#FFB432" stroke-width="2"/>
+                    <!-- Tatami floor (perspective) -->
+                    <polygon points="0,220 320,220 280,160 40,160"
+                             fill="rgba(50,180,100,0.10)" stroke="rgba(50,180,100,0.25)" stroke-width="1"/>
+                    <!-- Tatami grid lines (depth) -->
+                    <line x1="80"  y1="160" x2="40"  y2="220" stroke="rgba(50,180,100,0.15)" stroke-width="1"/>
+                    <line x1="160" y1="160" x2="160" y2="220" stroke="rgba(50,180,100,0.15)" stroke-width="1"/>
+                    <line x1="240" y1="160" x2="280" y2="220" stroke="rgba(50,180,100,0.15)" stroke-width="1"/>
+                    <line x1="40"  y1="178" x2="280" y2="178" stroke="rgba(50,180,100,0.10)" stroke-width="1"/>
+                    <line x1="20"  y1="200" x2="300" y2="200" stroke="rgba(50,180,100,0.10)" stroke-width="1"/>
 
-                    <!-- Center -->
-                    <circle cx="150" cy="150" r="38"
-                            fill="rgba(255,180,50,0.05)" stroke="rgba(255,180,50,0.18)"
-                            stroke-width="1" stroke-dasharray="4,4"/>
-                    <text x="150" y="143" text-anchor="middle" fill="#FFB432"
-                          font-family="Oswald,sans-serif" font-size="14" font-weight="700">OCTÁGONO</text>
-                    <text x="150" y="159" text-anchor="middle" fill="#FFB432"
-                          font-family="Oswald,sans-serif" font-size="12">KIDS</text>
-                    <text x="150" y="174" text-anchor="middle" fill="rgba(255,180,50,0.45)"
-                          font-family="sans-serif" font-size="10">Ø ~5 m</text>
+                    <!-- Padded walls (sides, perspective) -->
+                    <rect x="0"   y="60" width="36" height="160" rx="3"
+                          fill="rgba(229,0,26,0.12)" stroke="rgba(229,0,26,0.22)" stroke-width="1"/>
+                    <rect x="284" y="60" width="36" height="160" rx="3"
+                          fill="rgba(229,0,26,0.12)" stroke="rgba(229,0,26,0.22)" stroke-width="1"/>
+
+                    <!-- Back wall -->
+                    <rect x="36" y="60" width="248" height="100" rx="2"
+                          fill="rgba(229,0,26,0.04)" stroke="rgba(229,0,26,0.10)" stroke-width="1"/>
+
+                    <!-- ACME logo on back wall (subtle) -->
+                    <text x="160" y="118" text-anchor="middle" fill="rgba(229,0,26,0.18)"
+                          font-family="Oswald,sans-serif" font-size="22" font-weight="700" letter-spacing="3">ACME</text>
+
+                    <!-- Kids figures (simple silhouettes on tatami) -->
+                    <!-- Kid 1: sparring left -->
+                    <g fill="rgba(255,180,50,0.70)" transform="translate(95,148)">
+                        <ellipse cx="0" cy="-28" rx="7" ry="8"/>
+                        <rect x="-6" y="-20" width="12" height="18" rx="3"/>
+                        <rect x="-14" y="-16" width="7" height="14" rx="3" transform="rotate(-20,-10,-9)"/>
+                        <rect x="7"  y="-16" width="7" height="14" rx="3" transform="rotate(15,10,-9)"/>
+                        <rect x="-5" y="-2" width="6" height="16" rx="3" transform="rotate(-5,-2,6)"/>
+                        <rect x="1"  y="-2" width="6" height="16" rx="3" transform="rotate(8,4,6)"/>
+                    </g>
+                    <!-- Kid 2: sparring right (mirrored) -->
+                    <g fill="rgba(255,180,50,0.70)" transform="translate(225,148) scale(-1,1)">
+                        <ellipse cx="0" cy="-28" rx="7" ry="8"/>
+                        <rect x="-6" y="-20" width="12" height="18" rx="3"/>
+                        <rect x="-14" y="-16" width="7" height="14" rx="3" transform="rotate(-20,-10,-9)"/>
+                        <rect x="7"  y="-16" width="7" height="14" rx="3" transform="rotate(15,10,-9)"/>
+                        <rect x="-5" y="-2" width="6" height="16" rx="3" transform="rotate(-5,-2,6)"/>
+                        <rect x="1"  y="-2" width="6" height="16" rx="3" transform="rotate(8,4,6)"/>
+                    </g>
+                    <!-- Coach (slightly larger, center-back) -->
+                    <g fill="rgba(201,168,76,0.65)" transform="translate(160,155)">
+                        <ellipse cx="0" cy="-32" rx="8" ry="9"/>
+                        <rect x="-7" y="-23" width="14" height="20" rx="3"/>
+                        <rect x="-16" y="-19" width="8" height="16" rx="3" transform="rotate(-10,-12,-11)"/>
+                        <rect x="8"  y="-19" width="8" height="16" rx="3" transform="rotate(10,12,-11)"/>
+                        <rect x="-6" y="-3" width="7" height="18" rx="3"/>
+                        <rect x="1"  y="-3" width="7" height="18" rx="3"/>
+                    </g>
+
+                    <!-- Protective railing / observation barrier (viewer's perspective) -->
+                    <rect x="0" y="218" width="320" height="8" rx="2"
+                          fill="rgba(201,168,76,0.55)" stroke="rgba(201,168,76,0.80)" stroke-width="1"/>
+                    <!-- Railing posts -->
+                    <rect x="30"  y="200" width="4" height="26" rx="1" fill="rgba(201,168,76,0.50)"/>
+                    <rect x="100" y="200" width="4" height="26" rx="1" fill="rgba(201,168,76,0.50)"/>
+                    <rect x="160" y="200" width="4" height="26" rx="1" fill="rgba(201,168,76,0.50)"/>
+                    <rect x="220" y="200" width="4" height="26" rx="1" fill="rgba(201,168,76,0.50)"/>
+                    <rect x="288" y="200" width="4" height="26" rx="1" fill="rgba(201,168,76,0.50)"/>
+                    <!-- Horizontal rail -->
+                    <rect x="0" y="204" width="320" height="3" rx="1" fill="rgba(201,168,76,0.35)"/>
+
+                    <!-- Parent silhouettes at bottom (viewer POV) -->
+                    <g fill="rgba(243,243,243,0.18)">
+                        <!-- Parent left -->
+                        <ellipse cx="60" cy="252" rx="18" ry="16"/>
+                        <rect x="44" y="264" width="32" height="16" rx="6"/>
+                        <!-- Parent right -->
+                        <ellipse cx="260" cy="252" rx="18" ry="16"/>
+                        <rect x="244" y="264" width="32" height="16" rx="6"/>
+                    </g>
+
+                    <!-- Label -->
+                    <text x="160" y="14" text-anchor="middle" fill="rgba(255,180,50,0.80)"
+                          font-family="Oswald,sans-serif" font-size="9" font-weight="600" letter-spacing="2">VISTA DE PADRES · ZONA DE OBSERVACIÓN</text>
+                    <text x="160" y="30" text-anchor="middle" fill="rgba(255,255,255,0.18)"
+                          font-family="sans-serif" font-size="8">Visibilidad directa hacia el área de entrenamiento infantil</text>
                 </svg>
-                <div style="margin-top:18px;text-align:center;position:relative;z-index:1;">
-                    <p style="font-family:var(--font-h);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,243,243,0.3);">Planta Alta · 300 m²</p>
+                <div style="margin-top:14px;text-align:center;position:relative;z-index:1;">
+                    <p style="font-family:var(--font-h);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,180,50,0.45);">Vista conceptual · Planta Alta · 300 m²</p>
                 </div>
             </div>
         </div>
@@ -2826,6 +2898,8 @@
                 <span style="color:rgba(243,243,243,0.25);">·</span>
                 <a href="faq.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Preguntas Frecuentes</a>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
+                <a href="terminos.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Términos y Condiciones</a>
+                <span style="color:rgba(243,243,243,0.25);">·</span>
                 <span>🥊 ACC-2026-7849X</span>
             </p>
         </div>
@@ -2905,7 +2979,7 @@
                 e.target.classList.remove('anim-in');
             }
         });
-    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    }, { threshold: 0, rootMargin: window.innerWidth >= 1024 ? '0px 0px -18% 0px' : '0px 0px -10% 0px' });
     document.querySelectorAll('[data-anim]').forEach(el => animObs.observe(el));
 
     /* ── FADE-IN (generic non-text elements) ────────────────── */
@@ -3360,7 +3434,7 @@ var KB = [
   },
   {
     keys:['niños','kids','infantil','hijo','hija','pequeños','familia','niño','niña','programa infantil'],
-    res:'👦 <strong>Zona Niños &amp; Familia</strong><br><br>Área 100% dedicada al entrenamiento infantil:<br>• Grupos de máx. <strong>10 niños</strong><br>• Entrenador certificado<br>• Mini octágono Ø 5 m<br>• Tatami acolchado extra<br>• Equipo de protección completo<br>• Vista directa para padres<br>• Zona de descanso para padres<br>• Ambiente 100% seguro',
+    res:'👦 <strong>Zona Niños &amp; Familia</strong><br><br>Área 100% dedicada al entrenamiento infantil:<br>• Grupos de máx. <strong>10 niños</strong><br>• Entrenador certificado<br>• Zona de tatami especializada<br>• Tatami acolchado extra<br>• Equipo de protección completo<br>• Vista directa para padres<br>• Zona de descanso para padres<br>• Ambiente 100% seguro',
     actions:[{label:'Ver programa infantil',scroll:'#kids'}]
   },
   {

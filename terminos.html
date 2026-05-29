@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones · ACME Fight &amp; Fitness</title>
+    <meta name="description" content="Términos y Condiciones de uso de ACME Fight & Fitness. Lee los términos de nuestros servicios, membresías y uso de instalaciones.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap">
+    <style>
+        :root {
+            --gold:    #C9A84C;
+            --gold-l:  #E0C06A;
+            --red:     #E5001A;
+            --bg:      #060606;
+            --white:   #F3F3F3;
+            --muted:   rgba(243,243,243,0.45);
+            --card:    rgba(255,255,255,0.035);
+            --border:  rgba(255,255,255,0.08);
+            --font-h:  'Oswald', Impact, sans-serif;
+            --font-b:  'Inter', system-ui, sans-serif;
+            --r:       10px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--font-b);
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .priv-nav {
+            background: rgba(6,6,6,0.95);
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .priv-nav .inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .priv-nav .brand {
+            font-family: var(--font-h);
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .priv-nav .brand span { color: var(--red); }
+        .priv-nav .back-link {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color .2s;
+        }
+        .priv-nav .back-link:hover { color: var(--gold); }
+        .page-hero {
+            background: linear-gradient(160deg, #0d0d0d 0%, #150005 50%, #0d0d0d 100%);
+            border-bottom: 1px solid rgba(201,168,76,0.10);
+            padding: 64px 24px 48px;
+            text-align: center;
+        }
+        .page-hero .badge {
+            display: inline-block;
+            background: rgba(229,0,26,0.12);
+            border: 1px solid rgba(229,0,26,0.28);
+            color: var(--red);
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 3px;
+            padding: 5px 14px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .page-hero h1 {
+            font-family: var(--font-h);
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 14px;
+        }
+        .page-hero h1 span { color: var(--gold); }
+        .page-hero p {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .content-wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+        .tc-intro {
+            background: rgba(255,255,255,0.030);
+            border: 1px solid rgba(201,168,76,0.14);
+            border-left: 3px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            color: rgba(243,243,243,0.70);
+            font-size: 14px;
+        }
+        .tc-intro strong { color: var(--gold); }
+        .tc-section {
+            margin-bottom: 40px;
+        }
+        .tc-section-title {
+            font-family: var(--font-h);
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            border-bottom: 1px solid rgba(201,168,76,0.18);
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .tc-section-title .num {
+            font-size: 11px;
+            color: var(--red);
+            background: rgba(229,0,26,0.10);
+            border: 1px solid rgba(229,0,26,0.22);
+            border-radius: 4px;
+            padding: 2px 8px;
+            letter-spacing: 1px;
+        }
+        .tc-section p {
+            color: rgba(243,243,243,0.65);
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .tc-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px 0;
+        }
+        .tc-section ul li {
+            padding: 7px 0 7px 22px;
+            position: relative;
+            color: rgba(243,243,243,0.60);
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .tc-section ul li:last-child { border-bottom: none; }
+        .tc-section ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 12px;
+        }
+        .tc-section strong { color: var(--white); }
+        .tc-section .highlight {
+            background: rgba(229,0,26,0.07);
+            border: 1px solid rgba(229,0,26,0.16);
+            border-left: 3px solid var(--red);
+            border-radius: 6px;
+            padding: 14px 18px;
+            color: rgba(243,243,243,0.70);
+            font-size: 13px;
+            margin-top: 14px;
+        }
+        .tc-section .highlight strong { color: var(--red); }
+        .last-updated {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 12px;
+            color: rgba(243,243,243,0.30);
+        }
+        .last-updated .ref { color: var(--red); font-family: var(--font-h); letter-spacing: 1px; }
+        footer {
+            background: #040404;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 24px;
+            text-align: center;
+        }
+        footer p {
+            color: rgba(243,243,243,0.28);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        footer .ft-links a {
+            color: rgba(243,243,243,0.38);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-size: 12px;
+            transition: color .2s;
+            margin: 0 8px;
+        }
+        footer .ft-links a:hover { color: var(--gold); }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="priv-nav" aria-label="Navegación principal">
+    <div class="inner">
+        <a href="index.html" class="brand">MARCA <span>ACME</span> FIGHT &amp; FITNESS</a>
+        <a href="index.html" class="back-link">← Volver al sitio principal</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+    <span class="badge">DOCUMENTO LEGAL</span>
+    <h1>Términos y <span>Condiciones</span></h1>
+    <p>Al utilizar nuestras instalaciones, servicios o plataformas digitales, aceptas los términos establecidos en este documento.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+    <div class="tc-intro">
+        <strong>Importante:</strong> Lee este documento detenidamente antes de adquirir cualquier membresía o servicio de <strong>MARCA ACME FIGHT &amp; FITNESS</strong>. Al realizar un pago o registrarte, confirmas que has leído, entendido y aceptado estos términos. Última actualización: <strong>enero 2026</strong>.
+    </div>
+
+    <!-- Sección 1 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">01</span>Definiciones y Partes</h2>
+        <p>Para efectos de este contrato, se establecen las siguientes definiciones:</p>
+        <ul>
+            <li><strong>"ACME" o "el Gimnasio"</strong>: se refiere a MARCA ACME FIGHT &amp; FITNESS, propietario y operador de las instalaciones deportivas en México.</li>
+            <li><strong>"Miembro" o "Usuario"</strong>: toda persona física que adquiera una membresía, clase o servicio ofrecido por ACME.</li>
+            <li><strong>"Servicios"</strong>: incluye el acceso a instalaciones, clases grupales o individuales, uso de equipos y zonas de recuperación.</li>
+            <li><strong>"Membresía"</strong>: contrato de suscripción mensual o anual que otorga acceso al gimnasio bajo los términos aquí descritos.</li>
+            <li><strong>"Plataforma"</strong>: sitio web y medios digitales de ACME Fight &amp; Fitness.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 2 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">02</span>Membresías y Pagos</h2>
+        <p>Las membresías están disponibles en las siguientes modalidades:</p>
+        <ul>
+            <li><strong>Clase Única ($299 MXN/sesión):</strong> Acceso a una sesión de 60 minutos. Sin compromiso de permanencia. Pago anticipado obligatorio.</li>
+            <li><strong>Plan Básico ($1,299 MXN/mes):</strong> Acceso ilimitado a todas las instalaciones y clases grupales durante el período contratado.</li>
+            <li><strong>Plan Élite ($12,999 MXN/año):</strong> Incluye acceso ilimitado, 2 masajes deportivos por mes, asesoría nutricional y plan personalizado de entrenamiento.</li>
+        </ul>
+        <p>Todos los precios están expresados en pesos mexicanos (MXN) e incluyen IVA. ACME se reserva el derecho de modificar tarifas con un aviso previo de <strong>30 días naturales</strong>.</p>
+        <div class="highlight">
+            <strong>Nota sobre el Plan Élite:</strong> El beneficio de "3 meses GRATIS" aplica al comparar el costo anual contra el Plan Básico mensual (12,999 vs. 15,588 MXN/año). El ahorro efectivo es de $2,589 MXN.
+        </div>
+    </div>
+
+    <!-- Sección 3 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">03</span>Cancelaciones y Reembolsos</h2>
+        <p>La política de cancelación de ACME es la siguiente:</p>
+        <ul>
+            <li><strong>Clase Única:</strong> Se puede cancelar hasta <strong>24 horas antes</strong> de la sesión para obtener un crédito aplicable a futuras clases. No se realizan devoluciones en efectivo.</li>
+            <li><strong>Plan Básico (mensual):</strong> Se puede cancelar en cualquier momento. La membresía permanece activa hasta el fin del período pagado. No hay reembolso proporcional por días no utilizados.</li>
+            <li><strong>Plan Élite (anual):</strong> Cancelación posible dentro de los primeros <strong>15 días naturales</strong> con reembolso del 80% del monto pagado. Después de este plazo, no proceden reembolsos.</li>
+            <li><strong>Causas médicas:</strong> Ante justificación médica debidamente documentada, ACME evaluará la suspensión temporal o reembolso parcial caso por caso.</li>
+        </ul>
+        <p>Para iniciar cualquier proceso de cancelación, envía un correo a <strong>soporte@acmecombat.mx</strong> con tu nombre completo, número de referencia y motivo.</p>
+    </div>
+
+    <!-- Sección 4 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">04</span>Normas de Uso de Instalaciones</h2>
+        <p>Al acceder a las instalaciones de ACME, el usuario acepta cumplir con las siguientes normas:</p>
+        <ul>
+            <li>Presentarse puntual a las sesiones reservadas. El ingreso no se permite pasados <strong>10 minutos</strong> del inicio de la clase.</li>
+            <li>Utilizar equipo de protección personal (guantes, protector bucal, etc.) en todas las sesiones de contacto.</li>
+            <li>Respetar a entrenadores, staff y demás miembros en todo momento. Conductas agresivas o de acoso resultarán en suspensión inmediata.</li>
+            <li>No consumir alimentos, alcohol ni sustancias prohibidas dentro de las instalaciones.</li>
+            <li>Devolver todo el equipo a su lugar y dejar el área limpia después de cada uso.</li>
+            <li>Reportar cualquier equipo dañado o situación de seguridad al personal de inmediato.</li>
+            <li>Los menores de edad (programa infantil) deben estar acompañados por un adulto responsable durante el traslado al gimnasio.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 5 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">05</span>Salud, Aptitud y Responsabilidad</h2>
+        <p>El usuario declara estar en condiciones físicas aptas para la práctica de artes marciales mixtas. ACME recomienda realizarse un chequeo médico previo al inicio de cualquier programa de entrenamiento.</p>
+        <ul>
+            <li>ACME no se responsabiliza por lesiones derivadas del incumplimiento de las instrucciones del entrenador o de las normas de seguridad establecidas.</li>
+            <li>En caso de condición médica preexistente, el miembro debe informarlo al entrenador antes de iniciar cualquier actividad.</li>
+            <li>Los usuarios participan en actividades de contacto físico bajo su propia responsabilidad y con pleno conocimiento de los riesgos inherentes al deporte.</li>
+            <li>ACME cuenta con personal capacitado en primeros auxilios y protocolos de emergencia dentro de las instalaciones.</li>
+        </ul>
+        <div class="highlight">
+            <strong>Programa Infantil:</strong> Los padres o tutores legales son responsables de la integridad y conducta de los menores dentro y fuera de las instalaciones. El entrenador infantil está certificado y supervisado en todo momento.
+        </div>
+    </div>
+
+    <!-- Sección 6 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">06</span>Propiedad Intelectual</h2>
+        <p>Todos los contenidos del sitio web de ACME Fight &amp; Fitness —incluyendo logotipos, diseños, textos, imágenes, videos y metodología de entrenamiento— son propiedad de MARCA ACME FIGHT &amp; FITNESS y están protegidos por las leyes de propiedad intelectual mexicanas.</p>
+        <ul>
+            <li>Queda prohibida la reproducción, distribución o uso comercial de cualquier contenido sin autorización expresa y por escrito de ACME.</li>
+            <li>El nombre comercial "MARCA ACME", "ACME Fight &amp; Fitness" y sus variantes son marcas registradas.</li>
+            <li>Las fotografías o videos del interior del gimnasio no pueden publicarse en redes sociales sin autorización, si incluyen a terceros identificables.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 7 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">07</span>Modificaciones a los Términos</h2>
+        <p>ACME se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán notificados a los miembros activos mediante:</p>
+        <ul>
+            <li>Correo electrónico al email registrado con <strong>15 días de anticipación</strong>.</li>
+            <li>Publicación actualizada en el sitio web oficial.</li>
+            <li>Aviso visible en las instalaciones del gimnasio.</li>
+        </ul>
+        <p>El uso continuado de los servicios tras la entrada en vigor de los cambios implica la aceptación de los nuevos términos.</p>
+    </div>
+
+    <!-- Sección 8 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">08</span>Ley Aplicable y Jurisdicción</h2>
+        <p>Estos Términos y Condiciones se rigen por las leyes vigentes de los <strong>Estados Unidos Mexicanos</strong>. Para cualquier controversia derivada de la interpretación o cumplimiento de este documento, las partes se someten a la jurisdicción de los tribunales competentes de México.</p>
+        <p>Para consultas, reclamaciones o ejercicio de derechos, puedes contactarnos en:</p>
+        <ul>
+            <li><strong>Correo electrónico:</strong> soporte@acmecombat.mx</li>
+            <li><strong>Referencia única:</strong> ACC-2026-7849X</li>
+            <li><strong>Horario de atención:</strong> Lun–Vie 5:00 AM – 9:00 PM | Sáb–Dom 7:00 AM – 6:00 PM</li>
+        </ul>
+    </div>
+
+    <div class="last-updated">
+        <span>© 2026 MARCA ACME FIGHT &amp; FITNESS · México. Todos los derechos reservados.</span>
+        <span class="ref">ACC-2026-7849X</span>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 ACME Fight &amp; Fitness · México</p>
+    <div class="ft-links">
+        <a href="index.html">Inicio</a>
+        <a href="privacy.html" target="_blank">Política de Privacidad</a>
+        <a href="faq.html" target="_blank">Preguntas Frecuentes</a>
+    </div>
+</footer>
+
+</body>
+</html>
