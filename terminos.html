@@ -256,6 +256,20 @@
             font-size: 11px;
             color: rgba(243,243,243,0.18);
         }
+        #langBtn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: rgba(243,243,243,0.55);
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color .2s, border-color .2s;
+            text-transform: uppercase;
+        }
+        #langBtn:hover, #langBtn.active { color: var(--gold); border-color: var(--gold); }
     </style>
 </head>
 <body>
@@ -263,15 +277,18 @@
 <nav class="priv-nav" aria-label="Navegación principal">
     <div class="inner">
         <a href="index.html" class="brand">MARCA <span>ACME</span> FIGHT &amp; FITNESS</a>
-        <a href="index.html" class="back-link">← Volver al sitio principal</a>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <a href="index.html" id="backBtn" class="back-link">← Volver al sitio principal</a>
+            <button id="langBtn" onclick="window.toggleTermsLang()" aria-label="Switch language">EN</button>
+        </div>
     </div>
 </nav>
 
 <div class="page-hero">
-    <span class="badge">DOCUMENTO LEGAL · CONTRATO DE SERVICIOS</span>
-    <h1>Términos y <span>Condiciones</span></h1>
-    <p>Al utilizar nuestras instalaciones, adquirir una membresía o acceder a nuestros servicios digitales, aceptas los términos y condiciones establecidos en el presente contrato.</p>
-    <span class="legal-ref">LFPC · CÓDIGO CIVIL FEDERAL · NOM-247-SE-2021 · PROFECO</span>
+    <span class="badge" data-i18n="hero.badge">DOCUMENTO LEGAL · CONTRATO DE SERVICIOS</span>
+    <h1 data-i18n="hero.h1">Términos y <span>Condiciones</span></h1>
+    <p data-i18n="hero.p">Al utilizar nuestras instalaciones, adquirir una membresía o acceder a nuestros servicios digitales, aceptas los términos y condiciones establecidos en el presente contrato.</p>
+    <span class="legal-ref" data-i18n="hero.ref">LFPC · CÓDIGO CIVIL FEDERAL · NOM-247-SE-2021 · PROFECO</span>
 </div>
 
 <div class="content-wrap">
@@ -507,17 +524,125 @@
 </div>
 
 <footer>
-    <p>© 2026 ACME Fight &amp; Fitness · Ciudad de México, México</p>
+    <p data-i18n="footer.copy">© 2026 ACME Fight &amp; Fitness · Ciudad de México, México</p>
     <div class="ft-links">
-        <a href="index.html">Inicio</a>
-        <a href="privacy.html" target="_blank">Política de Privacidad</a>
-        <a href="faq.html" target="_blank">Preguntas Frecuentes</a>
+        <a href="index.html" data-i18n="footer.home">Inicio</a>
+        <a href="privacy.html" target="_blank" data-i18n="footer.privacy">Política de Privacidad</a>
+        <a href="faq.html" target="_blank" data-i18n="footer.faq">Preguntas Frecuentes</a>
     </div>
-    <p class="legal-footer-note">
+    <p class="legal-footer-note" data-i18n="footer.legal">
         Documento elaborado conforme a la LFPC (D.O.F. 24-12-1992 y reformas), Código Civil Federal,
         NOM-247-SE-2021 y la LFPDPPP (D.O.F. 05-07-2010).
     </p>
 </footer>
+
+<script>
+(function(){
+    var DICT = {
+        es: {
+            'hero.badge': 'DOCUMENTO LEGAL · CONTRATO DE SERVICIOS',
+            'hero.h1':    'Términos y <span>Condiciones</span>',
+            'hero.p':     'Al utilizar nuestras instalaciones, adquirir una membresía o acceder a nuestros servicios digitales, aceptas los términos y condiciones establecidos en el presente contrato.',
+            'hero.ref':   'LFPC · CÓDIGO CIVIL FEDERAL · NOM-247-SE-2021 · PROFECO',
+            'footer.copy':    '© 2026 ACME Fight &amp; Fitness · Ciudad de México, México',
+            'footer.home':    'Inicio',
+            'footer.privacy': 'Política de Privacidad',
+            'footer.faq':     'Preguntas Frecuentes',
+            'footer.legal':   'Documento elaborado conforme a la LFPC (D.O.F. 24-12-1992 y reformas), Código Civil Federal, NOM-247-SE-2021 y la LFPDPPP (D.O.F. 05-07-2010).'
+        },
+        en: {
+            'hero.badge': 'LEGAL DOCUMENT · SERVICE AGREEMENT',
+            'hero.h1':    'Terms &amp; <span>Conditions</span>',
+            'hero.p':     'By using our facilities, purchasing a membership or accessing our digital services, you agree to the terms and conditions set forth in this agreement.',
+            'hero.ref':   'LFPC · FEDERAL CIVIL CODE · NOM-247-SE-2021 · PROFECO',
+            'footer.copy':    '© 2026 ACME Fight &amp; Fitness · Mexico City, Mexico',
+            'footer.home':    'Home',
+            'footer.privacy': 'Privacy Policy',
+            'footer.faq':     'FAQ',
+            'footer.legal':   'Document prepared in accordance with LFPC (D.O.F. 24-12-1992 and amendments), Federal Civil Code, NOM-247-SE-2021 and LFPDPPP (D.O.F. 05-07-2010).'
+        }
+    };
+
+    var sectionsES = [
+        'Partes Contratantes y Definiciones',
+        'Membresías, Precios y Condiciones de Pago',
+        'Derecho de Rescisión y Cancelaciones',
+        'Obligaciones del Proveedor',
+        'Normas de Uso de Instalaciones',
+        'Salud, Aptitud Física y Deslinde de Responsabilidad',
+        'Propiedad Intelectual',
+        'Contrato de Adhesión y Cláusulas Abusivas',
+        'Modificaciones a los Términos y Condiciones',
+        'Protección al Consumidor y Medios de Defensa',
+        'Ley Aplicable y Jurisdicción'
+    ];
+
+    var sectionsEN = [
+        'Contracting Parties and Definitions',
+        'Memberships, Prices and Payment Terms',
+        'Right of Rescission and Cancellations',
+        'Provider Obligations',
+        'Facility Use Rules',
+        'Health, Physical Fitness and Disclaimer of Liability',
+        'Intellectual Property',
+        'Adhesion Contract and Abusive Clauses',
+        'Amendments to Terms and Conditions',
+        'Consumer Protection and Legal Remedies',
+        'Applicable Law and Jurisdiction'
+    ];
+
+    function applyLang(lang) {
+        // data-i18n elements
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (DICT[lang] && DICT[lang][key] !== undefined) {
+                el.innerHTML = DICT[lang][key];
+            }
+        });
+
+        // Section headings (h2.tc-section-title) – preserve .num span
+        var headings = document.querySelectorAll('h2.tc-section-title');
+        var titles = lang === 'en' ? sectionsEN : sectionsES;
+        headings.forEach(function(h2, i) {
+            if (titles[i] !== undefined) {
+                var numSpan = h2.querySelector('.num');
+                var numHTML = numSpan ? numSpan.outerHTML : '';
+                h2.innerHTML = numHTML + titles[i];
+            }
+        });
+
+        // Back link
+        var backBtn = document.getElementById('backBtn');
+        if (backBtn) {
+            backBtn.innerHTML = lang === 'en' ? '← Back to main site' : '← Volver al sitio principal';
+        }
+
+        // langBtn
+        var btn = document.getElementById('langBtn');
+        if (btn) {
+            btn.textContent = lang === 'en' ? 'ES' : 'EN';
+            btn.classList.toggle('active', lang === 'en');
+        }
+
+        // html lang attr + title
+        document.documentElement.lang = lang;
+        document.title = lang === 'en'
+            ? 'Terms & Conditions · ACME Fight & Fitness'
+            : 'Términos y Condiciones · ACME Fight & Fitness';
+    }
+
+    window.toggleTermsLang = function() {
+        var cur = localStorage.getItem('lang') || 'es';
+        var next = cur === 'es' ? 'en' : 'es';
+        localStorage.setItem('lang', next);
+        applyLang(next);
+    };
+
+    // Init on load
+    var saved = localStorage.getItem('lang') || 'es';
+    if (saved !== 'es') applyLang(saved);
+})();
+</script>
 
 </body>
 </html>

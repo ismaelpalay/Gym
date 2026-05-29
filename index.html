@@ -297,6 +297,23 @@
             transform: translateY(-2px);
             box-shadow: 0 0 22px rgba(201,168,76,0.55), 0 6px 18px rgba(0,0,0,0.4) !important;
         }
+        /* Language switcher button */
+        #langBtn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: var(--muted-l);
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--t);
+            text-transform: uppercase;
+        }
+        #langBtn:hover,
+        #langBtn.active { color: var(--gold); border-color: var(--gold); }
+
         .nav-hamburger {
             display: none;
             flex-direction: column;
@@ -313,6 +330,32 @@
             background: var(--white);
             border-radius: 1px;
             transition: var(--t);
+        }
+
+        /* Language switcher button */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(243,243,243,0.65);
+            font-family: 'Oswald', 'Arial Narrow', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        .lang-btn:hover, .lang-btn:focus {
+            color: var(--gold);
+            border-color: var(--gold);
+            outline: none;
+        }
+        .lang-btn.active-lang {
+            color: var(--gold);
+            border-color: var(--gold);
         }
 
         @media (max-width: 940px) {
@@ -2051,14 +2094,15 @@
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#espacios">Espacios</a></li>
-                <li><a href="#mapa">Mapa</a></li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#clases">Clases</a></li>
-                <li><a href="#recuperacion">Recuperación</a></li>
-                <li><a href="#kids">Niños</a></li>
-                <li><a href="#planes" class="nav-cta">Unirse Ahora</a></li>
+                <li><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+                <li><a href="#espacios" data-i18n="nav.spaces">Espacios</a></li>
+                <li><a href="#mapa" data-i18n="nav.map">Mapa</a></li>
+                <li><a href="#planes" data-i18n="nav.plans">Planes</a></li>
+                <li><a href="#clases" data-i18n="nav.classes">Clases</a></li>
+                <li><a href="#recuperacion" data-i18n="nav.recovery">Recuperación</a></li>
+                <li><a href="#kids" data-i18n="nav.kids">Niños</a></li>
+                <li><a href="#planes" class="nav-cta" data-i18n="nav.join">Unirse Ahora</a></li>
+                <li><button id="langBtn" onclick="window.toggleLang()" aria-label="Switch language">EN</button></li>
             </ul>
 
             <button class="nav-hamburger" id="hamburger" aria-label="Menú">
@@ -2086,7 +2130,7 @@
             <div class="hero-eyebrow fade-in">
                 <span class="hero-eyebrow-tag">México 🥊 2026</span>
                 <span class="hero-eyebrow-sep"></span>
-                <span class="hero-eyebrow-tag">Plan MMA Premium</span>
+                <span class="hero-eyebrow-tag" data-i18n="hero.pretag">Plan MMA Premium</span>
             </div>
 
             <p class="hero-pretitle fade-in" data-delay="1">Marca ACME</p>
@@ -2096,9 +2140,9 @@
                 <span class="l2" data-split="char" data-anim="neon">Fitness</span>
             </h1>
 
-            <p class="hero-subtitle" data-split="word" data-anim="blur">La Evolución del Combate Comienza en Familia</p>
+            <p class="hero-subtitle" data-split="word" data-anim="blur" data-text-es="La Evolución del Combate Comienza en Familia" data-text-en="The Evolution of Combat Begins as a Family">La Evolución del Combate Comienza en Familia</p>
 
-            <p class="hero-desc fade-in" data-delay="4">
+            <p class="hero-desc fade-in" data-delay="4" data-i18n="hero.desc">
                 Centro MMA de clase mundial diseñado para atletas comprometidos.
                 Octágono profesional de alto rendimiento, nueve áreas especializadas y capacidad para 20 atletas simultáneos
                 en 600 m² distribuidos en dos plantas.
@@ -2113,15 +2157,15 @@
             <div class="hero-stats-inner">
                 <div class="hero-stat">
                     <div class="hero-stat-num" data-count="1">1</div>
-                    <div class="hero-stat-label">Octágono</div>
+                    <div class="hero-stat-label" data-i18n="hero.stat1">Octágono</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-num" data-count="9">9</div>
-                    <div class="hero-stat-label">Áreas Especializadas</div>
+                    <div class="hero-stat-label" data-i18n="hero.stat2">Áreas Especializadas</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-num" data-count="20">20</div>
-                    <div class="hero-stat-label">Atletas Simultáneos</div>
+                    <div class="hero-stat-label" data-i18n="hero.stat3">Atletas Simultáneos</div>
                 </div>
             </div>
         </div>
@@ -2135,15 +2179,15 @@
     <div class="container">
         <div class="espacios-head">
             <div>
-                <p class="section-label" data-split="word" data-anim="bounce">01 — Espacios</p>
-                <h2 class="section-title" data-split="char" data-anim="glitch">Áreas <span>Especializadas</span></h2>
+                <p class="section-label" data-split="word" data-anim="bounce" data-text-es="01 — Espacios" data-text-en="01 — Spaces">01 — Espacios</p>
+                <h2 class="section-title" data-split="char" data-anim="glitch" data-text-es="Áreas Especializadas" data-text-en="Specialized Areas">Áreas <span>Especializadas</span></h2>
             </div>
             <div class="tab-group" role="tablist">
-                <button class="tab-btn active" data-tab="all">Todas</button>
-                <button class="tab-btn" data-tab="combate">Combate</button>
-                <button class="tab-btn" data-tab="fuerza">Fuerza</button>
-                <button class="tab-btn" data-tab="recuperacion">Recuperación</button>
-                <button class="tab-btn" data-tab="familia">Familia</button>
+                <button class="tab-btn active" data-tab="all" data-i18n="spaces.tab.all">Todas</button>
+                <button class="tab-btn" data-tab="combate" data-i18n="spaces.tab.combat">Combate</button>
+                <button class="tab-btn" data-tab="fuerza" data-i18n="spaces.tab.strength">Fuerza</button>
+                <button class="tab-btn" data-tab="recuperacion" data-i18n="spaces.tab.recovery">Recuperación</button>
+                <button class="tab-btn" data-tab="familia" data-i18n="spaces.tab.family">Familia</button>
             </div>
         </div>
 
@@ -2155,10 +2199,10 @@
                     🥊
                 </div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Octágono Principal</h3>
-                    <p class="space-card-desc">Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c1.title">Octágono Principal</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c1.desc">Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.</p>
                     <div class="space-card-actions">
-                        <a href="#mapa" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Mapa</a>
+                        <a href="#mapa" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.map">Ver Mapa</a>
                     </div>
                 </div>
             </div>
@@ -2166,10 +2210,10 @@
             <div class="space-card fade-in" data-delay="1" data-cat="combate">
                 <div class="space-card-img">🤼</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Zona de Tatami</h3>
-                    <p class="space-card-desc">150 m² de tatami de alta densidad para grappling, wrestling y calentamiento. Superficie amortiguadora certificada.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c2.title">Zona de Tatami</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c2.desc">150 m² de tatami de alta densidad para grappling, wrestling y calentamiento. Superficie amortiguadora certificada.</p>
                     <div class="space-card-actions">
-                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.plans">Ver Planes</a>
                     </div>
                 </div>
             </div>
@@ -2177,10 +2221,10 @@
             <div class="space-card fade-in" data-delay="2" data-cat="combate">
                 <div class="space-card-img">🧱</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Área de Costales</h3>
-                    <p class="space-card-desc">10–12 costales profesionales de distintos pesos. Desarrollo de potencia, cadencia y resistencia específica.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c3.title">Área de Costales</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c3.desc">10–12 costales profesionales de distintos pesos. Desarrollo de potencia, cadencia y resistencia específica.</p>
                     <div class="space-card-actions">
-                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.plans">Ver Planes</a>
                     </div>
                 </div>
             </div>
@@ -2189,10 +2233,10 @@
             <div class="space-card fade-in" data-delay="3" data-cat="fuerza">
                 <div class="space-card-img">🏋️</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Sala de Pesas</h3>
-                    <p class="space-card-desc">Equipamiento completo de fuerza. Rutinas prescritas según perfil atlético. Disponible post-clase incluido en Básico.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c4.title">Sala de Pesas</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c4.desc">Equipamiento completo de fuerza. Rutinas prescritas según perfil atlético. Disponible post-clase incluido en Básico.</p>
                     <div class="space-card-actions">
-                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Ver Planes</a>
+                        <a href="#planes" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.plans">Ver Planes</a>
                     </div>
                 </div>
             </div>
@@ -2201,10 +2245,10 @@
             <div class="space-card fade-in" data-cat="recuperacion">
                 <div class="space-card-img">❄️</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Crioterapia</h3>
-                    <p class="space-card-desc">3–4 tinas de inmersión en frío a 8–12 °C para reducción de inflamación y recuperación acelerada.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c5.title">Crioterapia</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c5.desc">3–4 tinas de inmersión en frío a 8–12 °C para reducción de inflamación y recuperación acelerada.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.info">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -2212,10 +2256,10 @@
             <div class="space-card fade-in" data-delay="1" data-cat="recuperacion">
                 <div class="space-card-img">🌡️</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Sauna Seco</h3>
-                    <p class="space-card-desc">Sauna de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda post-entrenamiento.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c6.title">Sauna Seco</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c6.desc">Sauna de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda post-entrenamiento.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.info">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -2223,10 +2267,10 @@
             <div class="space-card fade-in" data-delay="2" data-cat="recuperacion">
                 <div class="space-card-img">🛌</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Masajes &amp; Fisioterapia</h3>
-                    <p class="space-card-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones con fisioterapeuta certificado.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c7.title">Masajes &amp; Fisioterapia</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c7.desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones con fisioterapeuta certificado.</p>
                     <div class="space-card-actions">
-                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
+                        <a href="#recuperacion" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.info">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -2235,10 +2279,10 @@
             <div class="space-card fade-in" data-cat="familia">
                 <div class="space-card-img">🧒</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Zona Niños MMA</h3>
-                    <p class="space-card-desc">Área de tatami especializada, equipo de protección completo y entrenamiento supervisado.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c8.title">Zona Niños MMA</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c8.desc">Área de tatami especializada, equipo de protección completo y entrenamiento supervisado.</p>
                     <div class="space-card-actions">
-                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.info">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -2246,10 +2290,10 @@
             <div class="space-card fade-in" data-delay="1" data-cat="familia">
                 <div class="space-card-img">👨‍👩‍👧</div>
                 <div class="space-card-body">
-                    <h3 class="space-card-title">Zona de Padres</h3>
-                    <p class="space-card-desc">Área de descanso con visibilidad directa al entrenamiento infantil. Ambiente familiar, seguro y motivador.</p>
+                    <h3 class="space-card-title" data-i18n="spaces.c9.title">Zona de Padres</h3>
+                    <p class="space-card-desc" data-i18n="spaces.c9.desc">Área de descanso con visibilidad directa al entrenamiento infantil. Ambiente familiar, seguro y motivador.</p>
                     <div class="space-card-actions">
-                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;">Más Información</a>
+                        <a href="#kids" class="btn btn-outline" style="font-size:11px;padding:9px 16px;" data-i18n="spaces.btn.info">Más Información</a>
                     </div>
                 </div>
             </div>
@@ -2265,17 +2309,17 @@
 ================================================================ -->
 <section id="mapa" class="section mapa">
     <div class="container">
-        <p class="section-label" data-split="word" data-anim="zoom">03 — Distribución</p>
-        <h2 class="section-title" data-split="char" data-anim="blur">Mapa Conceptual</h2>
-        <p class="mapa-intro fade-in" data-delay="2">
+        <p class="section-label" data-split="word" data-anim="zoom" data-text-es="03 — Distribución" data-text-en="03 — Layout">03 — Distribución</p>
+        <h2 class="section-title" data-split="char" data-anim="blur" data-text-es="Mapa Conceptual" data-text-en="Gym Map">Mapa Conceptual</h2>
+        <p class="mapa-intro fade-in" data-delay="2" data-i18n="map.intro">
             2 Pisos × 300 m² · 600 m² totales. La planta baja concentra el 60% del espacio en zonas de tatami,
             ideal para grappling y calentamiento. La planta alta alberga el octágono principal rodeado por las áreas
             infantil, de padres y de recuperación.
         </p>
 
         <div class="floor-tabs fade-in" data-delay="3">
-            <button class="floor-tab active" data-floor="baja">Planta Baja</button>
-            <button class="floor-tab"        data-floor="alta">Planta Alta</button>
+            <button class="floor-tab active" data-floor="baja" data-i18n="map.floor1">Planta Baja</button>
+            <button class="floor-tab"        data-floor="alta" data-i18n="map.floor2">Planta Alta</button>
         </div>
 
         <!-- ── PLANTA BAJA ── -->
@@ -2350,22 +2394,22 @@
             </div>
 
             <div class="floor-legend">
-                <p class="floor-legend-title">Planta Baja · 300 m²</p>
+                <p class="floor-legend-title" data-i18n="map.floor1.title">Planta Baja · 300 m²</p>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#48C872"></div>
-                    <div><p class="legend-text">Zona de Tatami (60%)</p><p class="legend-sub">Grappling 180 m² + Calentamiento 150 m²</p></div>
+                    <div><p class="legend-text" data-i18n="map.baja.l1">Zona de Tatami (60%)</p><p class="legend-sub" data-i18n="map.baja.l1s">Grappling 180 m² + Calentamiento 150 m²</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#C93520"></div>
-                    <div><p class="legend-text">Área de Costales / Box</p><p class="legend-sub">10–12 costales · Área de impacto</p></div>
+                    <div><p class="legend-text" data-i18n="map.baja.l2">Área de Costales / Box</p><p class="legend-sub" data-i18n="map.baja.l2s">10–12 costales · Área de impacto</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#7090C8"></div>
-                    <div><p class="legend-text">Sala de Pesas / Cardio</p><p class="legend-sub">Fuerza y acondicionamiento</p></div>
+                    <div><p class="legend-text" data-i18n="map.baja.l3">Sala de Pesas / Cardio</p><p class="legend-sub" data-i18n="map.baja.l3s">Fuerza y acondicionamiento</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#E5001A;opacity:0.5"></div>
-                    <div><p class="legend-text">Recepción / Vestidores</p><p class="legend-sub">Acceso principal</p></div>
+                    <div><p class="legend-text" data-i18n="map.baja.l4">Recepción / Vestidores</p><p class="legend-sub" data-i18n="map.baja.l4s">Acceso principal</p></div>
                 </div>
             </div>
         </div>
@@ -2438,30 +2482,30 @@
             </div>
 
             <div class="floor-legend">
-                <p class="floor-legend-title">Planta Alta · 300 m²</p>
+                <p class="floor-legend-title" data-i18n="map.floor2.title">Planta Alta · 300 m²</p>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#E5001A"></div>
-                    <div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m · Centro de combate</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l1">Octágono Principal</p><p class="legend-sub" data-i18n="map.alta.l1s">Ø 9.1 m · Centro de combate</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#FFB432"></div>
-                    <div><p class="legend-text">Zona Niños MMA</p><p class="legend-sub">Tatami acolchado · Entrenamiento infantil</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l2">Zona Niños MMA</p><p class="legend-sub" data-i18n="map.alta.l2s">Tatami acolchado · Entrenamiento infantil</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#E5001A;opacity:0.45"></div>
-                    <div><p class="legend-text">Zona de Padres</p><p class="legend-sub">Vista directa · Área descanso</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l3">Zona de Padres</p><p class="legend-sub" data-i18n="map.alta.l3s">Vista directa · Área descanso</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#5090CC"></div>
-                    <div><p class="legend-text">Crioterapia</p><p class="legend-sub">3–4 tinas · 8–12 °C</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l4">Crioterapia</p><p class="legend-sub" data-i18n="map.alta.l4s">3–4 tinas · 8–12 °C</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#C86420"></div>
-                    <div><p class="legend-text">Sauna Seco</p><p class="legend-sub">70–95 °C · 8–10 pax</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l5">Sauna Seco</p><p class="legend-sub" data-i18n="map.alta.l5s">70–95 °C · 8–10 pax</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#A068C8"></div>
-                    <div><p class="legend-text">Masajes &amp; Fisioterapia</p><p class="legend-sub">2–3 camillas · Fisioterapeuta certificado</p></div>
+                    <div><p class="legend-text" data-i18n="map.alta.l6">Masajes &amp; Fisioterapia</p><p class="legend-sub" data-i18n="map.alta.l6s">2–3 camillas · Fisioterapeuta certificado</p></div>
                 </div>
             </div>
         </div>
@@ -2476,74 +2520,74 @@
 <section id="planes" class="section membresias">
     <div class="container">
         <div class="membresias-hd fade-in">
-            <p class="section-label" data-split="word" data-anim="fade-up">02 — Membresías</p>
-            <h2 class="section-title" data-split="char" data-anim="neon">Planes de Suscripción</h2>
+            <p class="section-label" data-split="word" data-anim="fade-up" data-text-es="02 — Membresías" data-text-en="02 — Memberships">02 — Membresías</p>
+            <h2 class="section-title" data-split="char" data-anim="neon" data-text-es="Planes de Suscripción" data-text-en="Subscription Plans">Planes de Suscripción</h2>
         </div>
 
         <div class="plans-grid">
 
             <!-- Clase Única -->
             <div class="plan-card fade-in">
-                <p class="plan-type">Entrada Abierta</p>
-                <h3 class="plan-name" data-split="char" data-anim="glitch">Clase Única</h3>
+                <p class="plan-type" data-i18n="plans.p1.type">Entrada Abierta</p>
+                <h3 class="plan-name" data-split="char" data-anim="glitch" data-text-es="Clase Única" data-text-en="Single Class">Clase Única</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">299</span>
                 </div>
-                <p class="plan-period">Por sesión · Sin compromiso</p>
+                <p class="plan-period" data-i18n="plans.p1.period">Por sesión · Sin compromiso</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="chk">✓</span>1 clase de 60 minutos</li>
-                    <li><span class="chk">✓</span>Acceso a instalaciones</li>
-                    <li><span class="chk">✓</span>Entrenador certificado</li>
-                    <li class="dim"><span class="chk">—</span>Acceso a fisioterapia</li>
-                    <li class="dim"><span class="chk">—</span>Toalla incluida</li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f1">1 clase de 60 minutos</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f2">Acceso a instalaciones</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f3">Entrenador certificado</span></li>
+                    <li class="dim"><span class="chk">—</span><span data-i18n="plans.p1.f4">Acceso a fisioterapia</span></li>
+                    <li class="dim"><span class="chk">—</span><span data-i18n="plans.p1.f5">Toalla incluida</span></li>
                 </ul>
-                <button onclick="openModal('modal-clase')" class="btn btn-red plan-btn">Reservar Clase</button>
+                <button onclick="openModal('modal-clase')" class="btn btn-red plan-btn" data-i18n="plans.p1.btn">Reservar Clase</button>
             </div>
 
             <!-- Mensual BÁSICO (featured) -->
             <div class="plan-card featured fade-in" data-delay="2">
-                <div class="plan-badge">⭐ Recomendado</div>
-                <p class="plan-type">Mensual</p>
-                <h3 class="plan-name" data-split="char" data-anim="neon">Básico</h3>
+                <div class="plan-badge" data-i18n="plans.p2.badge">⭐ Recomendado</div>
+                <p class="plan-type" data-i18n="plans.p2.type">Mensual</p>
+                <h3 class="plan-name" data-split="char" data-anim="neon" data-text-es="Básico" data-text-en="Basic">Básico</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">1,299</span>
                 </div>
-                <p class="plan-period">Clases ilimitadas · Cancelable</p>
+                <p class="plan-period" data-i18n="plans.p2.period">Clases ilimitadas · Cancelable</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="chk">✓</span>Clases ilimitadas (90 min)</li>
-                    <li><span class="chk">✓</span>Acceso 24/7 a instalaciones</li>
-                    <li><span class="chk">✓</span>Sala de pesas incluida</li>
-                    <li><span class="chk">✓</span>Crioterapia &amp; sauna</li>
-                    <li><span class="chk">✓</span>Fisioterapia básica</li>
-                    <li><span class="chk">✓</span>Comunidad ACME</li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f1">Clases ilimitadas (90 min)</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f2">Acceso 24/7 a instalaciones</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f3">Sala de pesas incluida</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f4">Crioterapia &amp; sauna</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f5">Fisioterapia básica</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f6">Comunidad ACME</span></li>
                 </ul>
-                <button onclick="openModal('modal-membresia','Básico')" class="btn btn-red plan-btn" style="background:var(--gold);border-color:var(--gold);color:#000;font-weight:700;">Inscribirme Ahora</button>
+                <button onclick="openModal('modal-membresia','Básico')" class="btn btn-red plan-btn" style="background:var(--gold);border-color:var(--gold);color:#000;font-weight:700;" data-i18n="plans.join">Inscribirme Ahora</button>
             </div>
 
             <!-- Élite -->
             <div class="plan-card fade-in" data-delay="4">
-                <p class="plan-type">Anual + Beneficios</p>
-                <h3 class="plan-name" data-split="char" data-anim="bounce">Élite</h3>
+                <p class="plan-type" data-i18n="plans.p3.type">Anual + Beneficios</p>
+                <h3 class="plan-name" data-split="char" data-anim="bounce" data-text-es="Élite" data-text-en="Elite">Élite</h3>
                 <div class="plan-price">
                     <span class="plan-curr">$</span>
                     <span class="plan-amount">12,999</span>
                 </div>
-                <p class="plan-period">12 meses · 3 meses gratis</p>
+                <p class="plan-period" data-i18n="plans.p3.period">12 meses · 3 meses gratis</p>
                 <div class="plan-divider"></div>
                 <ul class="plan-features">
-                    <li><span class="chk">✓</span>Todo lo del plan Básico</li>
-                    <li><span class="chk">✓</span>Masajes deportivos 2×/mes</li>
-                    <li><span class="chk">✓</span>Asesoría nutricional</li>
-                    <li><span class="chk">✓</span>Plan personalizado</li>
-                    <li><span class="chk">✓</span>Seminarios privados</li>
-                    <li><span class="chk">✓</span>Prioridad en octágono</li>
-                    <li><span class="chk">✓</span>Descuento en eventos</li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f1">Todo lo del plan Básico</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f2">Masajes deportivos 2×/mes</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f3">Asesoría nutricional</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f4">Plan personalizado</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f5">Seminarios privados</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f6">Prioridad en octágono</span></li>
+                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f7">Descuento en eventos</span></li>
                 </ul>
-                <button onclick="openModal('modal-membresia','Élite')" class="btn btn-red plan-btn">Inscribirme Ahora</button>
+                <button onclick="openModal('modal-membresia','Élite')" class="btn btn-red plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
             </div>
         </div>
 
@@ -2552,14 +2596,14 @@
             <div class="plans-contact-item">
                 <div class="plans-contact-icon">📧</div>
                 <div>
-                    <p class="plans-contact-lbl">Correo · Disponible 24/7</p>
+                    <p class="plans-contact-lbl" data-i18n="contact.email.lbl">Correo · Disponible 24/7</p>
                     <p class="plans-contact-val">soporte@acmecombat.mx</p>
                 </div>
             </div>
             <div class="plans-contact-item">
                 <div class="plans-contact-icon">🔖</div>
                 <div>
-                    <p class="plans-contact-lbl">Referencia única</p>
+                    <p class="plans-contact-lbl" data-i18n="contact.ref.lbl">Referencia única</p>
                     <p class="plans-contact-val" style="color:var(--red);">ACC-2026-7849X</p>
                 </div>
             </div>
@@ -2574,8 +2618,8 @@
 ================================================================ -->
 <section id="clases" class="section clases">
     <div class="container">
-        <p class="section-label" data-split="word" data-anim="bounce">04 — Operación</p>
-        <h2 class="section-title" data-split="char" data-anim="rotate">Modelo de Clases</h2>
+        <p class="section-label" data-split="word" data-anim="bounce" data-text-es="04 — Operación" data-text-en="04 — Operations">04 — Operación</p>
+        <h2 class="section-title" data-split="char" data-anim="rotate" data-text-es="Modelo de Clases" data-text-en="Class Model">Modelo de Clases</h2>
 
         <div class="clases-grid">
             <!-- Timeline -->
@@ -2584,62 +2628,62 @@
                     <div class="tl-num">01</div>
                     <div class="tl-body">
                         <p class="tl-dur">15 min.</p>
-                        <h3 class="tl-title">Calentamiento General</h3>
-                        <p class="tl-desc">Activación cardiovascular y movilidad articular con todo el grupo de 10 atletas.</p>
+                        <h3 class="tl-title" data-i18n="classes.tl1.title">Calentamiento General</h3>
+                        <p class="tl-desc" data-i18n="classes.tl1.desc">Activación cardiovascular y movilidad articular con todo el grupo de 10 atletas.</p>
                     </div>
                 </div>
                 <div class="tl-item fade-in" data-delay="1">
                     <div class="tl-num">02</div>
                     <div class="tl-body">
                         <p class="tl-dur">25 min.</p>
-                        <h3 class="tl-title">Técnica Específica</h3>
-                        <p class="tl-desc">Instrucción técnica dirigida: golpes, defensa, control de distancia o derribo. Striking / Grappling.</p>
+                        <h3 class="tl-title" data-i18n="classes.tl2.title">Técnica Específica</h3>
+                        <p class="tl-desc" data-i18n="classes.tl2.desc">Instrucción técnica dirigida: golpes, defensa, control de distancia o derribo. Striking / Grappling.</p>
                     </div>
                 </div>
                 <div class="tl-item fade-in" data-delay="2">
                     <div class="tl-num">03</div>
                     <div class="tl-body">
                         <p class="tl-dur">15 min.</p>
-                        <h3 class="tl-title">Circuito de Costales</h3>
-                        <p class="tl-desc">Rotación por costales desarrollando potencia, cadencia y resistencia específica.</p>
+                        <h3 class="tl-title" data-i18n="classes.tl3.title">Circuito de Costales</h3>
+                        <p class="tl-desc" data-i18n="classes.tl3.desc">Rotación por costales desarrollando potencia, cadencia y resistencia específica.</p>
                     </div>
                 </div>
                 <div class="tl-item fade-in" data-delay="3">
                     <div class="tl-num">04</div>
                     <div class="tl-body">
                         <p class="tl-dur">20 min.</p>
-                        <h3 class="tl-title">Sparring / Drilling en Octágono</h3>
-                        <p class="tl-desc">Aplicación táctica dentro del octágono, en parejas rotativas supervisadas.</p>
+                        <h3 class="tl-title" data-i18n="classes.tl4.title">Sparring / Drilling en Octágono</h3>
+                        <p class="tl-desc" data-i18n="classes.tl4.desc">Aplicación táctica dentro del octágono, en parejas rotativas supervisadas.</p>
                     </div>
                 </div>
                 <div class="tl-item fade-in" data-delay="4">
                     <div class="tl-num">05</div>
                     <div class="tl-body">
                         <p class="tl-dur">15 min.</p>
-                        <h3 class="tl-title">Fuerza Complementaria</h3>
-                        <p class="tl-desc">Opcionales en sala de pesas con rutina prescrita según perfil del atleta.</p>
+                        <h3 class="tl-title" data-i18n="classes.tl5.title">Fuerza Complementaria</h3>
+                        <p class="tl-desc" data-i18n="classes.tl5.desc">Opcionales en sala de pesas con rutina prescrita según perfil del atleta.</p>
                     </div>
                 </div>
                 <div class="tl-item fade-in" data-delay="5">
                     <div class="tl-num">06</div>
                     <div class="tl-body">
-                        <p class="tl-dur">Post-clase</p>
-                        <h3 class="tl-title">Recuperación — Fisioterapia</h3>
-                        <p class="tl-desc">Acceso a tinas de crioterapia y sauna. Protocolo: 3 min. frío / 10 min. sauna.</p>
+                        <p class="tl-dur" data-i18n="classes.tl6.dur">Post-clase</p>
+                        <h3 class="tl-title" data-i18n="classes.tl6.title">Recuperación — Fisioterapia</h3>
+                        <p class="tl-desc" data-i18n="classes.tl6.desc">Acceso a tinas de crioterapia y sauna. Protocolo: 3 min. frío / 10 min. sauna.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Capacity table -->
             <div class="cap-table fade-in" data-delay="2">
-                <div class="cap-head">Resumen de Capacidad</div>
-                <div class="cap-row"><span class="cap-lbl">Alumnos por clase (adultos)</span><span class="cap-val">10</span></div>
-                <div class="cap-row"><span class="cap-lbl">Alumnos por clase (niños)</span><span class="cap-val">10</span></div>
-                <div class="cap-row"><span class="cap-lbl">Costales disponibles</span><span class="cap-val">10–12</span></div>
-                <div class="cap-row"><span class="cap-lbl">Tinas de crioterapia</span><span class="cap-val">3–4</span></div>
-                <div class="cap-row"><span class="cap-lbl">Capacidad sauna</span><span class="cap-val">8–10 pax</span></div>
-                <div class="cap-row"><span class="cap-lbl">Octágono principal</span><span class="cap-val">Ø 9.1 m</span></div>
-                <div class="cap-row"><span class="cap-lbl">Zona entrenamiento niños</span><span class="cap-val">Planta Alta</span></div>
+                <div class="cap-head" data-i18n="classes.cap.title">Resumen de Capacidad</div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r1">Alumnos por clase (adultos)</span><span class="cap-val">10</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r2">Alumnos por clase (niños)</span><span class="cap-val">10</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r3">Costales disponibles</span><span class="cap-val">10–12</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r4">Tinas de crioterapia</span><span class="cap-val">3–4</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r5">Capacidad sauna</span><span class="cap-val">8–10 pax</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r6">Octágono principal</span><span class="cap-val">Ø 9.1 m</span></div>
+                <div class="cap-row"><span class="cap-lbl" data-i18n="classes.cap.r7">Zona entrenamiento niños</span><span class="cap-val" data-i18n="classes.cap.r7v">Planta Alta</span></div>
             </div>
         </div>
     </div>
@@ -2652,27 +2696,27 @@
 ================================================================ -->
 <section id="recuperacion" class="section recuperacion">
     <div class="container">
-        <p class="section-label" data-split="word" data-anim="slide-l">05 — Recuperación</p>
-        <h2 class="section-title" data-split="char" data-anim="neon">Área de Fisioterapia</h2>
+        <p class="section-label" data-split="word" data-anim="slide-l" data-text-es="05 — Recuperación" data-text-en="05 — Recovery">05 — Recuperación</p>
+        <h2 class="section-title" data-split="char" data-anim="neon" data-text-es="Área de Fisioterapia" data-text-en="Physical Therapy Area">Área de Fisioterapia</h2>
 
         <div class="recovery-grid">
             <div class="rec-card fade-in">
                 <span class="rec-icon">❄️</span>
-                <h3 class="rec-title" data-split="word" data-anim="blur">Crioterapia</h3>
-                <p class="rec-desc">Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.</p>
+                <h3 class="rec-title" data-split="word" data-anim="blur" data-text-es="Crioterapia" data-text-en="Cryotherapy">Crioterapia</h3>
+                <p class="rec-desc" data-i18n="recovery.c1.desc">Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.</p>
                 <span class="rec-badge">8 – 12 °C</span>
             </div>
             <div class="rec-card fade-in" data-delay="2">
                 <span class="rec-icon">🌡️</span>
-                <h3 class="rec-title" data-split="word" data-anim="blur">Sauna Seco</h3>
-                <p class="rec-desc">Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.</p>
+                <h3 class="rec-title" data-split="word" data-anim="blur" data-text-es="Sauna Seco" data-text-en="Dry Sauna">Sauna Seco</h3>
+                <p class="rec-desc" data-i18n="recovery.c2.desc">Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.</p>
                 <span class="rec-badge">70 – 95 °C</span>
             </div>
             <div class="rec-card fade-in" data-delay="4">
                 <span class="rec-icon">🛌</span>
-                <h3 class="rec-title" data-split="word" data-anim="blur">Camillas de Masaje</h3>
-                <p class="rec-desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.</p>
-                <span class="rec-badge">2 – 3 camillas</span>
+                <h3 class="rec-title" data-split="word" data-anim="blur" data-text-es="Camillas de Masaje" data-text-en="Massage Tables">Camillas de Masaje</h3>
+                <p class="rec-desc" data-i18n="recovery.c3.desc">2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.</p>
+                <span class="rec-badge" data-i18n="recovery.c3.badge">2 – 3 camillas</span>
             </div>
         </div>
     </div>
@@ -2687,26 +2731,26 @@
     <div class="container">
         <div class="kids-grid">
             <div>
-                <p class="section-label" data-split="word" data-anim="fade-up">06 — Programa Infantil</p>
+                <p class="section-label" data-split="word" data-anim="fade-up" data-text-es="06 — Programa Infantil" data-text-en="06 — Kids Program">06 — Programa Infantil</p>
                 <h2 class="section-title">
-                    <span data-split="char" data-anim="distort" style="display:block;">Zona de Niños</span>
-                    <span data-split="char" data-anim="distort" style="display:block;">&amp; Familia</span>
+                    <span data-split="char" data-anim="distort" style="display:block;" data-text-es="Zona de Niños" data-text-en="Kids Zone">Zona de Niños</span>
+                    <span data-split="char" data-anim="distort" style="display:block;" data-text-es="&amp; Familia" data-text-en="&amp; Family">&amp; Familia</span>
                 </h2>
-                <p class="kids-desc fade-in" data-delay="2">
+                <p class="kids-desc fade-in" data-delay="2" data-i18n="kids.desc">
                     El área niños está diseñada para que los niños entrenen con seguridad y confianza
                     mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad
                     directa al área de entrenamiento infantil, creando un ambiente familiar, seguro y motivador.
                     Los grupos pequeños de 10 niños garantizan atención personalizada de calidad.
                 </p>
                 <ul class="kids-features fade-in" data-delay="3">
-                    <li class="kids-feat-item">Grupos de 10 niños</li>
-                    <li class="kids-feat-item">Entrenador certificado</li>
-                    <li class="kids-feat-item">Equipo de protección completo</li>
-                    <li class="kids-feat-item">Tatami acolchado extra</li>
-                    <li class="kids-feat-item">Mini octágono Ø 5 m</li>
-                    <li class="kids-feat-item">Vista directa para padres</li>
-                    <li class="kids-feat-item">Zona de descanso para padres</li>
-                    <li class="kids-feat-item">Ambiente 100% seguro</li>
+                    <li class="kids-feat-item" data-i18n="kids.f1">Grupos de 10 niños</li>
+                    <li class="kids-feat-item" data-i18n="kids.f2">Entrenador certificado</li>
+                    <li class="kids-feat-item" data-i18n="kids.f3">Equipo de protección completo</li>
+                    <li class="kids-feat-item" data-i18n="kids.f4">Tatami acolchado extra</li>
+                    <li class="kids-feat-item" data-i18n="kids.f5">Mini octágono Ø 5 m</li>
+                    <li class="kids-feat-item" data-i18n="kids.f6">Vista directa para padres</li>
+                    <li class="kids-feat-item" data-i18n="kids.f7">Zona de descanso para padres</li>
+                    <li class="kids-feat-item" data-i18n="kids.f8">Ambiente 100% seguro</li>
                 </ul>
             </div>
 
@@ -2782,26 +2826,26 @@
                 <div class="ci">
                     <div class="ci-icon">📧</div>
                     <div>
-                        <p class="ci-lbl">Correo · Disponible 24/7</p>
+                        <p class="ci-lbl" data-i18n="contact.email.lbl">Correo · Disponible 24/7</p>
                         <p class="ci-val">soporte@acmecombat.mx</p>
                     </div>
                 </div>
                 <div class="ci">
                     <div class="ci-icon">🔖</div>
                     <div>
-                        <p class="ci-lbl">Referencia única</p>
+                        <p class="ci-lbl" data-i18n="contact.ref.lbl">Referencia única</p>
                         <p class="ci-val" style="color:var(--red);">ACC-2026-7849X</p>
                     </div>
                 </div>
                 <div class="ci">
                     <div class="ci-icon">📍</div>
                     <div>
-                        <p class="ci-lbl">Ubicación</p>
+                        <p class="ci-lbl" data-i18n="contact.loc.lbl">Ubicación</p>
                         <p class="ci-val">México · 2026</p>
                     </div>
                 </div>
             </div>
-            <a href="#planes" class="btn btn-red">¡Únete a ACME Fight &amp; Fitness!</a>
+            <a href="#planes" class="btn btn-red" data-i18n="contact.cta">¡Únete a ACME Fight &amp; Fitness!</a>
         </div>
     </div>
 </div>
@@ -2815,9 +2859,9 @@
             <div class="ft-brand">
                 <p class="brand">Marca ACME</p>
                 <p class="name">Fight &amp; Fitness 🥊</p>
-                <p>La Evolución del Combate Comienza en Familia.<br>
+                <p data-i18n="footer.tagline">La Evolución del Combate Comienza en Familia.<br>
                    Grupos reducidos de 10 · Ambiente familiar · México 2026.</p>
-                <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,243,243,0.35);margin:18px 0 6px;font-family:var(--font-h);">
+                <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(243,243,243,0.35);margin:18px 0 6px;font-family:var(--font-h);" data-i18n="footer.community">
                     Forma Parte de Nuestra Comunidad Digital
                 </p>
                 <div class="social-links-row">
@@ -2833,22 +2877,22 @@
                 </div>
             </div>
             <div>
-                <p class="ft-col-title">Navegación</p>
+                <p class="ft-col-title" data-i18n="footer.nav.title">Navegación</p>
                 <ul class="ft-links">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#espacios">Espacios</a></li>
-                    <li><a href="#mapa">Mapa</a></li>
-                    <li><a href="#planes">Planes</a></li>
-                    <li><a href="#clases">Clases</a></li>
-                    <li><a href="#recuperacion">Recuperación</a></li>
-                    <li><a href="#kids">Niños</a></li>
+                    <li><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+                    <li><a href="#espacios" data-i18n="nav.spaces">Espacios</a></li>
+                    <li><a href="#mapa" data-i18n="nav.map">Mapa</a></li>
+                    <li><a href="#planes" data-i18n="nav.plans">Planes</a></li>
+                    <li><a href="#clases" data-i18n="nav.classes">Clases</a></li>
+                    <li><a href="#recuperacion" data-i18n="nav.recovery">Recuperación</a></li>
+                    <li><a href="#kids" data-i18n="nav.kids">Niños</a></li>
                 </ul>
             </div>
             <div>
-                <p class="ft-col-title">Contacto</p>
+                <p class="ft-col-title" data-i18n="footer.contact.title">Contacto</p>
                 <ul class="ft-links">
                     <li><a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a></li>
-                    <li><a href="#">Disponible 24/7</a></li>
+                    <li><a href="#" data-i18n="footer.available">Disponible 24/7</a></li>
                     <li style="margin-top:16px;">
                         <span style="font-family:var(--font-h);color:var(--red);letter-spacing:1px;">ACC-2026-7849X</span>
                     </li>
@@ -2857,15 +2901,15 @@
         </div>
 
         <div class="ft-bottom">
-            <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+            <p data-i18n="footer.copy">© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
             <p class="ft-ref" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end;">
-                <span style="color:rgba(243,243,243,0.45);">🕐 Lun-Vie 5AM–9PM &nbsp;|&nbsp; Sáb-Dom 7AM–6PM</span>
+                <span style="color:rgba(243,243,243,0.45);" data-i18n="footer.hours">🕐 Lun-Vie 5AM–9PM &nbsp;|&nbsp; Sáb-Dom 7AM–6PM</span>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
-                <a href="privacy.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Política de Privacidad</a>
+                <a href="privacy.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'" data-i18n="footer.privacy">Política de Privacidad</a>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
-                <a href="faq.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Preguntas Frecuentes</a>
+                <a href="faq.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'" data-i18n="footer.faq">Preguntas Frecuentes</a>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
-                <a href="terminos.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'">Términos y Condiciones</a>
+                <a href="terminos.html" target="_blank" style="color:var(--muted-l);text-decoration:underline;text-underline-offset:3px;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted-l)'" data-i18n="footer.terms">Términos y Condiciones</a>
                 <span style="color:rgba(243,243,243,0.25);">·</span>
                 <span>🥊 ACC-2026-7849X</span>
             </p>
@@ -2967,6 +3011,7 @@
             el.appendChild(s);
         });
     }
+    window.resplitEl = splitEl;
     document.querySelectorAll('[data-split]').forEach(splitEl);
 
     /* ── BIDIRECTIONAL ANIMATION OBSERVER ──────────────────── */
@@ -2984,6 +3029,7 @@
             }
         });
     }, { threshold: 0.10 });
+    window.animObs = animObs;
     document.querySelectorAll('[data-anim]').forEach(el => animObs.observe(el));
 
     /* ── FADE-IN (generic non-text elements) ────────────────── */
@@ -3639,15 +3685,34 @@ function addTyping() {
 }
 
 /* ── Response engine ─────────────────────────────────────────── */
+function getActiveKB() {
+  return window._currentKB || KB;
+}
+
 function findMatch(query) {
   var q = query.toLowerCase();
-  for (var i = 0; i < KB.length; i++) {
-    var entry = KB[i];
+  var activeKB = getActiveKB();
+  for (var i = 0; i < activeKB.length; i++) {
+    var entry = activeKB[i];
     for (var j = 0; j < entry.keys.length; j++) {
       if (q.indexOf(entry.keys[j]) !== -1) return entry;
     }
   }
   return null;
+}
+
+function getNoMatchMsg() {
+  var lang = localStorage.getItem('lang') || 'es';
+  if (lang === 'en') {
+    return {
+      text: 'I couldn\'t find specific information about that. 🤔<br><br>Can I help you with any of these topics?<br>• Plans and prices<br>• Opening hours<br>• How to join<br>• Spaces and facilities<br>• Kids classes',
+      actions: [{label:'View full FAQ',href:'faq.html'},{label:'Contact us',href:'mailto:soporte@acmecombat.mx'}]
+    };
+  }
+  return {
+    text: 'No encontré información específica sobre eso. 🤔<br><br>¿Puedo ayudarte con alguno de estos temas?<br>• Planes y precios<br>• Horarios de apertura<br>• Cómo inscribirme<br>• Espacios e instalaciones<br>• Clases para niños',
+    actions: [{label:'Ver FAQ completo',href:'faq.html'},{label:'Contactar',href:'mailto:soporte@acmecombat.mx'}]
+  };
 }
 
 function sendMessage(text) {
@@ -3663,20 +3728,29 @@ function sendMessage(text) {
     if (match) {
       addBotMsg(match.res, match.actions);
     } else {
-      addBotMsg(
-        'No encontré información específica sobre eso. 🤔<br><br>¿Puedo ayudarte con alguno de estos temas?<br>• Planes y precios<br>• Horarios de apertura<br>• Cómo inscribirme<br>• Espacios e instalaciones<br>• Clases para niños',
-        [{label:'Ver FAQ completo',href:'faq.html'},{label:'Contactar',href:'mailto:soporte@acmecombat.mx'}]
-      );
+      var nm = getNoMatchMsg();
+      addBotMsg(nm.text, nm.actions);
     }
   }, delay);
 }
 
 function showWelcome() {
-  addBotMsg(
-    '¡BIENVENIDO/A A <strong>MARCA ACME FIGHT &amp; FITNESS</strong>! 🥊<br><br>¿En qué podemos ayudarlo el día de hoy?<br><br>Puedes preguntarme sobre planes, horarios, inscripción, instalaciones, clases para niños y mucho más.',
-    []
-  );
+  var lang = localStorage.getItem('lang') || 'es';
+  if (lang === 'en') {
+    addBotMsg(
+      'WELCOME TO <strong>ACME FIGHT &amp; FITNESS</strong>! 🥊<br><br>How can we help you today?<br><br>You can ask me about plans, schedules, registration, facilities, kids classes and much more.',
+      []
+    );
+  } else {
+    addBotMsg(
+      '¡BIENVENIDO/A A <strong>MARCA ACME FIGHT &amp; FITNESS</strong>! 🥊<br><br>¿En qué podemos ayudarlo el día de hoy?<br><br>Puedes preguntarme sobre planes, horarios, inscripción, instalaciones, clases para niños y mucho más.',
+      []
+    );
+  }
 }
+
+/* Expose sendMessage globally for the wiring script */
+window._chatSendMessage = sendMessage;
 
 inputEl.addEventListener('keydown', function(e){ if(e.key==='Enter') sendMessage(inputEl.value); });
 sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
@@ -3720,7 +3794,7 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
     <div class="cb-chips" id="cbChips"></div>
     <!-- Input -->
     <div class="cb-input-row">
-        <input type="text" id="cbInput" placeholder="Escribe tu pregunta..." autocomplete="off" aria-label="Mensaje al asistente">
+        <input type="text" id="cbInput" placeholder="Escribe tu pregunta..." autocomplete="off" aria-label="Mensaje al asistente" data-i18n-placeholder="chat.placeholder">
         <button id="cbSend" aria-label="Enviar mensaje">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -3729,6 +3803,518 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
         </button>
     </div>
 </div>
+
+<!-- ================================================================
+     LANGUAGE SWITCHER — i18n system
+================================================================ -->
+<script>
+(function() {
+'use strict';
+
+/* ── Translation dictionary ─────────────────────────────────── */
+var DICT = {
+  es: {
+    'nav.home': 'Inicio',
+    'nav.spaces': 'Espacios',
+    'nav.map': 'Mapa',
+    'nav.plans': 'Planes',
+    'nav.classes': 'Clases',
+    'nav.recovery': 'Recuperación',
+    'nav.kids': 'Niños',
+    'nav.join': 'Unirse Ahora',
+    'hero.pretag': 'Plan MMA Premium',
+    'hero.subtitle': 'La Evolución del Combate Comienza en Familia',
+    'hero.desc': 'Centro MMA de clase mundial diseñado para atletas comprometidos. Octágono profesional de alto rendimiento, nueve áreas especializadas y capacidad para 20 atletas simultáneos en 600 m² distribuidos en dos plantas.',
+    'hero.stat1': 'Octágono',
+    'hero.stat2': 'Áreas Especializadas',
+    'hero.stat3': 'Atletas Simultáneos',
+    'spaces.tab.all': 'Todas',
+    'spaces.tab.combat': 'Combate',
+    'spaces.tab.strength': 'Fuerza',
+    'spaces.tab.recovery': 'Recuperación',
+    'spaces.tab.family': 'Familia',
+    'spaces.c1.title': 'Octágono Principal',
+    'spaces.c1.desc': 'Octágono reglamentario de Ø 9.1 m, corazón del centro. Superficies profesionales e iluminación de competición.',
+    'spaces.c2.title': 'Zona de Tatami',
+    'spaces.c2.desc': '150 m² de tatami de alta densidad para grappling, wrestling y calentamiento. Superficie amortiguadora certificada.',
+    'spaces.c3.title': 'Área de Costales',
+    'spaces.c3.desc': '10–12 costales profesionales de distintos pesos. Desarrollo de potencia, cadencia y resistencia específica.',
+    'spaces.c4.title': 'Sala de Pesas',
+    'spaces.c4.desc': 'Equipamiento completo de fuerza. Rutinas prescritas según perfil atlético. Disponible post-clase incluido en Básico.',
+    'spaces.c5.title': 'Crioterapia',
+    'spaces.c5.desc': '3–4 tinas de inmersión en frío a 8–12 °C para reducción de inflamación y recuperación acelerada.',
+    'spaces.c6.title': 'Sauna Seco',
+    'spaces.c6.desc': 'Sauna de cedro canadiense 70–95 °C para 8–10 personas. Relajación muscular profunda post-entrenamiento.',
+    'spaces.c7.title': 'Masajes & Fisioterapia',
+    'spaces.c7.desc': '2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones con fisioterapeuta certificado.',
+    'spaces.c8.title': 'Zona Niños MMA',
+    'spaces.c8.desc': 'Área de tatami especializada, equipo de protección completo y entrenamiento supervisado.',
+    'spaces.c9.title': 'Zona de Padres',
+    'spaces.c9.desc': 'Área de descanso con visibilidad directa al entrenamiento infantil. Ambiente familiar, seguro y motivador.',
+    'spaces.btn.map': 'Ver Mapa',
+    'spaces.btn.plans': 'Ver Planes',
+    'spaces.btn.info': 'Más Información',
+    'map.intro': '2 Pisos × 300 m² · 600 m² totales. La planta baja concentra el 60% del espacio en zonas de tatami, ideal para grappling y calentamiento. La planta alta alberga el octágono principal rodeado por las áreas infantil, de padres y de recuperación.',
+    'map.floor1': 'Planta Baja',
+    'map.floor2': 'Planta Alta',
+    'map.floor1.title': 'Planta Baja · 300 m²',
+    'map.floor2.title': 'Planta Alta · 300 m²',
+    'map.baja.l1': 'Zona de Tatami (60%)',
+    'map.baja.l1s': 'Grappling 180 m² + Calentamiento 150 m²',
+    'map.baja.l2': 'Área de Costales / Box',
+    'map.baja.l2s': '10–12 costales · Área de impacto',
+    'map.baja.l3': 'Sala de Pesas / Cardio',
+    'map.baja.l3s': 'Fuerza y acondicionamiento',
+    'map.baja.l4': 'Recepción / Vestidores',
+    'map.baja.l4s': 'Acceso principal',
+    'map.alta.l1': 'Octágono Principal',
+    'map.alta.l1s': 'Ø 9.1 m · Centro de combate',
+    'map.alta.l2': 'Zona Niños MMA',
+    'map.alta.l2s': 'Tatami acolchado · Entrenamiento infantil',
+    'map.alta.l3': 'Zona de Padres',
+    'map.alta.l3s': 'Vista directa · Área descanso',
+    'map.alta.l4': 'Crioterapia',
+    'map.alta.l4s': '3–4 tinas · 8–12 °C',
+    'map.alta.l5': 'Sauna Seco',
+    'map.alta.l5s': '70–95 °C · 8–10 pax',
+    'map.alta.l6': 'Masajes & Fisioterapia',
+    'map.alta.l6s': '2–3 camillas · Fisioterapeuta certificado',
+    'plans.p1.type': 'Entrada Abierta',
+    'plans.p1.period': 'Por sesión · Sin compromiso',
+    'plans.p1.f1': '1 clase de 60 minutos',
+    'plans.p1.f2': 'Acceso a instalaciones',
+    'plans.p1.f3': 'Entrenador certificado',
+    'plans.p1.f4': 'Acceso a fisioterapia',
+    'plans.p1.f5': 'Toalla incluida',
+    'plans.p1.btn': 'Reservar Clase',
+    'plans.p2.badge': '⭐ Recomendado',
+    'plans.p2.type': 'Mensual',
+    'plans.p2.period': 'Clases ilimitadas · Cancelable',
+    'plans.p2.f1': 'Clases ilimitadas (90 min)',
+    'plans.p2.f2': 'Acceso 24/7 a instalaciones',
+    'plans.p2.f3': 'Sala de pesas incluida',
+    'plans.p2.f4': 'Crioterapia & sauna',
+    'plans.p2.f5': 'Fisioterapia básica',
+    'plans.p2.f6': 'Comunidad ACME',
+    'plans.p3.type': 'Anual + Beneficios',
+    'plans.p3.period': '12 meses · 3 meses gratis',
+    'plans.p3.f1': 'Todo lo del plan Básico',
+    'plans.p3.f2': 'Masajes deportivos 2×/mes',
+    'plans.p3.f3': 'Asesoría nutricional',
+    'plans.p3.f4': 'Plan personalizado',
+    'plans.p3.f5': 'Seminarios privados',
+    'plans.p3.f6': 'Prioridad en octágono',
+    'plans.p3.f7': 'Descuento en eventos',
+    'plans.join': 'Inscribirme Ahora',
+    'contact.email.lbl': 'Correo · Disponible 24/7',
+    'contact.ref.lbl': 'Referencia única',
+    'contact.loc.lbl': 'Ubicación',
+    'contact.cta': '¡Únete a ACME Fight & Fitness!',
+    'classes.tl1.title': 'Calentamiento General',
+    'classes.tl1.desc': 'Activación cardiovascular y movilidad articular con todo el grupo de 10 atletas.',
+    'classes.tl2.title': 'Técnica Específica',
+    'classes.tl2.desc': 'Instrucción técnica dirigida: golpes, defensa, control de distancia o derribo. Striking / Grappling.',
+    'classes.tl3.title': 'Circuito de Costales',
+    'classes.tl3.desc': 'Rotación por costales desarrollando potencia, cadencia y resistencia específica.',
+    'classes.tl4.title': 'Sparring / Drilling en Octágono',
+    'classes.tl4.desc': 'Aplicación táctica dentro del octágono, en parejas rotativas supervisadas.',
+    'classes.tl5.title': 'Fuerza Complementaria',
+    'classes.tl5.desc': 'Opcionales en sala de pesas con rutina prescrita según perfil del atleta.',
+    'classes.tl6.dur': 'Post-clase',
+    'classes.tl6.title': 'Recuperación — Fisioterapia',
+    'classes.tl6.desc': 'Acceso a tinas de crioterapia y sauna. Protocolo: 3 min. frío / 10 min. sauna.',
+    'classes.cap.title': 'Resumen de Capacidad',
+    'classes.cap.r1': 'Alumnos por clase (adultos)',
+    'classes.cap.r2': 'Alumnos por clase (niños)',
+    'classes.cap.r3': 'Costales disponibles',
+    'classes.cap.r4': 'Tinas de crioterapia',
+    'classes.cap.r5': 'Capacidad sauna',
+    'classes.cap.r6': 'Octágono principal',
+    'classes.cap.r7': 'Zona entrenamiento niños',
+    'classes.cap.r7v': 'Planta Alta',
+    'recovery.c1.desc': 'Tinas de inmersión en agua fría para reducción de inflamación muscular, recuperación acelerada y activación del sistema nervioso parasimpático.',
+    'recovery.c2.desc': 'Sauna de cedro canadiense que favorece la relajación muscular profunda, eliminación de toxinas y mejora circulatoria post-entrenamiento.',
+    'recovery.c3.desc': '2–3 camillas para masajes deportivos, liberación miofascial y atención de lesiones por fisioterapeuta certificado.',
+    'recovery.c3.badge': '2 – 3 camillas',
+    'kids.desc': 'El área niños está diseñada para que los niños entrenen con seguridad y confianza mientras los padres los acompañan desde cerca. La zona de padres tiene visibilidad directa al área de entrenamiento infantil, creando un ambiente familiar, seguro y motivador. Los grupos pequeños de 10 niños garantizan atención personalizada de calidad.',
+    'kids.f1': 'Grupos de 10 niños',
+    'kids.f2': 'Entrenador certificado',
+    'kids.f3': 'Equipo de protección completo',
+    'kids.f4': 'Tatami acolchado extra',
+    'kids.f5': 'Mini octágono Ø 5 m',
+    'kids.f6': 'Vista directa para padres',
+    'kids.f7': 'Zona de descanso para padres',
+    'kids.f8': 'Ambiente 100% seguro',
+    'footer.tagline': 'La Evolución del Combate Comienza en Familia.<br>Grupos reducidos de 10 · Ambiente familiar · México 2026.',
+    'footer.community': 'Forma Parte de Nuestra Comunidad Digital',
+    'footer.nav.title': 'Navegación',
+    'footer.contact.title': 'Contacto',
+    'footer.available': 'Disponible 24/7',
+    'footer.copy': '© 2026 ACME Fight & Fitness · México. Todos los derechos reservados.',
+    'footer.hours': '🕐 Lun-Vie 5AM–9PM  |  Sáb-Dom 7AM–6PM',
+    'footer.privacy': 'Política de Privacidad',
+    'footer.faq': 'Preguntas Frecuentes',
+    'footer.terms': 'Términos y Condiciones',
+    'chat.placeholder': 'Escribe tu pregunta...'
+  },
+  en: {
+    'nav.home': 'Home',
+    'nav.spaces': 'Spaces',
+    'nav.map': 'Map',
+    'nav.plans': 'Plans',
+    'nav.classes': 'Classes',
+    'nav.recovery': 'Recovery',
+    'nav.kids': 'Kids',
+    'nav.join': 'Join Now',
+    'hero.pretag': 'Premium MMA Plan',
+    'hero.subtitle': 'The Evolution of Combat Begins as a Family',
+    'hero.desc': 'World-class MMA center designed for committed athletes. High-performance professional octagon, nine specialized areas and capacity for 20 simultaneous athletes across 600 m² on two floors.',
+    'hero.stat1': 'Octagon',
+    'hero.stat2': 'Specialized Areas',
+    'hero.stat3': 'Simultaneous Athletes',
+    'spaces.tab.all': 'All',
+    'spaces.tab.combat': 'Combat',
+    'spaces.tab.strength': 'Strength',
+    'spaces.tab.recovery': 'Recovery',
+    'spaces.tab.family': 'Family',
+    'spaces.c1.title': 'Main Octagon',
+    'spaces.c1.desc': 'Regulation Ø 9.1 m octagon, the heart of the center. Professional surfaces and competition lighting.',
+    'spaces.c2.title': 'Tatami Zone',
+    'spaces.c2.desc': '150 m² of high-density tatami for grappling, wrestling and warm-up. Certified shock-absorbing surface.',
+    'spaces.c3.title': 'Heavy Bag Area',
+    'spaces.c3.desc': '10–12 professional heavy bags of various weights. Develop power, rhythm and specific endurance.',
+    'spaces.c4.title': 'Weight Room',
+    'spaces.c4.desc': 'Complete strength equipment. Prescribed routines per athletic profile. Available post-class, included in Basic.',
+    'spaces.c5.title': 'Cryotherapy',
+    'spaces.c5.desc': '3–4 cold-immersion tubs at 8–12 °C for inflammation reduction and accelerated recovery.',
+    'spaces.c6.title': 'Dry Sauna',
+    'spaces.c6.desc': 'Canadian cedar sauna 70–95 °C for 8–10 people. Deep muscular relaxation post-training.',
+    'spaces.c7.title': 'Massage & Physiotherapy',
+    'spaces.c7.desc': '2–3 tables for sports massage, myofascial release and injury care with certified physiotherapist.',
+    'spaces.c8.title': 'Kids MMA Zone',
+    'spaces.c8.desc': 'Specialized tatami area, full protective gear and supervised training.',
+    'spaces.c9.title': 'Parents Zone',
+    'spaces.c9.desc': 'Rest area with direct visibility to children\'s training. Family-friendly, safe and motivating atmosphere.',
+    'spaces.btn.map': 'View Map',
+    'spaces.btn.plans': 'View Plans',
+    'spaces.btn.info': 'More Info',
+    'map.intro': '2 Floors × 300 m² · 600 m² total. The ground floor concentrates 60% of the space in tatami zones, ideal for grappling and warm-up. The upper floor houses the main octagon surrounded by the kids, parents and recovery areas.',
+    'map.floor1': 'Ground Floor',
+    'map.floor2': 'Upper Floor',
+    'map.floor1.title': 'Ground Floor · 300 m²',
+    'map.floor2.title': 'Upper Floor · 300 m²',
+    'map.baja.l1': 'Tatami Zone (60%)',
+    'map.baja.l1s': 'Grappling 180 m² + Warm-up 150 m²',
+    'map.baja.l2': 'Heavy Bag / Boxing Area',
+    'map.baja.l2s': '10–12 bags · Impact area',
+    'map.baja.l3': 'Weight Room / Cardio',
+    'map.baja.l3s': 'Strength and conditioning',
+    'map.baja.l4': 'Reception / Locker Rooms',
+    'map.baja.l4s': 'Main entrance',
+    'map.alta.l1': 'Main Octagon',
+    'map.alta.l1s': 'Ø 9.1 m · Combat center',
+    'map.alta.l2': 'Kids MMA Zone',
+    'map.alta.l2s': 'Padded tatami · Children\'s training',
+    'map.alta.l3': 'Parents Zone',
+    'map.alta.l3s': 'Direct view · Rest area',
+    'map.alta.l4': 'Cryotherapy',
+    'map.alta.l4s': '3–4 tubs · 8–12 °C',
+    'map.alta.l5': 'Dry Sauna',
+    'map.alta.l5s': '70–95 °C · 8–10 people',
+    'map.alta.l6': 'Massage & Physiotherapy',
+    'map.alta.l6s': '2–3 tables · Certified physiotherapist',
+    'plans.p1.type': 'Open Entry',
+    'plans.p1.period': 'Per session · No commitment',
+    'plans.p1.f1': '1 class of 60 minutes',
+    'plans.p1.f2': 'Facility access',
+    'plans.p1.f3': 'Certified trainer',
+    'plans.p1.f4': 'Physiotherapy access',
+    'plans.p1.f5': 'Towel included',
+    'plans.p1.btn': 'Book Class',
+    'plans.p2.badge': '⭐ Recommended',
+    'plans.p2.type': 'Monthly',
+    'plans.p2.period': 'Unlimited classes · Cancellable',
+    'plans.p2.f1': 'Unlimited classes (90 min)',
+    'plans.p2.f2': '24/7 facility access',
+    'plans.p2.f3': 'Weight room included',
+    'plans.p2.f4': 'Cryotherapy & sauna',
+    'plans.p2.f5': 'Basic physiotherapy',
+    'plans.p2.f6': 'ACME community',
+    'plans.p3.type': 'Annual + Benefits',
+    'plans.p3.period': '12 months · 3 months free',
+    'plans.p3.f1': 'Everything in Basic plan',
+    'plans.p3.f2': 'Sports massages 2×/month',
+    'plans.p3.f3': 'Nutritional coaching',
+    'plans.p3.f4': 'Personalized plan',
+    'plans.p3.f5': 'Private seminars',
+    'plans.p3.f6': 'Octagon priority',
+    'plans.p3.f7': 'Event discounts',
+    'plans.join': 'Join Now',
+    'contact.email.lbl': 'Email · Available 24/7',
+    'contact.ref.lbl': 'Unique reference',
+    'contact.loc.lbl': 'Location',
+    'contact.cta': 'Join ACME Fight & Fitness!',
+    'classes.tl1.title': 'General Warm-up',
+    'classes.tl1.desc': 'Cardiovascular activation and joint mobility with the full group of 10 athletes.',
+    'classes.tl2.title': 'Specific Technique',
+    'classes.tl2.desc': 'Directed technical instruction: strikes, defense, distance control or takedowns. Striking / Grappling.',
+    'classes.tl3.title': 'Heavy Bag Circuit',
+    'classes.tl3.desc': 'Rotation through bags developing power, rhythm and specific endurance.',
+    'classes.tl4.title': 'Sparring / Drilling in Octagon',
+    'classes.tl4.desc': 'Tactical application inside the octagon, in rotating supervised pairs.',
+    'classes.tl5.title': 'Supplemental Strength',
+    'classes.tl5.desc': 'Optional weight room session with prescribed routine per athlete profile.',
+    'classes.tl6.dur': 'Post-class',
+    'classes.tl6.title': 'Recovery — Physiotherapy',
+    'classes.tl6.desc': 'Access to cryotherapy tubs and sauna. Protocol: 3 min. cold / 10 min. sauna.',
+    'classes.cap.title': 'Capacity Summary',
+    'classes.cap.r1': 'Students per class (adults)',
+    'classes.cap.r2': 'Students per class (kids)',
+    'classes.cap.r3': 'Available heavy bags',
+    'classes.cap.r4': 'Cryotherapy tubs',
+    'classes.cap.r5': 'Sauna capacity',
+    'classes.cap.r6': 'Main octagon',
+    'classes.cap.r7': 'Kids training zone',
+    'classes.cap.r7v': 'Upper Floor',
+    'recovery.c1.desc': 'Cold-water immersion tubs for reducing muscle inflammation, accelerating recovery and activating the parasympathetic nervous system.',
+    'recovery.c2.desc': 'Canadian cedar sauna that promotes deep muscular relaxation, toxin elimination and improved circulation post-training.',
+    'recovery.c3.desc': '2–3 tables for sports massage, myofascial release and injury care by certified physiotherapist.',
+    'recovery.c3.badge': '2 – 3 tables',
+    'kids.desc': 'The kids area is designed for children to train safely and confidently while parents stay close by. The parents zone has direct visibility to the children\'s training area, creating a family-friendly, safe and motivating environment. Small groups of 10 children guarantee quality personalized attention.',
+    'kids.f1': 'Groups of 10 children',
+    'kids.f2': 'Certified trainer',
+    'kids.f3': 'Full protective gear',
+    'kids.f4': 'Extra padded tatami',
+    'kids.f5': 'Mini octagon Ø 5 m',
+    'kids.f6': 'Direct view for parents',
+    'kids.f7': 'Parents rest area',
+    'kids.f8': '100% safe environment',
+    'footer.tagline': 'The Evolution of Combat Begins as a Family.<br>Small groups of 10 · Family atmosphere · Mexico 2026.',
+    'footer.community': 'Join Our Digital Community',
+    'footer.nav.title': 'Navigation',
+    'footer.contact.title': 'Contact',
+    'footer.available': 'Available 24/7',
+    'footer.copy': '© 2026 ACME Fight & Fitness · Mexico. All rights reserved.',
+    'footer.hours': '🕐 Mon-Fri 5AM–9PM  |  Sat-Sun 7AM–6PM',
+    'footer.privacy': 'Privacy Policy',
+    'footer.faq': 'Frequently Asked Questions',
+    'footer.terms': 'Terms & Conditions',
+    'chat.placeholder': 'Type your question...'
+  }
+};
+
+/* ── English chatbot KB ─────────────────────────────────────── */
+var KB_EN = [
+  {
+    keys:['hello','hi','hey','good morning','good afternoon','good evening','greetings','how are you'],
+    res:'Hello! 👊 I\'m the virtual assistant for <strong>ACME Fight &amp; Fitness</strong>.<br><br>You can ask me about plans, schedules, classes, facilities, registration and much more. How can I help you?',
+    actions:[]
+  },
+  {
+    keys:['plan','plans','price','prices','how much','membership','monthly','annual','subscription','basic','elite','cost'],
+    res:'💪 <strong>Our Plans:</strong><br><br>🥊 <strong>Single Class</strong> — <strong>$299</strong> / session<br><small>60 min · no commitment · max. 10 athletes</small><br><br>🏅 <strong>Basic Plan</strong> — <strong>$1,299</strong> / month<br><small>Unlimited access · certified trainer</small><br><br>⭐ <strong>Elite Plan</strong> — <strong>$12,999</strong> / year<br><small>3 months FREE · massages · nutrition · personalized plan</small>',
+    actions:[{label:'See full plans',scroll:'#planes'},{label:'Join now',modal:'modal-membresia'}]
+  },
+  {
+    keys:['schedule','hours','when open','what days','opening hours','open','monday','friday','saturday','sunday','week'],
+    res:'🕐 <strong>Opening Hours:</strong><br><br>📅 <strong>Monday to Friday:</strong> 5:00 AM – 9:00 PM<br>📅 <strong>Saturday and Sunday:</strong> 7:00 AM – 6:00 PM<br><br>📌 Holidays: availability by request at <strong>soporte@acmecombat.mx</strong>',
+    actions:[]
+  },
+  {
+    keys:['single class','trial','first class','first time','try','one class','1 class','trial class'],
+    res:'🎯 <strong>Single Class — $299 / session</strong><br><br>60 minutes of controlled intensity:<br>• Functional warm-up (15 min)<br>• Basic striking and grappling technique<br>• Supervised sparring<br>• Active recovery<br>• Post-class analysis<br><br>Maximum <strong>10 athletes</strong>. No prior experience needed!',
+    actions:[{label:'Book single class',modal:'modal-clase'}]
+  },
+  {
+    keys:['kids','children','child','son','daughter','family','kid','infant','program','junior'],
+    res:'👦 <strong>Kids &amp; Family Zone</strong><br><br>Area 100% dedicated to children\'s training:<br>• Groups of max. <strong>10 kids</strong><br>• Certified trainer<br>• Specialized tatami zone<br>• Extra padded tatami<br>• Full protective gear<br>• Direct view for parents<br>• Parents rest area<br>• 100% safe environment',
+    actions:[{label:'View kids program',scroll:'#kids'}]
+  },
+  {
+    keys:['physiotherapy','recovery','massage','sauna','cryotherapy','table','therapy','muscle pain','injury'],
+    res:'💆 <strong>Physiotherapy &amp; Recovery Area</strong><br><br>• ❄️ <strong>Cryotherapy</strong> — reduces muscle inflammation<br>• 🌡️ <strong>Dry Sauna</strong> — deep relaxation<br>• 🛏️ <strong>Massage Tables</strong> — active recovery<br><br>Sports massages included in <strong>Elite Plan</strong> (2x/month).',
+    actions:[{label:'View recovery area',scroll:'#recuperacion'}]
+  },
+  {
+    keys:['spaces','areas','facilities','octagon','box','boxing','grappling','sparring','tatami','ring','weights','cardio','equipment'],
+    res:'🏟️ <strong>Our Specialized Areas:</strong><br><br><strong>Ground Floor:</strong><br>• Professional Octagon Ø 8 m<br>• Boxing Area<br>• Grappling Area<br>• Sparring Area<br>• Thai Boxing<br><br><strong>Upper Floor:</strong><br>• Weight Room<br>• Cardio Area<br>• Kids &amp; Family Zone<br>• Physiotherapy &amp; Recovery',
+    actions:[{label:'Explore spaces',scroll:'#espacios'}]
+  },
+  {
+    keys:['classes','disciplines','mma','martial arts','muay thai','jiu jitsu','jiu-jitsu','kickboxing','class model','session','training'],
+    res:'🥋 <strong>ACME Class Model:</strong><br><br>• <strong>Phase 1</strong> — Functional warm-up (15 min)<br>• <strong>Phase 2</strong> — Specialized technique (25 min)<br>• <strong>Phase 3</strong> — Supervised sparring (15 min)<br>• <strong>Phase 4</strong> — Active recovery (5 min)<br><br>Total: <strong>60 minutes</strong>. Groups of max. <strong>10 athletes</strong>.',
+    actions:[{label:'View class model',scroll:'#clases'}]
+  },
+  {
+    keys:['sign up','register','how to join','registration','form','enroll','join'],
+    res:'📝 <strong>How to join:</strong><br><br>1. Choose your plan (Basic or Elite)<br>2. Click <strong>"Join Now"</strong><br>3. Complete the form with your details<br>4. An advisor will contact you in <strong>less than 24 hours</strong><br><br>You can also write to <strong>soporte@acmecombat.mx</strong>',
+    actions:[{label:'Go to plans',scroll:'#planes'},{label:'Registration form',modal:'modal-membresia'}]
+  },
+  {
+    keys:['contact','email','phone','whatsapp','instagram','facebook','social','location','address','where'],
+    res:'📬 <strong>Contact us:</strong><br><br>📧 <strong>soporte@acmecombat.mx</strong><br>💬 WhatsApp — button on the website<br>📸 Instagram / Facebook<br>📍 Mexico · 2026<br><br>24/7 support via email.',
+    actions:[{label:'WhatsApp',href:'https://wa.me/521XXXXXXXXXX'},{label:'Instagram',href:'https://instagram.com/'}]
+  },
+  {
+    keys:['groups','how many','students','athletes','size','personal','ratio','personalized attention','capacity'],
+    res:'👥 <strong>Small Groups — Maximum 10 Athletes</strong><br><br>This is our philosophy: small groups that ensure:<br>• <strong>Personalized</strong> trainer attention<br>• Individual technique correction<br>• Faster, safer progress<br>• Family-friendly and motivating atmosphere',
+    actions:[]
+  },
+  {
+    keys:['experience','beginner','never','no experience','new','start from scratch','level','never trained'],
+    res:'✅ <strong>Everyone is welcome!</strong><br><br>No prior experience needed. Our certified trainers adapt training to your current level.<br><br>The program is designed to take you <strong>from zero to competitive level</strong> if you wish.',
+    actions:[{label:'Book trial class',modal:'modal-clase'}]
+  },
+  {
+    keys:['cancel','cancellation','leave','refund','refunds'],
+    res:'📋 <strong>Cancellation Policy:</strong><br><br>To cancel or inquire about refunds, write to:<br><strong>soporte@acmecombat.mx</strong><br><br>Include your full name and reference number <strong>ACC-2026-7849X</strong>. An advisor will respond within 24 hours.',
+    actions:[{label:'Send email',href:'mailto:soporte@acmecombat.mx'}]
+  },
+  {
+    keys:['thank','thanks','perfect','excellent','great','awesome'],
+    res:'You\'re welcome! 🥊 I\'m always here to help.<br><br>If you have any other questions about the gym, I\'m happy to answer. Good luck with your training! 💪',
+    actions:[]
+  },
+  {
+    keys:['privacy','privacy policy','personal data','data protection'],
+    res:'🔒 <strong>Privacy Policy:</strong><br><br>ACME Fight &amp; Fitness protects your personal data in accordance with the <strong>LFPDPPP</strong> (Federal Law on Protection of Personal Data). You can view the full policy at the link below.',
+    actions:[{label:'View Privacy Policy',href:'privacy.html'}]
+  },
+  {
+    keys:['faq','frequently asked questions','common questions'],
+    res:'❓ <strong>Frequently Asked Questions:</strong><br><br>We have a complete page with more than 12 answers to the most common questions about the gym.',
+    actions:[{label:'Go to FAQ',href:'faq.html'}]
+  },
+  {
+    keys:['elite vs basic','difference','compare plans','what does elite include','recommended plan'],
+    res:'⭐ <strong>Elite vs. Basic:</strong><br><br><strong>Basic Plan ($1,299/mo):</strong><br>• Unlimited access to all areas<br>• Certified trainer<br>• Groups of max. 10 athletes<br><br><strong>Elite Plan ($12,999/year):</strong><br>Everything above plus:<br>• 3 months FREE<br>• 2 sports massages/month<br>• Nutritional coaching<br>• Personalized training plan<br>• Private seminars<br>• Octagon priority<br>• Event discounts',
+    actions:[{label:'View plans',scroll:'#planes'}]
+  },
+  {
+    keys:['parking','car','how to get','transport','directions'],
+    res:'📍 <strong>Location and Access:</strong><br><br>We are located in <strong>Mexico · 2026</strong>.<br><br>For specific directions, write to <strong>soporte@acmecombat.mx</strong> or via WhatsApp and we\'ll send the exact address and parking options.',
+    actions:[{label:'Contact via WhatsApp',href:'https://wa.me/521XXXXXXXXXX'}]
+  }
+];
+
+var FAQ_CHIPS_EN = [
+  {label:'💰 Plans & prices',    q:'plans'},
+  {label:'🕐 Hours',             q:'schedule'},
+  {label:'🎯 Trial class',       q:'trial class'},
+  {label:'👦 Kids',              q:'kids'},
+  {label:'💆 Physiotherapy',     q:'physiotherapy'},
+  {label:'📝 How to join',       q:'how to join'},
+  {label:'📍 Contact',           q:'contact'},
+  {label:'❓ More questions',    q:'frequently asked questions'}
+];
+
+/* ── Active KB reference ─────────────────────────────────────── */
+var _activeKB = null;
+var _activeFAQ = null;
+
+window.setChatbotLang = function(lang) {
+  /* Will be wired after the chatbot DOMContentLoaded block runs */
+  if (window._chatbotSetLang) window._chatbotSetLang(lang);
+  /* Store pending lang for when chatbot initializes */
+  window._pendingChatLang = lang;
+};
+
+/* ── Apply translations ─────────────────────────────────────── */
+function applyLang(lang) {
+  var d = DICT[lang] || DICT.es;
+
+  /* 1. Plain data-i18n elements */
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (d[key] !== undefined) {
+      el.innerHTML = d[key];
+    }
+  });
+
+  /* 2. Placeholder attributes */
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-placeholder');
+    if (d[key] !== undefined) el.setAttribute('placeholder', d[key]);
+  });
+
+  /* 3. data-split elements with data-text-es / data-text-en */
+  document.querySelectorAll('[data-split][data-text-' + lang + ']').forEach(function(el) {
+    var text = el.getAttribute('data-text-' + lang);
+    if (!text) return;
+    el.textContent = text;
+    if (window.resplitEl) {
+      window.resplitEl(el);
+      if (window.animObs) window.animObs.observe(el);
+    }
+  });
+
+  /* 4. html lang attribute */
+  document.documentElement.lang = lang;
+
+  /* 5. lang button label: show opposite language */
+  var btn = document.getElementById('langBtn');
+  if (btn) {
+    btn.textContent = lang === 'es' ? 'EN' : 'ES';
+    btn.classList.toggle('active', lang === 'en');
+  }
+
+  /* 6. Chatbot */
+  window.setChatbotLang(lang);
+}
+
+/* ── Toggle ─────────────────────────────────────────────────── */
+window.toggleLang = function() {
+  var cur = localStorage.getItem('lang') || 'es';
+  var next = cur === 'es' ? 'en' : 'es';
+  localStorage.setItem('lang', next);
+  applyLang(next);
+};
+
+/* ── Init on load ───────────────────────────────────────────── */
+(function() {
+  var saved = localStorage.getItem('lang') || 'es';
+  if (saved !== 'es') applyLang(saved);
+  else {
+    /* Still need to set button label */
+    var btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = 'EN';
+  }
+})();
+
+})();
+</script>
+
+<script>
+/* ── Wire chatbot language into KB_EN ────────────────────────── */
+document.addEventListener('DOMContentLoaded', function() {
+  /* Patch setChatbotLang to swap the actual KB array used */
+  window._chatbotSetLang = function(lang) {
+    var isEN = lang === 'en';
+    /* Swap chips */
+    var chipsEl = document.getElementById('cbChips');
+    if (chipsEl) {
+      chipsEl.innerHTML = '';
+      var chips = isEN ? FAQ_CHIPS_EN : FAQ_CHIPS;
+      chips.forEach(function(c) {
+        var btn = document.createElement('button');
+        btn.className = 'cb-chip-btn';
+        btn.textContent = c.label;
+        btn.addEventListener('click', function() { if(window._chatSendMessage) window._chatSendMessage(c.q); });
+        chipsEl.appendChild(btn);
+      });
+    }
+    /* Store active KB globally so findMatch can use it */
+    window._currentKB = isEN ? KB_EN : KB;
+    /* Update status text */
+    var statusSpan = document.querySelector('.cb-status > span:not(.cb-dot):not(.cb-powered-txt)');
+    if (statusSpan) statusSpan.textContent = isEN ? 'Assistant · Online' : 'Asistente · En línea';
+  };
+
+  /* If lang was already set before DOMContentLoaded, apply now */
+  var pending = window._pendingChatLang;
+  if (pending) window._chatbotSetLang(pending);
+});
+</script>
 
 </body>
 </html>

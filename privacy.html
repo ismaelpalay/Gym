@@ -225,6 +225,22 @@
             .priv-section { padding: 20px 18px; }
             .priv-hero { padding: 40px 0 28px; }
         }
+
+        /* Language button */
+        #langBtn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: rgba(243,243,243,0.55);
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color .2s, border-color .2s;
+            text-transform: uppercase;
+        }
+        #langBtn:hover, #langBtn.active { color: var(--gold); border-color: var(--gold); }
     </style>
 </head>
 <body>
@@ -232,14 +248,17 @@
 <nav class="priv-nav">
     <div class="inner">
         <a href="index.html" class="brand">ACME <span>Fight &amp; Fitness</span></a>
-        <a href="index.html" class="back-btn">← Volver al inicio</a>
+        <div style="display:flex;align-items:center;gap:14px;">
+            <a href="index.html" class="back-btn" id="backBtn">← Volver al inicio</a>
+            <button id="langBtn" onclick="window.togglePrivLang()" aria-label="Switch language">EN</button>
+        </div>
     </div>
 </nav>
 
 <header class="priv-hero">
-    <p class="tag">Documento Legal · México 2026</p>
-    <h1>Aviso de <span>Privacidad</span> Integral</h1>
-    <p class="meta">Última actualización: 29 de mayo de 2026 &nbsp;·&nbsp; Versión 2.0</p>
+    <p class="tag" data-i18n="hero.tag">Documento Legal · México 2026</p>
+    <h1 data-i18n="hero.title">Aviso de <span>Privacidad</span> Integral</h1>
+    <p class="meta" data-i18n="hero.meta">Última actualización: 29 de mayo de 2026 &nbsp;·&nbsp; Versión 2.0</p>
     <span class="legal-badge">LFPDPPP · D.O.F. 05-07-2010 · Reglamento D.O.F. 21-12-2011</span>
 </header>
 
@@ -505,19 +524,132 @@
 </main>
 
 <footer class="priv-footer">
-    <p>© 2026 ACME Fight &amp; Fitness · Ciudad de México, México. Todos los derechos reservados.</p>
+    <p data-i18n="footer.copy">© 2026 ACME Fight &amp; Fitness · Ciudad de México, México. Todos los derechos reservados.</p>
     <p style="margin-top:6px;">
-        <a href="index.html">← Volver al sitio principal</a>
+        <a href="index.html" data-i18n="footer.back">← Volver al sitio principal</a>
         &nbsp;·&nbsp;
-        <a href="terminos.html" target="_blank">Términos y Condiciones</a>
+        <a href="terminos.html" target="_blank" data-i18n="footer.terms">Términos y Condiciones</a>
         &nbsp;·&nbsp;
         <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a>
     </p>
-    <p style="margin-top:10px;font-size:11px;color:rgba(243,243,243,0.25);">
+    <p style="margin-top:10px;font-size:11px;color:rgba(243,243,243,0.25);" data-i18n="footer.legal">
         Documento elaborado conforme a la LFPDPPP (D.O.F. 05-07-2010), su Reglamento (D.O.F. 21-12-2011)
         y los Lineamientos del INAI en materia de Aviso de Privacidad (D.O.F. 17-01-2013).
     </p>
 </footer>
+
+<script>
+(function() {
+'use strict';
+
+var D = {
+  es: {
+    'hero.tag': 'Documento Legal · México 2026',
+    'hero.title': 'Aviso de <span>Privacidad</span> Integral',
+    'hero.meta': 'Última actualización: 29 de mayo de 2026 &nbsp;·&nbsp; Versión 2.0',
+    'nav.back': '← Volver al inicio',
+    'footer.copy': '© 2026 ACME Fight &amp; Fitness · Ciudad de México, México. Todos los derechos reservados.',
+    'footer.back': '← Volver al sitio principal',
+    'footer.terms': 'Términos y Condiciones',
+    'footer.legal': 'Documento elaborado conforme a la LFPDPPP (D.O.F. 05-07-2010), su Reglamento (D.O.F. 21-12-2011) y los Lineamientos del INAI en materia de Aviso de Privacidad (D.O.F. 17-01-2013).'
+  },
+  en: {
+    'hero.tag': 'Legal Document · Mexico 2026',
+    'hero.title': 'Comprehensive <span>Privacy</span> Notice',
+    'hero.meta': 'Last updated: May 29, 2026 &nbsp;·&nbsp; Version 2.0',
+    'nav.back': '← Back to home',
+    'footer.copy': '© 2026 ACME Fight &amp; Fitness · Mexico City, Mexico. All rights reserved.',
+    'footer.back': '← Back to main site',
+    'footer.terms': 'Terms & Conditions',
+    'footer.legal': 'Document prepared in accordance with LFPDPPP (Official Gazette 05-07-2010), its Regulations (Official Gazette 21-12-2011) and the INAI Guidelines on Privacy Notices (Official Gazette 17-01-2013).'
+  }
+};
+
+/* Section headings translations */
+var sectionsES = [
+  '<span class="num">01</span> Identidad y Domicilio del Responsable',
+  '<span class="num">02</span> Datos Personales Recabados',
+  '<span class="num">03</span> Finalidades del Tratamiento',
+  '<span class="num">04</span> Transferencia de Datos Personales',
+  '<span class="num">05</span> Derechos ARCO y Revocación del Consentimiento',
+  '<span class="num">06</span> Mecanismos para Limitar el Uso y Divulgación',
+  '<span class="num">07</span> Cookies y Tecnologías de Rastreo',
+  '<span class="num">08</span> Medidas de Seguridad',
+  '<span class="num">09</span> Datos de Menores de Edad',
+  '<span class="num">10</span> Plazos de Conservación',
+  '<span class="num">11</span> Modificaciones al Aviso de Privacidad',
+  '<span class="num">12</span> Autoridad Competente y Medios de Defensa'
+];
+var sectionsEN = [
+  '<span class="num">01</span> Identity and Address of the Controller',
+  '<span class="num">02</span> Personal Data Collected',
+  '<span class="num">03</span> Purposes of Processing',
+  '<span class="num">04</span> Transfer of Personal Data',
+  '<span class="num">05</span> ARCO Rights and Withdrawal of Consent',
+  '<span class="num">06</span> Mechanisms to Limit Use and Disclosure',
+  '<span class="num">07</span> Cookies and Tracking Technologies',
+  '<span class="num">08</span> Security Measures',
+  '<span class="num">09</span> Data of Minors',
+  '<span class="num">10</span> Retention Periods',
+  '<span class="num">11</span> Amendments to the Privacy Notice',
+  '<span class="num">12</span> Competent Authority and Legal Remedies'
+];
+
+var subsectionsES = [
+  'Datos de Identificación y Contacto',
+  'Datos de Preferencias y Servicio',
+  'Datos Sensibles (tratamiento especial)',
+  'Finalidades Primarias (necesarias para la prestación del servicio)',
+  'Finalidades Secundarias (no imprescindibles para el servicio)'
+];
+var subsectionsEN = [
+  'Identification and Contact Data',
+  'Preference and Service Data',
+  'Sensitive Data (special treatment)',
+  'Primary Purposes (necessary for service delivery)',
+  'Secondary Purposes (not essential for the service)'
+];
+
+function applyLang(lang) {
+  var d = D[lang] || D.es;
+  /* data-i18n elements */
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (d[key] !== undefined) el.innerHTML = d[key];
+  });
+  /* Section headings */
+  var h2s = document.querySelectorAll('.priv-section h2');
+  var heads = lang === 'en' ? sectionsEN : sectionsES;
+  h2s.forEach(function(h, i) { if (heads[i]) h.innerHTML = heads[i]; });
+  /* Sub-section headings */
+  var h3s = document.querySelectorAll('.priv-section h3');
+  var subs = lang === 'en' ? subsectionsEN : subsectionsES;
+  h3s.forEach(function(h, i) { if (subs[i]) h.textContent = subs[i]; });
+  /* button + html lang */
+  document.documentElement.lang = lang;
+  var btn = document.getElementById('langBtn');
+  if (btn) { btn.textContent = lang === 'es' ? 'EN' : 'ES'; btn.classList.toggle('active', lang === 'en'); }
+  var backBtn = document.getElementById('backBtn');
+  if (backBtn) backBtn.textContent = lang === 'es' ? '← Volver al inicio' : '← Back to home';
+  /* page title */
+  document.title = lang === 'en'
+    ? 'Privacy Notice · ACME Fight & Fitness'
+    : 'Aviso de Privacidad Integral · ACME Fight & Fitness';
+  localStorage.setItem('lang', lang);
+}
+
+window.togglePrivLang = function() {
+  var cur = localStorage.getItem('lang') || 'es';
+  applyLang(cur === 'es' ? 'en' : 'es');
+};
+
+/* Init */
+var saved = localStorage.getItem('lang') || 'es';
+if (saved !== 'es') applyLang(saved);
+else { var b = document.getElementById('langBtn'); if (b) b.textContent = 'EN'; }
+
+})();
+</script>
 
 </body>
 </html>
