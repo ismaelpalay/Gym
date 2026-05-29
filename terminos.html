@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Términos y Condiciones · ACME Fight &amp; Fitness</title>
-    <meta name="description" content="Términos y Condiciones de uso de ACME Fight & Fitness. Lee los términos de nuestros servicios, membresías y uso de instalaciones.">
+    <meta name="description" content="Términos y Condiciones de ACME Fight & Fitness. Contrato de prestación de servicios conforme a la Ley Federal de Protección al Consumidor y el Código Civil Federal de México.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +86,7 @@
             letter-spacing: 3px;
             padding: 5px 14px;
             border-radius: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .page-hero h1 {
             font-family: var(--font-h);
@@ -101,8 +101,16 @@
         .page-hero p {
             color: var(--muted);
             font-size: 14px;
-            max-width: 520px;
+            max-width: 560px;
             margin: 0 auto;
+        }
+        .page-hero .legal-ref {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(201,168,76,0.55);
+            font-family: var(--font-h);
         }
         .content-wrap {
             max-width: 860px;
@@ -171,7 +179,15 @@
             color: var(--gold);
             font-size: 12px;
         }
+        .tc-section ol {
+            padding-left: 20px;
+            color: rgba(243,243,243,0.65);
+            font-size: 14px;
+        }
+        .tc-section ol li { margin-bottom: 8px; }
         .tc-section strong { color: var(--white); }
+        .tc-section a { color: var(--gold); }
+        .tc-section a:hover { color: var(--gold-l); }
         .tc-section .highlight {
             background: rgba(229,0,26,0.07);
             border: 1px solid rgba(229,0,26,0.16);
@@ -182,7 +198,26 @@
             font-size: 13px;
             margin-top: 14px;
         }
-        .tc-section .highlight strong { color: var(--red); }
+        .tc-section .highlight strong { color: #ff6070; }
+        .tc-section .gold-box {
+            background: rgba(201,168,76,0.06);
+            border: 1px solid rgba(201,168,76,0.18);
+            border-left: 3px solid var(--gold);
+            border-radius: 6px;
+            padding: 14px 18px;
+            color: rgba(243,243,243,0.70);
+            font-size: 13px;
+            margin-top: 14px;
+        }
+        .tc-section .gold-box strong { color: var(--gold); }
+        .art-note {
+            font-size: 11px;
+            color: rgba(201,168,76,0.50);
+            font-family: var(--font-h);
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 8px;
+        }
         .last-updated {
             margin-top: 48px;
             padding-top: 24px;
@@ -216,11 +251,15 @@
             margin: 0 8px;
         }
         footer .ft-links a:hover { color: var(--gold); }
+        footer .legal-footer-note {
+            margin-top: 12px;
+            font-size: 11px;
+            color: rgba(243,243,243,0.18);
+        }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="priv-nav" aria-label="Navegación principal">
     <div class="inner">
         <a href="index.html" class="brand">MARCA <span>ACME</span> FIGHT &amp; FITNESS</a>
@@ -228,140 +267,256 @@
     </div>
 </nav>
 
-<!-- HERO -->
 <div class="page-hero">
-    <span class="badge">DOCUMENTO LEGAL</span>
+    <span class="badge">DOCUMENTO LEGAL · CONTRATO DE SERVICIOS</span>
     <h1>Términos y <span>Condiciones</span></h1>
-    <p>Al utilizar nuestras instalaciones, servicios o plataformas digitales, aceptas los términos establecidos en este documento.</p>
+    <p>Al utilizar nuestras instalaciones, adquirir una membresía o acceder a nuestros servicios digitales, aceptas los términos y condiciones establecidos en el presente contrato.</p>
+    <span class="legal-ref">LFPC · CÓDIGO CIVIL FEDERAL · NOM-247-SE-2021 · PROFECO</span>
 </div>
 
-<!-- CONTENT -->
 <div class="content-wrap">
 
     <div class="tc-intro">
-        <strong>Importante:</strong> Lee este documento detenidamente antes de adquirir cualquier membresía o servicio de <strong>MARCA ACME FIGHT &amp; FITNESS</strong>. Al realizar un pago o registrarte, confirmas que has leído, entendido y aceptado estos términos. Última actualización: <strong>enero 2026</strong>.
+        <strong>Aviso importante:</strong> El presente documento constituye un contrato de prestación de servicios
+        celebrado conforme a la <strong>Ley Federal de Protección al Consumidor (LFPC)</strong>, el
+        <strong>Código Civil Federal</strong>, la <strong>NOM-247-SE-2021</strong> (comercio electrónico) y demás
+        legislación aplicable en los <strong>Estados Unidos Mexicanos</strong>. Lee detenidamente antes de adquirir
+        cualquier membresía o servicio. Al realizar un pago o registrarte, confirmas que has leído, entendido y
+        aceptado estos términos en su totalidad.
+        Última actualización: <strong>29 de mayo de 2026</strong>.
     </div>
 
     <!-- Sección 1 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">01</span>Definiciones y Partes</h2>
-        <p>Para efectos de este contrato, se establecen las siguientes definiciones:</p>
+        <h2 class="tc-section-title"><span class="num">01</span>Partes Contratantes y Definiciones</h2>
+        <p>Para efectos del presente contrato, se establecen las siguientes definiciones conforme a los artículos 2 y 3 de la <strong>Ley Federal de Protección al Consumidor</strong>:</p>
         <ul>
-            <li><strong>"ACME" o "el Gimnasio"</strong>: se refiere a MARCA ACME FIGHT &amp; FITNESS, propietario y operador de las instalaciones deportivas en México.</li>
-            <li><strong>"Miembro" o "Usuario"</strong>: toda persona física que adquiera una membresía, clase o servicio ofrecido por ACME.</li>
-            <li><strong>"Servicios"</strong>: incluye el acceso a instalaciones, clases grupales o individuales, uso de equipos y zonas de recuperación.</li>
-            <li><strong>"Membresía"</strong>: contrato de suscripción mensual o anual que otorga acceso al gimnasio bajo los términos aquí descritos.</li>
-            <li><strong>"Plataforma"</strong>: sitio web y medios digitales de ACME Fight &amp; Fitness.</li>
+            <li><strong>"Proveedor" / "ACME":</strong> MARCA ACME FIGHT &amp; FITNESS, persona moral domiciliada en Ciudad de México, México, titular y operadora de las instalaciones deportivas y los servicios descritos en el presente documento.</li>
+            <li><strong>"Consumidor" / "Miembro" / "Usuario":</strong> toda persona física que adquiera, realice o disfrute los bienes, productos o servicios de ACME, conforme al artículo 2, fracción I de la LFPC.</li>
+            <li><strong>"Servicios":</strong> acceso a instalaciones, clases grupales o individuales, uso de equipos, zonas de recuperación y cualquier otro servicio ofrecido por ACME.</li>
+            <li><strong>"Membresía":</strong> contrato de suscripción mensual o anual que otorga acceso a los Servicios bajo los términos aquí descritos. Constituye un contrato de adhesión conforme al artículo 85 de la LFPC.</li>
+            <li><strong>"Plataforma":</strong> sitio web y medios digitales de ACME Fight &amp; Fitness, sujetos a la NOM-247-SE-2021 en materia de comercio electrónico.</li>
         </ul>
+        <span class="art-note">Fundamento: Arts. 1, 2 y 7 LFPC; Arts. 1792–1796 Código Civil Federal</span>
     </div>
 
     <!-- Sección 2 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">02</span>Membresías y Pagos</h2>
-        <p>Las membresías están disponibles en las siguientes modalidades:</p>
+        <h2 class="tc-section-title"><span class="num">02</span>Membresías, Precios y Condiciones de Pago</h2>
+        <p>Las membresías están disponibles en las siguientes modalidades. <strong>Todos los precios están expresados en pesos mexicanos (MXN) e incluyen el Impuesto al Valor Agregado (IVA) vigente conforme a la Ley del IVA</strong>:</p>
         <ul>
-            <li><strong>Clase Única ($299 MXN/sesión):</strong> Acceso a una sesión de 60 minutos. Sin compromiso de permanencia. Pago anticipado obligatorio.</li>
-            <li><strong>Plan Básico ($1,299 MXN/mes):</strong> Acceso ilimitado a todas las instalaciones y clases grupales durante el período contratado.</li>
-            <li><strong>Plan Élite ($12,999 MXN/año):</strong> Incluye acceso ilimitado, 2 masajes deportivos por mes, asesoría nutricional y plan personalizado de entrenamiento.</li>
+            <li><strong>Clase Única — $299 MXN/sesión (IVA incluido):</strong> Acceso a una sesión individual de 60 minutos. Sin compromiso de permanencia. Pago anticipado obligatorio.</li>
+            <li><strong>Plan Básico — $1,299 MXN/mes (IVA incluido):</strong> Acceso ilimitado a todas las instalaciones y clases grupales durante el período mensual contratado.</li>
+            <li><strong>Plan Élite — $12,999 MXN/año (IVA incluido):</strong> Incluye acceso ilimitado, 2 masajes deportivos por mes, asesoría nutricional y plan personalizado de entrenamiento.</li>
         </ul>
-        <p>Todos los precios están expresados en pesos mexicanos (MXN) e incluyen IVA. ACME se reserva el derecho de modificar tarifas con un aviso previo de <strong>30 días naturales</strong>.</p>
-        <div class="highlight">
-            <strong>Nota sobre el Plan Élite:</strong> El beneficio de "3 meses GRATIS" aplica al comparar el costo anual contra el Plan Básico mensual (12,999 vs. 15,588 MXN/año). El ahorro efectivo es de $2,589 MXN.
+        <p>
+            ACME se reserva el derecho de modificar tarifas, notificando con un mínimo de <strong>30 días naturales</strong>
+            de anticipación al correo electrónico registrado y mediante publicación en el sitio web oficial, conforme al
+            <strong>artículo 7, fracción X de la LFPC</strong>. Los cambios de precios no afectan membresías ya pagadas y vigentes.
+        </p>
+        <div class="gold-box">
+            <strong>Nota Plan Élite:</strong> El beneficio equivalente a "3 meses GRATIS" se calcula comparando el costo anual ($12,999 MXN) contra la suma de 12 mensualidades del Plan Básico ($15,588 MXN/año), lo que representa un ahorro efectivo de <strong>$2,589 MXN</strong>. Esta información se divulga de conformidad con el <strong>artículo 7-B de la LFPC</strong> (información veraz y comprobable).
         </div>
+        <span class="art-note">Fundamento: Arts. 7, 7-B, 10 LFPC; Art. 1 Ley del IVA</span>
     </div>
 
     <!-- Sección 3 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">03</span>Cancelaciones y Reembolsos</h2>
-        <p>La política de cancelación de ACME es la siguiente:</p>
+        <h2 class="tc-section-title"><span class="num">03</span>Derecho de Rescisión y Cancelaciones</h2>
+        <p>
+            Conforme al <strong>artículo 56 de la LFPC</strong>, tratándose de contratos celebrados fuera del establecimiento
+            comercial o a distancia (vía internet), el Consumidor tiene derecho a <strong>rescindir el contrato
+            dentro de los 5 días hábiles siguientes</strong> a la fecha de celebración o de recepción del bien o servicio,
+            sin responsabilidad alguna y sin necesidad de expresar causa, con derecho a reembolso total.
+        </p>
+        <p>Pasado el plazo de rescisión legal, aplica la siguiente política:</p>
         <ul>
-            <li><strong>Clase Única:</strong> Se puede cancelar hasta <strong>24 horas antes</strong> de la sesión para obtener un crédito aplicable a futuras clases. No se realizan devoluciones en efectivo.</li>
-            <li><strong>Plan Básico (mensual):</strong> Se puede cancelar en cualquier momento. La membresía permanece activa hasta el fin del período pagado. No hay reembolso proporcional por días no utilizados.</li>
-            <li><strong>Plan Élite (anual):</strong> Cancelación posible dentro de los primeros <strong>15 días naturales</strong> con reembolso del 80% del monto pagado. Después de este plazo, no proceden reembolsos.</li>
-            <li><strong>Causas médicas:</strong> Ante justificación médica debidamente documentada, ACME evaluará la suspensión temporal o reembolso parcial caso por caso.</li>
+            <li><strong>Clase Única:</strong> Cancelación hasta <strong>24 horas antes</strong> de la sesión para obtener un crédito aplicable a futuras clases. No se realizan reembolsos en efectivo fuera del período de rescisión legal.</li>
+            <li><strong>Plan Básico (mensual):</strong> Cancelación en cualquier momento; la membresía permanece activa hasta el fin del período pagado. No hay reembolso proporcional por días no utilizados, salvo causas de fuerza mayor debidamente acreditadas.</li>
+            <li><strong>Plan Élite (anual):</strong> Dentro de los primeros <strong>15 días naturales</strong> (adicionales al período de rescisión), reembolso del 80 % del monto pagado. Transcurrido dicho plazo, no proceden reembolsos, salvo por causa médica acreditada.</li>
+            <li><strong>Causas médicas o de fuerza mayor:</strong> Ante justificación médica documentada o caso fortuito, ACME evaluará la suspensión temporal o reembolso parcial, conforme al <strong>artículo 57 de la LFPC</strong>.</li>
         </ul>
-        <p>Para iniciar cualquier proceso de cancelación, envía un correo a <strong>soporte@acmecombat.mx</strong> con tu nombre completo, número de referencia y motivo.</p>
+        <div class="highlight">
+            <strong>Derecho de Rescisión (Art. 56 LFPC):</strong> Si adquiriste tu membresía en línea y deseas ejercer tu derecho de rescisión dentro de los 5 días hábiles, envía un correo a <strong>soporte@acmecombat.mx</strong> con el asunto <strong>"RESCISIÓN DE CONTRATO"</strong>. ACME realizará el reembolso íntegro dentro de los 15 días hábiles siguientes a la recepción de la solicitud.
+        </div>
+        <span class="art-note">Fundamento: Arts. 56 y 57 LFPC; Arts. 2106–2117 Código Civil Federal</span>
     </div>
 
     <!-- Sección 4 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">04</span>Normas de Uso de Instalaciones</h2>
-        <p>Al acceder a las instalaciones de ACME, el usuario acepta cumplir con las siguientes normas:</p>
+        <h2 class="tc-section-title"><span class="num">04</span>Obligaciones del Proveedor</h2>
+        <p>Conforme al <strong>artículo 7 de la LFPC</strong>, ACME Fight &amp; Fitness se obliga a:</p>
         <ul>
-            <li>Presentarse puntual a las sesiones reservadas. El ingreso no se permite pasados <strong>10 minutos</strong> del inicio de la clase.</li>
-            <li>Utilizar equipo de protección personal (guantes, protector bucal, etc.) en todas las sesiones de contacto.</li>
-            <li>Respetar a entrenadores, staff y demás miembros en todo momento. Conductas agresivas o de acoso resultarán en suspensión inmediata.</li>
-            <li>No consumir alimentos, alcohol ni sustancias prohibidas dentro de las instalaciones.</li>
-            <li>Devolver todo el equipo a su lugar y dejar el área limpia después de cada uso.</li>
-            <li>Reportar cualquier equipo dañado o situación de seguridad al personal de inmediato.</li>
-            <li>Los menores de edad (programa infantil) deben estar acompañados por un adulto responsable durante el traslado al gimnasio.</li>
+            <li>Prestar los servicios en los términos y condiciones ofrecidos, acordados y pactados.</li>
+            <li>Informar al Consumidor sobre los elementos, características y riesgos de los servicios ofrecidos.</li>
+            <li>Respetar las tarifas, precios y condiciones acordados al momento de la contratación.</li>
+            <li>Expedir comprobante fiscal (CFDI) por cada pago recibido, de conformidad con el artículo 29 del Código Fiscal de la Federación.</li>
+            <li>Garantizar condiciones de higiene, seguridad y mantenimiento adecuadas en las instalaciones.</li>
+            <li>Contar con personal capacitado en primeros auxilios y protocolos de atención a emergencias.</li>
+            <li>No incluir cláusulas abusivas en los contratos de adhesión, conforme al artículo 90 de la LFPC.</li>
         </ul>
+        <span class="art-note">Fundamento: Arts. 7, 7-A, 43 y 90 LFPC; Art. 29 CFF</span>
     </div>
 
     <!-- Sección 5 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">05</span>Salud, Aptitud y Responsabilidad</h2>
-        <p>El usuario declara estar en condiciones físicas aptas para la práctica de artes marciales mixtas. ACME recomienda realizarse un chequeo médico previo al inicio de cualquier programa de entrenamiento.</p>
+        <h2 class="tc-section-title"><span class="num">05</span>Normas de Uso de Instalaciones</h2>
+        <p>Al acceder a las instalaciones de ACME, el Consumidor acepta las siguientes normas de convivencia y seguridad:</p>
         <ul>
-            <li>ACME no se responsabiliza por lesiones derivadas del incumplimiento de las instrucciones del entrenador o de las normas de seguridad establecidas.</li>
-            <li>En caso de condición médica preexistente, el miembro debe informarlo al entrenador antes de iniciar cualquier actividad.</li>
-            <li>Los usuarios participan en actividades de contacto físico bajo su propia responsabilidad y con pleno conocimiento de los riesgos inherentes al deporte.</li>
-            <li>ACME cuenta con personal capacitado en primeros auxilios y protocolos de emergencia dentro de las instalaciones.</li>
+            <li>Presentarse puntual a las sesiones reservadas. El acceso no se permite pasados <strong>10 minutos</strong> del inicio de la clase, salvo autorización del entrenador.</li>
+            <li>Utilizar equipo de protección personal (guantes, protector bucal, casco, etc.) en todas las sesiones de contacto físico.</li>
+            <li>Respetar en todo momento a entrenadores, personal administrativo y demás miembros. Conductas de acoso, hostigamiento, discriminación o violencia resultarán en suspensión inmediata sin derecho a reembolso, conforme a la <strong>Ley Federal para Prevenir y Eliminar la Discriminación</strong>.</li>
+            <li>Queda prohibido el consumo de alcohol, sustancias psicoactivas, alimentos de olor penetrante o cualquier sustancia prohibida dentro de las instalaciones.</li>
+            <li>Devolver todo el equipo a su lugar designado y dejar el área limpia después de cada uso.</li>
+            <li>Reportar de inmediato al personal cualquier equipo dañado o situación de riesgo para la seguridad.</li>
+            <li>Los menores de edad (programa infantil) deben contar con un adulto responsable presente en las instalaciones durante toda la sesión, o en la zona de padres habilitada para tal efecto.</li>
         </ul>
-        <div class="highlight">
-            <strong>Programa Infantil:</strong> Los padres o tutores legales son responsables de la integridad y conducta de los menores dentro y fuera de las instalaciones. El entrenador infantil está certificado y supervisado en todo momento.
-        </div>
+        <p>El incumplimiento reiterado de estas normas podrá derivar en la cancelación de la membresía, previa notificación escrita y oportunidad de audiencia.</p>
+        <span class="art-note">Fundamento: Arts. 7 y 55 LFPC; Ley Federal para Prevenir y Eliminar la Discriminación</span>
     </div>
 
     <!-- Sección 6 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">06</span>Propiedad Intelectual</h2>
-        <p>Todos los contenidos del sitio web de ACME Fight &amp; Fitness —incluyendo logotipos, diseños, textos, imágenes, videos y metodología de entrenamiento— son propiedad de MARCA ACME FIGHT &amp; FITNESS y están protegidos por las leyes de propiedad intelectual mexicanas.</p>
+        <h2 class="tc-section-title"><span class="num">06</span>Salud, Aptitud Física y Deslinde de Responsabilidad</h2>
+        <p>
+            El Consumidor declara bajo protesta de decir verdad que se encuentra en condiciones físicas aptas para
+            la práctica de artes marciales mixtas y actividades de acondicionamiento físico. ACME recomienda realizarse
+            un chequeo médico previo al inicio de cualquier programa de entrenamiento, conforme a las buenas prácticas
+            de salud deportiva.
+        </p>
         <ul>
-            <li>Queda prohibida la reproducción, distribución o uso comercial de cualquier contenido sin autorización expresa y por escrito de ACME.</li>
-            <li>El nombre comercial "MARCA ACME", "ACME Fight &amp; Fitness" y sus variantes son marcas registradas.</li>
-            <li>Las fotografías o videos del interior del gimnasio no pueden publicarse en redes sociales sin autorización, si incluyen a terceros identificables.</li>
+            <li>El Consumidor asume bajo su propio riesgo la participación en actividades de contacto físico, con pleno conocimiento de los riesgos inherentes al deporte de artes marciales.</li>
+            <li>En caso de condición médica preexistente (enfermedades cardiovasculares, ortopédicas, neurológicas u otras), el Miembro debe informarlo al entrenador <strong>antes de iniciar cualquier actividad</strong>.</li>
+            <li>ACME no se hace responsable por lesiones derivadas del incumplimiento de instrucciones del entrenador, uso inadecuado del equipo o desacato a las normas de seguridad.</li>
+            <li>ACME cuenta con botiquín de primeros auxilios y personal certificado en primeros auxilios básicos dentro de las instalaciones en todo momento de operación.</li>
+            <li>En caso de emergencia médica, ACME activará los protocolos de atención y contactará a los servicios de emergencia (911) de forma inmediata.</li>
         </ul>
+        <div class="highlight">
+            <strong>Programa Infantil — Responsabilidad Parental:</strong> Los padres o tutores legales son responsables de la integridad, conducta y estado de salud de los menores dentro y en el entorno de las instalaciones. El entrenador infantil cuenta con certificación y es supervisado conforme a los lineamientos de protección de menores. La información médica del menor deberá ser proporcionada por escrito al momento de la inscripción.
+        </div>
+        <span class="art-note">Fundamento: Arts. 77 y 79 Código Civil Federal; Ley General de los Derechos de Niñas, Niños y Adolescentes</span>
     </div>
 
     <!-- Sección 7 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">07</span>Modificaciones a los Términos</h2>
-        <p>ACME se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán notificados a los miembros activos mediante:</p>
+        <h2 class="tc-section-title"><span class="num">07</span>Propiedad Intelectual</h2>
+        <p>
+            Conforme a la <strong>Ley Federal del Derecho de Autor (LFDA)</strong> y la <strong>Ley de la Propiedad Industrial (LPI)</strong>,
+            todos los contenidos del sitio web y los materiales de ACME Fight &amp; Fitness — incluyendo logotipos,
+            diseños, textos, imágenes, videos, metodología de entrenamiento y marca comercial — son propiedad exclusiva
+            de MARCA ACME FIGHT &amp; FITNESS y están protegidos por la legislación mexicana aplicable.
+        </p>
         <ul>
-            <li>Correo electrónico al email registrado con <strong>15 días de anticipación</strong>.</li>
-            <li>Publicación actualizada en el sitio web oficial.</li>
-            <li>Aviso visible en las instalaciones del gimnasio.</li>
+            <li>Queda <strong>expresamente prohibida</strong> la reproducción, distribución, modificación, transmisión o uso comercial de cualquier contenido sin autorización expresa y por escrito de ACME.</li>
+            <li>Los nombres comerciales "MARCA ACME", "ACME Fight &amp; Fitness" y sus variantes son marcas registradas ante el Instituto Mexicano de la Propiedad Industrial (IMPI).</li>
+            <li>Las fotografías o videos que incluyan a terceros identificables tomados dentro de las instalaciones no pueden publicarse sin consentimiento expreso de los involucrados, conforme al artículo 87 de la LFDA.</li>
         </ul>
-        <p>El uso continuado de los servicios tras la entrada en vigor de los cambios implica la aceptación de los nuevos términos.</p>
+        <span class="art-note">Fundamento: Arts. 87 y 88 LFDA; Arts. 128 y 129 LPI</span>
     </div>
 
     <!-- Sección 8 -->
     <div class="tc-section">
-        <h2 class="tc-section-title"><span class="num">08</span>Ley Aplicable y Jurisdicción</h2>
-        <p>Estos Términos y Condiciones se rigen por las leyes vigentes de los <strong>Estados Unidos Mexicanos</strong>. Para cualquier controversia derivada de la interpretación o cumplimiento de este documento, las partes se someten a la jurisdicción de los tribunales competentes de México.</p>
-        <p>Para consultas, reclamaciones o ejercicio de derechos, puedes contactarnos en:</p>
+        <h2 class="tc-section-title"><span class="num">08</span>Contrato de Adhesión y Cláusulas Abusivas</h2>
+        <p>
+            El presente documento constituye un <strong>contrato de adhesión</strong> conforme al artículo 85 de la LFPC.
+            ACME se compromete a que ninguna cláusula de este documento implique prestaciones desproporcionadas,
+            obligaciones inequitativas o cualquier condición abusiva en perjuicio del Consumidor, de conformidad
+            con el artículo 90 de la LFPC.
+        </p>
+        <p>
+            Si alguna cláusula del presente documento resultara nula, ilegal o inaplicable conforme a la legislación
+            mexicana, dicha nulidad no afectará la validez del resto del contrato, el cual permanecerá vigente en
+            lo que no sea contrario a derecho.
+        </p>
+        <div class="gold-box">
+            <strong>Registro ante PROFECO:</strong> En caso de que este contrato sea sometido a registro ante la
+            Procuraduría Federal del Consumidor (PROFECO), las cláusulas aprobadas por dicha autoridad prevalecerán
+            sobre las aquí contenidas en lo que resulten más favorables al Consumidor, conforme al artículo 87 de la LFPC.
+        </div>
+        <span class="art-note">Fundamento: Arts. 85, 87 y 90 LFPC</span>
+    </div>
+
+    <!-- Sección 9 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">09</span>Modificaciones a los Términos y Condiciones</h2>
+        <p>ACME se reserva el derecho de modificar el presente contrato. Cualquier modificación que implique un perjuicio para el Consumidor deberá ser notificada conforme al <strong>artículo 7, fracción X de la LFPC</strong>:</p>
         <ul>
-            <li><strong>Correo electrónico:</strong> soporte@acmecombat.mx</li>
-            <li><strong>Referencia única:</strong> ACC-2026-7849X</li>
-            <li><strong>Horario de atención:</strong> Lun–Vie 5:00 AM – 9:00 PM | Sáb–Dom 7:00 AM – 6:00 PM</li>
+            <li>Correo electrónico al email registrado con <strong>30 días naturales de anticipación</strong>.</li>
+            <li>Publicación actualizada en el sitio web oficial con fecha de entrada en vigor visible.</li>
+            <li>Aviso en las instalaciones físicas del gimnasio.</li>
         </ul>
+        <p>
+            El Consumidor que no esté de acuerdo con las modificaciones podrá cancelar su membresía sin penalización
+            dentro de los <strong>5 días hábiles</strong> siguientes a la notificación, con reembolso proporcional al
+            período no utilizado. El uso continuado de los servicios tras la entrada en vigor de los cambios implica la aceptación tácita de los nuevos términos.
+        </p>
+        <span class="art-note">Fundamento: Art. 7-X LFPC; Arts. 1800–1803 Código Civil Federal</span>
+    </div>
+
+    <!-- Sección 10 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">10</span>Protección al Consumidor y Medios de Defensa</h2>
+        <p>Conforme a la <strong>Ley Federal de Protección al Consumidor</strong>, el Consumidor tiene derecho a:</p>
+        <ul>
+            <li>Recibir información veraz, oportuna, suficiente y clara sobre los servicios adquiridos (Art. 7 LFPC).</li>
+            <li>Que se respeten los precios, tarifas, garantías, cantidades y calidades ofrecidas (Art. 7 LFPC).</li>
+            <li>Rescisión del contrato dentro de los 5 días hábiles siguientes a su celebración (Art. 56 LFPC).</li>
+            <li>No ser objeto de prácticas comerciales engañosas, coercitivas o que constituyan competencia desleal (Arts. 32 y 39 LFPC).</li>
+            <li>Presentar una queja o reclamación ante PROFECO de forma gratuita.</li>
+        </ul>
+        <div class="gold-box">
+            <strong>Quejas ante PROFECO:</strong> Si no recibes una respuesta satisfactoria de ACME, puedes presentar
+            tu queja ante la <strong>Procuraduría Federal del Consumidor (PROFECO)</strong>:
+            <br>🌐 <a href="https://www.profeco.gob.mx" target="_blank" rel="noopener">www.profeco.gob.mx</a>
+            <br>📞 TELCON: 800-468-8722 (sin costo desde México)
+            <br>📱 App PROFECO Móvil: disponible en App Store y Google Play
+        </div>
+        <span class="art-note">Fundamento: Arts. 1, 7, 24, 56 y 99 LFPC</span>
+    </div>
+
+    <!-- Sección 11 -->
+    <div class="tc-section">
+        <h2 class="tc-section-title"><span class="num">11</span>Ley Aplicable y Jurisdicción</h2>
+        <p>
+            El presente contrato se rige e interpreta conforme a las leyes vigentes de los <strong>Estados Unidos Mexicanos</strong>,
+            en particular la <strong>Ley Federal de Protección al Consumidor</strong>, el <strong>Código Civil Federal</strong>
+            y la <strong>NOM-247-SE-2021</strong> en materia de comercio electrónico y protección al consumidor en transacciones a distancia.
+        </p>
+        <p>
+            Para la resolución de cualquier controversia derivada del presente contrato, las partes se someten a la
+            <strong>jurisdicción de los Tribunales competentes de la Ciudad de México</strong>, renunciando a cualquier
+            otro fuero que pudiera corresponderles por razón de sus domicilios presentes o futuros, sin perjuicio del
+            derecho del Consumidor de acudir a la PROFECO para la resolución extrajudicial del conflicto.
+        </p>
+        <div class="tc-section">
+            <p>Para atención, consultas o reclamaciones directas:</p>
+            <ul>
+                <li><strong>Correo electrónico:</strong> soporte@acmecombat.mx</li>
+                <li><strong>Tiempo de respuesta:</strong> máximo 5 días hábiles</li>
+                <li><strong>Horario de atención:</strong> Lun–Vie 5:00 AM – 9:00 PM | Sáb–Dom 7:00 AM – 6:00 PM</li>
+                <li><strong>Referencia única:</strong> ACC-2026-7849X</li>
+            </ul>
+        </div>
+        <span class="art-note">Fundamento: Arts. 1, 100 y 111 LFPC; Art. 104 Constitución Política de los Estados Unidos Mexicanos</span>
     </div>
 
     <div class="last-updated">
-        <span>© 2026 MARCA ACME FIGHT &amp; FITNESS · México. Todos los derechos reservados.</span>
+        <span>© 2026 MARCA ACME FIGHT &amp; FITNESS · Ciudad de México, México. Todos los derechos reservados.</span>
         <span class="ref">ACC-2026-7849X</span>
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-    <p>© 2026 ACME Fight &amp; Fitness · México</p>
+    <p>© 2026 ACME Fight &amp; Fitness · Ciudad de México, México</p>
     <div class="ft-links">
         <a href="index.html">Inicio</a>
         <a href="privacy.html" target="_blank">Política de Privacidad</a>
         <a href="faq.html" target="_blank">Preguntas Frecuentes</a>
     </div>
+    <p class="legal-footer-note">
+        Documento elaborado conforme a la LFPC (D.O.F. 24-12-1992 y reformas), Código Civil Federal,
+        NOM-247-SE-2021 y la LFPDPPP (D.O.F. 05-07-2010).
+    </p>
 </footer>
 
 </body>

@@ -234,12 +234,12 @@
         }
         .nav-logo-circle {
             width: 44px; height: 44px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            overflow: hidden;
             flex-shrink: 0;
-            background: #0a0a0a;
-            box-shadow: 0 0 10px var(--gold-glow);
+            background: var(--gold);
+            clip-path: polygon(31% 4%, 69% 4%, 96% 31%, 96% 69%, 69% 96%, 31% 96%, 4% 69%, 4% 31%);
+            padding: 2px;
+            box-sizing: border-box;
+            filter: drop-shadow(0 0 6px rgba(201,168,76,0.45));
         }
         .nav-logo-circle svg { width: 100%; height: 100%; }
         .nav-logo-texts { display: flex; flex-direction: column; }
@@ -1846,13 +1846,16 @@
             background: rgba(229,0,26,0.08);
         }
         .cb-header-logo {
-            width: 42px; height: 42px; border-radius: 50%;
-            border: 2px solid var(--red);
-            overflow: hidden; flex-shrink: 0;
+            width: 42px; height: 42px;
+            background: var(--red);
+            clip-path: polygon(31% 4%, 69% 4%, 96% 31%, 96% 69%, 69% 96%, 31% 96%, 4% 69%, 4% 31%);
+            padding: 2px;
+            box-sizing: border-box;
+            flex-shrink: 0;
         }
         .cb-header-logo img {
             width: 100%; height: 100%;
-            object-fit: cover; object-position: 50% 38%;
+            object-fit: contain;
         }
         .cb-header-info { flex: 1; min-width: 0; }
         .cb-name {
@@ -2039,7 +2042,7 @@
         <div class="nav-inner">
             <a href="#inicio" class="nav-logo">
                 <div class="nav-logo-circle">
-                    <img src="logo.png" alt="ACME Fight &amp; Fitness" style="width:100%;height:100%;object-fit:cover;object-position:50% 44%;border-radius:50%;">
+                    <img src="logo.png" alt="ACME Fight &amp; Fitness" style="width:100%;height:100%;object-fit:contain;display:block;">
                 </div>
                 <div class="nav-logo-texts">
                     <span class="brand">Marca ACME</span>
@@ -3651,7 +3654,7 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
     <!-- Header -->
     <div class="cb-header">
         <div class="cb-header-logo">
-            <img src="logo.png" alt="ACME" style="width:100%;height:100%;object-fit:cover;object-position:50% 44%;">
+            <img src="logo.png" alt="ACME" style="width:100%;height:100%;object-fit:contain;display:block;">
         </div>
         <div class="cb-header-info">
             <p class="cb-name">ACME Fight &amp; Fitness</p>
