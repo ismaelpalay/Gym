@@ -2028,7 +2028,7 @@
 <!-- Logo watermark background -->
 <div class="logo-wm" id="logoWm" aria-hidden="true">
     <div class="logo-wm-inner" id="logoWmInner">
-        <img src="logo.png" alt="" style="width:100%;height:100%;object-fit:contain;opacity:0.11;">
+        <img src="logo.svg" alt="" style="width:100%;height:100%;object-fit:contain;opacity:0.11;">
     </div>
 </div>
 
@@ -2040,7 +2040,7 @@
         <div class="nav-inner">
             <a href="#inicio" class="nav-logo">
                 <div class="nav-logo-circle">
-                    <img src="logo.png" alt="ACME Fight &amp; Fitness" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;">
+                    <img src="logo.svg" alt="ACME Fight &amp; Fitness" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;">
                 </div>
                 <div class="nav-logo-texts">
                     <span class="brand">Marca ACME</span>
@@ -2289,84 +2289,84 @@
                             <path d="M 52 0 L 0 0 0 44" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
                         </pattern>
                     </defs>
-                    <!-- bg -->
                     <rect width="520" height="440" fill="#0f0f0f" rx="8"/>
                     <rect width="520" height="440" fill="url(#grid)" rx="8"/>
 
-                    <!-- Recepción / Vestidores -->
-                    <rect x="18" y="18" width="150" height="76" rx="4"
-                          fill="rgba(229,0,26,0.07)" stroke="rgba(229,0,26,0.28)" stroke-width="1"/>
-                    <text x="93" y="50"  text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
-                    <text x="93" y="67"  text-anchor="middle" fill="rgba(229,0,26,0.50)" font-family="sans-serif" font-size="9">VESTIDORES</text>
+                    <!-- ZONA TATAMI (60% del espacio — lado izquierdo) -->
+                    <!-- Tatami Grappling — ocupa ~60% horizontal, mitad superior -->
+                    <rect x="18" y="18" width="300" height="198" rx="4"
+                          fill="rgba(50,180,100,0.08)" stroke="rgba(50,180,100,0.30)" stroke-width="1.5"/>
+                    <!-- Tatami texture lines -->
+                    <line x1="18" y1="72" x2="318" y2="72" stroke="rgba(50,180,100,0.10)" stroke-width="1"/>
+                    <line x1="18" y1="126" x2="318" y2="126" stroke="rgba(50,180,100,0.10)" stroke-width="1"/>
+                    <line x1="18" y1="162" x2="318" y2="162" stroke="rgba(50,180,100,0.10)" stroke-width="1"/>
+                    <line x1="118" y1="18" x2="118" y2="216" stroke="rgba(50,180,100,0.07)" stroke-width="1"/>
+                    <line x1="218" y1="18" x2="218" y2="216" stroke="rgba(50,180,100,0.07)" stroke-width="1"/>
+                    <!-- Label -->
+                    <text x="168" y="95" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="13" font-weight="700" letter-spacing="2">TATAMI</text>
+                    <text x="168" y="115" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">GRAPPLING</text>
+                    <text x="168" y="133" text-anchor="middle" fill="rgba(72,200,114,0.50)" font-family="sans-serif" font-size="9" letter-spacing="1">180 m² · SUPERFICIE AMORTIGUADORA</text>
 
-                    <!-- Área Costales -->
-                    <rect x="186" y="18" width="140" height="76" rx="4"
+                    <!-- Tatami Calentamiento — ocupa ~60% horizontal, mitad inferior -->
+                    <rect x="18" y="224" width="300" height="198" rx="4"
+                          fill="rgba(50,180,100,0.05)" stroke="rgba(50,180,100,0.20)" stroke-width="1.5"/>
+                    <!-- Tatami texture lines -->
+                    <line x1="18" y1="278" x2="318" y2="278" stroke="rgba(50,180,100,0.08)" stroke-width="1"/>
+                    <line x1="18" y1="332" x2="318" y2="332" stroke="rgba(50,180,100,0.08)" stroke-width="1"/>
+                    <line x1="18" y1="376" x2="318" y2="376" stroke="rgba(50,180,100,0.08)" stroke-width="1"/>
+                    <line x1="118" y1="224" x2="118" y2="422" stroke="rgba(50,180,100,0.06)" stroke-width="1"/>
+                    <line x1="218" y1="224" x2="218" y2="422" stroke="rgba(50,180,100,0.06)" stroke-width="1"/>
+                    <text x="168" y="300" text-anchor="middle" fill="rgba(72,200,114,0.75)" font-family="Oswald,sans-serif" font-size="13" font-weight="700" letter-spacing="2">TATAMI</text>
+                    <text x="168" y="320" text-anchor="middle" fill="rgba(72,200,114,0.75)" font-family="Oswald,sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">CALENTAMIENTO</text>
+                    <text x="168" y="338" text-anchor="middle" fill="rgba(72,200,114,0.35)" font-family="sans-serif" font-size="9" letter-spacing="1">150 m²</text>
+
+                    <!-- Divisor vertical 60/40 -->
+                    <line x1="326" y1="18" x2="326" y2="422" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="6,4"/>
+
+                    <!-- ZONA DERECHA (40%) — Recepción -->
+                    <rect x="334" y="18" width="168" height="80" rx="4"
+                          fill="rgba(229,0,26,0.07)" stroke="rgba(229,0,26,0.28)" stroke-width="1"/>
+                    <text x="418" y="52" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">RECEPCIÓN</text>
+                    <text x="418" y="69" text-anchor="middle" fill="rgba(229,0,26,0.50)" font-family="sans-serif" font-size="9">VESTIDORES · ACCESO</text>
+
+                    <!-- Área de Costales -->
+                    <rect x="334" y="106" width="168" height="108" rx="4"
                           fill="rgba(201,53,32,0.07)" stroke="rgba(201,53,32,0.28)" stroke-width="1"/>
-                    <text x="256" y="50"  text-anchor="middle" fill="#C93520" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">COSTALES</text>
-                    <text x="256" y="67"  text-anchor="middle" fill="rgba(201,53,32,0.5)" font-family="sans-serif" font-size="9">10–12 UNIDADES</text>
+                    <text x="418" y="153" text-anchor="middle" fill="#C93520" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">COSTALES</text>
+                    <text x="418" y="170" text-anchor="middle" fill="rgba(201,53,32,0.5)" font-family="sans-serif" font-size="9">10–12 UNIDADES</text>
+                    <text x="418" y="185" text-anchor="middle" fill="rgba(201,53,32,0.35)" font-family="sans-serif" font-size="8">ÁREA DE BOX</text>
 
                     <!-- Sala Pesas -->
-                    <rect x="348" y="18" width="154" height="136" rx="4"
+                    <rect x="334" y="222" width="168" height="200" rx="4"
                           fill="rgba(90,130,210,0.07)" stroke="rgba(90,130,210,0.22)" stroke-width="1"/>
-                    <text x="425" y="78"  text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">SALA DE</text>
-                    <text x="425" y="95"  text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">PESAS</text>
-
-                    <!-- Tatami Grappling -->
-                    <rect x="18" y="112" width="150" height="120" rx="4"
-                          fill="rgba(50,180,100,0.06)" stroke="rgba(50,180,100,0.22)" stroke-width="1"/>
-                    <text x="93" y="166" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
-                    <text x="93" y="183" text-anchor="middle" fill="#48C872" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">GRAPPLING</text>
-                    <text x="93" y="200" text-anchor="middle" fill="rgba(72,200,114,0.45)" font-family="sans-serif" font-size="9">150 m²</text>
-
-                    <!-- Octágono Principal (centered at 256,240) -->
-                    <!-- Regular octagon: 8 points at r=105 -->
-                    <polygon
-                        points="256,135 325,158 348,225 325,292 256,315 187,292 164,225 187,158"
-                        fill="rgba(229,0,26,0.06)" stroke="#E5001A" stroke-width="2"/>
-                    <!-- inner ring -->
-                    <polygon
-                        points="256,152 314,172 334,226 314,280 256,300 198,280 178,226 198,172"
-                        fill="none" stroke="rgba(229,0,26,0.18)" stroke-width="1" stroke-dasharray="5,4"/>
-                    <text x="256" y="215" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="14" font-weight="700" letter-spacing="2">OCTÁGONO</text>
-                    <text x="256" y="234" text-anchor="middle" fill="#E5001A" font-family="Oswald,sans-serif" font-size="12" font-weight="400">Ø 9.1 m</text>
-                    <text x="256" y="251" text-anchor="middle" fill="rgba(229,0,26,0.45)" font-family="sans-serif" font-size="9" letter-spacing="2">PRINCIPAL</text>
-
-                    <!-- Tatami Calentamiento -->
-                    <rect x="18" y="250" width="140" height="172" rx="4"
-                          fill="rgba(50,180,100,0.04)" stroke="rgba(50,180,100,0.14)" stroke-width="1"/>
-                    <text x="88" y="328" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">TATAMI</text>
-                    <text x="88" y="345" text-anchor="middle" fill="rgba(72,200,114,0.6)" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">CALENTAMIENTO</text>
+                    <text x="418" y="308" text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">SALA DE</text>
+                    <text x="418" y="326" text-anchor="middle" fill="#7090C8" font-family="Oswald,sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">PESAS</text>
+                    <text x="418" y="344" text-anchor="middle" fill="rgba(112,144,200,0.40)" font-family="sans-serif" font-size="9">CARDIO · FUERZA</text>
 
                     <!-- Outer border -->
                     <rect x="18" y="18" width="484" height="404" rx="6"
                           fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1"/>
-
-                    <!-- Floor label -->
                     <text x="260" y="434" text-anchor="middle" fill="rgba(255,255,255,0.18)"
-                          font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA BAJA · 300 m²</text>
+                          font-family="sans-serif" font-size="9" letter-spacing="3">PLANTA BAJA · 300 m² · TATAMI 60% DEL ESPACIO</text>
                 </svg>
             </div>
 
             <div class="floor-legend">
                 <p class="floor-legend-title">Planta Baja · 300 m²</p>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#E5001A"></div>
-                    <div><p class="legend-text">Octágono Principal</p><p class="legend-sub">Ø 9.1 m</p></div>
+                    <div class="legend-dot" style="background:#48C872"></div>
+                    <div><p class="legend-text">Zona de Tatami (60%)</p><p class="legend-sub">Grappling 180 m² + Calentamiento 150 m²</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#C93520"></div>
-                    <div><p class="legend-text">Área de Costales</p><p class="legend-sub">10–12 unidades</p></div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot" style="background:#48C872"></div>
-                    <div><p class="legend-text">Zona de Tatami</p><p class="legend-sub">150 m² · Grappling + Calentamiento</p></div>
+                    <div><p class="legend-text">Área de Costales / Box</p><p class="legend-sub">10–12 costales · Área de impacto</p></div>
                 </div>
                 <div class="legend-item">
                     <div class="legend-dot" style="background:#7090C8"></div>
-                    <div><p class="legend-text">Sala de Pesas</p><p class="legend-sub">Fuerza y acondicionamiento</p></div>
+                    <div><p class="legend-text">Sala de Pesas / Cardio</p><p class="legend-sub">Fuerza y acondicionamiento</p></div>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-dot" style="background:#E5001A;opacity:0.45"></div>
+                    <div class="legend-dot" style="background:#E5001A;opacity:0.5"></div>
                     <div><p class="legend-text">Recepción / Vestidores</p><p class="legend-sub">Acceso principal</p></div>
                 </div>
             </div>
@@ -3492,7 +3492,7 @@ function addBotMsg(html, actions) {
   wrap.className = 'cb-msg bot';
   var av = document.createElement('div');
   av.className = 'cb-msg-av';
-  av.innerHTML = '<img src="logo.png" alt="bot" loading="lazy">';
+  av.innerHTML = '<img src="logo.svg" alt="bot" loading="lazy">';
   var inner = document.createElement('div');
   inner.className = 'cb-msg-inner';
   var bubble = document.createElement('div');
@@ -3547,7 +3547,7 @@ function addTyping() {
   wrap.id = 'cbTyping';
   var av = document.createElement('div');
   av.className = 'cb-msg-av';
-  av.innerHTML = '<img src="logo.png" alt="bot" loading="lazy">';
+  av.innerHTML = '<img src="logo.svg" alt="bot" loading="lazy">';
   var bubble = document.createElement('div');
   bubble.className = 'cb-bubble';
   var dots = document.createElement('div');
@@ -3611,7 +3611,7 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
      CHATBOT WIDGET  ·  ACME Fight & Fitness  ·  Powered by Claude
 ================================================================ -->
 <div class="chatbot-trigger" id="chatbotTrigger" role="button" tabindex="0" aria-label="Abrir asistente virtual">
-    <img src="logo.png" alt="ACME AI" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;display:block;">
+    <img src="logo.svg" alt="ACME AI" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;border-radius:50%;display:block;">
     <span class="chatbot-comic" aria-hidden="true">¿En qué podemos ayudarte?</span>
 </div>
 
@@ -3619,7 +3619,7 @@ sendBtn.addEventListener('click', function(){ sendMessage(inputEl.value); });
     <!-- Header -->
     <div class="cb-header">
         <div class="cb-header-logo">
-            <img src="logo.png" alt="ACME" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;">
+            <img src="logo.svg" alt="ACME" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;">
         </div>
         <div class="cb-header-info">
             <p class="cb-name">ACME Fight &amp; Fitness</p>
