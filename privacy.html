@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad · ACME Fight &amp; Fitness</title>
-    <meta name="description" content="Política de Privacidad de ACME Fight & Fitness. Conoce cómo tratamos y protegemos tus datos personales.">
+    <title>Aviso de Privacidad Integral · ACME Fight &amp; Fitness</title>
+    <meta name="description" content="Aviso de Privacidad Integral de ACME Fight & Fitness. Conoce cómo tratamos y protegemos tus datos personales conforme a la LFPDPPP.">
 
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23070707'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🥊</text></svg>">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap">
@@ -39,7 +36,6 @@
             min-height: 100vh;
         }
 
-        /* ── NAV BAR ─────────────────────────── */
         .priv-nav {
             background: rgba(6,6,6,0.95);
             border-bottom: 1px solid rgba(201,168,76,0.15);
@@ -82,7 +78,6 @@
         }
         .priv-nav .back-btn:hover { opacity: 0.7; }
 
-        /* ── HERO ────────────────────────────── */
         .priv-hero {
             background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
             border-bottom: 1px solid rgba(201,168,76,0.12);
@@ -111,13 +106,36 @@
             color: var(--muted);
             letter-spacing: 1px;
         }
+        .priv-hero .legal-badge {
+            display: inline-block;
+            margin-top: 16px;
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.25);
+            border-radius: 4px;
+            padding: 5px 14px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-family: var(--font-h);
+        }
 
-        /* ── CONTENT ─────────────────────────── */
         .priv-content {
             max-width: 900px;
             margin: 0 auto;
             padding: 48px 24px 80px;
         }
+        .priv-intro {
+            background: rgba(201,168,76,0.05);
+            border: 1px solid rgba(201,168,76,0.20);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 var(--r) var(--r) 0;
+            padding: 18px 22px;
+            margin-bottom: 36px;
+            font-size: 13px;
+            color: rgba(243,243,243,0.80);
+            line-height: 1.65;
+        }
+        .priv-intro strong { color: var(--gold); }
         .priv-section {
             margin-bottom: 44px;
             background: var(--card);
@@ -141,6 +159,14 @@
             font-size: 14px;
             margin-right: 8px;
         }
+        .priv-section h3 {
+            font-family: var(--font-h);
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(243,243,243,0.70);
+            margin: 18px 0 8px;
+        }
         .priv-section p {
             color: rgba(243,243,243,0.80);
             margin-bottom: 12px;
@@ -154,13 +180,16 @@
         }
         .priv-section li { margin-bottom: 6px; }
         .priv-section strong { color: var(--white); }
-        .priv-section a {
-            color: var(--gold);
-            text-underline-offset: 3px;
-        }
+        .priv-section a { color: var(--gold); text-underline-offset: 3px; }
         .priv-section a:hover { color: var(--gold-l); }
+        .priv-section .art-ref {
+            font-size: 11px;
+            color: rgba(201,168,76,0.55);
+            font-family: var(--font-h);
+            letter-spacing: 1px;
+            margin-left: 6px;
+        }
 
-        /* Highlight box */
         .priv-highlight {
             background: rgba(201,168,76,0.06);
             border-left: 3px solid var(--gold);
@@ -170,8 +199,17 @@
             font-size: 13px;
             color: rgba(243,243,243,0.85);
         }
+        .priv-alert {
+            background: rgba(229,0,26,0.06);
+            border-left: 3px solid var(--red);
+            border-radius: 0 var(--r) var(--r) 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: rgba(243,243,243,0.85);
+        }
+        .priv-alert strong { color: #ff6070; }
 
-        /* ── FOOTER ──────────────────────────── */
         .priv-footer {
             background: rgba(255,255,255,0.02);
             border-top: 1px solid rgba(201,168,76,0.12);
@@ -180,10 +218,7 @@
             font-size: 12px;
             color: var(--muted);
         }
-        .priv-footer a {
-            color: var(--gold);
-            text-decoration: none;
-        }
+        .priv-footer a { color: var(--gold); text-decoration: none; }
         .priv-footer a:hover { text-decoration: underline; }
 
         @media (max-width: 600px) {
@@ -194,7 +229,6 @@
 </head>
 <body>
 
-<!-- Nav -->
 <nav class="priv-nav">
     <div class="inner">
         <a href="index.html" class="brand">ACME <span>Fight &amp; Fitness</span></a>
@@ -202,185 +236,286 @@
     </div>
 </nav>
 
-<!-- Hero -->
 <header class="priv-hero">
     <p class="tag">Documento Legal · México 2026</p>
-    <h1>Política de <span>Privacidad</span></h1>
-    <p class="meta">Última actualización: 27 de mayo de 2026 &nbsp;·&nbsp; Versión 1.0</p>
+    <h1>Aviso de <span>Privacidad</span> Integral</h1>
+    <p class="meta">Última actualización: 29 de mayo de 2026 &nbsp;·&nbsp; Versión 2.0</p>
+    <span class="legal-badge">LFPDPPP · D.O.F. 05-07-2010 · Reglamento D.O.F. 21-12-2011</span>
 </header>
 
-<!-- Content -->
 <main class="priv-content">
 
+    <div class="priv-intro">
+        <strong>Aviso de Privacidad Integral</strong> — El presente aviso se emite en cumplimiento de lo dispuesto por los
+        artículos 15, 16 y 17 de la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares
+        (LFPDPPP)</strong>, publicada en el Diario Oficial de la Federación el 5 de julio de 2010, y su Reglamento
+        publicado el 21 de diciembre de 2011. Al proporcionar tus datos personales a través de este sitio web o en
+        nuestras instalaciones, manifiestas tu consentimiento para el tratamiento descrito en el presente aviso.
+    </div>
+
     <div class="priv-section">
-        <h2><span class="num">01</span> Identificación del Responsable</h2>
+        <h2><span class="num">01</span> Identidad y Domicilio del Responsable</h2>
         <p>
-            En cumplimiento con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong>
-            de los Estados Unidos Mexicanos y su Reglamento, se informa que el responsable del tratamiento de los datos
-            personales recopilados a través de este sitio web es:
+            En términos del <strong>artículo 16, fracción I de la LFPDPPP</strong>, se informa que el Responsable del
+            tratamiento de los datos personales es:
         </p>
         <div class="priv-highlight">
-            <strong>Denominación:</strong> ACME Fight &amp; Fitness<br>
+            <strong>Denominación comercial:</strong> MARCA ACME FIGHT &amp; FITNESS<br>
+            <strong>Razón social:</strong> ACME Fight &amp; Fitness, S. de R.L. de C.V. (en proceso de constitución)<br>
+            <strong>Domicilio:</strong> Ciudad de México, México<br>
             <strong>Actividad:</strong> Centro de entrenamiento de Artes Marciales Mixtas (MMA) y acondicionamiento físico<br>
-            <strong>Correo de contacto:</strong> <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
-            <strong>País:</strong> México<br>
-            <strong>Referencia:</strong> ACC-2026-7849X
+            <strong>Correo del Responsable de Datos:</strong> <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a><br>
+            <strong>Referencia de registro:</strong> ACC-2026-7849X
         </div>
+        <p>
+            El Responsable ha designado un área interna encargada de la protección de datos personales, a la que puedes
+            dirigirte para ejercer tus derechos o formular consultas relacionadas con el presente aviso.
+        </p>
     </div>
 
     <div class="priv-section">
         <h2><span class="num">02</span> Datos Personales Recabados</h2>
-        <p>A través de los formularios de inscripción y reserva de clase presentes en este sitio web, podemos recabar los siguientes datos personales:</p>
+        <p>
+            Conforme al <strong>artículo 16, fracción II de la LFPDPPP</strong>, los datos personales que podemos recabar son:
+        </p>
+        <h3>Datos de Identificación y Contacto</h3>
         <ul>
-            <li><strong>Datos de identificación:</strong> nombre completo, edad.</li>
-            <li><strong>Datos de contacto:</strong> correo electrónico, número de teléfono (incluyendo código de país).</li>
-            <li><strong>Datos de preferencias:</strong> plan seleccionado, fecha de inicio deseada, experiencia en artes marciales, condición física.</li>
-            <li><strong>Datos de salud (voluntarios):</strong> lesiones previas o condiciones físicas relevantes para la práctica deportiva.</li>
-            <li><strong>Datos de origen de contacto:</strong> cómo nos conociste (referido por, red social, búsqueda web, etc.).</li>
+            <li>Nombre completo, edad, fecha de nacimiento.</li>
+            <li>Correo electrónico, número de teléfono (incluyendo código de país).</li>
+            <li>País y ciudad de residencia.</li>
         </ul>
-        <p>No recopilamos datos sensibles adicionales (datos patrimoniales, financieros, biométricos o de origen racial/étnico) a través de este sitio web.</p>
+        <h3>Datos de Preferencias y Servicio</h3>
+        <ul>
+            <li>Plan seleccionado, fecha de inicio deseada, experiencia en artes marciales, condición física autodeclarada.</li>
+            <li>Fuente de referencia (cómo nos conociste).</li>
+        </ul>
+        <h3>Datos Sensibles (tratamiento especial)</h3>
+        <ul>
+            <li>
+                <strong>Datos de salud voluntarios:</strong> lesiones previas, condiciones físicas o médicas relevantes
+                para la práctica deportiva. Conforme al <strong>artículo 9 de la LFPDPPP</strong>, el tratamiento de
+                datos sensibles requiere tu consentimiento expreso y por escrito. Su entrega es voluntaria; si los
+                proporcionas, consientes expresamente su uso exclusivo para evaluar tu aptitud para el entrenamiento.
+            </li>
+        </ul>
+        <p>
+            No se recaban datos patrimoniales, financieros, biométricos ni de origen racial o étnico a través del sitio web.
+            Los datos de menores de edad deberán ser proporcionados exclusivamente por el padre, madre o tutor legal,
+            conforme al <strong>artículo 9, párrafo segundo de la LFPDPPP</strong>.
+        </p>
     </div>
 
     <div class="priv-section">
         <h2><span class="num">03</span> Finalidades del Tratamiento</h2>
-        <p>Los datos personales que nos proporcionas serán utilizados para las siguientes <strong>finalidades primarias</strong> (necesarias para la prestación del servicio):</p>
+        <p>
+            Conforme al <strong>artículo 16, fracción III de la LFPDPPP</strong>, tus datos personales serán tratados para las
+            siguientes finalidades:
+        </p>
+        <h3>Finalidades Primarias (necesarias para la prestación del servicio)</h3>
         <ul>
-            <li>Procesar tu solicitud de inscripción o reserva de clase única.</li>
-            <li>Contactarte para confirmar tu registro, resolver dudas y coordinar tu inicio.</li>
-            <li>Enviarte comunicaciones de bienvenida y orientación sobre el gimnasio.</li>
-            <li>Gestionar tu historial como miembro o asistente del gimnasio.</li>
-            <li>Cumplir con obligaciones legales y fiscales aplicables en México.</li>
+            <li>Gestionar tu solicitud de inscripción, membresía o reserva de clase.</li>
+            <li>Confirmar tu registro y coordinar tu incorporación al programa de entrenamiento.</li>
+            <li>Administrar tu historial como miembro o asistente del gimnasio.</li>
+            <li>Brindarte atención personalizada relacionada con los servicios contratados.</li>
+            <li>Cumplir con las obligaciones legales, fiscales y contables aplicables en los Estados Unidos Mexicanos.</li>
+            <li>Garantizar la seguridad de los participantes y del personal dentro de las instalaciones.</li>
         </ul>
-        <p>De manera adicional, y <strong>de forma secundaria</strong> (no imprescindibles para el servicio), podríamos utilizar tus datos para:</p>
+        <h3>Finalidades Secundarias (no imprescindibles para el servicio)</h3>
         <ul>
-            <li>Enviarte boletines informativos, promociones y novedades de ACME Fight &amp; Fitness.</li>
-            <li>Realizar análisis estadísticos anónimos sobre el perfil de nuestros miembros.</li>
+            <li>Envío de boletines informativos, promociones y novedades de ACME Fight &amp; Fitness.</li>
+            <li>Realización de estudios estadísticos anónimos sobre el perfil de nuestros miembros.</li>
+            <li>Mejora de la experiencia del usuario en nuestro sitio web y servicios.</li>
         </ul>
         <div class="priv-highlight">
-            Si no deseas que tus datos sean usados para las finalidades secundarias, puedes manifestarlo enviando un correo a <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a> con el asunto "OPOSICIÓN DATOS".
+            Si no deseas que tus datos sean tratados para las <strong>finalidades secundarias</strong>, puedes manifestarlo
+            en cualquier momento enviando un correo a <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a>
+            con el asunto <strong>"OPOSICIÓN FINALIDADES SECUNDARIAS"</strong>. La negativa no afectará el servicio contratado.
         </div>
     </div>
 
     <div class="priv-section">
-        <h2><span class="num">04</span> Transferencia de Datos</h2>
+        <h2><span class="num">04</span> Transferencia de Datos Personales</h2>
         <p>
-            ACME Fight &amp; Fitness <strong>no vende, cede ni transfiere</strong> tus datos personales a terceros con fines comerciales propios,
-            salvo en los casos expresamente previstos por la ley o cuando sea estrictamente necesario para la prestación del servicio.
+            Conforme al <strong>artículo 36 de la LFPDPPP</strong>, ACME Fight &amp; Fitness <strong>no vende, cede
+            ni transfiere</strong> tus datos personales a terceros para fines propios o comerciales ajenos al servicio,
+            salvo en los siguientes casos que no requieren tu consentimiento (Art. 37 LFPDPPP):
         </p>
-        <p>Podemos compartir datos con:</p>
         <ul>
-            <li><strong>Proveedores de servicios tecnológicos</strong> (plataformas de email, CRM) que actúan en nuestro nombre y bajo estrictas obligaciones de confidencialidad.</li>
-            <li><strong>Autoridades competentes</strong> cuando así lo exija la legislación mexicana aplicable.</li>
+            <li>Cuando lo exija una autoridad competente (SAT, IMSS, autoridades de seguridad pública).</li>
+            <li>Cuando sea necesario para el mantenimiento o cumplimiento de una relación jurídica entre el Responsable y el Titular.</li>
+            <li>Cuando exista una emergencia médica que requiera atención inmediata.</li>
         </ul>
+        <p>Podemos compartir datos con <strong>Encargados</strong> (prestadores de servicios tecnológicos, CRM, plataformas de email) que actúan en nuestro nombre bajo obligaciones contractuales de confidencialidad y medidas de seguridad equivalentes a las nuestras.</p>
+        <div class="priv-alert">
+            <strong>Aviso:</strong> En caso de que pretendamos realizar transferencias adicionales que requieran tu consentimiento, se te notificará previamente para obtenerlo de forma expresa.
+        </div>
     </div>
 
     <div class="priv-section">
-        <h2><span class="num">05</span> Derechos ARCO</h2>
+        <h2><span class="num">05</span> Derechos ARCO y Revocación del Consentimiento</h2>
         <p>
-            En cualquier momento tienes derecho a <strong>Acceder, Rectificar, Cancelar u Oponerte</strong> al tratamiento de tus datos personales
-            (Derechos ARCO), de conformidad con la LFPDPPP.
+            En términos de los <strong>artículos 22 al 36 y artículo 8 de la LFPDPPP</strong>, en todo momento tienes derecho a:
         </p>
-        <p>Para ejercer tus derechos ARCO deberás enviar una solicitud escrita a:</p>
+        <ul>
+            <li><strong>Acceso:</strong> conocer qué datos personales tenemos de ti y el uso que les damos.</li>
+            <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+            <li><strong>Cancelación:</strong> solicitar la supresión de tus datos cuando no sean necesarios para los fines del tratamiento o hayas revocado tu consentimiento.</li>
+            <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos para finalidades específicas.</li>
+            <li><strong>Revocación del consentimiento:</strong> retirar tu consentimiento para el tratamiento de tus datos en cualquier momento, sin efectos retroactivos (Art. 8, párrafo segundo, LFPDPPP).</li>
+        </ul>
+        <p>Para ejercer cualquiera de estos derechos, envía tu solicitud a:</p>
         <div class="priv-highlight">
-            📧 <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
-            Asunto: DERECHOS ARCO — [tu nombre completo]
+            📧 <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a><br>
+            Asunto: <strong>DERECHOS ARCO — [Nombre completo]</strong>
         </div>
-        <p>Tu solicitud deberá contener:</p>
+        <p>Tu solicitud debe incluir (Art. 29 LFPDPPP):</p>
         <ol>
-            <li>Nombre completo y correo electrónico con el que te registraste.</li>
-            <li>Descripción clara y precisa del derecho que deseas ejercer.</li>
-            <li>Cualquier otro elemento o documento que facilite la localización de tus datos.</li>
+            <li>Nombre completo y correo electrónico registrado para acreditar tu identidad.</li>
+            <li>Descripción clara del derecho que deseas ejercer y los datos sobre los que recae la petición.</li>
+            <li>Cualquier elemento que facilite la localización de tus datos personales.</li>
         </ol>
-        <p>Responderemos a tu solicitud en un plazo máximo de <strong>20 días hábiles</strong> a partir de su recepción.</p>
-    </div>
-
-    <div class="priv-section">
-        <h2><span class="num">06</span> Cookies y Tecnologías de Seguimiento</h2>
         <p>
-            Este sitio web puede utilizar <strong>cookies técnicas</strong> (estrictamente necesarias para el funcionamiento del sitio)
-            y <strong>cookies de análisis</strong> (para entender cómo los usuarios interactúan con el sitio, de forma anónima).
+            El trámite es <strong>gratuito</strong>. Daremos respuesta a tu solicitud en un plazo máximo de
+            <strong>20 días hábiles</strong> contados a partir de la fecha de recepción (Art. 32 LFPDPPP).
+            Si la solicitud procede, se hará efectiva dentro de los 15 días hábiles siguientes.
         </p>
-        <p>No utilizamos cookies publicitarias propias de terceros para segmentación o retargeting.</p>
         <p>
-            Puedes configurar tu navegador para rechazar o eliminar cookies en cualquier momento.
-            Ten en cuenta que deshabilitar las cookies técnicas puede afectar la funcionalidad del sitio.
+            ACME se reserva el derecho de negar el acceso o la cancelación cuando así lo permitan los artículos
+            34 y 35 de la LFPDPPP (datos necesarios para obligaciones legales, defensa de derechos, etc.).
         </p>
     </div>
 
     <div class="priv-section">
-        <h2><span class="num">07</span> Seguridad de los Datos</h2>
+        <h2><span class="num">06</span> Mecanismos para Limitar el Uso y Divulgación</h2>
         <p>
-            Adoptamos medidas técnicas, administrativas y físicas razonables para proteger tus datos personales
-            contra pérdida, mal uso, acceso no autorizado, divulgación, alteración y destrucción.
+            Conforme al <strong>artículo 16, fracción V de la LFPDPPP</strong>, puedes limitar el uso o divulgación de tus datos personales mediante:
         </p>
-        <p>
-            Sin embargo, ningún sistema de transmisión por internet o almacenamiento electrónico es 100% seguro.
-            Te recomendamos no compartir información sensible innecesaria a través de nuestros formularios.
-        </p>
+        <ul>
+            <li>Solicitud directa al correo <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a> con el asunto <strong>"LIMITACIÓN DE USO"</strong>.</li>
+            <li>Inscripción al Registro Público de Usuarios (REUS) de la CONDUSEF para limitar el uso publicitario: <a href="https://www.condusef.gob.mx" target="_blank" rel="noopener">www.condusef.gob.mx</a>.</li>
+            <li>Configuración de preferencias de comunicación mediante el enlace de baja incluido en cada correo promocional.</li>
+        </ul>
     </div>
 
     <div class="priv-section">
-        <h2><span class="num">08</span> Datos de Menores de Edad</h2>
+        <h2><span class="num">07</span> Cookies y Tecnologías de Rastreo</h2>
         <p>
-            Nuestro programa infantil (Zona Niños &amp; Familia) está dirigido a menores de edad.
-            Los datos de menores <strong>deben ser proporcionados exclusivamente por su padre, madre o tutor legal</strong>,
-            quien acepta y consiente el tratamiento de dichos datos en su nombre.
+            Conforme al <strong>artículo 16, fracción VI de la LFPDPPP</strong> y las Recomendaciones del INAI en materia de
+            comercio electrónico, este sitio puede utilizar:
         </p>
+        <ul>
+            <li><strong>Cookies técnicas o estrictamente necesarias:</strong> indispensables para el funcionamiento del sitio. No pueden desactivarse sin afectar la navegación.</li>
+            <li><strong>Cookies analíticas:</strong> recopilan información anónima sobre el uso del sitio para mejorar su funcionamiento. No identifican a usuarios individuales.</li>
+        </ul>
         <p>
-            Si eres padre/madre/tutor y deseas ejercer los derechos ARCO respecto a los datos de tu hijo(a),
-            sigue el procedimiento indicado en la sección 05 indicando la relación de parentesco o tutela.
-        </p>
-    </div>
-
-    <div class="priv-section">
-        <h2><span class="num">09</span> Conservación de los Datos</h2>
-        <p>
-            Conservaremos tus datos personales durante el tiempo que seas miembro activo o tengas una relación activa con ACME Fight &amp; Fitness
-            y, posteriormente, durante el tiempo necesario para cumplir con las obligaciones legales y fiscales vigentes en México
-            (mínimo 5 años según normativa fiscal aplicable).
-        </p>
-        <p>
-            Una vez concluido dicho período, tus datos serán eliminados o anonimizados de forma segura.
-        </p>
-    </div>
-
-    <div class="priv-section">
-        <h2><span class="num">10</span> Cambios en esta Política</h2>
-        <p>
-            Nos reservamos el derecho de actualizar o modificar la presente Política de Privacidad en cualquier momento.
-            Cualquier cambio significativo será notificado a través de nuestro sitio web, indicando la fecha de última actualización.
-        </p>
-        <p>
-            Te recomendamos revisar periódicamente esta página para mantenerte informado sobre cómo protegemos tus datos.
-            El uso continuo del sitio web tras la publicación de cambios implica la aceptación de la política actualizada.
-        </p>
-    </div>
-
-    <div class="priv-section">
-        <h2><span class="num">11</span> Contacto y Autoridad</h2>
-        <p>
-            Para cualquier consulta, duda o solicitud relacionada con el tratamiento de tus datos personales, contáctanos en:
+            No utilizamos cookies publicitarias de terceros para segmentación, retargeting o perfilamiento.
+            Puedes configurar tu navegador para rechazar, bloquear o eliminar cookies en cualquier momento.
         </p>
         <div class="priv-highlight">
-            📧 <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a><br>
-            🏷️ Ref. ACC-2026-7849X · ACME Fight &amp; Fitness · México 2026
+            La desactivación de cookies técnicas puede afectar la funcionalidad del sitio. Las cookies analíticas
+            pueden desactivarse sin afectar el servicio principal.
+        </div>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">08</span> Medidas de Seguridad</h2>
+        <p>
+            Conforme a los <strong>artículos 19 y 20 de la LFPDPPP</strong> y el <strong>Capítulo IV de su Reglamento</strong>,
+            ACME Fight &amp; Fitness ha implementado medidas de seguridad <strong>administrativas, técnicas y físicas</strong>
+            diseñadas para proteger tus datos personales contra pérdida, robo, uso no autorizado, acceso indebido,
+            divulgación, alteración o destrucción.
+        </p>
+        <p>
+            En caso de que ocurra una vulneración de seguridad que afecte de forma significativa tus derechos patrimoniales
+            o morales, ACME te lo notificará de conformidad con el <strong>artículo 20 de la LFPDPPP</strong> y los artículos
+            63 y 64 de su Reglamento, a la brevedad posible y dentro del plazo establecido por la autoridad.
+        </p>
+        <p>
+            Ningún sistema de transmisión de información por internet es 100% seguro. Te recomendamos no compartir
+            información sensible innecesaria a través de los formularios de este sitio.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">09</span> Datos de Menores de Edad</h2>
+        <p>
+            Conforme al <strong>artículo 9, párrafo segundo de la LFPDPPP</strong>, los datos personales de menores de edad
+            (participantes del programa infantil Zona Niños &amp; Familia) deberán ser proporcionados <strong>exclusivamente
+            por el padre, madre o tutor legal</strong>, quien otorga su consentimiento informado y expreso en nombre del menor.
+        </p>
+        <p>
+            El ejercicio de los derechos ARCO respecto a datos de menores debe ser realizado por quien tenga la patria
+            potestad o tutela, acreditando dicha calidad en la solicitud.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">10</span> Plazos de Conservación</h2>
+        <p>
+            Los datos personales se conservarán durante el tiempo en que exista la relación contractual con ACME Fight &amp; Fitness
+            y, una vez concluida, por los plazos que establezcan las disposiciones legales y fiscales vigentes, en particular:
+        </p>
+        <ul>
+            <li><strong>Obligaciones fiscales (SAT):</strong> mínimo 5 años conforme al Código Fiscal de la Federación (Art. 30 CFF).</li>
+            <li><strong>Obligaciones en materia de seguridad social (IMSS/ISSSTE):</strong> según los plazos aplicables.</li>
+            <li><strong>Datos de salud:</strong> el tiempo estrictamente necesario para la prestación del servicio o el que determine la normativa de salud aplicable.</li>
+        </ul>
+        <p>
+            Vencidos los plazos de conservación, los datos serán cancelados mediante eliminación segura o anonimización irreversible.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">11</span> Modificaciones al Aviso de Privacidad</h2>
+        <p>
+            Conforme al <strong>artículo 17 de la LFPDPPP</strong>, el presente aviso puede ser modificado en cualquier momento.
+            Cualquier cambio sustancial será informado a través de:
+        </p>
+        <ul>
+            <li>Publicación de la versión actualizada en este sitio web, con indicación de la fecha de modificación.</li>
+            <li>Notificación por correo electrónico a los titulares registrados, con 15 días de anticipación a la entrada en vigor.</li>
+        </ul>
+        <p>
+            El uso continuo del sitio web o de los servicios de ACME Fight &amp; Fitness después de la publicación
+            de los cambios implica la aceptación del aviso actualizado.
+        </p>
+    </div>
+
+    <div class="priv-section">
+        <h2><span class="num">12</span> Autoridad Competente y Medios de Defensa</h2>
+        <p>
+            Si consideras que tus derechos en materia de protección de datos no han sido debidamente atendidos,
+            tienes derecho a presentar una queja o denuncia ante el:
+        </p>
+        <div class="priv-highlight">
+            <strong>Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</strong><br>
+            🌐 <a href="https://www.inai.org.mx" target="_blank" rel="noopener">www.inai.org.mx</a><br>
+            📞 INAI Infomex: 800-835-4324 (sin costo)<br>
+            El INAI es la autoridad garante en materia de protección de datos personales en México (Art. 38 LFPDPPP).
         </div>
         <p>
-            Si no recibes respuesta satisfactoria en los plazos establecidos, tienes derecho a acudir al
-            <strong>Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</strong>
-            en <a href="https://www.inai.org.mx" target="_blank" rel="noopener">www.inai.org.mx</a>.
+            Para cualquier consulta o solicitud dirigida a ACME Fight &amp; Fitness:
         </p>
+        <div class="priv-highlight">
+            📧 <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a><br>
+            🏷️ Ref. ACC-2026-7849X · ACME Fight &amp; Fitness · Ciudad de México, México
+        </div>
     </div>
 
 </main>
 
-<!-- Footer -->
 <footer class="priv-footer">
-    <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+    <p>© 2026 ACME Fight &amp; Fitness · Ciudad de México, México. Todos los derechos reservados.</p>
     <p style="margin-top:6px;">
         <a href="index.html">← Volver al sitio principal</a>
         &nbsp;·&nbsp;
-        <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a>
+        <a href="terminos.html" target="_blank">Términos y Condiciones</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:privacidad@acmecombat.mx">privacidad@acmecombat.mx</a>
+    </p>
+    <p style="margin-top:10px;font-size:11px;color:rgba(243,243,243,0.25);">
+        Documento elaborado conforme a la LFPDPPP (D.O.F. 05-07-2010), su Reglamento (D.O.F. 21-12-2011)
+        y los Lineamientos del INAI en materia de Aviso de Privacidad (D.O.F. 17-01-2013).
     </p>
 </footer>
 
