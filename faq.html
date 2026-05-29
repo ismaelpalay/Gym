@@ -530,6 +530,21 @@
         }
         .faq-card[data-hidden="true"] { display: none; }
 
+        #langBtn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.22);
+            color: rgba(243,243,243,0.55);
+            font-family: var(--font-h);
+            font-size: 11px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color .2s, border-color .2s;
+            text-transform: uppercase;
+        }
+        #langBtn:hover, #langBtn.active { color: var(--gold); border-color: var(--gold); }
+
         /* ── RESPONSIVE ──────────────────────────────────────── */
         @media (max-width: 600px) {
             .faq-hero { padding: 44px 0 32px; }
@@ -547,34 +562,37 @@
 <nav class="faq-nav">
     <div class="inner">
         <a href="index.html" class="brand">ACME <span>Fight &amp; Fitness</span></a>
-        <a href="index.html" class="back-btn">← Volver al inicio</a>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <a href="index.html" id="backBtn" class="back-btn">← Volver al inicio</a>
+            <button id="langBtn" onclick="window.toggleFaqLang()" aria-label="Switch language">EN</button>
+        </div>
     </div>
 </nav>
 
 <!-- Hero -->
 <header class="faq-hero">
-    <p class="tag">Soporte &amp; Información · México 2026</p>
-    <h1>Preguntas <span>Frecuentes</span></h1>
-    <p class="meta">Resolvemos todas tus dudas sobre nuestros planes, clases, instalaciones, programa infantil, inscripción y más.</p>
+    <p class="tag" data-i18n="hero.tag">Soporte &amp; Información · México 2026</p>
+    <h1 data-i18n="hero.h1">Preguntas <span>Frecuentes</span></h1>
+    <p class="meta" data-i18n="hero.meta">Resolvemos todas tus dudas sobre nuestros planes, clases, instalaciones, programa infantil, inscripción y más.</p>
     <div class="hero-stats">
         <div class="hero-stat">
             <span class="stat-num">12+</span>
-            <span class="stat-label">Preguntas</span>
+            <span class="stat-label" data-i18n="hero.stat1">Preguntas</span>
         </div>
         <div class="hero-stat-sep"></div>
         <div class="hero-stat">
             <span class="stat-num">3</span>
-            <span class="stat-label">Planes</span>
+            <span class="stat-label" data-i18n="hero.stat2">Planes</span>
         </div>
         <div class="hero-stat-sep"></div>
         <div class="hero-stat">
             <span class="stat-num">7</span>
-            <span class="stat-label">Disciplinas</span>
+            <span class="stat-label" data-i18n="hero.stat3">Disciplinas</span>
         </div>
         <div class="hero-stat-sep"></div>
         <div class="hero-stat">
             <span class="stat-num">600m²</span>
-            <span class="stat-label">Instalaciones</span>
+            <span class="stat-label" data-i18n="hero.stat4">Instalaciones</span>
         </div>
     </div>
 </header>
@@ -587,6 +605,8 @@
         class="faq-search"
         id="faqSearch"
         placeholder="Busca una pregunta: planes, horarios, niños, cancelación..."
+        data-placeholder-es="Busca una pregunta: planes, horarios, niños, cancelación..."
+        data-placeholder-en="Search a question: plans, schedule, kids, cancellation..."
         aria-label="Buscar preguntas frecuentes"
     >
 </div>
@@ -594,14 +614,14 @@
 <!-- Filter tabs -->
 <div class="faq-filters">
     <div class="filter-row" id="filterRow">
-        <button class="filter-btn active" data-cat="all">Todas</button>
-        <button class="filter-btn" data-cat="precios">💰 Precios</button>
-        <button class="filter-btn" data-cat="horarios">📅 Horarios</button>
-        <button class="filter-btn" data-cat="clases">🥊 Clases</button>
-        <button class="filter-btn" data-cat="ninos">🧒 Niños</button>
-        <button class="filter-btn" data-cat="instalaciones">🏟️ Instalaciones</button>
-        <button class="filter-btn" data-cat="salud">❤️‍🩹 Salud</button>
-        <button class="filter-btn" data-cat="admin">📋 Administrativo</button>
+        <button class="filter-btn active" data-cat="all" data-i18n="filter.all">Todas</button>
+        <button class="filter-btn" data-cat="precios" data-i18n="filter.precios">💰 Precios</button>
+        <button class="filter-btn" data-cat="horarios" data-i18n="filter.horarios">📅 Horarios</button>
+        <button class="filter-btn" data-cat="clases" data-i18n="filter.clases">🥊 Clases</button>
+        <button class="filter-btn" data-cat="ninos" data-i18n="filter.ninos">🧒 Niños</button>
+        <button class="filter-btn" data-cat="instalaciones" data-i18n="filter.instalaciones">🏟️ Instalaciones</button>
+        <button class="filter-btn" data-cat="salud" data-i18n="filter.salud">❤️‍🩹 Salud</button>
+        <button class="filter-btn" data-cat="admin" data-i18n="filter.admin">📋 Administrativo</button>
     </div>
 </div>
 
@@ -609,7 +629,7 @@
 <main class="faq-content">
 
     <!-- ── PLANES & PRECIOS ───────────────────────────────── -->
-    <p class="faq-section-label">💰 Planes &amp; Precios</p>
+    <p class="faq-section-label" data-i18n="sec.precios">💰 Planes &amp; Precios</p>
 
     <details class="faq-card" data-cat="precios" open>
         <summary>
@@ -672,7 +692,7 @@
     </details>
 
     <!-- ── HORARIOS ───────────────────────────────────────── -->
-    <p class="faq-section-label">📅 Horarios</p>
+    <p class="faq-section-label" data-i18n="sec.horarios">📅 Horarios</p>
 
     <details class="faq-card" data-cat="horarios">
         <summary>
@@ -696,7 +716,7 @@
     </details>
 
     <!-- ── CLASES ─────────────────────────────────────────── -->
-    <p class="faq-section-label">🥊 Clases &amp; Disciplinas</p>
+    <p class="faq-section-label" data-i18n="sec.clases">🥊 Clases &amp; Disciplinas</p>
 
     <details class="faq-card" data-cat="clases">
         <summary>
@@ -761,7 +781,7 @@
     </details>
 
     <!-- ── NIÑOS ──────────────────────────────────────────── -->
-    <p class="faq-section-label">🧒 Programa Infantil</p>
+    <p class="faq-section-label" data-i18n="sec.ninos">🧒 Programa Infantil</p>
 
     <details class="faq-card" data-cat="ninos">
         <summary>
@@ -793,7 +813,7 @@
     </details>
 
     <!-- ── INSTALACIONES ──────────────────────────────────── -->
-    <p class="faq-section-label">🏟️ Instalaciones &amp; Estacionamiento</p>
+    <p class="faq-section-label" data-i18n="sec.instalaciones">🏟️ Instalaciones &amp; Estacionamiento</p>
 
     <details class="faq-card" data-cat="instalaciones">
         <summary>
@@ -847,7 +867,7 @@
     </details>
 
     <!-- ── FISIOTERAPIA ────────────────────────────────────── -->
-    <p class="faq-section-label">❤️‍🩹 Fisioterapia &amp; Recuperación</p>
+    <p class="faq-section-label" data-i18n="sec.salud">❤️‍🩹 Fisioterapia &amp; Recuperación</p>
 
     <details class="faq-card" data-cat="salud">
         <summary>
@@ -871,7 +891,7 @@
     </details>
 
     <!-- ── INSCRIPCIÓN ────────────────────────────────────── -->
-    <p class="faq-section-label">📋 Inscripción &amp; Administrativo</p>
+    <p class="faq-section-label" data-i18n="sec.admin">📋 Inscripción &amp; Administrativo</p>
 
     <details class="faq-card" data-cat="admin">
         <summary>
@@ -931,13 +951,13 @@
 
     <!-- CTA -->
     <div class="faq-cta">
-        <p class="cta-tag">¿Listo para dar el primer paso?</p>
-        <h3>Únete a <span>ACME Fight &amp; Fitness</span></h3>
-        <p>Tu primera clase prueba está a un clic. Sin compromisos, sin contratos forzosos. Solo ven, entrena y decide.</p>
+        <p class="cta-tag" data-i18n="cta.tag">¿Listo para dar el primer paso?</p>
+        <h3 data-i18n="cta.h3">Únete a <span>ACME Fight &amp; Fitness</span></h3>
+        <p data-i18n="cta.p">Tu primera clase prueba está a un clic. Sin compromisos, sin contratos forzosos. Solo ven, entrena y decide.</p>
         <div class="cta-btns">
-            <a href="index.html#planes" class="btn-gold">💰 Ver Planes y Precios</a>
-            <a href="mailto:soporte@acmecombat.mx" class="btn-outline-gold">📧 Escribirnos</a>
-            <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener" class="btn-outline-gold">💬 WhatsApp</a>
+            <a href="index.html#planes" class="btn-gold" data-i18n="cta.btn1">💰 Ver Planes y Precios</a>
+            <a href="mailto:soporte@acmecombat.mx" class="btn-outline-gold" data-i18n="cta.btn2">📧 Escribirnos</a>
+            <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener" class="btn-outline-gold" data-i18n="cta.btn3">💬 WhatsApp</a>
         </div>
     </div>
 
@@ -945,15 +965,133 @@
 
 <!-- Footer -->
 <footer class="faq-footer">
-    <p>© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
+    <p data-i18n="footer.copy">© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.</p>
     <p style="margin-top:6px;">
-        <a href="index.html">← Volver al sitio principal</a>
+        <a href="index.html" id="backBtn2" data-i18n="footer.back">← Volver al sitio principal</a>
         &nbsp;·&nbsp;
-        <a href="privacy.html">Política de Privacidad</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Política de Privacidad</a>
         &nbsp;·&nbsp;
         <a href="mailto:soporte@acmecombat.mx">soporte@acmecombat.mx</a>
     </p>
 </footer>
+
+<script>
+(function(){
+    var DICT = {
+        es: {
+            'hero.tag':   'Soporte &amp; Información · México 2026',
+            'hero.h1':    'Preguntas <span>Frecuentes</span>',
+            'hero.meta':  'Resolvemos todas tus dudas sobre nuestros planes, clases, instalaciones, programa infantil, inscripción y más.',
+            'hero.stat1': 'Preguntas',
+            'hero.stat2': 'Planes',
+            'hero.stat3': 'Disciplinas',
+            'hero.stat4': 'Instalaciones',
+            'filter.all':          'Todas',
+            'filter.precios':      '💰 Precios',
+            'filter.horarios':     '📅 Horarios',
+            'filter.clases':       '🥊 Clases',
+            'filter.ninos':        '🧒 Niños',
+            'filter.instalaciones':'🏟️ Instalaciones',
+            'filter.salud':        '❤️‍🩹 Salud',
+            'filter.admin':        '📋 Administrativo',
+            'sec.precios':      '💰 Planes &amp; Precios',
+            'sec.horarios':     '📅 Horarios',
+            'sec.clases':       '🥊 Clases &amp; Disciplinas',
+            'sec.ninos':        '🧒 Programa Infantil',
+            'sec.instalaciones':'🏟️ Instalaciones &amp; Estacionamiento',
+            'sec.salud':        '❤️‍🩹 Fisioterapia &amp; Recuperación',
+            'sec.admin':        '📋 Inscripción &amp; Administrativo',
+            'cta.tag':  '¿Listo para dar el primer paso?',
+            'cta.h3':   'Únete a <span>ACME Fight &amp; Fitness</span>',
+            'cta.p':    'Tu primera clase prueba está a un clic. Sin compromisos, sin contratos forzosos. Solo ven, entrena y decide.',
+            'cta.btn1': '💰 Ver Planes y Precios',
+            'cta.btn2': '📧 Escribirnos',
+            'cta.btn3': '💬 WhatsApp',
+            'footer.copy':    '© 2026 ACME Fight &amp; Fitness · México. Todos los derechos reservados.',
+            'footer.back':    '← Volver al sitio principal',
+            'footer.privacy': 'Política de Privacidad'
+        },
+        en: {
+            'hero.tag':   'Support &amp; Information · Mexico 2026',
+            'hero.h1':    'Frequently Asked <span>Questions</span>',
+            'hero.meta':  'Find answers about our plans, classes, facilities, kids program, sign-up process and more.',
+            'hero.stat1': 'Questions',
+            'hero.stat2': 'Plans',
+            'hero.stat3': 'Disciplines',
+            'hero.stat4': 'Facilities',
+            'filter.all':          'All',
+            'filter.precios':      '💰 Pricing',
+            'filter.horarios':     '📅 Schedule',
+            'filter.clases':       '🥊 Classes',
+            'filter.ninos':        '🧒 Kids',
+            'filter.instalaciones':'🏟️ Facilities',
+            'filter.salud':        '❤️‍🩹 Health',
+            'filter.admin':        '📋 Administrative',
+            'sec.precios':      '💰 Plans &amp; Pricing',
+            'sec.horarios':     '📅 Schedule',
+            'sec.clases':       '🥊 Classes &amp; Disciplines',
+            'sec.ninos':        '🧒 Kids Program',
+            'sec.instalaciones':'🏟️ Facilities &amp; Parking',
+            'sec.salud':        '❤️‍🩹 Physiotherapy &amp; Recovery',
+            'sec.admin':        '📋 Sign-up &amp; Administrative',
+            'cta.tag':  'Ready to take the first step?',
+            'cta.h3':   'Join <span>ACME Fight &amp; Fitness</span>',
+            'cta.p':    'Your first trial class is one click away. No commitment, no forced contracts. Just come, train and decide.',
+            'cta.btn1': '💰 View Plans &amp; Pricing',
+            'cta.btn2': '📧 Email Us',
+            'cta.btn3': '💬 WhatsApp',
+            'footer.copy':    '© 2026 ACME Fight &amp; Fitness · Mexico. All rights reserved.',
+            'footer.back':    '← Back to main site',
+            'footer.privacy': 'Privacy Policy'
+        }
+    };
+
+    function applyFaqLang(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (DICT[lang] && DICT[lang][key] !== undefined) {
+                el.innerHTML = DICT[lang][key];
+            }
+        });
+
+        // Search placeholder
+        var search = document.getElementById('faqSearch');
+        if (search) {
+            search.placeholder = lang === 'en'
+                ? search.getAttribute('data-placeholder-en')
+                : search.getAttribute('data-placeholder-es');
+        }
+
+        // Back link in nav
+        var backBtn = document.getElementById('backBtn');
+        if (backBtn) {
+            backBtn.innerHTML = lang === 'en' ? '← Back' : '← Volver al inicio';
+        }
+
+        // langBtn
+        var btn = document.getElementById('langBtn');
+        if (btn) {
+            btn.textContent = lang === 'en' ? 'ES' : 'EN';
+            btn.classList.toggle('active', lang === 'en');
+        }
+
+        document.documentElement.lang = lang;
+        document.title = lang === 'en'
+            ? 'FAQ · ACME Fight & Fitness'
+            : 'Preguntas Frecuentes · ACME Fight & Fitness';
+    }
+
+    window.toggleFaqLang = function() {
+        var cur = localStorage.getItem('lang') || 'es';
+        var next = cur === 'es' ? 'en' : 'es';
+        localStorage.setItem('lang', next);
+        applyFaqLang(next);
+    };
+
+    var saved = localStorage.getItem('lang') || 'es';
+    if (saved !== 'es') applyFaqLang(saved);
+})();
+</script>
 
 <script>
 (function () {
