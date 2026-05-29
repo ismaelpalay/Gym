@@ -741,7 +741,7 @@
 
         .membresias-hd {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 48px;
         }
         .membresias-hd .section-label {
             justify-content: center;
@@ -871,6 +871,32 @@
         .plan-btn { width: 100%; padding: 15px; }
         .plan-card.featured .plan-btn { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
         .plan-card.featured .plan-name { color: var(--gold) !important; }
+
+        .plans-aud-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .plans-panel { display: none; }
+        .plans-panel.active { display: block; }
+        .plans-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            align-items: start;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+        .plans-grid-1 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+        @media (max-width: 880px) {
+            .plans-grid-2 { grid-template-columns: 1fr; max-width: 430px; }
+        }
 
         /* Contact strip below plans */
         .plans-contact {
@@ -2522,72 +2548,157 @@
         <div class="membresias-hd fade-in">
             <p class="section-label" data-split="word" data-anim="fade-up" data-text-es="02 — Membresías" data-text-en="02 — Memberships">02 — Membresías</p>
             <h2 class="section-title" data-split="char" data-anim="neon" data-text-es="Planes de Suscripción" data-text-en="Subscription Plans">Planes de Suscripción</h2>
+            <div class="plans-aud-wrap">
+                <div class="tab-group" role="tablist">
+                    <button class="tab-btn plans-aud-btn active" data-plans-tab="adultos" role="tab" aria-selected="true" data-i18n="plans.tab.adultos">Adultos</button>
+                    <button class="tab-btn plans-aud-btn" data-plans-tab="ninos" role="tab" aria-selected="false" data-i18n="plans.tab.ninos">Niños</button>
+                    <button class="tab-btn plans-aud-btn" data-plans-tab="familiar" role="tab" aria-selected="false" data-i18n="plans.tab.familiar">Familiar</button>
+                </div>
+            </div>
         </div>
 
-        <div class="plans-grid">
+        <!-- ADULTOS -->
+        <div class="plans-panel active" id="plans-adultos">
+            <div class="plans-grid">
 
-            <!-- Clase Única -->
-            <div class="plan-card fade-in">
-                <p class="plan-type" data-i18n="plans.p1.type">Entrada Abierta</p>
-                <h3 class="plan-name" data-split="char" data-anim="glitch" data-text-es="Clase Única" data-text-en="Single Class">Clase Única</h3>
-                <div class="plan-price">
-                    <span class="plan-curr">$</span>
-                    <span class="plan-amount">299</span>
+                <!-- FIGHT -->
+                <div class="plan-card fade-in">
+                    <p class="plan-type" data-i18n="plans.fight.type">Entrada Abierta</p>
+                    <h3 class="plan-name" data-split="char" data-anim="glitch" data-text-es="FIGHT" data-text-en="FIGHT">FIGHT</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">499</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.fight.period">Por sesión · Sin compromiso</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.fight.f1">1 clase de 60 minutos</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.fight.f2">Entrenamiento personalizado</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.fight.f3">Entrenador calificado</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.fight.f4">Acceso a instalaciones</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-clase')" class="btn btn-red plan-btn" data-i18n="plans.fight.btn">Reservar Clase</button>
                 </div>
-                <p class="plan-period" data-i18n="plans.p1.period">Por sesión · Sin compromiso</p>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f1">1 clase de 60 minutos</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f2">Acceso a instalaciones</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p1.f3">Entrenador certificado</span></li>
-                    <li class="dim"><span class="chk">—</span><span data-i18n="plans.p1.f4">Acceso a fisioterapia</span></li>
-                    <li class="dim"><span class="chk">—</span><span data-i18n="plans.p1.f5">Toalla incluida</span></li>
-                </ul>
-                <button onclick="openModal('modal-clase')" class="btn btn-red plan-btn" data-i18n="plans.p1.btn">Reservar Clase</button>
+
+                <!-- CAMPEÓN (featured) -->
+                <div class="plan-card featured fade-in" data-delay="2">
+                    <div class="plan-badge" data-i18n="plans.campeon.badge">⭐ Recomendado</div>
+                    <p class="plan-type" data-i18n="plans.campeon.type">Mensual</p>
+                    <h3 class="plan-name" data-split="char" data-anim="neon" data-text-es="CAMPEÓN" data-text-en="CHAMPION">CAMPEÓN</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">2,999</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.campeon.period">12 clases · 3 por semana</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f1">Muay Thai, Militar, Jiu Jitsu, MMA, Boxeo</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f2">3 clases/semana a elección</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f3">Gimnasio abierto 30 días</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f4">2 sesiones crioterapia/mes</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f5">2 sesiones fisioterapia/mes</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.campeon.f6">Zona pesas y sauna</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-membresia','CAMPEÓN')" class="btn plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
+                </div>
+
+                <!-- ÉLITE -->
+                <div class="plan-card fade-in" data-delay="4">
+                    <p class="plan-type" data-i18n="plans.elite.type">Premium</p>
+                    <h3 class="plan-name" data-split="char" data-anim="bounce" data-text-es="ÉLITE" data-text-en="ELITE">ÉLITE</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">3,999</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.elite.period">4 clases/semana · Bienestar total</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.elite.f1">Todo lo del plan CAMPEÓN</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.elite.f2">4 clases a la semana</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.elite.f3">1 fisioterapia/semana</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.elite.f4">1 crioterapia/semana</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.elite.f5">App IA: nutrición + entrenamiento</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-membresia','ÉLITE')" class="btn btn-red plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
+                </div>
+
             </div>
+        </div>
 
-            <!-- Mensual BÁSICO (featured) -->
-            <div class="plan-card featured fade-in" data-delay="2">
-                <div class="plan-badge" data-i18n="plans.p2.badge">⭐ Recomendado</div>
-                <p class="plan-type" data-i18n="plans.p2.type">Mensual</p>
-                <h3 class="plan-name" data-split="char" data-anim="neon" data-text-es="Básico" data-text-en="Basic">Básico</h3>
-                <div class="plan-price">
-                    <span class="plan-curr">$</span>
-                    <span class="plan-amount">1,299</span>
+        <!-- NIÑOS -->
+        <div class="plans-panel" id="plans-ninos">
+            <div class="plans-grid plans-grid-2">
+
+                <!-- VALOR -->
+                <div class="plan-card fade-in">
+                    <p class="plan-type" data-i18n="plans.valor.type">Entrada Abierta</p>
+                    <h3 class="plan-name" data-split="char" data-anim="glitch" data-text-es="VALOR" data-text-en="VALOR">VALOR</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">329</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.valor.period">Por sesión · Sin compromiso</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.valor.f1">1 clase de 60 minutos</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.valor.f2">Entrenamiento personalizado</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.valor.f3">Entrenador calificado</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.valor.f4">Equipo de protección incluido</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-clase')" class="btn btn-red plan-btn" data-i18n="plans.valor.btn">Reservar Clase</button>
                 </div>
-                <p class="plan-period" data-i18n="plans.p2.period">Clases ilimitadas · Cancelable</p>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f1">Clases ilimitadas (90 min)</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f2">Acceso 24/7 a instalaciones</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f3">Sala de pesas incluida</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f4">Crioterapia &amp; sauna</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f5">Fisioterapia básica</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p2.f6">Comunidad ACME</span></li>
-                </ul>
-                <button onclick="openModal('modal-membresia','Básico')" class="btn btn-red plan-btn" style="background:var(--gold);border-color:var(--gold);color:#000;font-weight:700;" data-i18n="plans.join">Inscribirme Ahora</button>
+
+                <!-- PROSPECTO (featured) -->
+                <div class="plan-card featured fade-in" data-delay="2">
+                    <div class="plan-badge" data-i18n="plans.prospecto.badge">⭐ Recomendado</div>
+                    <p class="plan-type" data-i18n="plans.prospecto.type">Mensual</p>
+                    <h3 class="plan-name" data-split="char" data-anim="neon" data-text-es="PROSPECTO" data-text-en="PROSPECT">PROSPECTO</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">2,799</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.prospecto.period">12 clases · 3 por semana</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.prospecto.f1">12 clases (todas las disciplinas)</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.prospecto.f2">Tatami acolchado especializado</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.prospecto.f3">Equipo de protección completo</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.prospecto.f4">Entrenador certificado infantil</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.prospecto.f5">Ambiente 100% seguro</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-membresia','PROSPECTO')" class="btn plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
+                </div>
+
             </div>
+        </div>
 
-            <!-- Élite -->
-            <div class="plan-card fade-in" data-delay="4">
-                <p class="plan-type" data-i18n="plans.p3.type">Anual + Beneficios</p>
-                <h3 class="plan-name" data-split="char" data-anim="bounce" data-text-es="Élite" data-text-en="Elite">Élite</h3>
-                <div class="plan-price">
-                    <span class="plan-curr">$</span>
-                    <span class="plan-amount">12,999</span>
+        <!-- FAMILIAR -->
+        <div class="plans-panel" id="plans-familiar">
+            <div class="plans-grid plans-grid-1">
+
+                <!-- LEGADO ACME -->
+                <div class="plan-card featured fade-in" style="width:100%;">
+                    <div class="plan-badge" data-i18n="plans.legado.badge">👑 Plan Exclusivo</div>
+                    <p class="plan-type" data-i18n="plans.legado.type">Plan Familiar</p>
+                    <h3 class="plan-name" data-split="char" data-anim="neon" data-text-es="LEGADO ACME" data-text-en="ACME LEGACY">LEGADO ACME</h3>
+                    <div class="plan-price">
+                        <span class="plan-curr">$</span>
+                        <span class="plan-amount">4,999</span>
+                    </div>
+                    <p class="plan-period" data-i18n="plans.legado.period">Padre + Hijo · Todo incluido</p>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f1">Padre: Plan CAMPEÓN completo</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f2">Hijo: Plan PROSPECTO completo</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f3">4 sesiones crioterapia/mes (2+2)</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f4">4 sesiones fisioterapia/mes (2+2)</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f5">App IA personalizada (nutrición + entrenamiento)</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f6">Zona pesas, sauna y gimnasio abierto</span></li>
+                        <li><span class="chk">✓</span><span data-i18n="plans.legado.f7">Entrenador certificado para ambos</span></li>
+                    </ul>
+                    <button onclick="openModal('modal-membresia','LEGADO ACME')" class="btn plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
                 </div>
-                <p class="plan-period" data-i18n="plans.p3.period">12 meses · 3 meses gratis</p>
-                <div class="plan-divider"></div>
-                <ul class="plan-features">
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f1">Todo lo del plan Básico</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f2">Masajes deportivos 2×/mes</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f3">Asesoría nutricional</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f4">Plan personalizado</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f5">Seminarios privados</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f6">Prioridad en octágono</span></li>
-                    <li><span class="chk">✓</span><span data-i18n="plans.p3.f7">Descuento en eventos</span></li>
-                </ul>
-                <button onclick="openModal('modal-membresia','Élite')" class="btn btn-red plan-btn" data-i18n="plans.join">Inscribirme Ahora</button>
+
             </div>
         </div>
 
@@ -3110,6 +3221,21 @@
         });
     });
 
+    /* ── Plans audience tabs ────────────────────────────────── */
+    document.querySelectorAll('.plans-aud-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.plans-aud-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            document.querySelectorAll('.plans-panel').forEach(p => p.classList.remove('active'));
+            const panel = document.getElementById('plans-' + btn.dataset.plansTab);
+            if (panel) panel.classList.add('active');
+        });
+    });
+
     /* ── Animated counters ──────────────────────────────────── */
     function countUp (el) {
         const target = parseInt(el.dataset.count, 10);
@@ -3216,8 +3342,10 @@
                     <div class="form-row">
                         <label for="mem-plan">Plan seleccionado</label>
                         <select id="mem-plan" name="plan">
-                            <option value="Básico">Básico — $1,299/mes</option>
-                            <option value="Élite">Élite — $12,999/año</option>
+                            <option value="CAMPEÓN">CAMPEÓN — $2,999/mes</option>
+                            <option value="ÉLITE">ÉLITE — $3,999/mes</option>
+                            <option value="PROSPECTO">PROSPECTO — $2,799/mes (Niños)</option>
+                            <option value="LEGADO ACME">LEGADO ACME — $4,999/mes (Familiar)</option>
                         </select>
                     </div>
                     <div class="form-row">
@@ -3464,8 +3592,8 @@ var KB = [
     actions:[]
   },
   {
-    keys:['plan','planes','precio','precios','cuánto cuesta','cuanto cuesta','cuanto es','membresía','membresia','mensual','anual','suscripción','suscripcion','básico','basico','élite','elite','costo'],
-    res:'💪 <strong>Nuestros Planes:</strong><br><br>🥊 <strong>Clase Única</strong> — <strong>$299</strong> / sesión<br><small>60 min · sin compromiso · máx. 10 atletas</small><br><br>🏅 <strong>Plan Básico</strong> — <strong>$1,299</strong> / mes<br><small>Acceso ilimitado · entrenador certificado</small><br><br>⭐ <strong>Plan Élite</strong> — <strong>$12,999</strong> / año<br><small>3 meses GRATIS · masajes · nutrición · plan personalizado</small>',
+    keys:['plan','planes','precio','precios','cuánto cuesta','cuanto cuesta','cuanto es','membresía','membresia','mensual','anual','suscripción','suscripcion','campeon','campeón','élite','elite','fight','valor','prospecto','legado','familiar','costo'],
+    res:'💪 <strong>Nuestros Planes:</strong><br><br><strong>👊 Adultos</strong><br>🥊 <strong>FIGHT</strong> — <strong>$499</strong>/sesión · 1 clase · entrenador calificado<br>🏅 <strong>CAMPEÓN</strong> — <strong>$2,999</strong>/mes · 12 clases · crioterapia + fisioterapia<br>⭐ <strong>ÉLITE</strong> — <strong>$3,999</strong>/mes · 4 clases/semana · App IA + bienestar total<br><br><strong>👦 Niños</strong><br>🥊 <strong>VALOR</strong> — <strong>$329</strong>/sesión · 1 clase · equipo protección incluido<br>🏅 <strong>PROSPECTO</strong> — <strong>$2,799</strong>/mes · 12 clases · tatami especializado<br><br><strong>👨‍👦 Familiar</strong><br>👑 <strong>LEGADO ACME</strong> — <strong>$4,999</strong>/mes · Padre + Hijo todo incluido',
     actions:[{label:'Ver planes completos',scroll:'#planes'},{label:'Inscribirme ahora',modal:'modal-membresia'}]
   },
   {
@@ -3475,7 +3603,7 @@ var KB = [
   },
   {
     keys:['clase única','clase unica','prueba','primera clase','primera vez','probar','trial','una clase','1 clase','clase de prueba'],
-    res:'🎯 <strong>Clase Única — $299 / sesión</strong><br><br>60 minutos de intensidad controlada:<br>• Calentamiento funcional (15 min)<br>• Técnica de golpeo y grappling básico<br>• Sparring supervisado<br>• Recuperación activa<br>• Análisis post-clase<br><br>Máximo <strong>10 atletas</strong>. ¡Sin experiencia previa necesaria!',
+    res:'🎯 <strong>FIGHT (Adultos) — $499/sesión · VALOR (Niños) — $329/sesión</strong><br><br>60 minutos de intensidad controlada:<br>• Calentamiento funcional (15 min)<br>• Técnica de golpeo y grappling básico<br>• Sparring supervisado<br>• Recuperación activa<br>• Análisis post-clase<br><br>Máximo <strong>10 atletas</strong>. ¡Sin experiencia previa necesaria!',
     actions:[{label:'Reservar clase única',modal:'modal-clase'}]
   },
   {
@@ -3485,7 +3613,7 @@ var KB = [
   },
   {
     keys:['fisioterapia','recuperación','recuperacion','masaje','masajes','sauna','crioterapia','camilla','terapia','dolor muscular','lesión','lesion'],
-    res:'💆 <strong>Área de Fisioterapia &amp; Recuperación</strong><br><br>• ❄️ <strong>Crioterapia</strong> — reduce inflamación muscular<br>• 🌡️ <strong>Sauna Seco</strong> — relajación profunda<br>• 🛏️ <strong>Camillas de Masaje</strong> — recuperación activa<br><br>Masajes deportivos incluidos en el <strong>Plan Élite</strong> (2x/mes).',
+    res:'💆 <strong>Área de Fisioterapia &amp; Recuperación</strong><br><br>• ❄️ <strong>Crioterapia</strong> — reduce inflamación muscular<br>• 🌡️ <strong>Sauna Seco</strong> — relajación profunda<br>• 🛏️ <strong>Camillas de Masaje</strong> — recuperación activa<br><br>Sesiones de fisioterapia y crioterapia incluidas en <strong>Plan CAMPEÓN</strong> (2/mes cada una) y <strong>Plan ÉLITE</strong> (1/semana cada una).',
     actions:[{label:'Ver área de recuperación',scroll:'#recuperacion'}]
   },
   {
@@ -3500,7 +3628,7 @@ var KB = [
   },
   {
     keys:['inscribir','inscribirme','cómo me inscribo','como me inscribo','registrar','registro','formulario','apuntar','unirme','joinme'],
-    res:'📝 <strong>¿Cómo inscribirte?</strong><br><br>1. Elige tu plan (Básico o Élite)<br>2. Haz clic en <strong>"Inscribirme Ahora"</strong><br>3. Completa el formulario con tus datos<br>4. Un asesor te contactará en <strong>menos de 24 horas</strong><br><br>También puedes escribir a <strong>soporte@acmecombat.mx</strong>',
+    res:'📝 <strong>¿Cómo inscribirte?</strong><br><br>1. Elige tu plan (FIGHT, CAMPEÓN, ÉLITE, VALOR, PROSPECTO o LEGADO ACME)<br>2. Haz clic en <strong>"Inscribirme Ahora"</strong><br>3. Completa el formulario con tus datos<br>4. Un asesor te contactará en <strong>menos de 24 horas</strong><br><br>También puedes escribir a <strong>soporte@acmecombat.mx</strong>',
     actions:[{label:'Ir a planes',scroll:'#planes'},{label:'Formulario de inscripción',modal:'modal-membresia'}]
   },
   {
@@ -3539,8 +3667,8 @@ var KB = [
     actions:[{label:'Ir a Preguntas Frecuentes',href:'faq.html'}]
   },
   {
-    keys:['élite vs básico','elite vs basico','diferencia','comparar planes','qué incluye élite','que incluye elite','plan recomendado'],
-    res:'⭐ <strong>Élite vs. Básico:</strong><br><br><strong>Plan Básico ($1,299/mes):</strong><br>• Acceso ilimitado a todas las áreas<br>• Entrenador certificado<br>• Grupos de máx. 10 atletas<br><br><strong>Plan Élite ($12,999/año):</strong><br>Todo lo anterior más:<br>• 3 meses GRATIS<br>• 2 masajes deportivos/mes<br>• Asesoría nutricional<br>• Plan de entrenamiento personalizado<br>• Seminarios privados<br>• Prioridad en octágono<br>• Descuento en eventos',
+    keys:['élite vs campeón','elite vs campeon','diferencia','comparar planes','qué incluye élite','que incluye elite','plan recomendado'],
+    res:'⭐ <strong>CAMPEÓN vs. ÉLITE:</strong><br><br><strong>Plan CAMPEÓN ($2,999/mes):</strong><br>• 12 clases/mes (3/semana) a elección<br>• Muay Thai, Militar, Jiu Jitsu, MMA, Boxeo<br>• 2 crioterapias + 2 fisioterapias/mes<br>• Zona pesas y sauna<br><br><strong>Plan ÉLITE ($3,999/mes):</strong><br>Todo lo anterior más:<br>• 4 clases a la semana<br>• 1 fisioterapia/semana<br>• 1 crioterapia/semana<br>• App IA (nutrición + entrenamiento personalizado)',
     actions:[{label:'Ver planes',scroll:'#planes'}]
   },
   {
@@ -3879,32 +4007,57 @@ var DICT = {
     'map.alta.l5s': '70–95 °C · 8–10 pax',
     'map.alta.l6': 'Masajes & Fisioterapia',
     'map.alta.l6s': '2–3 camillas · Fisioterapeuta certificado',
-    'plans.p1.type': 'Entrada Abierta',
-    'plans.p1.period': 'Por sesión · Sin compromiso',
-    'plans.p1.f1': '1 clase de 60 minutos',
-    'plans.p1.f2': 'Acceso a instalaciones',
-    'plans.p1.f3': 'Entrenador certificado',
-    'plans.p1.f4': 'Acceso a fisioterapia',
-    'plans.p1.f5': 'Toalla incluida',
-    'plans.p1.btn': 'Reservar Clase',
-    'plans.p2.badge': '⭐ Recomendado',
-    'plans.p2.type': 'Mensual',
-    'plans.p2.period': 'Clases ilimitadas · Cancelable',
-    'plans.p2.f1': 'Clases ilimitadas (90 min)',
-    'plans.p2.f2': 'Acceso 24/7 a instalaciones',
-    'plans.p2.f3': 'Sala de pesas incluida',
-    'plans.p2.f4': 'Crioterapia & sauna',
-    'plans.p2.f5': 'Fisioterapia básica',
-    'plans.p2.f6': 'Comunidad ACME',
-    'plans.p3.type': 'Anual + Beneficios',
-    'plans.p3.period': '12 meses · 3 meses gratis',
-    'plans.p3.f1': 'Todo lo del plan Básico',
-    'plans.p3.f2': 'Masajes deportivos 2×/mes',
-    'plans.p3.f3': 'Asesoría nutricional',
-    'plans.p3.f4': 'Plan personalizado',
-    'plans.p3.f5': 'Seminarios privados',
-    'plans.p3.f6': 'Prioridad en octágono',
-    'plans.p3.f7': 'Descuento en eventos',
+    'plans.tab.adultos': 'Adultos',
+    'plans.tab.ninos': 'Niños',
+    'plans.tab.familiar': 'Familiar',
+    'plans.fight.type': 'Entrada Abierta',
+    'plans.fight.period': 'Por sesión · Sin compromiso',
+    'plans.fight.f1': '1 clase de 60 minutos',
+    'plans.fight.f2': 'Entrenamiento personalizado',
+    'plans.fight.f3': 'Entrenador calificado',
+    'plans.fight.f4': 'Acceso a instalaciones',
+    'plans.fight.btn': 'Reservar Clase',
+    'plans.campeon.badge': '⭐ Recomendado',
+    'plans.campeon.type': 'Mensual',
+    'plans.campeon.period': '12 clases · 3 por semana',
+    'plans.campeon.f1': 'Muay Thai, Militar, Jiu Jitsu, MMA, Boxeo',
+    'plans.campeon.f2': '3 clases/semana a elección',
+    'plans.campeon.f3': 'Gimnasio abierto 30 días',
+    'plans.campeon.f4': '2 sesiones crioterapia/mes',
+    'plans.campeon.f5': '2 sesiones fisioterapia/mes',
+    'plans.campeon.f6': 'Zona pesas y sauna',
+    'plans.elite.type': 'Premium',
+    'plans.elite.period': '4 clases/semana · Bienestar total',
+    'plans.elite.f1': 'Todo lo del plan CAMPEÓN',
+    'plans.elite.f2': '4 clases a la semana',
+    'plans.elite.f3': '1 fisioterapia/semana',
+    'plans.elite.f4': '1 crioterapia/semana',
+    'plans.elite.f5': 'App IA: nutrición + entrenamiento',
+    'plans.valor.type': 'Entrada Abierta',
+    'plans.valor.period': 'Por sesión · Sin compromiso',
+    'plans.valor.f1': '1 clase de 60 minutos',
+    'plans.valor.f2': 'Entrenamiento personalizado',
+    'plans.valor.f3': 'Entrenador calificado',
+    'plans.valor.f4': 'Equipo de protección incluido',
+    'plans.valor.btn': 'Reservar Clase',
+    'plans.prospecto.badge': '⭐ Recomendado',
+    'plans.prospecto.type': 'Mensual',
+    'plans.prospecto.period': '12 clases · 3 por semana',
+    'plans.prospecto.f1': '12 clases (todas las disciplinas)',
+    'plans.prospecto.f2': 'Tatami acolchado especializado',
+    'plans.prospecto.f3': 'Equipo de protección completo',
+    'plans.prospecto.f4': 'Entrenador certificado infantil',
+    'plans.prospecto.f5': 'Ambiente 100% seguro',
+    'plans.legado.badge': '👑 Plan Exclusivo',
+    'plans.legado.type': 'Plan Familiar',
+    'plans.legado.period': 'Padre + Hijo · Todo incluido',
+    'plans.legado.f1': 'Padre: Plan CAMPEÓN completo',
+    'plans.legado.f2': 'Hijo: Plan PROSPECTO completo',
+    'plans.legado.f3': '4 sesiones crioterapia/mes (2+2)',
+    'plans.legado.f4': '4 sesiones fisioterapia/mes (2+2)',
+    'plans.legado.f5': 'App IA personalizada (nutrición + entrenamiento)',
+    'plans.legado.f6': 'Zona pesas, sauna y gimnasio abierto',
+    'plans.legado.f7': 'Entrenador certificado para ambos',
     'plans.join': 'Inscribirme Ahora',
     'contact.email.lbl': 'Correo · Disponible 24/7',
     'contact.ref.lbl': 'Referencia única',
@@ -4023,32 +4176,57 @@ var DICT = {
     'map.alta.l5s': '70–95 °C · 8–10 people',
     'map.alta.l6': 'Massage & Physiotherapy',
     'map.alta.l6s': '2–3 tables · Certified physiotherapist',
-    'plans.p1.type': 'Open Entry',
-    'plans.p1.period': 'Per session · No commitment',
-    'plans.p1.f1': '1 class of 60 minutes',
-    'plans.p1.f2': 'Facility access',
-    'plans.p1.f3': 'Certified trainer',
-    'plans.p1.f4': 'Physiotherapy access',
-    'plans.p1.f5': 'Towel included',
-    'plans.p1.btn': 'Book Class',
-    'plans.p2.badge': '⭐ Recommended',
-    'plans.p2.type': 'Monthly',
-    'plans.p2.period': 'Unlimited classes · Cancellable',
-    'plans.p2.f1': 'Unlimited classes (90 min)',
-    'plans.p2.f2': '24/7 facility access',
-    'plans.p2.f3': 'Weight room included',
-    'plans.p2.f4': 'Cryotherapy & sauna',
-    'plans.p2.f5': 'Basic physiotherapy',
-    'plans.p2.f6': 'ACME community',
-    'plans.p3.type': 'Annual + Benefits',
-    'plans.p3.period': '12 months · 3 months free',
-    'plans.p3.f1': 'Everything in Basic plan',
-    'plans.p3.f2': 'Sports massages 2×/month',
-    'plans.p3.f3': 'Nutritional coaching',
-    'plans.p3.f4': 'Personalized plan',
-    'plans.p3.f5': 'Private seminars',
-    'plans.p3.f6': 'Octagon priority',
-    'plans.p3.f7': 'Event discounts',
+    'plans.tab.adultos': 'Adults',
+    'plans.tab.ninos': 'Kids',
+    'plans.tab.familiar': 'Family',
+    'plans.fight.type': 'Open Entry',
+    'plans.fight.period': 'Per session · No commitment',
+    'plans.fight.f1': '1 class of 60 minutes',
+    'plans.fight.f2': 'Personalized training',
+    'plans.fight.f3': 'Qualified trainer',
+    'plans.fight.f4': 'Facility access',
+    'plans.fight.btn': 'Book Class',
+    'plans.campeon.badge': '⭐ Recommended',
+    'plans.campeon.type': 'Monthly',
+    'plans.campeon.period': '12 classes · 3 per week',
+    'plans.campeon.f1': 'Muay Thai, Military, Jiu Jitsu, MMA, Boxing',
+    'plans.campeon.f2': '3 classes/week of your choice',
+    'plans.campeon.f3': 'Gym open 30 days',
+    'plans.campeon.f4': '2 cryotherapy sessions/month',
+    'plans.campeon.f5': '2 physiotherapy sessions/month',
+    'plans.campeon.f6': 'Weight room and sauna',
+    'plans.elite.type': 'Premium',
+    'plans.elite.period': '4 classes/week · Total wellness',
+    'plans.elite.f1': 'Everything in CHAMPION plan',
+    'plans.elite.f2': '4 classes per week',
+    'plans.elite.f3': '1 physiotherapy/week',
+    'plans.elite.f4': '1 cryotherapy/week',
+    'plans.elite.f5': 'AI App: nutrition + training',
+    'plans.valor.type': 'Open Entry',
+    'plans.valor.period': 'Per session · No commitment',
+    'plans.valor.f1': '1 class of 60 minutes',
+    'plans.valor.f2': 'Personalized training',
+    'plans.valor.f3': 'Qualified trainer',
+    'plans.valor.f4': 'Protective gear included',
+    'plans.valor.btn': 'Book Class',
+    'plans.prospecto.badge': '⭐ Recommended',
+    'plans.prospecto.type': 'Monthly',
+    'plans.prospecto.period': '12 classes · 3 per week',
+    'plans.prospecto.f1': '12 classes (all disciplines)',
+    'plans.prospecto.f2': 'Specialized padded tatami',
+    'plans.prospecto.f3': 'Full protective gear',
+    'plans.prospecto.f4': 'Certified kids trainer',
+    'plans.prospecto.f5': '100% safe environment',
+    'plans.legado.badge': '👑 Exclusive Plan',
+    'plans.legado.type': 'Family Plan',
+    'plans.legado.period': 'Parent + Child · All included',
+    'plans.legado.f1': 'Parent: Full CHAMPION plan',
+    'plans.legado.f2': 'Child: Full PROSPECT plan',
+    'plans.legado.f3': '4 cryotherapy sessions/month (2+2)',
+    'plans.legado.f4': '4 physiotherapy sessions/month (2+2)',
+    'plans.legado.f5': 'AI App (nutrition + personalized training)',
+    'plans.legado.f6': 'Weight room, sauna & open gym',
+    'plans.legado.f7': 'Certified trainer for both',
     'plans.join': 'Join Now',
     'contact.email.lbl': 'Email · Available 24/7',
     'contact.ref.lbl': 'Unique reference',
@@ -4111,8 +4289,8 @@ var KB_EN = [
     actions:[]
   },
   {
-    keys:['plan','plans','price','prices','how much','membership','monthly','annual','subscription','basic','elite','cost'],
-    res:'💪 <strong>Our Plans:</strong><br><br>🥊 <strong>Single Class</strong> — <strong>$299</strong> / session<br><small>60 min · no commitment · max. 10 athletes</small><br><br>🏅 <strong>Basic Plan</strong> — <strong>$1,299</strong> / month<br><small>Unlimited access · certified trainer</small><br><br>⭐ <strong>Elite Plan</strong> — <strong>$12,999</strong> / year<br><small>3 months FREE · massages · nutrition · personalized plan</small>',
+    keys:['plan','plans','price','prices','how much','membership','monthly','annual','subscription','champion','elite','fight','valor','prospect','legacy','family','cost'],
+    res:'💪 <strong>Our Plans:</strong><br><br><strong>👊 Adults</strong><br>🥊 <strong>FIGHT</strong> — <strong>$499</strong>/session · 1 class · qualified trainer<br>🏅 <strong>CHAMPION</strong> — <strong>$2,999</strong>/month · 12 classes · cryotherapy + physiotherapy<br>⭐ <strong>ELITE</strong> — <strong>$3,999</strong>/month · 4 classes/week · AI App + total wellness<br><br><strong>👦 Kids</strong><br>🥊 <strong>VALOR</strong> — <strong>$329</strong>/session · 1 class · protective gear included<br>🏅 <strong>PROSPECT</strong> — <strong>$2,799</strong>/month · 12 classes · specialized tatami<br><br><strong>👨‍👦 Family</strong><br>👑 <strong>ACME LEGACY</strong> — <strong>$4,999</strong>/month · Parent + Child all included',
     actions:[{label:'See full plans',scroll:'#planes'},{label:'Join now',modal:'modal-membresia'}]
   },
   {
@@ -4122,7 +4300,7 @@ var KB_EN = [
   },
   {
     keys:['single class','trial','first class','first time','try','one class','1 class','trial class'],
-    res:'🎯 <strong>Single Class — $299 / session</strong><br><br>60 minutes of controlled intensity:<br>• Functional warm-up (15 min)<br>• Basic striking and grappling technique<br>• Supervised sparring<br>• Active recovery<br>• Post-class analysis<br><br>Maximum <strong>10 athletes</strong>. No prior experience needed!',
+    res:'🎯 <strong>FIGHT (Adults) — $499 / session · VALOR (Kids) — $329 / session</strong><br><br>60 minutes of controlled intensity:<br>• Functional warm-up (15 min)<br>• Basic striking and grappling technique<br>• Supervised sparring<br>• Active recovery<br>• Post-class analysis<br><br>Maximum <strong>10 athletes</strong>. No prior experience needed!',
     actions:[{label:'Book single class',modal:'modal-clase'}]
   },
   {
@@ -4132,7 +4310,7 @@ var KB_EN = [
   },
   {
     keys:['physiotherapy','recovery','massage','sauna','cryotherapy','table','therapy','muscle pain','injury'],
-    res:'💆 <strong>Physiotherapy &amp; Recovery Area</strong><br><br>• ❄️ <strong>Cryotherapy</strong> — reduces muscle inflammation<br>• 🌡️ <strong>Dry Sauna</strong> — deep relaxation<br>• 🛏️ <strong>Massage Tables</strong> — active recovery<br><br>Sports massages included in <strong>Elite Plan</strong> (2x/month).',
+    res:'💆 <strong>Physiotherapy &amp; Recovery Area</strong><br><br>• ❄️ <strong>Cryotherapy</strong> — reduces muscle inflammation<br>• 🌡️ <strong>Dry Sauna</strong> — deep relaxation<br>• 🛏️ <strong>Massage Tables</strong> — active recovery<br><br>Cryotherapy &amp; physiotherapy sessions included in <strong>CHAMPION</strong> (2/month each) and <strong>ELITE</strong> (1/week each).',
     actions:[{label:'View recovery area',scroll:'#recuperacion'}]
   },
   {
@@ -4186,8 +4364,8 @@ var KB_EN = [
     actions:[{label:'Go to FAQ',href:'faq.html'}]
   },
   {
-    keys:['elite vs basic','difference','compare plans','what does elite include','recommended plan'],
-    res:'⭐ <strong>Elite vs. Basic:</strong><br><br><strong>Basic Plan ($1,299/mo):</strong><br>• Unlimited access to all areas<br>• Certified trainer<br>• Groups of max. 10 athletes<br><br><strong>Elite Plan ($12,999/year):</strong><br>Everything above plus:<br>• 3 months FREE<br>• 2 sports massages/month<br>• Nutritional coaching<br>• Personalized training plan<br>• Private seminars<br>• Octagon priority<br>• Event discounts',
+    keys:['elite vs champion','difference','compare plans','what does elite include','recommended plan'],
+    res:'⭐ <strong>CHAMPION vs. ELITE:</strong><br><br><strong>CHAMPION ($2,999/mo):</strong><br>• 12 classes/month (3/week) of your choice<br>• Muay Thai, Military, Jiu Jitsu, MMA, Boxing<br>• 2 cryotherapy + 2 physiotherapy/month<br>• Weight room and sauna<br><br><strong>ELITE ($3,999/mo):</strong><br>Everything above plus:<br>• 4 classes/week<br>• 1 physiotherapy/week<br>• 1 cryotherapy/week<br>• AI App (nutrition + personalized training)',
     actions:[{label:'View plans',scroll:'#planes'}]
   },
   {
