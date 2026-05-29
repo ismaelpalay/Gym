@@ -67,7 +67,7 @@
             --t:         0.3s ease;
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
 
         body {
             background: var(--bg);
@@ -2889,6 +2889,36 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
 
+    /* ── Smooth scroll personalizado (expuesto globalmente) ─── */
+    window.smoothScroll = function smoothScroll (el, duration) {
+        const navH  = document.getElementById('navbar').offsetHeight;
+        const targetY = el.getBoundingClientRect().top + window.pageYOffset - navH - 28;
+        const startY  = window.pageYOffset;
+        const dist    = targetY - startY;
+        let   startTs = null;
+        function ease (t) {
+            return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+        }
+        function step (ts) {
+            if (!startTs) startTs = ts;
+            const p = Math.min((ts - startTs) / duration, 1);
+            window.scrollTo(0, startY + dist * ease(p));
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            const id = this.getAttribute('href').slice(1);
+            if (!id) return;
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            window.smoothScroll(target, 950);
+        });
+    });
+
     /* ── Navbar ─────────────────────────────────────────────── */
     const navbar    = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
@@ -3517,6 +3547,9 @@ closeBtn.addEventListener('click', closeChat);
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape' && isOpen) closeChat();
 });
+document.addEventListener('click', function(e){
+  if (isOpen && !panel.contains(e.target) && !trigger.contains(e.target)) closeChat();
+});
 
 /* ── Render helpers ─────────────────────────────────────────── */
 function addBotMsg(html, actions) {
@@ -3542,7 +3575,7 @@ function addBotMsg(html, actions) {
         btn.addEventListener('click', function(){
           closeChat();
           var el = document.querySelector(a.scroll);
-          if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+          if (el) window.smoothScroll(el, 950);
         });
       } else if (a.modal) {
         btn.addEventListener('click', function(){
