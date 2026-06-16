@@ -17,6 +17,7 @@
 
     <!-- EmailJS SDK — para envío de correos automáticos al suscribirse -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
     <style>
         /* ============================================================
@@ -3528,6 +3529,13 @@ const EMAILJS_CONFIGURED  = EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY_AQUI';
 
 if (EMAILJS_CONFIGURED) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
+/* ================================================================
+   SUPABASE — BASE DE DATOS
+================================================================ */
+const SUPABASE_URL  = 'https://gtucbxhcamowdrfxznot.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0dWNieGhjYW1vd2RyZnh6bm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTg1OTIsImV4cCI6MjA5NzE5NDU5Mn0.XBCYTQ-yJUjyKPM5kaSxoWfeBg23HlESZx2yVXdm1ms';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
 /* ── Envío de correo de bienvenida ─────────────────────────────── */
 function sendWelcomeEmail(data) {
     const payload = {
@@ -3617,10 +3625,44 @@ function submitForm(e, modalId) {
         nombreNino:  get('nombre_nino')
     };
 
-    /* 1 — Enviar correo de bienvenida */
+    /* 1 — Guardar en Supabase */
+    if (modalId === 'modal-membresia') {
+        sb.from('leads').insert([{
+            nombre:       data.nombre,
+            email:        data.email,
+            pais_codigo:  data.codigo,
+            telefono:     data.telefono,
+            plan:         data.plan,
+            fecha_inicio: data.fechaInicio || null,
+            experiencia:  get('experiencia') || get('condicion') || null,
+            fuente:       data.fuente || null,
+            notas:        data.notas || null,
+            nombre_padre: data.nombrePadre || null,
+            nombre_nino:  data.nombreNino  || null
+        }]).then(({ error }) => {
+            if (error) console.error('[ACME] Supabase leads error:', error.message);
+        });
+    } else {
+        sb.from('clases').insert([{
+            nombre:          data.nombre,
+            email:           data.email,
+            pais_codigo:     data.codigo,
+            telefono:        data.telefono,
+            plan:            data.plan,
+            fecha_preferida: data.fechaInicio || null,
+            primera_vez:     get('primera_vez') || null,
+            condicion:       get('condicion')   || null,
+            fuente:          data.fuente || null,
+            notas:           data.notas  || null
+        }]).then(({ error }) => {
+            if (error) console.error('[ACME] Supabase clases error:', error.message);
+        });
+    }
+
+    /* 2 — Enviar correo de bienvenida */
     sendWelcomeEmail(data);
 
-    /* 2 — Mostrar pantalla de éxito en el modal */
+    /* 3 — Mostrar pantalla de éxito en el modal */
     const wrapId    = modalId === 'modal-membresia' ? 'mem-form-wrap' : 'clase-form-wrap';
     const successId = modalId === 'modal-membresia' ? 'mem-success'   : 'clase-success';
     const wrap    = document.getElementById(wrapId);
@@ -3628,7 +3670,7 @@ function submitForm(e, modalId) {
     if (wrap)    wrap.style.display    = 'none';
     if (success) success.style.display = 'block';
 
-    /* 3 — Abrir página de pago en nueva pestaña (sólo membresías) */
+    /* 4 — Abrir página de pago en nueva pestaña (sólo membresías) */
     if (modalId === 'modal-membresia') {
         const params = new URLSearchParams({
             nombre:  data.nombre,

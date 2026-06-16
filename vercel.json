@@ -22,6 +22,7 @@
     { "source": "/privacy",  "destination": "/privacy.html" },
     { "source": "/terminos", "destination": "/terminos.html" },
     { "source": "/faq",      "destination": "/faq.html" },
-    { "source": "/payment",  "destination": "/payment.html" }
+    { "source": "/payment",  "destination": "/payment.html" },
+    { "source": "/admin",    "destination": "/admin/index.html" }
   ]
 }
