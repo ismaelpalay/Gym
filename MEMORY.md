@@ -1,154 +1,168 @@
 # MEMORY — ACME Fight & Fitness
-
-Archivo de memoria viva del proyecto. Se actualiza conforme evoluciona el sitio.
 Última actualización: 2026-06-16
 
 ---
 
 ## Estado actual del proyecto
 
-- **Sitio en producción**: Vercel, repo `ismaelpalay/Gym`, deploy automático en push a main.
-- **Rama activa de trabajo**: `claude/html-professional-webpage-XCwl4`
-- **Archivos principales**: `index.html` (~4600 líneas), `payment.html` (507), `faq.html` (1173)
-- **Páginas auxiliares**: `privacy.html`, `terminos.html`
-- **Panel admin**: `admin/index.html` — accesible en `/admin`
+- **Sitio web**: `marcaacme.vercel.app` — repo `ismaelpalay/Gym`, rama `claude/html-professional-webpage-XCwl4`
+- **Panel admin**: `gym-admin-kappa-amber.vercel.app` — proyecto Vercel separado en `/Users/invitado/Desktop/gym-admin/`
+- **Archivos principales**: `index.html` (~4600 líneas), `payment.html`, `faq.html`, `privacy.html`, `terminos.html`
+- **Deploy**: `vercel --prod --yes --scope ismael-palay-s-projects` desde cada carpeta
 
 ---
 
-## Planes y precios actuales
+## Planes y precios
 
 | Plan | Precio | Periodo | Audiencia |
 |---|---|---|---|
 | FIGHT | $499 | por sesión | Adultos |
 | CAMPEÓN | $2,999 | al mes | Adultos |
-| ÉLITE | $3,999 | al mes | Adultos (Premium) |
+| ÉLITE | $3,999 | al mes | Adultos Premium |
 | VALOR | $329 | por sesión | Niños |
 | PROSPECTO | $2,799 | al mes | Niños |
 | LEGADO ACME | $4,999 | al mes | Familiar |
 
-El plan **LEGADO ACME** muestra campos extra en el modal (`#legado-fields`): nombre del niño, nombre del padre, notas.
+**Duración de membresía** (para cálculo de `fecha_expiracion`):
+- FIGHT / VALOR → sesión única → `fecha_expiracion = null`
+- CAMPEÓN / ÉLITE / PROSPECTO / LEGADO ACME → 30 días
+
+---
+
+## Arquitectura de datos (Supabase)
+
+### Flujo de datos
+
+```
+Web form (modal-membresia)
+  └── INSERT leads  (estado: pendiente)
+  └── INSERT registros_totales (tipo: 'membresia')
+
+Web form (modal-clase)
+  └── INSERT clases (estado: pendiente)
+  └── INSERT registros_totales (tipo: 'clase')
+
+Admin cobro en efectivo
+  └── INSERT pagos_efectivo
+  └── INSERT miembros  (ref_pago_id → pagos_efectivo.id)
+  └── INSERT registros_totales (tipo: 'efectivo', ref_id → miembros.id)
+
+Admin "Promover a Miembro"
+  └── INSERT miembros (desde un lead)
+  └── UPDATE registros_totales (ref_id → miembros.id)
+  └── DELETE leads
+```
+
+### Tablas
+
+```sql
+-- LEADS — solo visitantes web que NO completaron pago
+leads (id, created_at, nombre, email, pais_codigo, telefono, plan,
+       fecha_inicio, experiencia, fuente, notas, nombre_padre, nombre_nino,
+       estado [pendiente|contactado], descuento, precio_final)
+
+-- MIEMBROS — pagantes reales (web promovidos + efectivo)
+miembros (id, created_at, nombre, email, pais_codigo, telefono, plan,
+          fecha_inicio, fecha_expiracion, estado [activo|inactivo],
+          fuente, notas, ref_pago_id)
+
+-- CLASES — reservas de sesión única
+clases (id, created_at, nombre, email, pais_codigo, telefono, plan,
+        fecha_preferida, primera_vez, condicion, fuente, notas,
+        estado [pendiente|confirmado|asistio|no_asistio])
+
+-- PAGOS EN EFECTIVO — registro financiero
+pagos_efectivo (id, created_at, fecha_pago, nombre_cliente, pais_codigo,
+                telefono, email, plan, monto, concepto, notas, registrado_por)
+
+-- REGISTROS TOTALES — conteo global para dashboard
+registros_totales (id, created_at, nombre, email, pais_codigo, telefono,
+                   plan, tipo, estado, fuente, ref_id)
+   -- ref_id → miembros.id (para sync de cobros en efectivo)
+   -- tipo: 'membresia' | 'clase' | 'efectivo'
+```
+
+### Permisos
+
+```sql
+-- RLS deshabilitado en tablas con inserción pública
+alter table leads            disable row level security;
+alter table clases           disable row level security;
+alter table miembros         disable row level security;
+alter table registros_totales disable row level security;
+grant insert on leads, clases to anon;
+grant all on leads, clases, pagos_efectivo, miembros, registros_totales to authenticated;
+
+-- pagos_efectivo con RLS solo para autenticados
+alter table pagos_efectivo enable row level security;
+create policy "auth_all" on pagos_efectivo as permissive for all to authenticated using (true) with check (true);
+
+-- Realtime habilitado en todas las tablas
+alter publication supabase_realtime add table miembros;
+```
+
+### Función de expiración automática
+
+```sql
+create or replace function marcar_expirados()
+returns void language sql as $$
+  update miembros set estado = 'inactivo'
+  where estado = 'activo' and fecha_expiracion is not null and fecha_expiracion < current_date;
+  update registros_totales rt set estado = 'inactivo'
+  from miembros m where rt.ref_id = m.id and m.estado = 'inactivo' and rt.estado != 'inactivo';
+$$;
+```
+El admin llama `marcar_expirados()` en JS al iniciar (sin RPC, lo hace client-side comparando fechas).
+
+---
+
+## Panel de administración
+
+**URL**: `gym-admin-kappa-amber.vercel.app`
+**Auth**: Supabase email + contraseña + hCaptcha (site key: `532074d2-e8a0-441c-8fc2-2558ef007b90`)
+
+### Pestañas
+
+| Pestaña | Descripción |
+|---|---|
+| Dashboard | Stats: total registros, semana, miembros activos, leads pendientes, efectivo. Últimos 10 registros. |
+| Leads Web | Solo visitas web sin pago completado (estado: pendiente/contactado). Botón "Promover a Miembro". |
+| Miembros | Pagantes activos/inactivos con fecha de expiración. Botón QR de acceso. |
+| Clases | Reservas de sesión única. Cambio de estado. |
+| Cobros en Efectivo | Formulario manual → crea Miembro + pagos_efectivo + registros_totales. |
+
+### Funcionalidades clave
+
+- **Expiración automática**: al iniciar el admin, detecta miembros con `fecha_expiracion < hoy` y los pasa a `inactivo` (también actualiza `registros_totales`).
+- **QR de acceso**: genera imagen QR via `api.qrserver.com` con datos del miembro. Imprimible.
+- **Borrar en cascada**: eliminar cobro → borra miembro + registros_totales (via `ref_id`). Eliminar lead/clase → borra entrada en registros_totales por nombre+email+tipo.
+- **Promover lead**: mueve lead a miembros, calcula `fecha_expiracion`, actualiza registros_totales.
+- **Sync de estado**: cambiar estado de un miembro también actualiza `registros_totales.estado`.
+- **Realtime**: todas las tablas actualizan el UI sin recargar.
+- **Export CSV**: disponible en cada pestaña.
 
 ---
 
 ## Integraciones
 
-### EmailJS
-- CDN: `@emailjs/browser@4`
-- Constantes en `index.html` línea ~3523: `EMAILJS_PUBLIC_KEY`, `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`
-- **Estado**: pendiente de configurar — valores actuales son placeholders `TU_..._AQUI`
-- La bandera `EMAILJS_CONFIGURED` evita llamadas reales hasta que se llenen las keys
-- Correo de pruebas hardcodeado: `ismaelemergencia.46@gmail.com`
-- Variables del template: `to_name`, `to_email`, `bcc_to`, `plan_type`, `telefono`, `fecha_inicio`, `nombre_padre`, `nombre_nino`, `fuente`, `notas`, `año`
-
 ### Supabase
-- **Estado**: ✅ Integrado
 - **URL**: `https://gtucbxhcamowdrfxznot.supabase.co`
-- **Anon key**: configurada en `index.html` y `admin/index.html` (hardcoded, es pública por diseño)
-- CDN usado: `@supabase/supabase-js@2/dist/umd/supabase.js` — IMPORTANTE: usar siempre la ruta `/dist/umd/supabase.js`, sin ella se carga el módulo ESM que no expone el global `supabase` y falla con ReferenceError.
-- **Tablas creadas**:
-  - `leads` — membresías del formulario web
-  - `clases` — reservas clase única del formulario web
-  - `pagos_efectivo` — cobros manuales en efectivo desde admin
-- **Permisos (GRANTs en Supabase)**:
-  - `anon`: INSERT en `leads` y `clases`
-  - `authenticated`: ALL en las 3 tablas
-- **RLS**: deshabilitado en `leads` y `clases` (acceso controlado por GRANTs); `pagos_efectivo` con RLS habilitado solo para autenticados
-- **NOTA CRÍTICA RLS**: Si en el futuro se necesita re-habilitar RLS en `leads`/`clases`, usar `as permissive for insert to public with check (true)` — NO usar `to anon`, causa error 42501 incluso con GRANTs correctos. Después de cualquier cambio de RLS, refrescar el schema cache en Supabase: Project Settings → API → Reload schema.
-- **Realtime**: habilitado en las 3 tablas → el admin se actualiza en vivo sin recargar
+- **CDN CRÍTICO**: siempre usar `/dist/umd/supabase.js` — sin esa ruta carga ESM y falla con ReferenceError.
+- **RLS**: `leads` y `clases` con RLS deshabilitado. Si se reactiva, usar `as permissive for insert to public with check (true)` (NO `to anon`).
+
+### EmailJS
+- CDN `@emailjs/browser@4`, constantes en `index.html` aún con placeholders `TU_..._AQUI`
+- Bandera `EMAILJS_CONFIGURED = false` evita llamadas reales
+- Template vars: `to_name`, `to_email`, `bcc_to`, `plan_type`, `telefono`, `fecha_inicio`, `nombre_padre`, `nombre_nino`, `fuente`, `notas`, `año`
 
 ### Vercel
-- `vercel.json` configurado con URLs limpias, headers de seguridad, rewrites
-- Rewrite `/admin` → `/admin/index.html` agregado
+- Sitio web: `vercel.json` con cleanUrls, headers seguridad, rewrites (`/privacy`, `/terminos`, `/faq`, `/payment`)
+- Admin: `vercel.json` separado con `X-Frame-Options: DENY`
+- Deploy: `vercel --prod --yes --scope ismael-palay-s-projects`
 
 ---
 
-## Flujo de datos (formulario web → Supabase → Admin)
-
-```
-Usuario web llena modal-membresia o modal-clase
-  └── submitForm() en index.html
-        ├── sb.from('leads' | 'clases').insert(...)  → Supabase
-        ├── sendWelcomeEmail(data)                   → EmailJS (pendiente config)
-        └── window.open('payment.html?...')          → Página de pago
-
-Supabase Realtime → admin/index.html
-  └── tabla actualiza en vivo, toast de notificación aparece
-```
-
----
-
-## Panel de administración (`admin/index.html`)
-
-- **Ruta**: `/admin` (rewrite en vercel.json)
-- **Auth**: Supabase Auth email + contraseña. Crear usuario en Supabase → Authentication → Users → Add user.
-- **Diseño**: tema oscuro brand (--bg #060606, --red, --gold), Google Fonts Oswald/Inter, iconos SVG inline (sin emojis), watermark con `logo.svg` al 4% de opacidad.
-- **Funcionalidades**:
-  - Login / logout con sesión persistente (Supabase maneja cookies)
-  - Dashboard: 5 stat cards (total leads, esta semana, activos, clases, efectivo recaudado) + tabla de últimos 10 registros combinados
-  - Tab Membresías: tabla con búsqueda/filtros, modal detalle con editar teléfono, cambiar estado (pendiente → contactado → activo → inactivo), aplicar descuento % con cálculo de precio final
-  - Tab Clases: tabla con búsqueda/filtros, modal detalle con editar teléfono, cambiar estado (pendiente → confirmado → asistio → no_asistio)
-  - Tab Cobros en Efectivo: formulario para registrar cobros manuales, tabla con total acumulado, eliminar registros
-  - Export CSV en cada sección (con BOM UTF-8 para Excel)
-  - Realtime: INSERT/UPDATE/DELETE en las 3 tablas se reflejan sin recargar
-
----
-
-## Schema SQL de Supabase (referencia)
-
-```sql
--- Tablas
-create table leads (id uuid primary key default gen_random_uuid(), created_at timestamptz default now(), nombre text, email text, pais_codigo text, telefono text, plan text, fecha_inicio date, experiencia text, fuente text, notas text, nombre_padre text, nombre_nino text, estado text default 'pendiente', descuento integer default 0, precio_final numeric);
-create table clases (id uuid primary key default gen_random_uuid(), created_at timestamptz default now(), nombre text, email text, pais_codigo text, telefono text, plan text, fecha_preferida date, primera_vez text, condicion text, fuente text, notas text, estado text default 'pendiente');
-create table pagos_efectivo (id uuid primary key default gen_random_uuid(), created_at timestamptz default now(), fecha_pago date default current_date, nombre_cliente text, plan text, monto numeric, concepto text, registrado_por text, notas text);
-
--- Permisos
-alter table leads  disable row level security;
-alter table clases disable row level security;
-grant insert on leads, clases to anon;
-grant all on leads, clases, pagos_efectivo to authenticated;
-alter table pagos_efectivo enable row level security;
-create policy "auth_all" on pagos_efectivo as permissive for all to authenticated using (true) with check (true);
-```
-
----
-
-## Secciones de index.html (en orden DOM)
-
-| ID | Nombre visible |
-|---|---|
-| `#inicio` | Hero |
-| `#espacios` | Espacios / Instalaciones |
-| `#mapa` | Mapa de planta (tabs por piso) |
-| `#planes` | Membresías (tabs adultos / niños / familiar) |
-| `#clases` | Clases |
-| `#recuperacion` | Recuperación |
-| `#kids` | Zona Niños & Familia |
-| `.contact-bar` | Barra de contacto |
-| `footer` | Footer |
-
----
-
-## Modales en index.html
-
-| ID modal | Propósito |
-|---|---|
-| `modal-membresia` | Inscripción a membresía → guarda en `leads` |
-| `modal-clase` | Reservar clase única → guarda en `clases` |
-
-Flujo `submitForm()`: INSERT Supabase → sendWelcomeEmail() → redirect payment.html (solo membresías).
-
----
-
-## i18n (ES / EN)
-
-- Objeto `DICT` en `index.html` con claves `es` y `en`
-- `data-i18n="clave"` en HTML para texto, `data-i18n-placeholder="clave"` para placeholders
-- `applyLang(lang)` aplica idioma; `window.toggleLang()` alterna y persiste en `localStorage`
-- Chatbot: `KB` (ES) y `KB_EN` (EN), chips: `FAQ_CHIPS` / `FAQ_CHIPS_EN`
-
----
-
-## Variables CSS globales
+## Variables CSS globales (index.html)
 
 ```css
 --red: #E5001A   --red-l: #FF2030   --red-d: #AA0012
@@ -159,26 +173,10 @@ Flujo `submitForm()`: INSERT Supabase → sendWelcomeEmail() → redirect paymen
 
 ---
 
-## Historial de cambios importantes
+## Notas de diseño
 
-| Fecha | Cambio |
-|---|---|
-| 2026-06-16 | Admin panel: watermark logo, emojis → iconos SVG profesionales |
-| 2026-06-16 | Backend Supabase completo + `admin/index.html` creado |
-| 2026-06-16 | Creación de MEMORY.md |
-| ~2026-06 | `vercel.json` agregado para deploy en Vercel |
-| ~2026-06 | Zona Niños: eliminado mini octágono, renombrada zona de padres |
-| ~2026-06 | Plan LEGADO ACME actualizado, formulario y flujo de correo/pago |
-| ~2026-06 | Rediseño completo sección planes con tabs de audiencia |
-| ~2026-06 | Switch ES/EN implementado en todas las páginas |
-
----
-
-## Notas y decisiones de diseño
-
-- El sitio es **HTML/CSS/JS puro**, sin framework ni bundler. Mantenerlo así salvo decisión explícita.
-- Toda clase `.section` usa `padding: 110px 0` y animaciones `.fade-in` via IntersectionObserver con `data-delay="1-6"`.
-- El scroll personalizado usa curva `easeInOutCubic` a 950ms, con offset de navbar.
-- Logos en círculos con borde gold/red (border-radius 50%).
-- El chatbot se cierra al hacer clic fuera de él.
-- El panel admin NO usa emojis — iconos SVG inline con `stroke: currentColor`.
+- HTML/CSS/JS puro — sin framework ni bundler. Mantener así.
+- Admin: sin emojis, iconos SVG inline con `stroke: currentColor`.
+- Watermark logo al 4% de opacidad en el admin.
+- Clases `.section` usan `padding: 110px 0` + `.fade-in` via IntersectionObserver con `data-delay="1-6"`.
+- i18n ES/EN en index.html: objeto `DICT` + `data-i18n="clave"`. Cambiar siempre en `DICT`, no en HTML directo.

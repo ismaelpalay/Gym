@@ -3642,6 +3642,14 @@ function submitForm(e, modalId) {
         }]).then(({ error }) => {
             if (error) console.error('[ACME] Supabase leads error:', error.message);
         });
+        sb.from('registros_totales').insert([{
+            nombre: data.nombre, email: data.email,
+            pais_codigo: data.codigo, telefono: data.telefono,
+            plan: data.plan, tipo: 'membresia',
+            estado: 'pendiente', fuente: data.fuente || null
+        }]).then(({ error }) => {
+            if (error) console.error('[ACME] Supabase registros error:', error.message);
+        });
     } else {
         sb.from('clases').insert([{
             nombre:          data.nombre,
@@ -3656,6 +3664,14 @@ function submitForm(e, modalId) {
             notas:           data.notas  || null
         }]).then(({ error }) => {
             if (error) console.error('[ACME] Supabase clases error:', error.message);
+        });
+        sb.from('registros_totales').insert([{
+            nombre: data.nombre, email: data.email,
+            pais_codigo: data.codigo, telefono: data.telefono,
+            plan: data.plan, tipo: 'clase',
+            estado: 'pendiente', fuente: data.fuente || null
+        }]).then(({ error }) => {
+            if (error) console.error('[ACME] Supabase registros error:', error.message);
         });
     }
 
