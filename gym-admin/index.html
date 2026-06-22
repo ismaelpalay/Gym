@@ -5,296 +5,308 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ACME Admin · Panel de Control</title>
 <link rel="icon" href="./logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://js.hcaptcha.com/1/api.js?hl=es" async defer></script>
 <style>
 :root {
   --red:    #E5001A;
   --red-l:  #FF2030;
+  --red-d:  #AA0012;
   --gold:   #C9A84C;
   --gold-l: #E0C06A;
+  --gold-d: #9A7830;
   --bg:     #060606;
   --bg2:    #0d0d0d;
   --card:   #111111;
   --card2:  #181818;
-  --border: #222222;
+  --border: #252525;
   --text:   #f0f0f0;
   --muted:  #888;
   --font-h: 'Oswald', sans-serif;
   --font-b: 'Inter', sans-serif;
-  --sidebar: 220px;
+  --sidebar-w: 230px;
+  --topbar-h: 56px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-b); background: var(--bg); color: var(--text); min-height: 100vh; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-b); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
 /* ── LOGIN ─────────────────────────────────────────────────────── */
 #login-screen {
   display: flex; align-items: center; justify-content: center;
-  min-height: 100vh;
+  min-height: 100vh; padding: 20px;
   background: radial-gradient(ellipse at 50% 0%, #1a0005 0%, var(--bg) 70%);
 }
 .login-card {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 380px;
-  box-shadow: 0 24px 80px rgba(229,0,26,.12);
+  border-radius: 16px; padding: 40px 32px; width: 100%; max-width: 380px;
+  box-shadow: 0 24px 80px rgba(229,0,26,.15);
 }
-.login-logo { text-align: center; margin-bottom: 32px; }
-.login-logo span { font-family: var(--font-h); font-size: 22px; letter-spacing: 3px; color: var(--gold); }
+.login-logo { text-align: center; margin-bottom: 28px; }
+.login-logo img { width: 56px; height: 56px; margin-bottom: 12px; }
+.login-logo span { font-family: var(--font-h); font-size: 20px; letter-spacing: 3px; color: var(--gold); display: block; }
 .login-logo p { color: var(--muted); font-size: 12px; margin-top: 4px; }
-.login-card h2 { font-family: var(--font-h); font-size: 24px; margin-bottom: 24px; text-align: center; }
-.form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.login-card h2 { font-family: var(--font-h); font-size: 22px; margin-bottom: 20px; text-align: center; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
 .form-group input {
   width: 100%; padding: 12px 14px; background: var(--bg2);
   border: 1px solid var(--border); border-radius: 8px; color: var(--text);
-  font-size: 14px; outline: none; transition: border-color .2s;
+  font-size: 14px; outline: none; transition: border-color .2s; -webkit-appearance: none;
 }
 .form-group input:focus { border-color: var(--red); }
 .btn-login {
   width: 100%; padding: 13px; background: var(--red); color: #fff;
   border: none; border-radius: 8px; font-size: 15px; font-weight: 600;
   cursor: pointer; margin-top: 8px; letter-spacing: 1px; transition: background .2s;
+  font-family: var(--font-h);
 }
-.btn-login:hover { background: var(--red-l); }
+.btn-login:hover:not(:disabled) { background: var(--red-l); }
+.btn-login:disabled { opacity: .4; cursor: not-allowed; }
 #login-error { color: var(--red); font-size: 13px; margin-top: 10px; text-align: center; min-height: 18px; }
-.captcha-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
-.btn-login:disabled { opacity: .45; cursor: not-allowed; }
+.captcha-wrap { display: flex; justify-content: center; margin: 14px 0 6px; overflow: hidden; }
 .pass-wrap { position: relative; }
-.pass-wrap input { padding-right: 42px; }
-.pass-toggle {
-  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; cursor: pointer; color: var(--muted); padding: 0; line-height: 1;
-}
+.pass-wrap input { padding-right: 44px; }
+.pass-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); padding: 0; }
 .pass-toggle:hover { color: var(--text); }
-.pass-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.phone-row { display: grid; grid-template-columns: 100px 1fr; gap: 8px; }
-.phone-row select, .phone-row input { width: 100%; padding: 10px 12px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; outline: none; font-family: inherit; }
-.phone-row select:focus, .phone-row input:focus { border-color: var(--gold); }
+.pass-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
-/* ── LAYOUT ────────────────────────────────────────────────────── */
+/* ── APP LAYOUT ─────────────────────────────────────────────────── */
 #app { display: none; }
-#app.active { display: flex; min-height: 100vh; }
+#app.active { display: block; }
 
-/* ── SIDEBAR ───────────────────────────────────────────────────── */
-.sidebar {
-  width: var(--sidebar); background: var(--card); border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+/* ── MOBILE TOP BAR ─────────────────────────────────────────────── */
+.mobile-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  position: fixed; top: 0; left: 0; right: 0; height: var(--topbar-h);
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 0 16px; z-index: 200;
 }
-.sidebar-logo { padding: 24px 20px; border-bottom: 1px solid var(--border); }
-.sidebar-logo span { font-family: var(--font-h); font-size: 16px; letter-spacing: 2px; color: var(--gold); display: block; }
-.sidebar-logo small { color: var(--muted); font-size: 11px; }
-.sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+.mobile-bar-brand { font-family: var(--font-h); font-size: 15px; letter-spacing: 2px; color: var(--gold); }
+.hamburger {
+  background: none; border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); cursor: pointer; padding: 7px; display: flex; align-items: center;
+}
+.hamburger svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+.mobile-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  z-index: 298; backdrop-filter: blur(2px);
+}
+.mobile-overlay.show { display: block; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w); background: var(--card); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 299;
+  transform: translateX(-100%); transition: transform .28s cubic-bezier(.4,0,.2,1);
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-logo { padding: 22px 20px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.sidebar-logo img { width: 32px; height: 32px; flex-shrink: 0; }
+.sidebar-logo-text span { font-family: var(--font-h); font-size: 14px; letter-spacing: 2px; color: var(--gold); display: block; }
+.sidebar-logo-text small { color: var(--muted); font-size: 10px; }
+.sidebar-nav { flex: 1; padding: 12px 0; overflow-y: auto; }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 11px 20px; cursor: pointer; font-size: 14px; color: var(--muted);
-  transition: all .15s; border-left: 3px solid transparent;
+  padding: 11px 20px; cursor: pointer; font-size: 13px; color: var(--muted);
+  transition: all .15s; border-left: 3px solid transparent; text-decoration: none;
 }
 .nav-item:hover { color: var(--text); background: var(--bg2); }
 .nav-item.active { color: var(--text); background: var(--bg2); border-left-color: var(--red); }
-.nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.nav-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.sidebar-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+.nav-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-icon svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sidebar-footer { padding: 14px 20px; border-top: 1px solid var(--border); }
 .sidebar-email { font-size: 11px; color: var(--muted); margin-bottom: 10px; word-break: break-all; }
-.btn-logout {
-  width: 100%; padding: 8px; background: transparent; border: 1px solid var(--border);
-  border-radius: 6px; color: var(--muted); font-size: 12px; cursor: pointer; transition: all .15s;
-}
+.btn-logout { width: 100%; padding: 8px; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 12px; cursor: pointer; transition: all .15s; }
 .btn-logout:hover { border-color: var(--red); color: var(--red); }
 
 /* ── WATERMARK ──────────────────────────────────────────────────── */
-.watermark {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  display: flex; align-items: center; justify-content: center;
-  margin-left: var(--sidebar);
-}
-.watermark img { width: 340px; opacity: 0.04; user-select: none; }
-
-/* ── REALTIME BADGE ─────────────────────────────────────────────── */
-.rt-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 11px; color: #4caf50; padding: 3px 8px;
-  border: 1px solid #4caf5033; border-radius: 20px;
-}
-.rt-dot { width: 6px; height: 6px; background: #4caf50; border-radius: 50%; animation: pulse-dot 2s infinite; }
-@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.3} }
+.watermark { position: fixed; inset: 0; pointer-events: none; z-index: 0; display: flex; align-items: center; justify-content: center; }
+.watermark img { width: 300px; opacity: 0.035; user-select: none; }
 
 /* ── MAIN ──────────────────────────────────────────────────────── */
-.main { margin-left: var(--sidebar); flex: 1; padding: 32px; min-width: 0; position: relative; z-index: 1; }
+.main { position: relative; z-index: 1; padding: calc(var(--topbar-h) + 20px) 16px 24px; min-height: 100vh; }
 .page { display: none; }
 .page.active { display: block; }
 
-/* ── PAGE HEADER ───────────────────────────────────────────────── */
-.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
-.page-header h1 { font-family: var(--font-h); font-size: 26px; letter-spacing: 1px; }
+/* ── RT BADGE ────────────────────────────────────────────────────── */
+.rt-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--gold); padding: 3px 8px; border: 1px solid rgba(201,168,76,.3); border-radius: 20px; }
+.rt-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ── PAGE HEADER ─────────────────────────────────────────────────── */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+.page-header h1 { font-family: var(--font-h); font-size: 22px; letter-spacing: 1px; }
 .page-header h1 span { color: var(--gold); }
 
-/* ── STAT CARDS ────────────────────────────────────────────────── */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
-.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.stat-value { font-family: var(--font-h); font-size: 32px; letter-spacing: 1px; }
-.stat-value.red { color: var(--red-l); }
+/* ── STAT CARDS ──────────────────────────────────────────────────── */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.stat-value { font-family: var(--font-h); font-size: 28px; letter-spacing: 1px; }
+.stat-value.red  { color: var(--red-l); }
 .stat-value.gold { color: var(--gold); }
-.stat-value.green { color: #4caf50; }
-.stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.stat-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-/* ── TOOLBAR ───────────────────────────────────────────────────── */
-.toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.toolbar input[type="text"] {
-  flex: 1; min-width: 200px; padding: 9px 14px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-size: 13px; outline: none;
-}
+/* ── TOOLBAR ─────────────────────────────────────────────────────── */
+.toolbar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar input[type="text"] { flex: 1; min-width: 160px; padding: 9px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; outline: none; }
 .toolbar input:focus { border-color: var(--gold); }
-.toolbar select {
-  padding: 9px 12px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-size: 13px; outline: none; cursor: pointer;
-}
+.toolbar select { padding: 9px 10px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
+
+/* ── BUTTONS ─────────────────────────────────────────────────────── */
 .btn-sm {
-  padding: 9px 16px; border-radius: 8px; border: none; font-size: 13px;
-  cursor: pointer; font-weight: 600; transition: all .15s; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 14px; border-radius: 8px; border: none; font-size: 12px;
+  cursor: pointer; font-weight: 600; transition: all .15s; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-b);
 }
-.btn-red { background: var(--red); color: #fff; }
+.btn-red     { background: var(--red); color: #fff; }
 .btn-red:hover { background: var(--red-l); }
-.btn-gold { background: var(--gold); color: #000; }
+.btn-gold    { background: var(--gold); color: #000; }
 .btn-gold:hover { background: var(--gold-l); }
-.btn-green { background: #1a4a26; color: #4cff86; border: 1px solid #4cff8644; }
-.btn-green:hover { background: #1e5e2e; }
 .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-.btn-danger { background: transparent; border: 1px solid var(--red); color: var(--red); }
-.btn-danger:hover { background: var(--red); color: #fff; }
+.btn-danger  { background: transparent; border: 1px solid rgba(229,0,26,.5); color: var(--red-l); }
+.btn-danger:hover { background: var(--red); color: #fff; border-color: var(--red); }
 
-/* ── TABLE ─────────────────────────────────────────────────────── */
-.table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+/* ── TABLE ───────────────────────────────────────────────────────── */
+.table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
 thead { background: var(--card2); }
-th { padding: 12px 16px; text-align: left; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .8px; border-bottom: 1px solid var(--border); }
-td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+th { padding: 10px 14px; text-align: left; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr.row-hover { cursor: pointer; }
 tr.row-hover:hover td { background: var(--card2); }
 .cell-name { font-weight: 500; }
-.cell-date { color: var(--muted); font-size: 12px; }
-.empty-row td { text-align: center; padding: 40px; color: var(--muted); }
-.td-actions { display: flex; gap: 6px; }
+.cell-date { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.empty-row td { text-align: center; padding: 32px; color: var(--muted); min-width: 0; }
+.td-actions { display: flex; gap: 5px; flex-wrap: nowrap; }
 
-/* ── BADGES ─────────────────────────────────────────────────────── */
-.badge {
-  display: inline-flex; align-items: center; padding: 3px 10px;
-  border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: .5px;
-}
-.badge-pendiente   { background: #2a2a00; color: #ffd740; }
-.badge-contactado  { background: #001a2a; color: #40b4ff; }
-.badge-activo      { background: #002a10; color: #4cff86; }
-.badge-inactivo    { background: #1a1a1a; color: #888; }
-.badge-expirado    { background: #2a0000; color: #ff4040; }
-.badge-confirmado  { background: #001a2a; color: #40b4ff; }
-.badge-asistio     { background: #002a10; color: #4cff86; }
-.badge-no_asistio  { background: #2a0000; color: #ff4040; }
-.badge-plan { background: #1a0f00; color: var(--gold); }
+/* ── BADGES (solo colores de marca) ─────────────────────────────── */
+.badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: .3px; white-space: nowrap; }
+.badge-pendiente  { background: rgba(201,168,76,.12); color: var(--gold);   border: 1px solid rgba(201,168,76,.25); }
+.badge-contactado { background: rgba(201,168,76,.22); color: var(--gold-l); border: 1px solid rgba(201,168,76,.35); }
+.badge-activo     { background: rgba(201,168,76,.30); color: #fff;          border: 1px solid rgba(201,168,76,.5);  }
+.badge-inactivo   { background: rgba(136,136,136,.1); color: var(--muted);  border: 1px solid rgba(136,136,136,.2); }
+.badge-expirado   { background: rgba(229,0,26,.15);   color: var(--red-l);  border: 1px solid rgba(229,0,26,.3);   }
+.badge-confirmado { background: rgba(201,168,76,.22); color: var(--gold-l); border: 1px solid rgba(201,168,76,.3); }
+.badge-asistio    { background: rgba(201,168,76,.30); color: #fff;          border: 1px solid rgba(201,168,76,.5); }
+.badge-no_asistio { background: rgba(229,0,26,.15);   color: var(--red-l);  border: 1px solid rgba(229,0,26,.3);  }
+.badge-plan       { background: rgba(201,168,76,.1);  color: var(--gold);   border: 1px solid rgba(201,168,76,.2); }
 
-/* ── MODAL ─────────────────────────────────────────────────────── */
+/* ── MODAL ───────────────────────────────────────────────────────── */
 .modal-bg {
-  position: fixed; inset: 0; background: rgba(0,0,0,.75);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 200; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .2s;
+  position: fixed; inset: 0; background: rgba(0,0,0,.8);
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 400; padding: 0; opacity: 0; pointer-events: none; transition: opacity .2s;
 }
 .modal-bg.open { opacity: 1; pointer-events: all; }
 .modal-box {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-  padding: 32px; width: 100%; max-width: 560px; max-height: 90vh;
-  overflow-y: auto; position: relative; transform: translateY(10px); transition: transform .2s;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px 16px 0 0; padding: 24px 20px;
+  width: 100%; max-width: 100%; max-height: 92vh;
+  overflow-y: auto; position: relative;
+  transform: translateY(30px); transition: transform .25s cubic-bezier(.4,0,.2,1);
 }
 .modal-bg.open .modal-box { transform: translateY(0); }
-.modal-close-btn {
-  position: absolute; top: 16px; right: 16px; background: none; border: none;
-  color: var(--muted); font-size: 22px; cursor: pointer; line-height: 1;
-}
-.modal-close-btn:hover { color: var(--text); }
-.modal-title { font-family: var(--font-h); font-size: 20px; margin-bottom: 20px; }
+.modal-close-btn { position: absolute; top: 14px; right: 14px; background: var(--card2); border: 1px solid var(--border); border-radius: 50%; color: var(--muted); font-size: 16px; cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.modal-close-btn:hover { color: var(--text); border-color: var(--gold); }
+.modal-title { font-family: var(--font-h); font-size: 18px; margin-bottom: 16px; }
 .modal-title span { color: var(--gold); }
-.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-.detail-field label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
-.detail-field p { font-size: 14px; }
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.detail-field label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 3px; }
+.detail-field p { font-size: 13px; }
 .detail-field.full { grid-column: 1/-1; }
-.modal-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
-.modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.modal-actions select, .modal-actions input {
-  flex: 1; padding: 9px 12px; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-size: 13px; outline: none; min-width: 120px;
-}
-.modal-actions select:focus, .modal-actions input:focus { border-color: var(--gold); }
+.modal-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 .precio-final-preview { font-size: 13px; color: var(--gold); font-weight: 600; }
 
-/* ── QR MODAL ────────────────────────────────────────────────────── */
-.qr-card {
-  background: var(--card2); border: 1px solid var(--border); border-radius: 12px;
-  padding: 24px; text-align: center; margin: 0 auto;
-}
-.qr-member-name { font-family: var(--font-h); font-size: 20px; color: var(--gold); margin-bottom: 4px; }
-.qr-member-plan { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
-.qr-img-wrap { display: flex; justify-content: center; margin-bottom: 16px; }
-.qr-img-wrap img { border-radius: 8px; width: 220px; height: 220px; }
-.qr-vence { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+/* ── QR CARD ─────────────────────────────────────────────────────── */
+.qr-card { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.qr-member-name { font-family: var(--font-h); font-size: 18px; color: var(--gold); margin-bottom: 4px; }
+.qr-member-plan { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+.qr-img-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+.qr-img-wrap img { border-radius: 8px; width: 200px; height: 200px; }
+.qr-vence { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
 .qr-vence strong { color: var(--text); }
-@media print {
-  #app, .sidebar, .watermark, #modal-qr .modal-close-btn { display: none !important; }
-  #modal-qr { position: static !important; opacity: 1 !important; pointer-events: all !important; background: #fff !important; }
-  #modal-qr .modal-box { box-shadow: none; border: none; }
-  .qr-card { background: #fff; color: #000; }
-  .qr-member-name { color: #8B6914; }
-}
 
-/* ── COBROS FORM ─────────────────────────────────────────────────── */
-.cobros-layout { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start; }
-.cobros-form-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-.cobros-form-card h3 { font-family: var(--font-h); font-size: 17px; margin-bottom: 20px; color: var(--gold); }
-.field-group { margin-bottom: 14px; }
-.field-group label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px; }
+/* ── COBROS ──────────────────────────────────────────────────────── */
+.cobros-form-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.cobros-form-card h3 { font-family: var(--font-h); font-size: 16px; margin-bottom: 16px; color: var(--gold); display: flex; align-items: center; gap: 8px; }
+.field-group { margin-bottom: 12px; }
+.field-group label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
 .field-group input, .field-group select, .field-group textarea {
   width: 100%; padding: 10px 12px; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-size: 13px; outline: none; font-family: inherit;
+  border-radius: 8px; color: var(--text); font-size: 13px; outline: none; font-family: inherit; -webkit-appearance: none;
 }
 .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--gold); }
-.field-group textarea { resize: vertical; min-height: 70px; }
-.total-cobros { background: var(--card2); border: 1px solid #C9A84C33; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
-.total-cobros span { color: var(--muted); font-size: 13px; }
+.field-group textarea { resize: vertical; min-height: 60px; }
+.phone-row { display: grid; grid-template-columns: 90px 1fr; gap: 8px; }
+.plan-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.plan-card {
+  border: 2px solid var(--border); border-radius: 10px; padding: 14px 12px;
+  cursor: pointer; transition: all .15s; text-align: center; background: var(--bg2);
+}
+.plan-card:hover { border-color: var(--gold); }
+.plan-card.selected { border-color: var(--gold); background: rgba(201,168,76,.08); }
+.plan-card input[type="radio"] { display: none; }
+.plan-card-name { font-family: var(--font-h); font-size: 16px; color: var(--gold); display: block; }
+.plan-card-price { font-size: 20px; font-family: var(--font-h); color: var(--text); display: block; margin-top: 2px; }
+.plan-card-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.total-cobros { background: var(--card2); border: 1px solid rgba(201,168,76,.25); border-radius: 10px; padding: 14px 18px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.total-cobros span { color: var(--muted); font-size: 12px; }
 .total-cobros strong { font-family: var(--font-h); font-size: 22px; color: var(--gold); }
-.save-msg { font-size: 13px; color: #4caf50; min-height: 18px; margin-top: 8px; }
+.save-msg { font-size: 12px; color: var(--gold); min-height: 16px; margin-top: 6px; }
+.notif-status { font-size: 11px; color: var(--muted); margin-top: 6px; display: flex; gap: 10px; flex-wrap: wrap; }
+.notif-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 3px; }
+.notif-dot.on { background: var(--gold); }
+.notif-dot.off { background: var(--muted); }
 
-/* ── TOAST ─────────────────────────────────────────────────────── */
+/* ── TOAST ───────────────────────────────────────────────────────── */
 #toast {
-  position: fixed; bottom: 24px; right: 24px; background: var(--card2);
-  border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px;
-  font-size: 14px; z-index: 999; transform: translateY(20px); opacity: 0;
-  transition: all .3s; pointer-events: none; max-width: 320px;
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px 18px; font-size: 13px; z-index: 999; opacity: 0;
+  transition: all .3s; pointer-events: none; max-width: calc(100vw - 32px); text-align: center; white-space: pre-line;
 }
-#toast.show { transform: translateY(0); opacity: 1; }
-#toast.success { border-color: #4caf5066; }
-#toast.error { border-color: var(--red); }
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+#toast.success { border-color: rgba(201,168,76,.4); }
+#toast.error   { border-color: var(--red); }
 
-@media (max-width: 900px) {
-  .cobros-layout { grid-template-columns: 1fr; }
-  .detail-grid { grid-template-columns: 1fr; }
+/* ── PRINT ───────────────────────────────────────────────────────── */
+@media print {
+  .mobile-bar, .sidebar, .watermark, .btn-sm, .toolbar { display: none !important; }
+  .main { padding: 0 !important; margin: 0 !important; }
 }
-@media (max-width: 700px) {
-  :root { --sidebar: 0px; }
-  .sidebar { display: none; }
-  .main { margin-left: 0; padding: 16px; }
+
+/* ── DESKTOP (≥ 900px) ───────────────────────────────────────────── */
+@media (min-width: 900px) {
+  .mobile-bar { display: none; }
+  .mobile-overlay { display: none !important; }
+  .sidebar { transform: translateX(0); border-right: 1px solid var(--border); }
+  .main { margin-left: var(--sidebar-w); padding: 32px 28px; }
+  .watermark { margin-left: var(--sidebar-w); }
+  .modal-bg { align-items: center; padding: 20px; }
+  .modal-box { border-radius: 16px; max-width: 560px; }
+  .cobros-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+  .cobros-form-card { margin-bottom: 0; }
+  .stats-grid { grid-template-columns: repeat(5, 1fr); }
+  .detail-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     LOGIN
-════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════ LOGIN ════════════════ -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">
+      <img src="./logo.svg" alt="ACME">
       <span>ACME FIGHT &amp; FITNESS</span>
       <p>Panel de Administración</p>
     </div>
@@ -302,13 +314,13 @@ tr.row-hover:hover td { background: var(--card2); }
     <form id="login-form">
       <div class="form-group">
         <label>Correo electrónico</label>
-        <input type="email" id="login-email" required autocomplete="email" placeholder="admin@acmecombat.mx">
+        <input type="email" id="login-email" required autocomplete="email" placeholder="admin@acmefitness.mx">
       </div>
       <div class="form-group">
         <label>Contraseña</label>
         <div class="pass-wrap">
           <input type="password" id="login-pass" required autocomplete="current-password" placeholder="••••••••">
-          <button type="button" class="pass-toggle" onclick="togglePass()" aria-label="Mostrar contraseña">
+          <button type="button" class="pass-toggle" onclick="togglePass()" aria-label="Ver contraseña">
             <svg id="eye-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         </div>
@@ -318,7 +330,8 @@ tr.row-hover:hover td { background: var(--card2); }
              data-sitekey="532074d2-e8a0-441c-8fc2-2558ef007b90"
              data-callback="onCaptchaSuccess"
              data-expired-callback="onCaptchaExpired"
-             data-theme="dark">
+             data-theme="dark"
+             data-lang="es">
         </div>
       </div>
       <button type="submit" class="btn-login" id="btn-login" disabled>ENTRAR</button>
@@ -327,43 +340,47 @@ tr.row-hover:hover td { background: var(--card2); }
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     APP
-════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════ APP ════════════════ -->
 <div id="app">
-<div class="watermark"><img src="./logo.svg" alt=""></div>
+  <div class="watermark"><img src="./logo.svg" alt=""></div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <!-- Mobile top bar -->
+  <div class="mobile-bar">
+    <span class="mobile-bar-brand">ACME ADMIN</span>
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Menú">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <span>ACME ADMIN</span>
-      <small>Panel de control</small>
+      <img src="./logo.svg" alt="ACME">
+      <div class="sidebar-logo-text">
+        <span>ACME ADMIN</span>
+        <small>Panel de control</small>
+      </div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-item active" data-page="dashboard">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg></span>
-        Dashboard
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg></span>Dashboard
       </div>
       <div class="nav-item" data-page="leads">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-        Leads Web
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>Leads Web
       </div>
       <div class="nav-item" data-page="miembros">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        Miembros
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Miembros
       </div>
       <div class="nav-item" data-page="clases">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-        Clases
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Clases
       </div>
       <div class="nav-item" data-page="cobros">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg></span>
-        Cobros en Efectivo
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span>Cobros en Efectivo
       </div>
       <a href="/informes" target="_blank" class="nav-item" style="text-decoration:none">
-        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
-        Informes
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>Informes
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;opacity:.4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
     </nav>
     <div class="sidebar-footer">
@@ -372,20 +389,20 @@ tr.row-hover:hover td { background: var(--card2); }
     </div>
   </aside>
 
-  <!-- MAIN -->
+  <!-- Main -->
   <main class="main">
 
-    <!-- ── DASHBOARD ────────────────────────────────────────────── -->
+    <!-- DASHBOARD -->
     <div id="page-dashboard" class="page active">
       <div class="page-header">
         <h1>Dashboard <span>ACME</span></h1>
-        <div class="rt-badge"><div class="rt-dot"></div> Tiempo real</div>
+        <div class="rt-badge"><div class="rt-dot"></div>Tiempo real</div>
       </div>
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Registros Totales</div>
           <div class="stat-value red" id="stat-total">—</div>
-          <div class="stat-sub">web + efectivo</div>
+          <div class="stat-sub">acumulado</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Esta Semana</div>
@@ -394,49 +411,41 @@ tr.row-hover:hover td { background: var(--card2); }
         </div>
         <div class="stat-card">
           <div class="stat-label">Miembros Activos</div>
-          <div class="stat-value green" id="stat-activos">—</div>
+          <div class="stat-value gold" id="stat-activos">—</div>
           <div class="stat-sub">membresías vigentes</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Leads Pendientes</div>
-          <div class="stat-value gold" id="stat-leads">—</div>
+          <div class="stat-value red" id="stat-leads">—</div>
           <div class="stat-sub">sin convertir</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Recaudado Efectivo</div>
-          <div class="stat-value green" id="stat-efectivo">—</div>
-          <div class="stat-sub">cobros registrados</div>
+          <div class="stat-label">Recaudado</div>
+          <div class="stat-value gold" id="stat-efectivo">—</div>
+          <div class="stat-sub">cobros efectivo</div>
         </div>
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Fecha</th><th>Nombre</th><th>Plan</th><th>Tipo</th><th>Estado</th>
-            </tr>
-          </thead>
-          <tbody id="dash-tbody">
-            <tr class="empty-row"><td colspan="5">Cargando...</td></tr>
-          </tbody>
+          <thead><tr><th>Fecha</th><th>Nombre</th><th>Plan</th><th>Tipo</th><th>Estado</th></tr></thead>
+          <tbody id="dash-tbody"><tr class="empty-row"><td colspan="5">Cargando...</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ── LEADS WEB ────────────────────────────────────────────── -->
+    <!-- LEADS WEB -->
     <div id="page-leads" class="page">
       <div class="page-header">
         <h1>Leads <span>Web</span></h1>
         <button class="btn-sm btn-outline" onclick="exportCSV('leads')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar CSV
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV
         </button>
       </div>
       <div class="toolbar">
-        <input type="text" id="lead-search" placeholder="Buscar nombre, email, teléfono…" oninput="filterLeads()">
+        <input type="text" id="lead-search" placeholder="Buscar nombre, email…" oninput="filterLeads()">
         <select id="lead-filter-plan" onchange="filterLeads()">
           <option value="">Todos los planes</option>
-          <option>CAMPEÓN</option><option>ÉLITE</option>
-          <option>PROSPECTO</option><option>LEGADO ACME</option>
+          <option>CAMPEÓN</option><option>ÉLITE</option><option>PROSPECTO</option><option>LEGADO ACME</option>
         </select>
         <select id="lead-filter-estado" onchange="filterLeads()">
           <option value="">Todos los estados</option>
@@ -445,34 +454,25 @@ tr.row-hover:hover td { background: var(--card2); }
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Fecha</th><th>Nombre</th><th>Plan</th><th>Teléfono</th>
-              <th>Fuente</th><th>Estado</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="leads-tbody">
-            <tr class="empty-row"><td colspan="7">Cargando...</td></tr>
-          </tbody>
+          <thead><tr><th>Fecha</th><th>Nombre</th><th>Plan</th><th>Teléfono</th><th>Fuente</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="leads-tbody"><tr class="empty-row"><td colspan="7">Cargando...</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ── MIEMBROS ──────────────────────────────────────────────── -->
+    <!-- MIEMBROS -->
     <div id="page-miembros" class="page">
       <div class="page-header">
         <h1>Miembros <span>Activos</span></h1>
         <button class="btn-sm btn-outline" onclick="exportCSV('miembros')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar CSV
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV
         </button>
       </div>
       <div class="toolbar">
-        <input type="text" id="miem-search" placeholder="Buscar nombre, email, teléfono…" oninput="filterMiembros()">
+        <input type="text" id="miem-search" placeholder="Buscar nombre, email…" oninput="filterMiembros()">
         <select id="miem-filter-plan" onchange="filterMiembros()">
           <option value="">Todos los planes</option>
-          <option>FIGHT</option><option>CAMPEÓN</option><option>ÉLITE</option>
-          <option>VALOR</option><option>PROSPECTO</option><option>LEGADO ACME</option>
+          <option>CAMPEÓN</option><option>ÉLITE</option><option>PROSPECTO</option><option>LEGADO ACME</option>
         </select>
         <select id="miem-filter-estado" onchange="filterMiembros()">
           <option value="">Todos los estados</option>
@@ -481,26 +481,18 @@ tr.row-hover:hover td { background: var(--card2); }
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Fecha</th><th>Nombre</th><th>Plan</th><th>Vence</th>
-              <th>Fuente</th><th>Estado</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="miembros-tbody">
-            <tr class="empty-row"><td colspan="7">Cargando...</td></tr>
-          </tbody>
+          <thead><tr><th>Fecha</th><th>Nombre</th><th>Plan</th><th>Vence</th><th>Fuente</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="miembros-tbody"><tr class="empty-row"><td colspan="7">Cargando...</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ── CLASES ─────────────────────────────────────────────────── -->
+    <!-- CLASES -->
     <div id="page-clases" class="page">
       <div class="page-header">
         <h1>Clases <span>Reservadas</span></h1>
         <button class="btn-sm btn-outline" onclick="exportCSV('clases')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar CSV
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV
         </button>
       </div>
       <div class="toolbar">
@@ -511,38 +503,51 @@ tr.row-hover:hover td { background: var(--card2); }
         </select>
         <select id="cls-filter-estado" onchange="filterClases()">
           <option value="">Todos los estados</option>
-          <option>pendiente</option><option>confirmado</option>
-          <option>asistio</option><option>no_asistio</option>
+          <option>pendiente</option><option>confirmado</option><option>asistio</option><option>no_asistio</option>
         </select>
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Fecha</th><th>Nombre</th><th>Plan</th><th>Teléfono</th>
-              <th>Primera vez</th><th>Estado</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="clases-tbody">
-            <tr class="empty-row"><td colspan="7">Cargando...</td></tr>
-          </tbody>
+          <thead><tr><th>Fecha</th><th>Nombre</th><th>Plan</th><th>Teléfono</th><th>1ª Vez</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="clases-tbody"><tr class="empty-row"><td colspan="7">Cargando...</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ── COBROS EN EFECTIVO ─────────────────────────────────────── -->
+    <!-- COBROS EN EFECTIVO — solo FIGHT y VALOR -->
     <div id="page-cobros" class="page">
       <div class="page-header">
         <h1>Cobros <span>en Efectivo</span></h1>
         <button class="btn-sm btn-outline" onclick="exportCSV('pagos')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar CSV
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV
         </button>
       </div>
       <div class="cobros-layout">
+        <!-- Formulario -->
         <div class="cobros-form-card">
-          <h3>Registrar Cobro</h3>
+          <h3>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+            Registrar Clase del Día
+          </h3>
           <form id="cobro-form">
+            <!-- Selección de plan -->
+            <div class="field-group">
+              <label>Plan *</label>
+              <div class="plan-select-grid">
+                <label class="plan-card" id="card-fight">
+                  <input type="radio" name="plan" value="FIGHT" onchange="onPlanChange(this)">
+                  <span class="plan-card-name">FIGHT</span>
+                  <span class="plan-card-price">$499</span>
+                  <span class="plan-card-desc">Clase adultos</span>
+                </label>
+                <label class="plan-card" id="card-valor">
+                  <input type="radio" name="plan" value="VALOR" onchange="onPlanChange(this)">
+                  <span class="plan-card-name">VALOR</span>
+                  <span class="plan-card-price">$329</span>
+                  <span class="plan-card-desc">Clase niños</span>
+                </label>
+              </div>
+            </div>
             <div class="field-group">
               <label>Nombre del cliente *</label>
               <input type="text" name="nombre_cliente" required placeholder="Ej: Juan García">
@@ -557,70 +562,48 @@ tr.row-hover:hover td { background: var(--card2); }
                   <option value="+57">🇨🇴 +57</option>
                   <option value="+54">🇦🇷 +54</option>
                   <option value="+56">🇨🇱 +56</option>
-                  <option value="+51">🇵🇪 +51</option>
-                  <option value="+58">🇻🇪 +58</option>
-                  <option value="+502">🇬🇹 +502</option>
-                  <option value="+44">🇬🇧 +44</option>
-                  <option value="+33">🇫🇷 +33</option>
-                  <option value="+49">🇩🇪 +49</option>
                   <option value="+55">🇧🇷 +55</option>
-                  <option value="+81">🇯🇵 +81</option>
-                  <option value="+86">🇨🇳 +86</option>
+                  <option value="+44">🇬🇧 +44</option>
                 </select>
-                <input type="tel" name="telefono" placeholder="Número de teléfono">
+                <input type="tel" name="telefono" placeholder="Número de teléfono" id="cobro-tel">
               </div>
             </div>
             <div class="field-group">
               <label>Email</label>
-              <input type="email" name="email_cliente" placeholder="correo@ejemplo.com">
-            </div>
-            <div class="field-group">
-              <label>Plan *</label>
-              <select name="plan" id="cobro-plan" onchange="autoFillMonto()">
-                <option value="">— Seleccionar —</option>
-                <option>FIGHT — $499</option>
-                <option>CAMPEÓN — $2,999</option>
-                <option>ÉLITE — $3,999</option>
-                <option>VALOR — $329</option>
-                <option>PROSPECTO — $2,799</option>
-                <option>LEGADO ACME — $4,999</option>
-                <option>Otro</option>
-              </select>
+              <input type="email" name="email_cliente" placeholder="correo@ejemplo.com" id="cobro-email">
             </div>
             <div class="field-group">
               <label>Monto cobrado (MXN) *</label>
               <input type="number" name="monto" id="cobro-monto" required min="1" placeholder="0.00">
             </div>
             <div class="field-group">
-              <label>Concepto adicional</label>
-              <input type="text" name="concepto" placeholder="Ej: Mensualidad mayo, inscripción…">
-            </div>
-            <div class="field-group">
-              <label>Fecha inicio de membresía</label>
-              <input type="date" name="fecha_inicio" id="cobro-fecha">
+              <label>Fecha</label>
+              <input type="date" name="fecha_pago" id="cobro-fecha">
             </div>
             <div class="field-group">
               <label>Notas</label>
-              <textarea name="notas" placeholder="Observaciones opcionales…"></textarea>
+              <textarea name="notas" placeholder="Observaciones opcionales…" rows="2"></textarea>
             </div>
-            <button type="submit" class="btn-sm btn-gold" style="width:100%;padding:12px;justify-content:center">REGISTRAR COBRO</button>
+            <button type="submit" id="cobro-submit" class="btn-sm btn-gold" style="width:100%;padding:12px;justify-content:center;font-size:14px">
+              REGISTRAR COBRO
+            </button>
             <p class="save-msg" id="cobro-msg"></p>
+            <div class="notif-status" id="notif-status">
+              <span><span class="notif-dot" id="dot-email"></span>Email</span>
+              <span><span class="notif-dot" id="dot-sms"></span>SMS</span>
+            </div>
           </form>
         </div>
-
+        <!-- Tabla de cobros -->
         <div>
           <div class="total-cobros">
-            <span>Total recaudado en efectivo</span>
+            <span>Total recaudado (efectivo)</span>
             <strong id="total-efectivo">$0</strong>
           </div>
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Plan</th><th>Monto</th><th>Vence</th><th>Acciones</th></tr>
-              </thead>
-              <tbody id="cobros-tbody">
-                <tr class="empty-row"><td colspan="7">Cargando...</td></tr>
-              </tbody>
+              <thead><tr><th>Fecha</th><th>Cliente</th><th>Plan</th><th>Monto</th><th>Teléfono</th><th></th></tr></thead>
+              <tbody id="cobros-tbody"><tr class="empty-row"><td colspan="6">Cargando...</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -630,9 +613,7 @@ tr.row-hover:hover td { background: var(--card2); }
   </main>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     MODAL DETALLE
-════════════════════════════════════════════════════════════════ -->
+<!-- MODAL DETALLE -->
 <div class="modal-bg" id="modal-detail">
   <div class="modal-box">
     <button class="modal-close-btn" onclick="closeDetail()">&times;</button>
@@ -643,9 +624,7 @@ tr.row-hover:hover td { background: var(--card2); }
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     MODAL QR
-════════════════════════════════════════════════════════════════ -->
+<!-- MODAL QR -->
 <div class="modal-bg" id="modal-qr">
   <div class="modal-box" style="max-width:400px">
     <button class="modal-close-btn" onclick="closeQR()">&times;</button>
@@ -653,15 +632,12 @@ tr.row-hover:hover td { background: var(--card2); }
     <div class="qr-card">
       <p class="qr-member-name" id="qr-nombre"></p>
       <p class="qr-member-plan" id="qr-plan"></p>
-      <div class="qr-img-wrap">
-        <img id="qr-img" src="" alt="Código QR de acceso">
-      </div>
+      <div class="qr-img-wrap"><img id="qr-img" src="" alt="QR"></div>
       <p class="qr-vence" id="qr-vence"></p>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:16px" id="qr-id"></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:14px" id="qr-id"></div>
       <div style="display:flex;gap:8px;justify-content:center">
         <button class="btn-sm btn-outline" onclick="window.print()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Imprimir
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir
         </button>
         <button class="btn-sm btn-gold" onclick="closeQR()">Cerrar</button>
       </div>
@@ -669,20 +645,107 @@ tr.row-hover:hover td { background: var(--card2); }
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
-/* ── RECORDAR ÚLTIMO EMAIL ───────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   CONFIGURACIÓN DE NOTIFICACIONES
+   ══════════════════════════════════════════
+   Para activar email: pon tus keys de EmailJS y cambia EMAILJS_CONFIGURED a true
+   Para activar SMS:   pon tus credenciales de Twilio y cambia TWILIO_CONFIGURED a true
+*/
+const EMAILJS_PUBLIC_KEY      = 'TU_PUBLIC_KEY_AQUI';
+const EMAILJS_SERVICE_ID      = 'TU_SERVICE_ID_AQUI';
+const EMAILJS_TEMPLATE_COBRO  = 'TU_TEMPLATE_ID_AQUI';
+const EMAILJS_CONFIGURED      = false;
+
+const TWILIO_ACCOUNT_SID = 'TU_ACCOUNT_SID_AQUI';
+const TWILIO_AUTH_TOKEN  = 'TU_AUTH_TOKEN_AQUI';
+const TWILIO_FROM        = '+1XXXXXXXXXX'; // Tu número Twilio
+const TWILIO_CONFIGURED  = false;
+
+/* ══════════════════════════════════════════
+   SUPABASE
+   ══════════════════════════════════════════ */
+const SUPABASE_URL  = 'https://gtucbxhcamowdrfxznot.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0dWNieGhjYW1vd2RyZnh6bm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTg1OTIsImV4cCI6MjA5NzE5NDU5Mn0.XBCYTQ-yJUjyKPM5kaSxoWfeBg23HlESZx2yVXdm1ms';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+/* ══════════════════════════════════════════
+   CONSTANTES
+   ══════════════════════════════════════════ */
+const PLAN_PRICES = {
+  'FIGHT': 499, 'CAMPEÓN': 2999, 'ÉLITE': 3999,
+  'VALOR': 329, 'PROSPECTO': 2799, 'LEGADO ACME': 4999
+};
+const PLAN_DURACION_DIAS = {
+  'FIGHT': null, 'VALOR': null,
+  'CAMPEÓN': 30, 'ÉLITE': 30, 'PROSPECTO': 30, 'LEGADO ACME': 30
+};
+
+/* ══════════════════════════════════════════
+   ESTADO
+   ══════════════════════════════════════════ */
+let allLeads = [], allMiembros = [], allClases = [], allPagos = [], allRegistros = [];
+let currentDetail = null, currentDetailTable = null;
+
+/* ══════════════════════════════════════════
+   UTILS
+   ══════════════════════════════════════════ */
+function today() { return new Date().toISOString().split('T')[0]; }
+function fmtDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+function fmtDateShort(iso) {
+  if (!iso) return '—';
+  return new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric' });
+}
+function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function pesos(n) { return '$' + Number(n || 0).toLocaleString('es-MX'); }
+
+function calcExpiracion(plan, fechaInicio) {
+  const dias = PLAN_DURACION_DIAS[plan];
+  if (!dias) return null;
+  const d = fechaInicio ? new Date(fechaInicio + 'T12:00:00') : new Date();
+  d.setDate(d.getDate() + dias);
+  return d.toISOString().split('T')[0];
+}
+function estaExpirado(m) {
+  return m.fecha_expiracion && new Date(m.fecha_expiracion + 'T23:59:59') < new Date() && m.estado === 'activo';
+}
+
+function badgeEstado(est) {
+  const cls = {
+    pendiente:'badge-pendiente', contactado:'badge-contactado',
+    activo:'badge-activo', inactivo:'badge-inactivo', expirado:'badge-expirado',
+    confirmado:'badge-confirmado', asistio:'badge-asistio', no_asistio:'badge-no_asistio'
+  }[est] || 'badge-pendiente';
+  return `<span class="badge ${cls}">${esc(est)}</span>`;
+}
+
+/* ══════════════════════════════════════════
+   TOAST
+   ══════════════════════════════════════════ */
+let _toastTimer;
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'show ' + type;
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.className = '', 3500);
+}
+
+/* ══════════════════════════════════════════
+   RECORDAR EMAIL
+   ══════════════════════════════════════════ */
 (function() {
   const saved = localStorage.getItem('acme_last_email');
-  if (saved) {
-    const el = document.getElementById('login-email');
-    if (el) el.value = saved;
-  }
+  if (saved) { const el = document.getElementById('login-email'); if (el) el.value = saved; }
 })();
 
-/* ── PASSWORD TOGGLE ────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   PASSWORD TOGGLE
+   ══════════════════════════════════════════ */
 function togglePass() {
   const inp = document.getElementById('login-pass');
   const icon = document.getElementById('eye-icon');
@@ -693,87 +756,15 @@ function togglePass() {
     : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
 }
 
-/* ── HCAPTCHA ───────────────────────────────────────────────────── */
-function onCaptchaSuccess(token) {
-  window._captchaToken = token;
-  document.getElementById('btn-login').disabled = false;
-}
-function onCaptchaExpired() {
-  window._captchaToken = null;
-  document.getElementById('btn-login').disabled = true;
-}
+/* ══════════════════════════════════════════
+   HCAPTCHA
+   ══════════════════════════════════════════ */
+function onCaptchaSuccess(token) { window._captchaToken = token; document.getElementById('btn-login').disabled = false; }
+function onCaptchaExpired()      { window._captchaToken = null;  document.getElementById('btn-login').disabled = true; }
 
-/* ── SUPABASE ───────────────────────────────────────────────────── */
-const SUPABASE_URL  = 'https://gtucbxhcamowdrfxznot.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0dWNieGhjYW1vd2RyZnh6bm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTg1OTIsImV4cCI6MjA5NzE5NDU5Mn0.XBCYTQ-yJUjyKPM5kaSxoWfeBg23HlESZx2yVXdm1ms';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-
-/* ── CONSTANTES ──────────────────────────────────────────────────── */
-const PLAN_PRICES = {
-  'FIGHT': 499, 'CAMPEÓN': 2999, 'ÉLITE': 3999,
-  'VALOR': 329, 'PROSPECTO': 2799, 'LEGADO ACME': 4999
-};
-const PLAN_DURACION_DIAS = {
-  'FIGHT': null, 'VALOR': null,
-  'CAMPEÓN': 30, 'ÉLITE': 30, 'PROSPECTO': 30, 'LEGADO ACME': 30
-};
-
-/* ── STATE ───────────────────────────────────────────────────────── */
-let allLeads     = [];
-let allMiembros  = [];
-let allClases    = [];
-let allPagos     = [];
-let allRegistros = [];
-let currentDetail = null;
-let currentDetailTable = null;
-
-/* ── UTILS ───────────────────────────────────────────────────────── */
-function calcExpiracion(plan, fechaInicio) {
-  const dias = PLAN_DURACION_DIAS[plan];
-  if (!dias) return null;
-  const d = fechaInicio ? new Date(fechaInicio + 'T12:00:00') : new Date();
-  d.setDate(d.getDate() + dias);
-  return d.toISOString().split('T')[0];
-}
-
-function fmtDate(iso) {
-  if (!iso) return '—';
-  return new Date(iso).toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
-}
-function fmtDateShort(iso) {
-  if (!iso) return '—';
-  return new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric' });
-}
-function today() { return new Date().toISOString().split('T')[0]; }
-function esc(str) { return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function badgeEstado(est) {
-  const cls = {
-    pendiente:'badge-pendiente', contactado:'badge-contactado',
-    activo:'badge-activo', inactivo:'badge-inactivo',
-    expirado:'badge-expirado', confirmado:'badge-confirmado',
-    asistio:'badge-asistio', no_asistio:'badge-no_asistio'
-  }[est] || 'badge-pendiente';
-  return `<span class="badge ${cls}">${esc(est)}</span>`;
-}
-
-function estaExpirado(miembro) {
-  return miembro.fecha_expiracion
-    && new Date(miembro.fecha_expiracion + 'T23:59:59') < new Date()
-    && miembro.estado === 'activo';
-}
-
-/* ── TOAST ───────────────────────────────────────────────────────── */
-let toastTimer;
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'show ' + type;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.className = '', 3500);
-}
-
-/* ── AUTH ────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   AUTH
+   ══════════════════════════════════════════ */
 sb.auth.onAuthStateChange((event, session) => {
   if (session) {
     document.getElementById('login-screen').style.display = 'none';
@@ -783,6 +774,7 @@ sb.auth.onAuthStateChange((event, session) => {
   } else {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app').classList.remove('active');
+    stopInactivityTimer();
   }
 });
 
@@ -792,72 +784,122 @@ document.getElementById('login-form').addEventListener('submit', async e => {
   const pass  = document.getElementById('login-pass').value;
   const errEl = document.getElementById('login-error');
   errEl.textContent = '';
-  if (!window._captchaToken) {
-    errEl.textContent = 'Por favor completa la verificación de seguridad.';
-    return;
-  }
+  if (!window._captchaToken) { errEl.textContent = 'Por favor completa la verificación.'; return; }
   const btn = document.getElementById('btn-login');
-  btn.textContent = 'Verificando...'; btn.disabled = true;
-  const { error } = await sb.auth.signInWithPassword({
-    email, password: pass,
-    options: { captchaToken: window._captchaToken }
-  });
+  btn.textContent = 'Verificando…'; btn.disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass, options: { captchaToken: window._captchaToken } });
   btn.textContent = 'ENTRAR';
-  if (!error) localStorage.setItem('acme_last_email', email);
   if (error) {
     if (window.hcaptcha) window.hcaptcha.reset();
-    window._captchaToken = null;
-    btn.disabled = true;
-    const msgs = {
-      'Invalid login credentials': 'Email o contraseña incorrectos.',
-      'Email not confirmed': 'Email no confirmado. Confirma tu usuario en Supabase → Authentication → Users.',
-    };
+    window._captchaToken = null; btn.disabled = true;
+    const msgs = { 'Invalid login credentials': 'Email o contraseña incorrectos.', 'Email not confirmed': 'Email no confirmado en Supabase.' };
     errEl.textContent = msgs[error.message] || error.message;
+  } else {
+    localStorage.setItem('acme_last_email', email);
   }
 });
 
 document.getElementById('btn-logout').addEventListener('click', () => sb.auth.signOut());
 
-/* ── NAVIGATION ──────────────────────────────────────────────────── */
-document.querySelectorAll('.nav-item').forEach(item => {
+/* ══════════════════════════════════════════
+   SIDEBAR / HAMBURGER
+   ══════════════════════════════════════════ */
+function toggleSidebar() {
+  const sb2 = document.getElementById('sidebar');
+  const ov  = document.getElementById('mobile-overlay');
+  sb2.classList.toggle('open');
+  ov.classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('show');
+}
+
+/* ══════════════════════════════════════════
+   NAVEGACIÓN
+   ══════════════════════════════════════════ */
+document.querySelectorAll('.nav-item[data-page]').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     item.classList.add('active');
     document.getElementById('page-' + item.dataset.page).classList.add('active');
+    closeSidebar();
   });
 });
 
-/* ── AUTO-CIERRE POR INACTIVIDAD (15 min) ───────────────────────── */
+/* ══════════════════════════════════════════
+   INACTIVIDAD — 15 MINUTOS
+   ══════════════════════════════════════════ */
 let _inactTimer, _warnTimer;
 const INACT_MS = 15 * 60 * 1000;
 const WARN_MS  = 14 * 60 * 1000;
 
 function resetInactivityTimer() {
-  clearTimeout(_inactTimer);
-  clearTimeout(_warnTimer);
-  _warnTimer = setTimeout(() => {
-    showToast('La sesión se cerrará en 1 minuto por inactividad', 'error');
-  }, WARN_MS);
+  clearTimeout(_inactTimer); clearTimeout(_warnTimer);
+  _warnTimer  = setTimeout(() => showToast('⚠ La sesión se cierra en 1 minuto por inactividad', 'error'), WARN_MS);
   _inactTimer = setTimeout(async () => {
     showToast('Sesión cerrada por inactividad', 'error');
     await sb.auth.signOut();
   }, INACT_MS);
 }
-
+function stopInactivityTimer() { clearTimeout(_inactTimer); clearTimeout(_warnTimer); }
 function startInactivityTracker() {
-  ['mousemove','keydown','click','scroll','touchstart'].forEach(ev =>
+  ['mousemove','keydown','click','scroll','touchstart','touchmove'].forEach(ev =>
     document.addEventListener(ev, resetInactivityTimer, { passive: true })
   );
   resetInactivityTimer();
 }
 
-/* ── INIT ────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   NOTIFICACIONES — indicadores de estado
+   ══════════════════════════════════════════ */
+function updateNotifStatus() {
+  const de = document.getElementById('dot-email');
+  const ds = document.getElementById('dot-sms');
+  if (de) de.className = 'notif-dot ' + (EMAILJS_CONFIGURED ? 'on' : 'off');
+  if (ds) ds.className = 'notif-dot ' + (TWILIO_CONFIGURED ? 'on' : 'off');
+}
+
+async function sendThankYouEmail(nombre, email, plan, monto) {
+  if (!EMAILJS_CONFIGURED || !email) return;
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_COBRO, {
+      to_name:   nombre,
+      to_email:  email,
+      plan_type: plan,
+      monto:     pesos(monto),
+      fecha:     new Date().toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' }),
+      año:       new Date().getFullYear()
+    }, EMAILJS_PUBLIC_KEY);
+  } catch(err) { console.warn('[ACME] Email error:', err); }
+}
+
+async function sendThankYouSMS(pais_codigo, telefono, nombre, plan, monto) {
+  if (!TWILIO_CONFIGURED || !telefono) return;
+  const to   = (pais_codigo || '+52') + telefono.replace(/\D/g, '');
+  const body = `Hola ${nombre}, ¡gracias por tu pago en ACME Fight & Fitness! 🥊\nPlan: ${plan} — ${pesos(monto)} MXN\n¡Te esperamos en el gym! Cualquier duda escríbenos.`;
+  try {
+    await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({ To: to, From: TWILIO_FROM, Body: body })
+    });
+  } catch(err) { console.warn('[ACME] SMS error:', err); }
+}
+
+/* ══════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════ */
 async function initApp() {
   await Promise.all([loadLeads(), loadMiembros(), loadClases(), loadPagos(), loadRegistros()]);
   initRealtime();
   setDefaultCobroDate();
   startInactivityTracker();
+  updateNotifStatus();
   await expirarMembresías();
 }
 
@@ -866,545 +908,429 @@ function setDefaultCobroDate() {
   if (d) d.value = today();
 }
 
-function autoFillMonto() {
-  const sel = document.getElementById('cobro-plan');
-  const montoInp = document.getElementById('cobro-monto');
-  if (!sel || !montoInp) return;
-  const plan = sel.value.split(' —')[0].trim();
-  if (PLAN_PRICES[plan]) montoInp.value = PLAN_PRICES[plan];
+/* ══════════════════════════════════════════
+   PLAN CARDS (cobros)
+   ══════════════════════════════════════════ */
+function onPlanChange(radio) {
+  document.getElementById('card-fight').classList.toggle('selected', radio.value === 'FIGHT');
+  document.getElementById('card-valor').classList.toggle('selected', radio.value === 'VALOR');
+  document.getElementById('cobro-monto').value = PLAN_PRICES[radio.value] || '';
 }
 
-/* ── AUTO-EXPIRAR MEMBRESÍAS ─────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   AUTO-EXPIRAR MEMBRESÍAS
+   ══════════════════════════════════════════ */
 async function expirarMembresías() {
   const hoy = today();
-  const expirados = allMiembros.filter(m =>
-    m.estado === 'activo' && m.fecha_expiracion && m.fecha_expiracion < hoy
-  );
-  if (!expirados.length) return;
-
-  for (const m of expirados) {
+  const exp = allMiembros.filter(m => m.estado === 'activo' && m.fecha_expiracion && m.fecha_expiracion < hoy);
+  for (const m of exp) {
     await sb.from('miembros').update({ estado: 'inactivo' }).eq('id', m.id);
     await sb.from('registros_totales').update({ estado: 'inactivo' }).eq('ref_id', m.id);
   }
-
-  if (expirados.length) {
-    showToast(`${expirados.length} membresía(s) expirada(s) actualizadas`);
-    await Promise.all([loadMiembros(), loadRegistros()]);
-  }
+  if (exp.length) { showToast(`${exp.length} membresía(s) expirada(s)`); await Promise.all([loadMiembros(), loadRegistros()]); }
 }
 
-/* ── REALTIME ────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   REALTIME
+   ══════════════════════════════════════════ */
 function initRealtime() {
   sb.channel('admin-rt')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, payload => {
-      if (payload.eventType === 'INSERT') { allLeads.unshift(payload.new); showToast('Nuevo lead web: ' + (payload.new.nombre || 'Sin nombre')); }
-      else if (payload.eventType === 'UPDATE') { const i = allLeads.findIndex(l => l.id === payload.new.id); if (i !== -1) allLeads[i] = payload.new; }
-      else if (payload.eventType === 'DELETE') { allLeads = allLeads.filter(l => l.id !== payload.old.id); }
+    .on('postgres_changes', { event:'*', schema:'public', table:'leads' }, p => {
+      if (p.eventType==='INSERT') { allLeads.unshift(p.new); showToast('Nuevo lead: ' + (p.new.nombre||'')); }
+      else if (p.eventType==='UPDATE') { const i=allLeads.findIndex(l=>l.id===p.new.id); if(i!==-1) allLeads[i]=p.new; }
+      else if (p.eventType==='DELETE') { allLeads=allLeads.filter(l=>l.id!==p.old.id); }
       renderLeads(); updateDashboard();
     })
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'miembros' }, payload => {
-      if (payload.eventType === 'INSERT') { allMiembros.unshift(payload.new); showToast('Nuevo miembro: ' + (payload.new.nombre || 'Sin nombre')); }
-      else if (payload.eventType === 'UPDATE') { const i = allMiembros.findIndex(m => m.id === payload.new.id); if (i !== -1) allMiembros[i] = payload.new; }
-      else if (payload.eventType === 'DELETE') { allMiembros = allMiembros.filter(m => m.id !== payload.old.id); }
+    .on('postgres_changes', { event:'*', schema:'public', table:'miembros' }, p => {
+      if (p.eventType==='INSERT') { allMiembros.unshift(p.new); showToast('Nuevo miembro: ' + (p.new.nombre||'')); }
+      else if (p.eventType==='UPDATE') { const i=allMiembros.findIndex(m=>m.id===p.new.id); if(i!==-1) allMiembros[i]=p.new; }
+      else if (p.eventType==='DELETE') { allMiembros=allMiembros.filter(m=>m.id!==p.old.id); }
       renderMiembros(); updateDashboard();
     })
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'clases' }, payload => {
-      if (payload.eventType === 'INSERT') { allClases.unshift(payload.new); showToast('Nueva reserva: ' + (payload.new.nombre || 'Sin nombre')); }
-      else if (payload.eventType === 'UPDATE') { const i = allClases.findIndex(c => c.id === payload.new.id); if (i !== -1) allClases[i] = payload.new; }
-      else if (payload.eventType === 'DELETE') { allClases = allClases.filter(c => c.id !== payload.old.id); }
+    .on('postgres_changes', { event:'*', schema:'public', table:'clases' }, p => {
+      if (p.eventType==='INSERT') { allClases.unshift(p.new); showToast('Nueva clase: ' + (p.new.nombre||'')); }
+      else if (p.eventType==='UPDATE') { const i=allClases.findIndex(c=>c.id===p.new.id); if(i!==-1) allClases[i]=p.new; }
+      else if (p.eventType==='DELETE') { allClases=allClases.filter(c=>c.id!==p.old.id); }
       renderClases(); updateDashboard();
     })
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'pagos_efectivo' }, () => {
-      loadPagos();
-    })
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'registros_totales' }, () => {
-      loadRegistros();
-    })
+    .on('postgres_changes', { event:'*', schema:'public', table:'pagos_efectivo' }, () => loadPagos())
+    .on('postgres_changes', { event:'*', schema:'public', table:'registros_totales' }, () => loadRegistros())
     .subscribe();
 }
 
-/* ── LOAD DATA ───────────────────────────────────────────────────── */
-async function loadLeads() {
-  const { data } = await sb.from('leads').select('*').order('created_at', { ascending: false });
-  allLeads = data || [];
-  renderLeads(); updateDashboard();
-}
+/* ══════════════════════════════════════════
+   LOAD
+   ══════════════════════════════════════════ */
+async function loadLeads()     { const { data } = await sb.from('leads').select('*').order('created_at',{ascending:false}); allLeads=data||[]; renderLeads(); updateDashboard(); }
+async function loadMiembros()  { const { data } = await sb.from('miembros').select('*').order('created_at',{ascending:false}); allMiembros=data||[]; renderMiembros(); updateDashboard(); }
+async function loadClases()    { const { data } = await sb.from('clases').select('*').order('created_at',{ascending:false}); allClases=data||[]; renderClases(); updateDashboard(); }
+async function loadPagos()     { const { data } = await sb.from('pagos_efectivo').select('*').order('created_at',{ascending:false}); allPagos=data||[]; renderPagos(); updateDashboard(); }
+async function loadRegistros() { const { data } = await sb.from('registros_totales').select('*').order('created_at',{ascending:false}); allRegistros=data||[]; updateDashboard(); }
 
-async function loadMiembros() {
-  const { data } = await sb.from('miembros').select('*').order('created_at', { ascending: false });
-  allMiembros = data || [];
-  renderMiembros(); updateDashboard();
-}
-
-async function loadClases() {
-  const { data } = await sb.from('clases').select('*').order('created_at', { ascending: false });
-  allClases = data || [];
-  renderClases(); updateDashboard();
-}
-
-async function loadPagos() {
-  const { data } = await sb.from('pagos_efectivo').select('*').order('created_at', { ascending: false });
-  allPagos = data || [];
-  renderPagos(); updateDashboard();
-}
-
-async function loadRegistros() {
-  const { data } = await sb.from('registros_totales').select('*').order('created_at', { ascending: false });
-  allRegistros = data || [];
-  updateDashboard();
-}
-
-/* ── DASHBOARD ───────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   DASHBOARD
+   ══════════════════════════════════════════ */
 function updateDashboard() {
-  const semana = new Date(); semana.setDate(semana.getDate() - 7);
-  const regSemanales = allRegistros.filter(r => new Date(r.created_at) > semana).length;
-  const miembrosActivos = allMiembros.filter(m => m.estado === 'activo' && !estaExpirado(m)).length;
-  const leadsPendientes = allLeads.filter(l => l.estado === 'pendiente' || l.estado === 'contactado').length;
-  const totalEfectivo = allPagos.reduce((s, p) => s + (Number(p.monto) || 0), 0);
-
+  const semana = new Date(); semana.setDate(semana.getDate()-7);
   document.getElementById('stat-total').textContent    = allRegistros.length;
-  document.getElementById('stat-semana').textContent   = regSemanales;
-  document.getElementById('stat-activos').textContent  = miembrosActivos;
-  document.getElementById('stat-leads').textContent    = leadsPendientes;
-  document.getElementById('stat-efectivo').textContent = '$' + totalEfectivo.toLocaleString('es-MX');
-  document.getElementById('total-efectivo').textContent = '$' + totalEfectivo.toLocaleString('es-MX');
+  document.getElementById('stat-semana').textContent   = allRegistros.filter(r=>new Date(r.created_at)>semana).length;
+  document.getElementById('stat-activos').textContent  = allMiembros.filter(m=>m.estado==='activo'&&!estaExpirado(m)).length;
+  document.getElementById('stat-leads').textContent    = allLeads.filter(l=>l.estado==='pendiente'||l.estado==='contactado').length;
+  const totalEfectivo = allPagos.reduce((s,p)=>s+Number(p.monto||0),0);
+  document.getElementById('stat-efectivo').textContent = pesos(totalEfectivo);
+  document.getElementById('total-efectivo').textContent = pesos(totalEfectivo);
 
   const combined = [
-    ...allLeads.map(l => ({ ...l, _tipo: 'Lead Web' })),
-    ...allMiembros.map(m => ({ ...m, _tipo: m.fuente === 'Efectivo' ? 'Cobro Efectivo' : 'Miembro Web' })),
-    ...allClases.map(c => ({ ...c, _tipo: 'Clase' }))
-  ].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 10);
+    ...allLeads.map(l=>({...l,_tipo:'Lead Web'})),
+    ...allMiembros.map(m=>({...m,_tipo:m.fuente==='Efectivo'?'Cobro Efectivo':'Miembro Web'})),
+    ...allClases.map(c=>({...c,_tipo:'Clase'}))
+  ].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,10);
 
   const tbody = document.getElementById('dash-tbody');
-  if (!combined.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Sin registros aún</td></tr>'; return; }
-  tbody.innerHTML = combined.map(r => `
-    <tr>
-      <td class="cell-date">${fmtDate(r.created_at)}</td>
-      <td class="cell-name">${esc(r.nombre || '—')}</td>
-      <td><span class="badge badge-plan">${esc(r.plan || '—')}</span></td>
-      <td><span style="color:var(--muted);font-size:12px">${esc(r._tipo)}</span></td>
-      <td>${badgeEstado(r.estado || 'pendiente')}</td>
-    </tr>`).join('');
+  tbody.innerHTML = combined.length
+    ? combined.map(r=>`<tr><td class="cell-date">${fmtDate(r.created_at)}</td><td class="cell-name">${esc(r.nombre||'—')}</td><td><span class="badge badge-plan">${esc(r.plan||'—')}</span></td><td style="color:var(--muted);font-size:11px">${esc(r._tipo)}</td><td>${badgeEstado(r.estado||'pendiente')}</td></tr>`).join('')
+    : '<tr class="empty-row"><td colspan="5">Sin registros</td></tr>';
 }
 
-/* ── RENDER LEADS ────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   RENDER LEADS
+   ══════════════════════════════════════════ */
 function renderLeads() {
-  const search = (document.getElementById('lead-search')?.value || '').toLowerCase();
-  const fPlan  = document.getElementById('lead-filter-plan')?.value  || '';
-  const fEst   = document.getElementById('lead-filter-estado')?.value || '';
-
-  const rows = allLeads.filter(l =>
-    (!search || [l.nombre, l.email, l.telefono].some(f => (f||'').toLowerCase().includes(search))) &&
-    (!fPlan  || l.plan === fPlan) &&
-    (!fEst   || l.estado === fEst)
+  const q = (document.getElementById('lead-search')?.value||'').toLowerCase();
+  const fp = document.getElementById('lead-filter-plan')?.value||'';
+  const fe = document.getElementById('lead-filter-estado')?.value||'';
+  const rows = allLeads.filter(l=>
+    (!q||[l.nombre,l.email,l.telefono].some(f=>(f||'').toLowerCase().includes(q)))&&
+    (!fp||l.plan===fp)&&(!fe||l.estado===fe)
   );
-
   const tbody = document.getElementById('leads-tbody');
-  if (!rows.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>'; return; }
-  tbody.innerHTML = rows.map(l => `
-    <tr class="row-hover" onclick="openDetail('leads','${l.id}')">
-      <td class="cell-date">${fmtDate(l.created_at)}</td>
-      <td class="cell-name">${esc(l.nombre || '—')}<br><small style="color:var(--muted)">${esc(l.email || '')}</small></td>
-      <td><span class="badge badge-plan">${esc(l.plan || '—')}</span></td>
-      <td>${esc((l.pais_codigo||'')+' '+(l.telefono||'—'))}</td>
-      <td style="color:var(--muted);font-size:12px">${esc(l.fuente || '—')}</td>
-      <td>${badgeEstado(l.estado || 'pendiente')}</td>
-      <td><button class="btn-sm btn-outline" style="padding:5px 10px" onclick="event.stopPropagation();openDetail('leads','${l.id}')">Ver</button></td>
-    </tr>`).join('');
+  tbody.innerHTML = rows.length
+    ? rows.map(l=>`<tr class="row-hover" onclick="openDetail('leads','${l.id}')">
+        <td class="cell-date">${fmtDate(l.created_at)}</td>
+        <td class="cell-name">${esc(l.nombre||'—')}<br><small style="color:var(--muted);font-size:11px">${esc(l.email||'')}</small></td>
+        <td><span class="badge badge-plan">${esc(l.plan||'—')}</span></td>
+        <td style="font-size:12px">${esc((l.pais_codigo||'')+' '+(l.telefono||'—'))}</td>
+        <td style="color:var(--muted);font-size:11px">${esc(l.fuente||'—')}</td>
+        <td>${badgeEstado(l.estado||'pendiente')}</td>
+        <td><button class="btn-sm btn-outline" style="padding:5px 8px;font-size:11px" onclick="event.stopPropagation();openDetail('leads','${l.id}')">Ver</button></td>
+      </tr>`).join('')
+    : '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>';
 }
 function filterLeads() { renderLeads(); }
 
-/* ── RENDER MIEMBROS ─────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   RENDER MIEMBROS
+   ══════════════════════════════════════════ */
 function renderMiembros() {
-  const search = (document.getElementById('miem-search')?.value || '').toLowerCase();
-  const fPlan  = document.getElementById('miem-filter-plan')?.value  || '';
-  const fEst   = document.getElementById('miem-filter-estado')?.value || '';
-
-  const rows = allMiembros.filter(m =>
-    (!search || [m.nombre, m.email, m.telefono].some(f => (f||'').toLowerCase().includes(search))) &&
-    (!fPlan  || m.plan === fPlan) &&
-    (!fEst   || m.estado === fEst)
+  const q = (document.getElementById('miem-search')?.value||'').toLowerCase();
+  const fp = document.getElementById('miem-filter-plan')?.value||'';
+  const fe = document.getElementById('miem-filter-estado')?.value||'';
+  const rows = allMiembros.filter(m=>
+    (!q||[m.nombre,m.email,m.telefono].some(f=>(f||'').toLowerCase().includes(q)))&&
+    (!fp||m.plan===fp)&&(!fe||m.estado===fe)
   );
-
   const tbody = document.getElementById('miembros-tbody');
-  if (!rows.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>'; return; }
-  tbody.innerHTML = rows.map(m => {
-    const expirado = estaExpirado(m);
-    const estadoReal = expirado ? 'expirado' : (m.estado || 'activo');
-    const vence = m.fecha_expiracion ? fmtDateShort(m.fecha_expiracion) : 'Sesión única';
-    return `
-    <tr class="row-hover" onclick="openDetail('miembros','${m.id}')">
-      <td class="cell-date">${fmtDate(m.created_at)}</td>
-      <td class="cell-name">${esc(m.nombre || '—')}<br><small style="color:var(--muted)">${esc(m.email || '')}</small></td>
-      <td><span class="badge badge-plan">${esc(m.plan || '—')}</span></td>
-      <td style="font-size:12px;color:${expirado ? 'var(--red)' : 'var(--muted)'}">${vence}</td>
-      <td style="color:var(--muted);font-size:12px">${esc(m.fuente || '—')}</td>
-      <td>${badgeEstado(estadoReal)}</td>
-      <td>
-        <div class="td-actions">
-          <button class="btn-sm btn-outline" style="padding:5px 10px" onclick="event.stopPropagation();openQR('${m.id}')" title="Ver código QR">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/></svg>
-            QR
-          </button>
-          <button class="btn-sm btn-outline" style="padding:5px 10px" onclick="event.stopPropagation();openDetail('miembros','${m.id}')">Ver</button>
-        </div>
-      </td>
-    </tr>`;
-  }).join('');
+  tbody.innerHTML = rows.length
+    ? rows.map(m=>{
+        const exp = estaExpirado(m);
+        return `<tr class="row-hover" onclick="openDetail('miembros','${m.id}')">
+          <td class="cell-date">${fmtDate(m.created_at)}</td>
+          <td class="cell-name">${esc(m.nombre||'—')}<br><small style="color:var(--muted);font-size:11px">${esc(m.email||'')}</small></td>
+          <td><span class="badge badge-plan">${esc(m.plan||'—')}</span></td>
+          <td style="font-size:12px;color:${exp?'var(--red-l)':'var(--muted)'}">${m.fecha_expiracion?fmtDateShort(m.fecha_expiracion):'Sesión única'}</td>
+          <td style="color:var(--muted);font-size:11px">${esc(m.fuente||'—')}</td>
+          <td>${badgeEstado(exp?'expirado':(m.estado||'activo'))}</td>
+          <td><div class="td-actions">
+            <button class="btn-sm btn-outline" style="padding:5px 8px;font-size:11px" onclick="event.stopPropagation();openQR('${m.id}')">QR</button>
+            <button class="btn-sm btn-outline" style="padding:5px 8px;font-size:11px" onclick="event.stopPropagation();openDetail('miembros','${m.id}')">Ver</button>
+          </div></td>
+        </tr>`;}).join('')
+    : '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>';
 }
 function filterMiembros() { renderMiembros(); }
 
-/* ── RENDER CLASES ───────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   RENDER CLASES
+   ══════════════════════════════════════════ */
 function renderClases() {
-  const search = (document.getElementById('cls-search')?.value || '').toLowerCase();
-  const fPlan  = document.getElementById('cls-filter-plan')?.value  || '';
-  const fEst   = document.getElementById('cls-filter-estado')?.value || '';
-
-  const rows = allClases.filter(c =>
-    (!search || [c.nombre, c.email, c.telefono].some(f => (f||'').toLowerCase().includes(search))) &&
-    (!fPlan  || c.plan === fPlan) &&
-    (!fEst   || c.estado === fEst)
+  const q = (document.getElementById('cls-search')?.value||'').toLowerCase();
+  const fp = document.getElementById('cls-filter-plan')?.value||'';
+  const fe = document.getElementById('cls-filter-estado')?.value||'';
+  const rows = allClases.filter(c=>
+    (!q||[c.nombre,c.email,c.telefono].some(f=>(f||'').toLowerCase().includes(q)))&&
+    (!fp||c.plan===fp)&&(!fe||c.estado===fe)
   );
-
   const tbody = document.getElementById('clases-tbody');
-  if (!rows.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>'; return; }
-  tbody.innerHTML = rows.map(c => `
-    <tr class="row-hover" onclick="openDetail('clases','${c.id}')">
-      <td class="cell-date">${fmtDate(c.created_at)}</td>
-      <td class="cell-name">${esc(c.nombre || '—')}<br><small style="color:var(--muted)">${esc(c.email || '')}</small></td>
-      <td><span class="badge badge-plan">${esc(c.plan || '—')}</span></td>
-      <td>${esc((c.pais_codigo||'')+' '+(c.telefono||'—'))}</td>
-      <td style="color:var(--muted);font-size:12px">${c.primera_vez === 'si' ? 'Sí' : c.primera_vez === 'no' ? 'No' : '—'}</td>
-      <td>${badgeEstado(c.estado || 'pendiente')}</td>
-      <td><button class="btn-sm btn-outline" style="padding:5px 10px" onclick="event.stopPropagation();openDetail('clases','${c.id}')">Ver</button></td>
-    </tr>`).join('');
+  tbody.innerHTML = rows.length
+    ? rows.map(c=>`<tr class="row-hover" onclick="openDetail('clases','${c.id}')">
+        <td class="cell-date">${fmtDate(c.created_at)}</td>
+        <td class="cell-name">${esc(c.nombre||'—')}<br><small style="color:var(--muted);font-size:11px">${esc(c.email||'')}</small></td>
+        <td><span class="badge badge-plan">${esc(c.plan||'—')}</span></td>
+        <td style="font-size:12px">${esc((c.pais_codigo||'')+' '+(c.telefono||'—'))}</td>
+        <td style="font-size:12px;color:var(--muted)">${c.primera_vez==='si'?'Sí':c.primera_vez==='no'?'No':'—'}</td>
+        <td>${badgeEstado(c.estado||'pendiente')}</td>
+        <td><button class="btn-sm btn-outline" style="padding:5px 8px;font-size:11px" onclick="event.stopPropagation();openDetail('clases','${c.id}')">Ver</button></td>
+      </tr>`).join('')
+    : '<tr class="empty-row"><td colspan="7">Sin resultados</td></tr>';
 }
 function filterClases() { renderClases(); }
 
-/* ── RENDER PAGOS ────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   RENDER PAGOS
+   ══════════════════════════════════════════ */
 function renderPagos() {
   const tbody = document.getElementById('cobros-tbody');
-  if (!allPagos.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sin cobros registrados</td></tr>'; return; }
-  tbody.innerHTML = allPagos.map(p => {
-    const plan = p.plan ? p.plan.split(' —')[0].trim() : null;
-    const vence = plan ? calcExpiracion(plan, p.fecha_pago || today()) : null;
-    return `
-    <tr>
-      <td class="cell-date">${esc(p.fecha_pago || fmtDate(p.created_at))}</td>
-      <td class="cell-name">${esc(p.nombre_cliente || '—')}</td>
-      <td style="font-size:12px">${esc((p.pais_codigo||'')+' '+(p.telefono||'—'))}</td>
-      <td><span class="badge badge-plan">${esc(p.plan || '—')}</span></td>
-      <td style="color:var(--gold);font-weight:600">$${Number(p.monto||0).toLocaleString('es-MX')}</td>
-      <td style="font-size:12px;color:var(--muted)">${vence ? fmtDateShort(vence) : 'Sesión única'}</td>
-      <td><button class="btn-sm btn-danger" style="padding:5px 10px" onclick="deletePago('${p.id}')">Borrar</button></td>
-    </tr>`;
-  }).join('');
+  tbody.innerHTML = allPagos.length
+    ? allPagos.map(p=>`<tr>
+        <td class="cell-date">${esc(p.fecha_pago||fmtDate(p.created_at))}</td>
+        <td class="cell-name">${esc(p.nombre_cliente||'—')}</td>
+        <td><span class="badge badge-plan">${esc((p.plan||'').split(' —')[0]||'—')}</span></td>
+        <td style="color:var(--gold);font-weight:600">${pesos(p.monto)}</td>
+        <td style="font-size:12px;color:var(--muted)">${esc((p.pais_codigo||'')+' '+(p.telefono||'—'))}</td>
+        <td><button class="btn-sm btn-danger" style="padding:5px 8px;font-size:11px" onclick="deletePago('${p.id}')">Borrar</button></td>
+      </tr>`).join('')
+    : '<tr class="empty-row"><td colspan="6">Sin cobros registrados</td></tr>';
 }
 
-/* ── COBRO FORM ──────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   COBRO FORM — solo FIGHT / VALOR
+   ══════════════════════════════════════════ */
 document.getElementById('cobro-form').addEventListener('submit', async e => {
   e.preventDefault();
   const fd = new FormData(e.target);
   const { data: sessionData } = await sb.auth.getSession();
   const adminEmail = sessionData?.session?.user?.email || 'admin';
 
-  const nombre   = fd.get('nombre_cliente');
-  const codigo   = fd.get('pais_codigo')   || '+52';
-  const tel      = fd.get('telefono')      || null;
-  const email    = fd.get('email_cliente') || null;
-  const planRaw  = fd.get('plan')          || '';
-  const planNombre = planRaw.split(' —')[0].trim() || null;
-  const monto    = Number(fd.get('monto'));
-  const concepto = fd.get('concepto')     || null;
-  const fechaInicio = fd.get('fecha_inicio') || today();
-  const notas    = fd.get('notas')        || null;
+  const plan    = fd.get('plan');
+  const nombre  = fd.get('nombre_cliente')?.trim();
+  const codigo  = fd.get('pais_codigo') || '+52';
+  const tel     = fd.get('telefono')?.trim() || null;
+  const email   = fd.get('email_cliente')?.trim() || null;
+  const monto   = Number(fd.get('monto'));
+  const fecha   = fd.get('fecha_pago') || today();
+  const notas   = fd.get('notas')?.trim() || null;
 
-  if (!nombre || !monto) { showToast('Nombre y monto son obligatorios', 'error'); return; }
+  if (!plan)   { showToast('Selecciona un plan (FIGHT o VALOR)', 'error'); return; }
+  if (!nombre) { showToast('El nombre es obligatorio', 'error'); return; }
+  if (!monto)  { showToast('El monto es obligatorio', 'error'); return; }
 
-  const btn = e.target.querySelector('[type=submit]');
+  const btn = document.getElementById('cobro-submit');
   btn.disabled = true; btn.textContent = 'Guardando…';
 
-  // 1. Guardar cobro en efectivo
+  // 1. Guardar cobro financiero
   const { data: pagoData, error: errPago } = await sb.from('pagos_efectivo').insert([{
     nombre_cliente: nombre, pais_codigo: codigo, telefono: tel, email,
-    plan: planRaw, monto, concepto, fecha_pago: fechaInicio, notas, registrado_por: adminEmail
+    plan: plan + ' — $' + PLAN_PRICES[plan], monto, fecha_pago: fecha,
+    notas, registrado_por: adminEmail
   }]).select().single();
 
-  if (errPago) {
-    showToast('Error guardando cobro: ' + errPago.message, 'error');
-    btn.disabled = false; btn.textContent = 'REGISTRAR COBRO'; return;
-  }
+  if (errPago) { showToast('Error: ' + errPago.message, 'error'); btn.disabled=false; btn.textContent='REGISTRAR COBRO'; return; }
 
-  // 2. Calcular expiración
-  const fechaExpiracion = calcExpiracion(planNombre, fechaInicio);
-
-  // 3. Guardar como miembro (NO en leads)
-  const { data: miembroData, error: errMiembro } = await sb.from('miembros').insert([{
+  // 2. Guardar en registros_totales (para el conteo del dashboard)
+  await sb.from('registros_totales').insert([{
     nombre, email, pais_codigo: codigo, telefono: tel,
-    plan: planNombre, fecha_inicio: fechaInicio, fecha_expiracion: fechaExpiracion,
-    estado: 'activo', fuente: 'Efectivo', notas, ref_pago_id: pagoData.id
-  }]).select().single();
-
-  if (errMiembro) console.warn('[ACME] miembros insert:', errMiembro.message);
-
-  // 4. Guardar en registros_totales con ref_id → miembro
-  const { error: errReg } = await sb.from('registros_totales').insert([{
-    nombre, email, pais_codigo: codigo, telefono: tel,
-    plan: planNombre, tipo: 'efectivo', estado: 'activo', fuente: 'Efectivo',
-    ref_id: miembroData?.id || null
+    plan, tipo: 'efectivo', estado: 'activo', fuente: 'Efectivo',
+    ref_id: pagoData.id
   }]);
-  if (errReg) console.warn('[ACME] registros insert:', errReg.message);
 
-  showToast('Cobro registrado — miembro creado');
-  document.getElementById('cobro-msg').textContent = 'Cliente registrado como miembro activo';
-  setTimeout(() => document.getElementById('cobro-msg').textContent = '', 3500);
+  // 3. Guardar en clases (para registro de la sesión)
+  await sb.from('clases').insert([{
+    nombre, email, pais_codigo: codigo, telefono: tel,
+    plan, fuente: 'Efectivo', notas,
+    fecha_preferida: fecha, estado: 'confirmado'
+  }]);
+
+  // 4. Enviar notificaciones
+  await Promise.all([
+    sendThankYouEmail(nombre, email, plan, monto),
+    sendThankYouSMS(codigo, tel, nombre, plan, monto)
+  ]);
+
+  const notifMsg = EMAILJS_CONFIGURED || TWILIO_CONFIGURED ? '\nNotificaciones enviadas.' : '';
+  showToast(`Cobro registrado — ${plan} ${pesos(monto)}${notifMsg}`);
+  document.getElementById('cobro-msg').textContent = 'Cobro registrado correctamente';
+  setTimeout(() => document.getElementById('cobro-msg').textContent = '', 3000);
+
   btn.disabled = false; btn.textContent = 'REGISTRAR COBRO';
-  e.target.reset(); setDefaultCobroDate();
-  await Promise.all([loadPagos(), loadMiembros(), loadRegistros()]);
+  e.target.reset();
+  document.getElementById('card-fight').classList.remove('selected');
+  document.getElementById('card-valor').classList.remove('selected');
+  setDefaultCobroDate();
+  await Promise.all([loadPagos(), loadClases(), loadRegistros()]);
 });
 
-/* ── DELETE PAGO (sync cascade) ──────────────────────────────────── */
+/* ══════════════════════════════════════════
+   ELIMINAR — cascade sync
+   ══════════════════════════════════════════ */
 async function deletePago(id) {
-  if (!confirm('¿Eliminar este cobro?\n\nTambién se eliminará el miembro asociado de todas las tablas.')) return;
-
-  // Buscar miembro vinculado al cobro
-  const { data: miembro } = await sb.from('miembros').select('id').eq('ref_pago_id', id).maybeSingle();
-
-  if (miembro) {
-    await sb.from('registros_totales').delete().eq('ref_id', miembro.id);
-    await sb.from('miembros').delete().eq('id', miembro.id);
+  if (!confirm('¿Eliminar este cobro? Se eliminará también de registros y clases.')) return;
+  // Buscar en registros_totales el ref_id del pago
+  await sb.from('registros_totales').delete().eq('ref_id', id);
+  // Buscar clase relacionada (por ref o por campos coincidentes)
+  const pago = allPagos.find(p => p.id === id);
+  if (pago) {
+    await sb.from('clases').delete()
+      .eq('nombre', pago.nombre_cliente)
+      .eq('fuente', 'Efectivo')
+      .eq('fecha_preferida', pago.fecha_pago);
   }
-
   const { error } = await sb.from('pagos_efectivo').delete().eq('id', id);
-  if (error) { showToast('Error al eliminar cobro', 'error'); return; }
-
-  showToast('Cobro y miembro eliminados de todas las tablas');
-  await Promise.all([loadPagos(), loadMiembros(), loadRegistros()]);
+  if (error) { showToast('Error al eliminar', 'error'); return; }
+  showToast('Cobro eliminado de todos los registros');
+  await Promise.all([loadPagos(), loadClases(), loadRegistros()]);
 }
 
-/* ── DELETE LEAD (sync cascade) ──────────────────────────────────── */
 async function deleteLead(id) {
   const lead = allLeads.find(l => l.id === id);
   if (!lead) return;
-
-  let q = sb.from('registros_totales').delete().eq('tipo', 'membresia').eq('nombre', lead.nombre);
+  let q = sb.from('registros_totales').delete().eq('tipo','membresia').eq('nombre', lead.nombre);
   if (lead.email) q = q.eq('email', lead.email);
   await q;
-
-  const { error } = await sb.from('leads').delete().eq('id', id);
-  if (error) { showToast('Error al eliminar lead', 'error'); return; }
-
-  showToast('Lead eliminado de todas las tablas');
-  closeDetail();
+  await sb.from('leads').delete().eq('id', id);
+  showToast('Lead eliminado'); closeDetail();
   await Promise.all([loadLeads(), loadRegistros()]);
 }
 
-/* ── DELETE CLASE (sync cascade) ─────────────────────────────────── */
 async function deleteClase(id) {
   const clase = allClases.find(c => c.id === id);
   if (!clase) return;
-
-  let q = sb.from('registros_totales').delete().eq('tipo', 'clase').eq('nombre', clase.nombre);
+  let q = sb.from('registros_totales').delete().eq('tipo','clase').eq('nombre', clase.nombre);
   if (clase.email) q = q.eq('email', clase.email);
   await q;
-
-  const { error } = await sb.from('clases').delete().eq('id', id);
-  if (error) { showToast('Error al eliminar clase', 'error'); return; }
-
-  showToast('Reserva eliminada de todas las tablas');
-  closeDetail();
+  await sb.from('clases').delete().eq('id', id);
+  showToast('Reserva eliminada'); closeDetail();
   await Promise.all([loadClases(), loadRegistros()]);
 }
 
-/* ── DELETE MIEMBRO (sync cascade) ──────────────────────────────── */
 async function deleteMiembro(id) {
   await sb.from('registros_totales').delete().eq('ref_id', id);
-  const { error } = await sb.from('miembros').delete().eq('id', id);
-  if (error) { showToast('Error al eliminar miembro', 'error'); return; }
-
-  showToast('Miembro eliminado de todas las tablas');
-  closeDetail();
+  await sb.from('miembros').delete().eq('id', id);
+  showToast('Miembro eliminado de todos los registros'); closeDetail();
   await Promise.all([loadMiembros(), loadRegistros()]);
 }
 
-/* ── PROMOVER LEAD A MIEMBRO ─────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   PROMOVER LEAD → MIEMBRO
+   ══════════════════════════════════════════ */
 async function promoverAMiembro() {
   if (!currentDetail || currentDetailTable !== 'leads') return;
   const lead = currentDetail;
-  if (!confirm(`¿Promover a ${lead.nombre} como miembro activo?\n\nSe eliminará de Leads y se creará en Miembros.`)) return;
-
+  if (!confirm(`¿Promover a ${lead.nombre} como miembro activo?`)) return;
   const fechaInicio = today();
-  const fechaExpiracion = calcExpiracion(lead.plan, fechaInicio);
-
-  const { data: miembro, error: errM } = await sb.from('miembros').insert([{
-    nombre: lead.nombre, email: lead.email,
-    pais_codigo: lead.pais_codigo, telefono: lead.telefono,
-    plan: lead.plan, fecha_inicio: fechaInicio,
-    fecha_expiracion: fechaExpiracion, estado: 'activo',
-    fuente: lead.fuente || 'Web', notas: lead.notas
+  const { data: miembro, error } = await sb.from('miembros').insert([{
+    nombre: lead.nombre, email: lead.email, pais_codigo: lead.pais_codigo,
+    telefono: lead.telefono, plan: lead.plan, fecha_inicio: fechaInicio,
+    fecha_expiracion: calcExpiracion(lead.plan, fechaInicio),
+    estado: 'activo', fuente: lead.fuente || 'Web', notas: lead.notas
   }]).select().single();
-
-  if (errM) { showToast('Error al promover: ' + errM.message, 'error'); return; }
-
-  // Actualizar ref en registros_totales
-  await sb.from('registros_totales')
-    .update({ ref_id: miembro.id, estado: 'activo' })
-    .eq('tipo', 'membresia')
-    .eq('nombre', lead.nombre);
-
-  // Eliminar de leads
+  if (error) { showToast('Error: ' + error.message, 'error'); return; }
+  await sb.from('registros_totales').update({ ref_id: miembro.id, estado: 'activo' })
+    .eq('tipo','membresia').eq('nombre', lead.nombre);
   await sb.from('leads').delete().eq('id', lead.id);
-
   showToast(`${lead.nombre} promovido a miembro activo`);
   closeDetail();
   await Promise.all([loadLeads(), loadMiembros(), loadRegistros()]);
 }
 
-/* ── DETAIL MODAL ────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   DETAIL MODAL
+   ══════════════════════════════════════════ */
 function openDetail(table, id) {
-  const row =
-    table === 'leads'    ? allLeads.find(l => l.id === id)    :
-    table === 'miembros' ? allMiembros.find(m => m.id === id) :
-                           allClases.find(c => c.id === id);
+  const row = table==='leads' ? allLeads.find(l=>l.id===id) : table==='miembros' ? allMiembros.find(m=>m.id===id) : allClases.find(c=>c.id===id);
   if (!row) return;
-  currentDetail = row;
-  currentDetailTable = table;
+  currentDetail = row; currentDetailTable = table;
 
-  const titles = { leads: 'Lead <span>Web</span>', miembros: 'Miembro <span>Activo</span>', clases: 'Reserva <span>Clase</span>' };
-  document.getElementById('detail-title').innerHTML = titles[table] || 'Detalle';
+  const titles = { leads:'Lead <span>Web</span>', miembros:'Miembro <span>Activo</span>', clases:'Reserva <span>Clase</span>' };
+  document.getElementById('detail-title').innerHTML = titles[table];
 
-  const expirado = table === 'miembros' && estaExpirado(row);
-  const estadoActual = expirado ? 'expirado' : (row.estado || 'pendiente');
-
-  let gridHtml = `
-    <div class="detail-field"><label>Nombre</label><p>${esc(row.nombre || '—')}</p></div>
-    <div class="detail-field"><label>Plan</label><p><span class="badge badge-plan">${esc(row.plan || '—')}</span></p></div>
-    <div class="detail-field"><label>Email</label><p>${esc(row.email || '—')}</p></div>
+  const exp = table==='miembros' && estaExpirado(row);
+  let grid = `
+    <div class="detail-field"><label>Nombre</label><p>${esc(row.nombre||'—')}</p></div>
+    <div class="detail-field"><label>Plan</label><p><span class="badge badge-plan">${esc(row.plan||'—')}</span></p></div>
+    <div class="detail-field"><label>Email</label><p style="word-break:break-all">${esc(row.email||'—')}</p></div>
     <div class="detail-field"><label>Teléfono</label><p>${esc((row.pais_codigo||'')+' '+(row.telefono||'—'))}</p></div>
-    <div class="detail-field"><label>Fecha registro</label><p>${fmtDate(row.created_at)}</p></div>`;
+    <div class="detail-field"><label>Registro</label><p>${fmtDate(row.created_at)}</p></div>`;
 
-  if (table === 'leads') {
-    const precioBase = PLAN_PRICES[row.plan] || 0;
-    const descuento  = row.descuento || 0;
-    const precioFinal = row.precio_final || Math.round(precioBase * (1 - descuento / 100));
-    gridHtml += `
-    <div class="detail-field"><label>Fecha inicio</label><p>${esc(row.fecha_inicio || '—')}</p></div>
-    <div class="detail-field"><label>Experiencia</label><p>${esc(row.experiencia || '—')}</p></div>
-    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente || '—')}</p></div>
-    ${row.nombre_padre ? `<div class="detail-field"><label>Padre/Tutor</label><p>${esc(row.nombre_padre)}</p></div>` : ''}
-    ${row.nombre_nino  ? `<div class="detail-field"><label>Nombre niño</label><p>${esc(row.nombre_nino)}</p></div>` : ''}
-    ${row.notas ? `<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>` : ''}`;
-  } else if (table === 'miembros') {
-    gridHtml += `
-    <div class="detail-field"><label>Fecha inicio</label><p>${esc(row.fecha_inicio || '—')}</p></div>
-    <div class="detail-field"><label>Vence</label><p style="color:${expirado ? 'var(--red)' : 'inherit'}">${row.fecha_expiracion ? fmtDateShort(row.fecha_expiracion) : 'Sesión única'}</p></div>
-    <div class="detail-field"><label>Estado</label><p>${badgeEstado(estadoActual)}</p></div>
-    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente || '—')}</p></div>
-    ${row.notas ? `<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>` : ''}`;
+  if (table==='leads') {
+    grid += `
+    <div class="detail-field"><label>Fecha inicio</label><p>${esc(row.fecha_inicio||'—')}</p></div>
+    <div class="detail-field"><label>Experiencia</label><p>${esc(row.experiencia||'—')}</p></div>
+    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente||'—')}</p></div>
+    ${row.nombre_padre?`<div class="detail-field"><label>Padre/Tutor</label><p>${esc(row.nombre_padre)}</p></div>`:''}
+    ${row.nombre_nino?`<div class="detail-field"><label>Nombre niño</label><p>${esc(row.nombre_nino)}</p></div>`:''}
+    ${row.notas?`<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>`:''}`;
+  } else if (table==='miembros') {
+    grid += `
+    <div class="detail-field"><label>Vence</label><p style="color:${exp?'var(--red-l)':'inherit'}">${row.fecha_expiracion?fmtDateShort(row.fecha_expiracion):'Sesión única'}</p></div>
+    <div class="detail-field"><label>Estado</label><p>${badgeEstado(exp?'expirado':(row.estado||'activo'))}</p></div>
+    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente||'—')}</p></div>
+    ${row.notas?`<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>`:''}`;
   } else {
-    gridHtml += `
-    <div class="detail-field"><label>Fecha preferida</label><p>${esc(row.fecha_preferida || '—')}</p></div>
-    <div class="detail-field"><label>Primera vez</label><p>${row.primera_vez === 'si' ? 'Sí' : row.primera_vez === 'no' ? 'No' : '—'}</p></div>
-    <div class="detail-field"><label>Condición física</label><p>${esc(row.condicion || '—')}</p></div>
-    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente || '—')}</p></div>
-    ${row.notas ? `<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>` : ''}`;
+    grid += `
+    <div class="detail-field"><label>Fecha preferida</label><p>${esc(row.fecha_preferida||'—')}</p></div>
+    <div class="detail-field"><label>Primera vez</label><p>${row.primera_vez==='si'?'Sí':row.primera_vez==='no'?'No':'—'}</p></div>
+    <div class="detail-field"><label>Condición</label><p>${esc(row.condicion||'—')}</p></div>
+    <div class="detail-field"><label>Fuente</label><p>${esc(row.fuente||'—')}</p></div>
+    ${row.notas?`<div class="detail-field full"><label>Notas</label><p>${esc(row.notas)}</p></div>`:''}`;
   }
+  document.getElementById('detail-grid').innerHTML = grid;
 
-  document.getElementById('detail-grid').innerHTML = gridHtml;
+  const estadoOpts = { leads:['pendiente','contactado','activo','inactivo'], miembros:['activo','inactivo'], clases:['pendiente','confirmado','asistio','no_asistio'] }[table];
 
-  // ACCIONES según tabla
-  let actHtml = '<div style="display:flex;flex-direction:column;gap:14px">';
-
-  // Editar teléfono
-  actHtml += `
+  let acts = `<div style="display:flex;flex-direction:column;gap:12px">
     <div>
-      <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Editar Teléfono</label>
+      <label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">Editar Teléfono</label>
       <div style="display:flex;gap:8px">
-        <input type="text" id="edit-telefono" value="${esc(row.telefono || '')}" placeholder="Número sin código"
-          style="flex:1;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none">
+        <input type="text" id="edit-telefono" value="${esc(row.telefono||'')}" placeholder="Sin código" style="flex:1;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none">
         <button class="btn-sm btn-outline" onclick="savePhone()">Guardar</button>
       </div>
-    </div>`;
-
-  // Cambiar estado
-  const estadoOpts = {
-    leads:    ['pendiente','contactado','activo','inactivo'],
-    miembros: ['activo','inactivo'],
-    clases:   ['pendiente','confirmado','asistio','no_asistio']
-  }[table] || ['pendiente'];
-
-  actHtml += `
+    </div>
     <div>
-      <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Estado</label>
+      <label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">Estado</label>
       <div style="display:flex;gap:8px">
         <select id="edit-estado" style="flex:1;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none">
-          ${estadoOpts.map(s => `<option ${row.estado===s?'selected':''}>${s}</option>`).join('')}
+          ${estadoOpts.map(s=>`<option ${row.estado===s?'selected':''}>${s}</option>`).join('')}
         </select>
         <button class="btn-sm btn-red" onclick="saveEstado()">Aplicar</button>
       </div>
     </div>`;
 
-  // Descuento — solo leads
-  if (table === 'leads') {
-    const precioBase  = PLAN_PRICES[row.plan] || 0;
-    const descuento   = row.descuento || 0;
-    const precioFinal = row.precio_final || Math.round(precioBase * (1 - descuento / 100));
-    actHtml += `
+  if (table==='leads') {
+    const base = PLAN_PRICES[row.plan]||0;
+    const desc = row.descuento||0;
+    const pf   = row.precio_final||Math.round(base*(1-desc/100));
+    acts += `
     <div>
-      <label style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Descuento &amp; Precio Final</label>
+      <label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">Descuento</label>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <input type="number" id="edit-descuento" value="${descuento}" min="0" max="100" placeholder="%"
-          style="width:80px;padding:9px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"
-          oninput="previewPrecio()">
-        <span style="color:var(--muted);font-size:13px">% descuento</span>
-        <span class="precio-final-preview" id="precio-preview">Precio: $${precioFinal.toLocaleString('es-MX')}</span>
+        <input type="number" id="edit-descuento" value="${desc}" min="0" max="100" oninput="previewPrecio()" style="width:70px;padding:9px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none">
+        <span style="color:var(--muted);font-size:12px">%</span>
+        <span class="precio-final-preview" id="precio-preview">= ${pesos(pf)}</span>
         <button class="btn-sm btn-gold" onclick="saveDescuento()">Guardar</button>
       </div>
     </div>
-    <div>
-      <button class="btn-sm btn-green" style="width:100%;justify-content:center" onclick="promoverAMiembro()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
-        Promover a Miembro Activo
-      </button>
-    </div>
-    <div>
-      <button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteLead('${row.id}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-        Eliminar Lead
-      </button>
-    </div>`;
+    <button class="btn-sm btn-gold" style="width:100%;justify-content:center;padding:11px" onclick="promoverAMiembro()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+      Promover a Miembro Activo
+    </button>
+    <button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteLead('${row.id}')">Eliminar Lead</button>`;
   }
 
-  // QR y eliminar — solo miembros
-  if (table === 'miembros') {
-    actHtml += `
-    <div>
-      <button class="btn-sm btn-gold" style="width:100%;justify-content:center" onclick="openQR('${row.id}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
-        Generar Código QR de Acceso
-      </button>
-    </div>
-    <div>
-      <button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteMiembro('${row.id}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-        Eliminar Miembro
-      </button>
-    </div>`;
+  if (table==='miembros') {
+    acts += `
+    <button class="btn-sm btn-gold" style="width:100%;justify-content:center;padding:11px" onclick="openQR('${row.id}')">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Generar Código QR de Acceso
+    </button>
+    <button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteMiembro('${row.id}')">Eliminar Miembro</button>`;
   }
 
-  // Eliminar — solo clases
-  if (table === 'clases') {
-    actHtml += `
-    <div>
-      <button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteClase('${row.id}')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-        Eliminar Reserva
-      </button>
-    </div>`;
+  if (table==='clases') {
+    acts += `<button class="btn-sm btn-danger" style="width:100%;justify-content:center" onclick="deleteClase('${row.id}')">Eliminar Reserva</button>`;
   }
 
-  actHtml += '</div>';
-  document.getElementById('detail-actions').innerHTML = actHtml;
+  acts += '</div>';
+  document.getElementById('detail-actions').innerHTML = acts;
   document.getElementById('modal-detail').classList.add('open');
 }
 
@@ -1412,115 +1338,89 @@ function closeDetail() {
   document.getElementById('modal-detail').classList.remove('open');
   currentDetail = null; currentDetailTable = null;
 }
-document.getElementById('modal-detail').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-detail')) closeDetail();
-});
+document.getElementById('modal-detail').addEventListener('click', e => { if (e.target===document.getElementById('modal-detail')) closeDetail(); });
 
 function previewPrecio() {
-  const desc  = Number(document.getElementById('edit-descuento').value) || 0;
-  const base  = PLAN_PRICES[currentDetail?.plan] || 0;
-  const final = Math.round(base * (1 - desc / 100));
-  document.getElementById('precio-preview').textContent = 'Precio: $' + final.toLocaleString('es-MX');
+  const d = Number(document.getElementById('edit-descuento').value)||0;
+  const base = PLAN_PRICES[currentDetail?.plan]||0;
+  document.getElementById('precio-preview').textContent = '= ' + pesos(Math.round(base*(1-d/100)));
 }
 
 async function savePhone() {
   const tel = document.getElementById('edit-telefono').value.trim();
-  const { error } = await sb.from(currentDetailTable).update({ telefono: tel }).eq('id', currentDetail.id);
-  if (error) { showToast('Error al guardar teléfono', 'error'); return; }
+  await sb.from(currentDetailTable).update({ telefono: tel }).eq('id', currentDetail.id);
   currentDetail.telefono = tel;
-  if (currentDetailTable === 'leads')    { const i = allLeads.findIndex(l => l.id === currentDetail.id); if (i !== -1) allLeads[i].telefono = tel; renderLeads(); }
-  if (currentDetailTable === 'miembros') { const i = allMiembros.findIndex(m => m.id === currentDetail.id); if (i !== -1) allMiembros[i].telefono = tel; renderMiembros(); }
-  if (currentDetailTable === 'clases')   { const i = allClases.findIndex(c => c.id === currentDetail.id); if (i !== -1) allClases[i].telefono = tel; renderClases(); }
+  if (currentDetailTable==='leads')    { const i=allLeads.findIndex(l=>l.id===currentDetail.id); if(i!==-1) allLeads[i].telefono=tel; renderLeads(); }
+  if (currentDetailTable==='miembros') { const i=allMiembros.findIndex(m=>m.id===currentDetail.id); if(i!==-1) allMiembros[i].telefono=tel; renderMiembros(); }
+  if (currentDetailTable==='clases')   { const i=allClases.findIndex(c=>c.id===currentDetail.id); if(i!==-1) allClases[i].telefono=tel; renderClases(); }
   showToast('Teléfono actualizado');
 }
 
 async function saveEstado() {
   const estado = document.getElementById('edit-estado').value;
-  const { error } = await sb.from(currentDetailTable).update({ estado }).eq('id', currentDetail.id);
-  if (error) { showToast('Error al actualizar estado', 'error'); return; }
-
-  // Sync a registros_totales si es miembro
-  if (currentDetailTable === 'miembros') {
-    await sb.from('registros_totales').update({ estado }).eq('ref_id', currentDetail.id);
-  }
-
+  await sb.from(currentDetailTable).update({ estado }).eq('id', currentDetail.id);
+  if (currentDetailTable==='miembros') await sb.from('registros_totales').update({ estado }).eq('ref_id', currentDetail.id);
   currentDetail.estado = estado;
-  if (currentDetailTable === 'leads')    { const i = allLeads.findIndex(l => l.id === currentDetail.id); if (i !== -1) allLeads[i].estado = estado; renderLeads(); }
-  if (currentDetailTable === 'miembros') { const i = allMiembros.findIndex(m => m.id === currentDetail.id); if (i !== -1) allMiembros[i].estado = estado; renderMiembros(); }
-  if (currentDetailTable === 'clases')   { const i = allClases.findIndex(c => c.id === currentDetail.id); if (i !== -1) allClases[i].estado = estado; renderClases(); }
-  updateDashboard();
-  showToast('Estado actualizado: ' + estado);
+  if (currentDetailTable==='leads')    { const i=allLeads.findIndex(l=>l.id===currentDetail.id); if(i!==-1) allLeads[i].estado=estado; renderLeads(); }
+  if (currentDetailTable==='miembros') { const i=allMiembros.findIndex(m=>m.id===currentDetail.id); if(i!==-1) allMiembros[i].estado=estado; renderMiembros(); }
+  if (currentDetailTable==='clases')   { const i=allClases.findIndex(c=>c.id===currentDetail.id); if(i!==-1) allClases[i].estado=estado; renderClases(); }
+  updateDashboard(); showToast('Estado: ' + estado);
 }
 
 async function saveDescuento() {
-  if (currentDetailTable !== 'leads') return;
-  const descuento = Number(document.getElementById('edit-descuento').value) || 0;
-  const base = PLAN_PRICES[currentDetail.plan] || 0;
-  const precio_final = Math.round(base * (1 - descuento / 100));
-  const { error } = await sb.from('leads').update({ descuento, precio_final }).eq('id', currentDetail.id);
-  if (error) { showToast('Error al guardar descuento', 'error'); return; }
-  currentDetail.descuento = descuento; currentDetail.precio_final = precio_final;
-  const i = allLeads.findIndex(l => l.id === currentDetail.id);
-  if (i !== -1) { allLeads[i].descuento = descuento; allLeads[i].precio_final = precio_final; }
-  showToast(`Descuento ${descuento}% — Precio final: $${precio_final.toLocaleString('es-MX')}`);
+  if (currentDetailTable!=='leads') return;
+  const d  = Number(document.getElementById('edit-descuento').value)||0;
+  const pf = Math.round((PLAN_PRICES[currentDetail.plan]||0)*(1-d/100));
+  await sb.from('leads').update({ descuento: d, precio_final: pf }).eq('id', currentDetail.id);
+  currentDetail.descuento = d; currentDetail.precio_final = pf;
+  const i = allLeads.findIndex(l=>l.id===currentDetail.id);
+  if (i!==-1) { allLeads[i].descuento=d; allLeads[i].precio_final=pf; }
+  showToast(`Descuento ${d}% — Precio final: ${pesos(pf)}`);
 }
 
-/* ── QR CODE ─────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   QR CODE
+   ══════════════════════════════════════════ */
 function openQR(id) {
-  const m = allMiembros.find(m => m.id === id);
+  const m = allMiembros.find(m=>m.id===id);
   if (!m) return;
-
-  const qrData = [
-    'ACME FIGHT & FITNESS',
-    'Miembro: ' + (m.nombre || ''),
-    'Plan: ' + (m.plan || ''),
-    'Vigencia: ' + (m.fecha_expiracion ? fmtDateShort(m.fecha_expiracion) : 'Sesión única'),
-    'ID: ' + m.id.slice(-8).toUpperCase()
-  ].join('\n');
-
-  const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220'
-    + '&data=' + encodeURIComponent(qrData)
-    + '&bgcolor=111111&color=C9A84C&margin=10&ecc=M';
-
-  document.getElementById('qr-nombre').textContent = m.nombre || '—';
-  document.getElementById('qr-plan').textContent   = (m.plan || '—') + (m.fuente ? ' · ' + m.fuente : '');
-  document.getElementById('qr-vence').innerHTML    = m.fecha_expiracion
-    ? `Membresía vigente hasta: <strong>${fmtDateShort(m.fecha_expiracion)}</strong>`
-    : 'Sesión única — sin fecha de expiración';
+  const qrData = `ACME FIGHT & FITNESS\nMiembro: ${m.nombre}\nPlan: ${m.plan}\nVigencia: ${m.fecha_expiracion?fmtDateShort(m.fecha_expiracion):'Sesión única'}\nID: ${m.id.slice(-8).toUpperCase()}`;
+  document.getElementById('qr-nombre').textContent = m.nombre||'—';
+  document.getElementById('qr-plan').textContent   = (m.plan||'—') + (m.fuente?' · '+m.fuente:'');
+  document.getElementById('qr-vence').innerHTML    = m.fecha_expiracion ? `Vigente hasta: <strong>${fmtDateShort(m.fecha_expiracion)}</strong>` : 'Sesión única';
   document.getElementById('qr-id').textContent     = 'ID: ' + m.id.slice(-8).toUpperCase();
-  document.getElementById('qr-img').src            = qrUrl;
+  document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}&bgcolor=111111&color=C9A84C&margin=10&ecc=M`;
   document.getElementById('modal-qr').classList.add('open');
 }
-
 function closeQR() { document.getElementById('modal-qr').classList.remove('open'); }
-document.getElementById('modal-qr').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-qr')) closeQR();
-});
+document.getElementById('modal-qr').addEventListener('click', e => { if(e.target===document.getElementById('modal-qr')) closeQR(); });
 
-/* ── EXPORT CSV ──────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   EXPORT CSV
+   ══════════════════════════════════════════ */
 function exportCSV(tipo) {
   let rows, headers, filename;
-  if (tipo === 'leads') {
-    headers  = ['ID','Fecha','Nombre','Email','Código País','Teléfono','Plan','Fecha Inicio','Experiencia','Fuente','Notas','Nombre Padre','Nombre Niño','Estado','Descuento %','Precio Final'];
-    rows     = allLeads.map(l => [l.id,fmtDate(l.created_at),l.nombre,l.email,l.pais_codigo,l.telefono,l.plan,l.fecha_inicio,l.experiencia,l.fuente,l.notas,l.nombre_padre,l.nombre_nino,l.estado,l.descuento,l.precio_final]);
-    filename = 'acme_leads_' + today() + '.csv';
-  } else if (tipo === 'miembros') {
-    headers  = ['ID','Fecha','Nombre','Email','Código País','Teléfono','Plan','Fecha Inicio','Fecha Expiración','Estado','Fuente','Notas'];
-    rows     = allMiembros.map(m => [m.id,fmtDate(m.created_at),m.nombre,m.email,m.pais_codigo,m.telefono,m.plan,m.fecha_inicio,m.fecha_expiracion,m.estado,m.fuente,m.notas]);
-    filename = 'acme_miembros_' + today() + '.csv';
-  } else if (tipo === 'clases') {
-    headers  = ['ID','Fecha','Nombre','Email','Código País','Teléfono','Plan','Fecha Preferida','Primera Vez','Condición','Fuente','Notas','Estado'];
-    rows     = allClases.map(c => [c.id,fmtDate(c.created_at),c.nombre,c.email,c.pais_codigo,c.telefono,c.plan,c.fecha_preferida,c.primera_vez,c.condicion,c.fuente,c.notas,c.estado]);
-    filename = 'acme_clases_' + today() + '.csv';
+  if (tipo==='leads') {
+    headers=['ID','Fecha','Nombre','Email','Código','Teléfono','Plan','Inicio','Experiencia','Fuente','Notas','Padre','Niño','Estado','Desc%','PrecioFinal'];
+    rows=allLeads.map(l=>[l.id,fmtDate(l.created_at),l.nombre,l.email,l.pais_codigo,l.telefono,l.plan,l.fecha_inicio,l.experiencia,l.fuente,l.notas,l.nombre_padre,l.nombre_nino,l.estado,l.descuento,l.precio_final]);
+    filename='acme_leads_'+today()+'.csv';
+  } else if (tipo==='miembros') {
+    headers=['ID','Fecha','Nombre','Email','Código','Teléfono','Plan','Inicio','Expira','Estado','Fuente','Notas'];
+    rows=allMiembros.map(m=>[m.id,fmtDate(m.created_at),m.nombre,m.email,m.pais_codigo,m.telefono,m.plan,m.fecha_inicio,m.fecha_expiracion,m.estado,m.fuente,m.notas]);
+    filename='acme_miembros_'+today()+'.csv';
+  } else if (tipo==='clases') {
+    headers=['ID','Fecha','Nombre','Email','Código','Teléfono','Plan','FechaPref','PrimeraVez','Condición','Fuente','Notas','Estado'];
+    rows=allClases.map(c=>[c.id,fmtDate(c.created_at),c.nombre,c.email,c.pais_codigo,c.telefono,c.plan,c.fecha_preferida,c.primera_vez,c.condicion,c.fuente,c.notas,c.estado]);
+    filename='acme_clases_'+today()+'.csv';
   } else {
-    headers  = ['ID','Fecha Cobro','Cliente','Teléfono','Email','Plan','Monto','Concepto','Registrado Por','Notas'];
-    rows     = allPagos.map(p => [p.id,p.fecha_pago,p.nombre_cliente,(p.pais_codigo||'')+' '+(p.telefono||''),p.email,p.plan,p.monto,p.concepto,p.registrado_por,p.notas]);
-    filename = 'acme_cobros_' + today() + '.csv';
+    headers=['ID','Fecha','Cliente','Código','Teléfono','Email','Plan','Monto','Notas','RegistradoPor'];
+    rows=allPagos.map(p=>[p.id,p.fecha_pago,p.nombre_cliente,p.pais_codigo,p.telefono,p.email,p.plan,p.monto,p.notas,p.registrado_por]);
+    filename='acme_cobros_'+today()+'.csv';
   }
-  const csv = [headers, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,﻿' + encodeURIComponent(csv);
-  a.download = filename; a.click();
+  const csv=[headers,...rows].map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,﻿'+encodeURIComponent(csv);
+  a.download=filename; a.click();
 }
 </script>
 </body>
